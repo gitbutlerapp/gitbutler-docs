@@ -1,0 +1,20 @@
+---
+title: Scripting
+description: How to script with GitButler CLI
+---
+
+### JSON Errwhere
+
+All of the commands are designed to be very user friendly when we have an interactive terminal, but you can also very easily script everything by passing the `--json` or `-j` option to anything. For example, here is using `but show` on a commit.
+
+```cli [scripting-but-show-1, 330px]
+but show 2672465
+```
+
+Now with the `--json` option:
+
+```cli [scripting-but-show-2, 682px]
+but show --json 2672465 | jq
+```
+
+You can do this with anything - committing, status, diffing, etc. Just throw a `-j` in there and you get parseable data (or, data your agent can very easily work with).
