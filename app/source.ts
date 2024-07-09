@@ -7,7 +7,7 @@ export const { getPage, getPages, pageTree, files } = loader({
   rootDir: "docs",
   transformers: [
     async ({ storage }) => {
-      const releasesFile = storage.files.get("releases/releases.page")
+      const releasesFile = storage.files.get("releases.page")
       if (!releasesFile) {
         console.log("No releases file found")
         return
