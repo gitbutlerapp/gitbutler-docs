@@ -7,7 +7,7 @@ export const { getPage, getPages, pageTree, files } = loader({
   rootDir: "docs",
   transformers: [
     async ({ storage }) => {
-      const releasesFile = storage.files.get("releases.page")
+      const releasesFile = storage.files.get("releases/releases.page")
       if (!releasesFile) {
         console.log("No releases file found")
         return
@@ -46,11 +46,11 @@ export const { getPage, getPages, pageTree, files } = loader({
 
       console.log("Updated releases file", JSON.stringify(releasesFile, null, 2))
       // data.storage.files.set("releases.page", releasesFile)
-      storage.write("releases.mdx", "page", releasesFile)
+      storage.write("releases.mdx", "page", releasesFile.data)
 
       // Debug
       const releasesFile2 = storage.files.get("releases.page")
-      // console.log("releaseFile2", JSON.stringify(releasesFile2, null, 2))
+      console.log("releaseFile2", JSON.stringify(releasesFile2, null, 2))
     }
   ],
   source: createMDXSource(map)
