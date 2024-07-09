@@ -32,6 +32,7 @@ export const { getPage, getPages, pageTree, files } = loader({
         return
       }
 
+      // @ts-expect-error TODO type data
       const newContent = releasesFile.data.data.exports.structuredData.contents
 
       newContent.splice(1, 0, {
@@ -42,6 +43,7 @@ export const { getPage, getPages, pageTree, files } = loader({
       //   heading: `v111`,
       //   content: "NEW CONTENT!"
       // })
+      // @ts-expect-error TODO type data
       releasesFile.data.data.exports.structuredData.contents = newContent
 
       console.log("Updated releases file", JSON.stringify(releasesFile, null, 2))
