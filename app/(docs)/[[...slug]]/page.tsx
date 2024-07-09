@@ -2,6 +2,9 @@ import { getPage, getPages } from "@/app/source"
 import { DocsPage, DocsBody } from "fumadocs-ui/page"
 import { notFound } from "next/navigation"
 import { RollButton } from "fumadocs-ui/components/roll-button"
+import { MDXRemote } from "next-mdx-remote/rsc"
+// import { serialize } from "next-mdx-remote/serialize"
+
 import type { Metadata } from "next"
 
 export default async function Page({ params }: { params: { slug?: string[] } }) {
@@ -63,7 +66,12 @@ export default async function Page({ params }: { params: { slug?: string[] } }) 
     </>
   )
 
-  const MDX = page.data.exports.default
+  // TODO: Avoid this hack; See `source.ts`
+  let MDX = page.data.exports.default
+
+  if (typeof MDX === "string") {
+    MDX = MDX.replace("<", "&lt;").replace(">", "&gt;")
+  }
 
   return (
     <DocsPage
@@ -77,7 +85,7 @@ export default async function Page({ params }: { params: { slug?: string[] } }) 
       <RollButton percentage={0.3} />
       <DocsBody>
         <h1>{page.data.title}</h1>
-        <MDX />
+        {typeof MDX === "string" ? <MDXRemote source={MDX} /> : <MDX />}
       </DocsBody>
     </DocsPage>
   )

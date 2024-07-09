@@ -32,27 +32,37 @@ export const { getPage, getPages, pageTree, files } = loader({
         return
       }
 
+      // HACKY WAY
       // @ts-expect-error TODO type data
       const newContent = releasesFile.data.data.exports.structuredData.contents
-
       newContent.splice(1, 0, {
         heading: `v${latestRelease.name.replace("release/", "")}`,
-        content: latestRelease.body
+        content: `${latestRelease.body}\n\n---\n`
       })
-      // newContent.splice(1, 0, {
-      //   heading: `v111`,
-      //   content: "NEW CONTENT!"
-      // })
+      // TODO: This hack works, but it's not using their VFS APIs :thinking:
       // @ts-expect-error TODO type data
-      releasesFile.data.data.exports.structuredData.contents = newContent
+      releasesFile.data.data.exports.default = newContent
+        .map((item: { heading: string; content: string }) => {
+          let output = ""
+          if (item.heading) {
+            output = `### ${item.heading}`
+          }
+          output += `\n\n${item.content}`
+          return output
+        })
+        .join("\n\n")
 
-      console.log("Updated releases file", JSON.stringify(releasesFile, null, 2))
-      // data.storage.files.set("releases.page", releasesFile)
-      storage.write("releases.mdx", "page", releasesFile.data)
-
-      // Debug
-      const releasesFile2 = storage.files.get("releases.page")
-      console.log("releaseFile2", JSON.stringify(releasesFile2, null, 2))
+      // REAL WAY
+      // // @ts-expect-error TODO type data
+      // const newContent = releasesFile.data.data.exports.structuredData.contents
+      // newContent.splice(1, 0, {
+      //   heading: `v${latestRelease.name.replace("release/", "")}`,
+      //   content: latestRelease.body
+      // })
+      // // @ts-expect-error TODO type data
+      // releasesFile.data.data.exports.structuredData.contents = newContent
+      //
+      // storage.write("releases.mdx", "page", releasesFile.data)
     }
   ],
   source: createMDXSource(map)
