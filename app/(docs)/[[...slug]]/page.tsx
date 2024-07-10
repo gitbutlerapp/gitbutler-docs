@@ -70,6 +70,7 @@ export default async function Page({ params }: { params: { slug?: string[] } }) 
   let MDX = page.data.exports.default
 
   if (typeof MDX === "string") {
+    // @ts-expect-error todo
     MDX = MDX.replace("<", "&lt;").replace(">", "&gt;")
   }
 
