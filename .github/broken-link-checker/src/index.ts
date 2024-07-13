@@ -212,6 +212,7 @@ async function brokenLinkChecker(): Promise<void> {
       }
     },
     end: async () => {
+      console.debug("SITECHECKER.END", JSON.stringify(output, 2, null))
       if (output.links.length) {
         // Skip links that returned 308
         const brokenLinksForAttention = output.links.filter(
