@@ -212,6 +212,7 @@ async function brokenLinkChecker(): Promise<void> {
       }
     },
     end: async () => {
+      console.debug("END", JSON.stringify(output, null, 2))
       if (output.links.length) {
         // DEBUG
         console.debug(output.links)
