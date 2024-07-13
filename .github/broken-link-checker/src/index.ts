@@ -196,7 +196,7 @@ async function brokenLinkChecker(): Promise<void> {
   }
 
   const options = {
-    excludeExternalLinks: true,
+    excludeExternalLinks: false,
     honorRobotExclusions: false,
     filterLevel: 0,
     excludedKeywords: []
@@ -212,11 +212,7 @@ async function brokenLinkChecker(): Promise<void> {
       }
     },
     end: async () => {
-      console.debug("END", JSON.stringify(output, null, 2))
       if (output.links.length) {
-        // DEBUG
-        console.debug(output.links)
-
         // Skip links that returned 308
         const brokenLinksForAttention = output.links.filter(
           (link) => link.broken && !["HTTP_308"].includes(link.brokenReason)
