@@ -214,7 +214,7 @@ async function brokenLinkChecker(): Promise<void> {
     end: async () => {
       if (output.links.length) {
         // DEBUG
-        // console.debug(output.links)
+        console.debug(output.links)
 
         // Skip links that returned 308
         const brokenLinksForAttention = output.links.filter(
