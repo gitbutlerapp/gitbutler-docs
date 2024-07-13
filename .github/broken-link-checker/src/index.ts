@@ -187,7 +187,7 @@ async function brokenLinkChecker(): Promise<void> {
   if (!process.env.GITHUB_TOKEN) {
     throw new Error("GITHUB_TOKEN is required")
   }
-  const siteUrl = process.env.VERCEL_PREVIEW_URL || "https://gitbutler-docs.vercel.app"
+  const siteUrl = process.env.VERCEL_PREVIEW_URL || "https://docs.gitbutler.com"
   const output: Output = {
     errors: [],
     links: [],
