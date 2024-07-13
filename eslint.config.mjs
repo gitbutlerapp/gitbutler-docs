@@ -32,7 +32,7 @@ export default [...compat.extends(
         },
 
         parser: tsParser,
-        ecmaVersion: "2023",
+        ecmaVersion: 2023,
         sourceType: "module",
     },
 
