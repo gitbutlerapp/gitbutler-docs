@@ -17,9 +17,10 @@ if (swaggerContent.info.title === "API title") {
   swaggerContent.info.title = "GitButler API"
 }
 
-await writeFile("./swagger_v3.json", JSON.stringify(swaggerContent, null, 2))
+await writeFile("./api-reference.json", JSON.stringify(swaggerContent, null, 2))
 
 void generateFiles({
-  input: ["./swagger_v3.json"],
-  output: "./content/docs/api-reference/"
+  input: ["./api-reference.json"],
+  per: "tag",
+  output: "./content/docs/"
 })
