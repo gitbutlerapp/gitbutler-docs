@@ -1,8 +1,10 @@
 {
   "title": "Folder",
+  "root": true,
+  "defaultOpen": false,
   "pages": [
     "index",
-    "---Guide---",
+    "---Getting Started---",
     "overview",
     "features",
     "troubleshooting",
