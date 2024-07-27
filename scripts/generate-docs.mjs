@@ -19,8 +19,21 @@ if (swaggerContent.info.title === "API title") {
 
 await writeFile("./api-reference.json", JSON.stringify(swaggerContent, null, 2))
 
+function toTitleCase(str) {
+  return str
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+}
+
 void generateFiles({
   input: ["./api-reference.json"],
   per: "tag",
+  frontmatter: (title, description) => {
+    return {
+      title: toTitleCase(title),
+      description
+    }
+  },
   output: "./content/docs/"
 })
