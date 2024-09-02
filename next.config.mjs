@@ -17,11 +17,6 @@ const config = {
         hostname: "docs.gitbutler.com"
       }
     ]
-  },
-  webpack: (config) => {
-    config.module.noParse = [/typescript\/lib\/typescript.js/]
-
-    return config
   }
 }
 

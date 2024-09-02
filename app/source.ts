@@ -5,8 +5,6 @@ import { attachFile, createOpenAPI } from "fumadocs-openapi/server"
 import type { InferMetaType, InferPageType } from "fumadocs-core/source"
 
 export const utils = loader({
-  // baseUrl: "/",
-  // rootDir: "docs",
   source: createMDXSource(docs, meta),
   pageTree: {
     attachFile
