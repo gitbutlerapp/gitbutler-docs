@@ -1,26 +1,17 @@
-import createMDX from "fumadocs-mdx/config"
-import remarkYoutube from "remark-youtube"
-import { remarkHeading, remarkImage, remarkStructure, rehypeCode } from "fumadocs-core/mdx-plugins"
-
-const withMDX = createMDX({
-  buildSearchIndex: {
-    filter: (path) => {
-      return path.startsWith("docs")
-    }
-  },
-  mdxOptions: {
-    remarkPlugins: [remarkHeading, remarkImage, remarkStructure, remarkYoutube],
-    rehypePlugins: [[rehypeCode]]
-  }
-})
+import { createMDX } from "fumadocs-mdx/next"
 
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  output: "export",
+  eslint: {
+    ignoreDuringBuilds: true
+  },
   compress: true,
   swcMinify: true,
   cleanDistDir: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         hostname: "docs.gitbutler.com"
@@ -29,4 +20,4 @@ const config = {
   }
 }
 
-export default withMDX(config)
+export default createMDX()(config)
