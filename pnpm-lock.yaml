@@ -18,17 +18,17 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       fumadocs-core:
-        specifier: 13.4.2
-        version: 13.4.2(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 13.4.4
+        version: 13.4.4(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       fumadocs-mdx:
         specifier: 10.0.0
-        version: 10.0.0(fumadocs-core@13.4.2(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        version: 10.0.0(fumadocs-core@13.4.4(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       fumadocs-openapi:
-        specifier: ^5.4.6
-        version: 5.4.6(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4)
+        specifier: ^5.4.8
+        version: 5.4.8(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4)
       fumadocs-ui:
-        specifier: 13.4.2
-        version: 13.4.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4)
+        specifier: 13.4.4
+        version: 13.4.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4)
       next:
         specifier: ^14.2.7
         version: 14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1769,8 +1769,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  fumadocs-core@13.4.2:
-    resolution: {integrity: sha512-2agWXhzjkUPJ0BP8XX4cmxBK9V+NcQyW9Xmk7qlE+CgxY+4vl7yhAg7cy45n+QkiafSw6as0bq90hWJoOLxSOg==}
+  fumadocs-core@13.4.4:
+    resolution: {integrity: sha512-tLHYCAXzad6PS3CJg+dY0KR5M0VVde9ZRmAtmv8eXoE56PdW33f28liJ4ssZPlB6o4wnyUHiQcn1mqB/pUA+ow==}
     peerDependencies:
       next: '>= 14.1.0'
       react: '>= 18'
@@ -1783,15 +1783,15 @@ packages:
       fumadocs-core: ^13.2.1
       next: '>= 14.1.0'
 
-  fumadocs-openapi@5.4.6:
-    resolution: {integrity: sha512-euUkPiPMhPbtP5Y9DLLRZBThYesY9//0GP5ge/fJVxnR6V+dXPqiB/zC1Y0ohKanBlfRG3jpdoY40wj6WqCaqg==}
+  fumadocs-openapi@5.4.8:
+    resolution: {integrity: sha512-cdi10rP4oPhnaV627CmC2OfL6hW8yr2YbvuWQ5oPT7k4SgNSXUW5N2vHQGERVsEfL5SCOau/RaHGiovvVsdx9Q==}
     peerDependencies:
       next: '>= 14.1.0'
       react: '>= 18'
       react-dom: '>= 18'
 
-  fumadocs-ui@13.4.2:
-    resolution: {integrity: sha512-zuQXIwgJ2gJnMBaTPcseEmiyWFtSRLiHCStDPLr8stWtg1vNgVE+26cfm2sDiE1yWvVF/3BUYFdRwdTKzYjn4A==}
+  fumadocs-ui@13.4.4:
+    resolution: {integrity: sha512-s4nzAO/KGQu+3LcpbwyQrBhqaWbBxRU+DYPJWLVjkwPT1orTERsdZ/ERvEjnDC7DR4fYnERfmtf03LOBc6OFLg==}
     peerDependencies:
       next: '>= 14.1.0'
       react: '>= 18'
@@ -5124,7 +5124,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fumadocs-core@13.4.2(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  fumadocs-core@13.4.4(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.4
       '@shikijs/rehype': 1.16.1
@@ -5149,7 +5149,7 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  fumadocs-mdx@10.0.0(fumadocs-core@13.4.2(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+  fumadocs-mdx@10.0.0(fumadocs-core@13.4.4(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       '@mdx-js/mdx': 3.0.1
       chokidar: 3.6.0
@@ -5157,7 +5157,7 @@ snapshots:
       esbuild: 0.23.1
       estree-util-value-to-estree: 3.1.2
       fast-glob: 3.3.2
-      fumadocs-core: 13.4.2(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      fumadocs-core: 13.4.4(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       gray-matter: 4.0.3
       micromatch: 4.0.8
       next: 14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5165,7 +5165,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  fumadocs-openapi@5.4.6(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4):
+  fumadocs-openapi@5.4.8(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4):
     dependencies:
       '@apidevtools/json-schema-ref-parser': 11.7.0
       '@fumari/json-schema-to-typescript': 1.1.0
@@ -5173,8 +5173,8 @@ snapshots:
       '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
       class-variance-authority: 0.7.0
       fast-glob: 3.3.2
-      fumadocs-core: 13.4.2(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      fumadocs-ui: 13.4.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4)
+      fumadocs-core: 13.4.4(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      fumadocs-ui: 13.4.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4)
       github-slugger: 2.0.0
       hast-util-to-jsx-runtime: 2.3.0
       js-yaml: 4.1.0
@@ -5194,7 +5194,7 @@ snapshots:
       - supports-color
       - tailwindcss
 
-  fumadocs-ui@13.4.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4):
+  fumadocs-ui@13.4.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4):
     dependencies:
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5206,7 +5206,7 @@ snapshots:
       '@tailwindcss/typography': 0.5.15(tailwindcss@3.4.4)
       class-variance-authority: 0.7.0
       cmdk: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      fumadocs-core: 13.4.2(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      fumadocs-core: 13.4.4(@types/react@18.3.3)(next@14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lucide-react: 0.437.0(react@18.3.1)
       next: 14.2.7(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-themes: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
