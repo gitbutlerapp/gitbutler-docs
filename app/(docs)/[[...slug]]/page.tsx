@@ -14,7 +14,8 @@ interface Param {
   slug: string[]
 }
 
-export default function Page({ params }: { params: Param }): React.ReactElement {
+export default async function Page(props: { params: Promise<Param> }): Promise<React.ReactElement> {
+  const params = await props.params
   const page = utils.getPage(params.slug)
 
   if (!page) notFound()
@@ -119,7 +120,8 @@ export function generateStaticParams(): Param[] {
   })
 }
 
-export function generateMetadata({ params }: { params: { slug?: string[] } }) {
+export async function generateMetadata(props: { params: Promise<{ slug?: string[] }> }) {
+  const params = await props.params
   const page = utils.getPage(params.slug)
 
   if (!page) notFound()
