@@ -30,11 +30,11 @@ const toBase64 = (str: string) =>
 export default async function ImageSection({ src, alt, subtitle }: Props) {
   const img = await import(`../../public/img/docs${src}`).then((mod) => mod.default)
   if (!img) return null
-  console.log("IMG", img)
+
   return (
     <div className="mx-auto mb-4 flex flex-col justify-start rounded-lg border border-neutral-200 bg-neutral-100 p-2 dark:border-neutral-800 dark:bg-neutral-900 [&>span]:w-fit [&_img]:m-0">
       <ImageZoom
-        className="relative rounded-md object-contain"
+        className="rounded-md"
         placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(img.width, img.height))}`}
         alt={alt ?? subtitle ?? ""}
         src={img}
