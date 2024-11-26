@@ -13,8 +13,8 @@ if (swaggerContent.servers?.[0]?.url === "//app.gitbutler.com/api") {
 }
 
 // NOTE: Temporary bug fix for cyclic references (project <-> parentProject)
-delete swaggerContent.components.schemas.Butler_API_Entities_Project.properties.parentProject
-delete swaggerContent.components.schemas.Butler_API_Entities_UserPrivate.properties.projects
+// delete swaggerContent.components.schemas.Butler_API_Entities_Project.properties.parentProject
+// delete swaggerContent.components.schemas.Butler_API_Entities_UserPrivate.properties.projects
 
 await writeFile("./api-reference.json", JSON.stringify(swaggerContent, null, 2))
 
