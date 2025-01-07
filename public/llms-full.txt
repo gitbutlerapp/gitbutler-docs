@@ -1,7 +1,7 @@
 
 # GitButler Documentation
 
-## Docs 
+## Table of Contents 
 
 - [guide](#guide.mdx)
 - [index](#index.mdx)

@@ -19,7 +19,7 @@ try {
   fileContent = `
 # GitButler Documentation
 
-## Docs 
+## Table of Contents 
 
 ${Object.entries(filePaths).map((file) => {
   return `- [${file[0].replace(".mdx","")}](#${file[0]})\n`
