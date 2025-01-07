@@ -39,4 +39,4 @@ await Promise.all(
   })
 )
 
-await writeFile("./public/llms.txt", fileContent)
+await writeFile("./public/llms-full.txt", fileContent)
