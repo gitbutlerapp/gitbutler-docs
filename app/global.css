@@ -58,3 +58,15 @@ iframe[src*="youtube"] {
   border-radius: 0.5rem;
   @apply h-full w-full;
 }
+
+.peer {
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 1.5em;
+}
+
+#nd-page p { 
+  padding: 10px 0;
+  line-height: 1.8em;
+}
