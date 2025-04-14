@@ -41,6 +41,10 @@ If you use your own key for OpenAI or Anthropic, you can choose which model you 
 
 If you don't want to send your diff to another server, you can also use Ollama, which is a local LLM server. With Ollama, you can run nearly any open source large language model ([Llama 3](https://www.ollama.com/library/llama3), [Phi 3](https://www.ollama.com/library/phi3), [Mistral](https://www.ollama.com/library/mistral), [Gemma](https://www.ollama.com/library/gemma), etc) entirely locally.
 
+
+Note that if you choose to configure a self-hosted Ollama server, you will likely need to add a custom CSP (Content Security Policy) to allow GitButler to connect to it. 
+You can find more information on how to do that in the [Custom Content Security Policy (CSP)](/troubleshooting/custom-csp) section of the documentation.
+
 With all of these models, you can also customize the prompt if you want something more specific. In the "Custom AI prompts" section, you can add new prompts and select which one you want to use per project. This is useful for following certain formats or generating messages in other languages, etc.
 
 <ImageSection
