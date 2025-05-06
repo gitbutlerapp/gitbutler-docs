@@ -37,7 +37,9 @@ In order for this to work, you need to:
 
 For GitButler to sign commits, you need to setup Git to sign commits, as we do roughly the same thing that Git itself tries to do, and we read and respect most of the same Git config settings.
 
-The main difference is that instead of `commit.gpgSign` as the flag that tells Git to automatically sign commits, we look for `gitbutler.signCommits`. If this is set, GitButler will attempt to sign your commits with the normal Git settings.
+The main difference is that instead of only the `commit.gpgSign` as the flag that tells Git to automatically sign commits, we look for `gitbutler.signCommits` first. Thus, if Git would sign, GitButler will attempt to sign your commits with the normal Git settings as well.
+But if something goes wrong, `gitbutler.signCommits` will be set to `false` in the repository-local settings to prevent commits from
+failing generally.
 
 We look to see if we have a signing key in `user.signingkey`. If we have a key, we look for 'ssh' in `gpg.format`, otherwise we use GPG. We will respect `gpg.ssh.program` for ssh if there is a different binary path, and `gpg.program` for GPG. We also identify literal SSH keys in the `user.signingkey` field.
 

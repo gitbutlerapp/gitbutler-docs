@@ -1,0 +1,64 @@
+---
+title: Custom Content Security Policy (CSP)
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+By default GitButler uses a strict Content Security Policy (CSP) to protect against various attacks, such as cross-site scripting (XSS) and data injection attacks. This policy restricts the sources from which content can be loaded, as well as the hosts the application can connect to, ensuring that only trusted sources are allowed.
+
+However, there are some cases where you may need to customize the CSP to allow certain features or integrations. Some examples include:
+- Self-hosted GitHub Enterprise instances
+- Self-hosted GitLab instances
+- Self-hosted Ollama instances
+
+In those cases you are likely to observe an error message that looks something like this:
+
+```
+Refused to connect to https://<YOURDOMAIN>.<TLD>/api/v4/projects/9/merge_requests because it does not appear in the connect-src directive of the Content Security Policy.
+```
+
+You can resolve this issue by adding your host to the CSP. 
+
+## Adding a Custom CSP
+
+You can add a custom CSP by editing the GitButler configuration file, found at the following location:
+
+<Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
+  <Tab value="macOS">
+  ```bash
+  ~/Library/Application\ Support/gitbutler/settings.json
+  ```
+  </Tab>
+  <Tab value="Windows">
+  ```bash
+  C:\Users\[username]\AppData\Roaming\gitbutler\settings.json
+  ```
+  </Tab>
+  <Tab value="Linux">
+  ```bash
+  ~/.config/gitbutler/settings.json
+  ```
+  </Tab>
+</Tabs>
+
+The file is in JSONC format and follows the [following schema](https://github.com/gitbutlerapp/gitbutler/blob/master/crates/but-settings/assets/defaults.jsonc)
+
+In order to add your custom CSP entry, you want to add an `extraCsp` entry to the JSON file. The `extraCsp` entry is an object that contains a `hosts` array, which is where you can add your custom hosts. For example:
+
+```json
+"extraCsp": {
+  "hosts": ["https://subdomain.example.com", "http://another-subdomain.example.com"]
+}
+```
+
+Note that if `extraCsp` is the only entry in the JSON file, you may want to enclose it in a top-level object, like this:
+
+```json
+{
+  "extraCsp": {
+    "hosts": ["https://subdomain.example.com", "http://another-subdomain.example.com"]
+  }
+}
+```
+
+The changes will take effect the next time you start GitButler.
