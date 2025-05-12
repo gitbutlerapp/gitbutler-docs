@@ -3,8 +3,31 @@ title: Fetch / Push Issues
 ---
 
 import ImageSection from "@/components/ImageSection"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 
 If you are having trouble pushing or fetching from a remote, this is likely related to git authentication. Here are a few configuration options you can try out, found in the project settings.
+
+## Configuring the auto-fetch frequency
+
+GitButler will periodically fetch from your configured remotes in order to display new branches etc. By default, this happens every every 15 minutes.
+
+You can configure the interval or completely disable this behavior by editing the application's `settings.json` file:
+
+<Tabs groupId="platform" items={["macOS", "Windows", "Linux"]} persist>
+  <Tab value="macOS">```bash ~/Library/Application\ Support/gitbutler/settings.json ```</Tab>
+  <Tab value="Windows">```bash C:\Users\[username]\AppData\Roaming\gitbutler\settings.json ```</Tab>
+  <Tab value="Linux">```bash ~/.config/gitbutler/settings.json ```</Tab>
+</Tabs>
+
+The file is in JSONC format and follows the [following schema](https://github.com/gitbutlerapp/gitbutler/blob/master/crates/but-settings/assets/defaults.jsonc)
+
+```json
+  "fetch": {
+    "autoFetchIntervalMinutes": 15
+  }
+```
+
+A negative value (e.g. -1) disables auto fetching. Note that if `fetch` is the only entry in the JSON file, you may want to enclose it in a top-level object.
 
 ## Available authentication methods
 
