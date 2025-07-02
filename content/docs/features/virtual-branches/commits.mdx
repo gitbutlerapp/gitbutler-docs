@@ -3,54 +3,51 @@ title: Commits
 ---
 
 import ImageSection from "@/components/ImageSection"
-import { Callout } from 'fumadocs-ui/components/callout';
+import { Callout } from "fumadocs-ui/components/callout"
 
 GitButler gives you a lot of tooling for creating, modifying, squashing, splitting and undoing commits.
 
-GitButler has lots of ways to craft the exact commits that you want to end up with. With other Git clients, you tend to have to run somewhat complicated git rebase -i type commands to change commit messages, split a commit up or absorb new changes into an existing commit. With GitButler, most of these are simply drag-and-drop operations.
+GitButler has lots of ways to craft the exact commits that you want to end up with. With other Git clients, you tend to have to run somewhat complicated `git rebase -i` type commands to change commit messages, split a commit up or absorb new changes into an existing commit. With GitButler, most of these are simply drag-and-drop operations.
 
 Here are some of the cool things you can do very easily with GitButler.
 
 ## Creating Commits
-Once you have changes on a virtual branch and want to commit them, you can hit the "Start Commit" button, which gives you an editor to write a summary and optional description for your commit message.
+
+Once you have changes on a virtual branch and want to commit them, you can hit the "Start a Commit" button in any lane, which gives you an editor to write a summary and optional description for your commit message.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-edit.png"
+  width="800"
+  height="600"
+  subtitle="Crafting a commit message with our advanced floating mode editor"
+/>
 
 If you want AI to use your diff to generate a commit message, you can hit the "Generate message" button.
 
-<ImageSection
-  alt="Creating Commits Example"
-  src="/commits-01.gif"
-/>
-
 ## AI Commit Message Settings
 
-If you want to use AI for generating your commit messages from time to time, there are quite a few options in your user preferences. You can choose from [OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/) or [Ollama](https://www.ollama.com/) as your engine.
+If you want to use AI for generating your commit messages or branch names from time to time, there are quite a few options in your user preferences. You can choose from [OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/), [Ollama](https://www.ollama.com/) or [LM Studio](https://lmstudio.ai/) as your engine.
 
 For both OpenAI and Anthropic, you can either use your own API key to directly send your request to their servers, or you can proxy via our server (which you need to be logged in for).
 
-<ImageSection
-  alt="AI Commit Settings"
-  src="/commits-02.png"
-/>
+<ImageSection alt="AI Commit Settings" src="/commits-02.png" />
 
 If you use your own key for OpenAI or Anthropic, you can choose which model you would like us to use.
 
-<ImageSection
-  alt="AI Commit Settings"
-  src="/commits-03.png"
-/>
+<ImageSection alt="AI Commit Settings" src="/commits-03.png" />
 
-If you don't want to send your diff to another server, you can also use Ollama, which is a local LLM server. With Ollama, you can run nearly any open source large language model ([Llama 3](https://www.ollama.com/library/llama3), [Phi 3](https://www.ollama.com/library/phi3), [Mistral](https://www.ollama.com/library/mistral), [Gemma](https://www.ollama.com/library/gemma), etc) entirely locally.
+If you don't want to send your diff to another server, you can also use Ollama or LM Studio, which are a local LLM servers.
 
+With Ollama, you can run nearly any open source large language model ([Llama 3](https://www.ollama.com/library/llama3), [Phi 3](https://www.ollama.com/library/phi3), [Mistral](https://www.ollama.com/library/mistral), [Gemma](https://www.ollama.com/library/gemma), etc) entirely locally.
 
-Note that if you choose to configure a self-hosted Ollama server, you will likely need to add a custom CSP (Content Security Policy) to allow GitButler to connect to it. 
+Note that if you choose to configure a self-hosted Ollama server, you will likely need to add a custom CSP (Content Security Policy) to allow GitButler to connect to it.
+
 You can find more information on how to do that in the [Custom Content Security Policy (CSP)](/troubleshooting/custom-csp) section of the documentation.
 
 With all of these models, you can also customize the prompt if you want something more specific. In the "Custom AI prompts" section, you can add new prompts and select which one you want to use per project. This is useful for following certain formats or generating messages in other languages, etc.
 
-<ImageSection
-  alt="AI Commit Settings"
-  src="/commits-04.png"
-/>
+<ImageSection alt="AI Commit Settings" src="/commits-04.png" />
 
 Custom prompts can contain three variables which we will replace with the appropriate values. Those include:
 
@@ -66,8 +63,11 @@ If you have a commit and get some feedback on it or find an issue and wish to am
 This will both rewrite that commit to include the new changes and also rebase every commit upstream from it automatically.
 
 <ImageSection
-  alt="Absorbing New Work"
-  src="/commits-05.gif"
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/absorb-work.gif"
+  width="800"
+  height="600"
+  subtitle="Assigning work on a file to a lane, then into an existing commit"
 />
 
 ## Undoing Commits
@@ -75,12 +75,28 @@ This will both rewrite that commit to include the new changes and also rebase ev
 You can easily undo any commit in your stack by expanding the commit and hitting the 'Undo' button. This will rebase all the commits above it and leave whatever work was in that commit as new uncommitted changes.
 
 <Callout>
-"Undo"ing a commit does not throw it away, it simply makes that work not in a commit anymore. It will not discard the changes.
+  "Undo"ing a commit does not throw it away, it simply makes that work not in a commit anymore. It
+  will not discard the changes.
 </Callout>
 
 <ImageSection
-  alt="Undoing Commits"
-  src="/commits-06.gif"
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/undoing-commits.gif"
+  width="800"
+  height="600"
+  subtitle="Undoing a commit in GitButler"
+/>
+
+## Undoing One File in a Commit
+
+If you want to undo a single file in a commit, you can expand the commit and click on the file you want to undo. Then hit "Uncommit". This will remove that file from the commit and leave it as uncommitted changes.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/undoing-file-then-redoing.gif"
+  width="800"
+  height="600"
+  subtitle="Uncommitting a file, then adding it back into the commit"
 />
 
 ## Squashing Commits
@@ -88,8 +104,11 @@ You can easily undo any commit in your stack by expanding the commit and hitting
 Squashing two commits into a single combined commit is also very simple. Just drag one commit on top of another one.
 
 <ImageSection
-  alt="Squashing Commits"
-  src="/commits-07.gif"
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/squashing.gif"
+  width="800"
+  height="600"
+  subtitle="Squash commits together by dragging and dropping"
 />
 
 ## Splitting Commits
@@ -97,8 +116,11 @@ Squashing two commits into a single combined commit is also very simple. Just dr
 Splitting commits is slightly more complex. GitButler allows you to create an "empty" commit anywhere and then drag changes into it. Here is an example of creating an empty commit between two other commits, dragging changes from both of them into it and then absorbing new work into it as well.
 
 <ImageSection
-  alt="Splitting Commits"
-  src="/commits-08.gif"
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/splitting.gif"
+  width="800"
+  height="600"
+  subtitle="Splitting commits by adding an empty commit and dragging changes into it"
 />
 
 You can also notice that I easily edit the commit message by just hitting the "edit message" button.
@@ -108,8 +130,11 @@ You can also notice that I easily edit the commit message by just hitting the "e
 You can also arbitrarily change the order of your commits by dragging and dropping them, which rebases everything to change the order.
 
 <ImageSection
-  alt="Moving Commits"
-  src="/commits-09.gif"
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/reorder.gif"
+  width="800"
+  height="600"
+  subtitle="Reordering commits in a branch"
 />
 
 ## Edit Mode
@@ -119,9 +144,11 @@ The other way that you can modify a commit is to go into "Edit Mode". When you c
 The screen will go into "Edit mode", indicating that you're in a special state where you're focusing on this one commit.
 
 <ImageSection
-  subtitle="Editing a commit"
-  alt="Editing a commit"
-  src="/conflicts-edit-mode.png"
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/edit-mode.gif"
+  width="800"
+  height="600"
+  subtitle="Going into edit mode to directly edit the state of a commit"
 />
 
 Then you can change whatever you want and when you click "Save and exit", it will amend the commit you were editing and rebase anything on top of it.
