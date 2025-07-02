@@ -1,5 +1,5 @@
 {
   "title": "Features",
   "defaultOpen": true,
-  "pages": ["virtual-branches", "stacked-branches", "timeline", "gitlab-integration"]
+  "pages": ["virtual-branches", "stacked-branches", "timeline", "mcp-server", "gitlab-integration"]
 }
