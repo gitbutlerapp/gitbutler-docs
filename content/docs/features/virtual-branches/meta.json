@@ -8,7 +8,6 @@
     "pushing-and-fetching",
     "integration-branch",
     "merging",
-    "signing-commits",
-    "committer-mark"
+    "signing-commits"
   ]
 }
