@@ -1,0 +1,189 @@
+---
+title: MCP Server
+---
+
+import ImageSection from "@/components/ImageSection"
+
+If you use an AI agent (such as Cursor, Windsurf, Claude Code) to help you with your code, you can easily setup GitButler to manage your commits automatically, keep save points, and more. You know, _vibe_ commit...
+
+## Setting up your Agent to use GitButler
+
+The first step is to let your agent know about GitButler, which is done via MCP - you need to tell your agent to use the GitButler MCP server.
+
+### Installing the CLI
+
+GitButler provides a CLI that can be used to interact with the GitButler platform. Before you can setup AI Agent integration, you will need to install the CLI.
+
+This can be found by opening the GitButler global settings, and then clicking on the "Install CLI" button in the General settings.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/install-cli.png"
+  width="800"
+  height="600"
+  subtitle="How to install the GitButler CLI"
+/>
+
+Now that you have the `but` CLI installed, your agent can use the CLI's MCP server to interact with GitButler.
+
+### Cursor
+
+To install the GitButler MCP server in Cursor, first go to the Cursor settings, and then click on the "Extensions" tab, then click on "Tools and Integrations" and click on "New MCP Server".
+
+This will open your `~/.cursor/mcp.json` file.
+
+Add the following to the `mcpServers` object:
+
+```json
+{
+  "mcpServers": {
+    "gitbutler": {
+      "command": "but",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+You should see the GitButler MCP server in the list of MCP servers and it should have the tool `gitbutler_update_branches` available.
+
+### VSCode
+
+To install the GitButler MCP server in VSCode, you need to select "MCP: List Servers" from the actions menu. Then select "Add Server". Select "stdio" as the server type.
+
+Now you can type your command (`but mcp`) and name it something. After this, it should open up your settings file and show you something like this:
+
+```json
+  "mcp": {
+    "servers": {
+      Running | Stop | Restart | 1 tools
+      "gitbutler-mcp": {
+        "type": "stdio",
+        "command": "but",
+        "args": ["mcp"]
+      }
+    }
+  }
+```
+
+However, if you have Cursor's MCP already setup, VSCode will notice and help you automatically reuse the settings.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/vscode-mcp-cursor.png"
+  width="800"
+  height="600"
+  subtitle="vscode-mcp-cursor.png"
+/>
+
+### Claude Code
+
+Adding an MCP server to Claude Code is done by running the `claude mcp add` command.
+
+```
+❯ claude mcp add gitbutler but mcp
+Added stdio MCP server gitbutler with command: but mcp to local config
+
+❯ claude mcp list
+gitbutler: but mcp
+```
+
+## Rules: How to configure auto committing
+
+Once you have installed the MCP server in your editor or agent, you can optionally configure it to automatically commit your changes.
+
+We've found that adding something like this to your rules works well:
+
+```
+If you generate code or modify files, run the gitbutler update branches MCP tool.
+```
+
+## How to add rules
+
+Cursor stores it's rules in `~/.cursor/rules` file, but you can also manually set them by going to the Cursor Settings pane, clicking 'Rules' and adding them to the User Rules section.
+
+In VSCode's Copilot Agent Mode, you can use ["custom instructions"](https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions) to accomplish this.
+
+In Claude Code, they are now called "memories" and you can add them by hitting '#' and storing them in user memory (or local if you just want them in one project).
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/claude-memories.png"
+  width="800"
+  height="600"
+  subtitle="Adding memories in Claude Code"
+/>
+
+Or directly in your `~/.claude/CLAUDE.md` rules file:
+
+```
+❯ cat ~/.claude/CLAUDE.md
+## Development Workflow
+- When you're done with a task where code was created or files edited, please run the gitbutler mcp update_branches command.
+```
+
+## Using GitButler with your agent
+
+If you've set up a rule/instruction/memory, then every time a chat session is completed, the agent will send the changes and prompt to GitButler and it will automatically commit the changes.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/update-branches.png"
+  width="800"
+  height="600"
+  subtitle="Notice the automatic 'Called gitbutler_update_branches' after a change was made"
+/>
+
+If you're using Claude Code, it may look something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/claude-mcp-call.png"
+  width="800"
+  height="600"
+  subtitle="Claude Code will show the full MCP prompt after a change was made"
+/>
+
+If you don't have the agent setup to automatically call our tool, then you can also just manually type 'update gitbutler branches' in the chat, but that's a little less magical.
+
+## GitButler interface
+
+There are two phases to GitButler's MCP agent interaction. The first is the agent sending the changes and prompt to GitButler, which GitButler will quickly record and then return a success to the agent. The second is GitButler processing that raw recorded change and attempting to process that change into a commit.
+
+### Recording the changes
+
+When your agent calls the `gitbutler_update_branches` tool, GitButler will record the changes and prompt and then immediately return to the agent, so the call should be very fast.
+
+So for instance, let's say that I prompted my coding agent to update my `README.md` file to add a list of contributing authors. When the agent is done, it should call the update branches MCP tool, which will record a commit that looks something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-raw.png"
+  width="800"
+  height="600"
+  subtitle="The recorded commit message with prompt and summary data from the agent"
+/>
+
+### Processing the changes
+
+Then, if you have AI tooling setup, GitButler will see that and turn it into a commit message like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-updated.png"
+  width="800"
+  height="600"
+  subtitle="The updated commit message"
+/>
+
+You can see all of these steps in the "Actions" section of the GitButler interface, which you can toggle by hitting the "Actions" button in the top right of the interface.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/actions.png"
+  width="800"
+  height="600"
+  subtitle="The 'Actions' section of the GitButler interface"
+/>
+
+In the near future, we will also be able to do more interesting things like auto-absorbing changes into existing commits, creating new branches based on the prompt theme, creating stacked branches, and more.
