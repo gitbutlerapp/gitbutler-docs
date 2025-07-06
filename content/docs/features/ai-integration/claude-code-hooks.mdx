@@ -1,0 +1,79 @@
+---
+title: Claude Code Hooks
+---
+
+If you are using Claude Code, you can use the new ["hooks"](https://docs.anthropic.com/en/docs/claude-code/hooks) functionality to manage the output of even multiple simultaneous instances, while isolating all the generated code into virtual or stacked branches automatically. In this case, there is no need to set up the MCP server, as the hooks will handle everything for you.
+
+## Install the GitButler CLI
+
+First, you need to install the GitButler CLI, which can be done in your General settings. See the [MCP Server documentation](mcp-server) for more details on how to install the CLI.
+
+## Installing GitButler as a Hook
+
+Hooks in Claude Code are defined in one of your settings files.
+
+```
+~/.claude/settings.json - User settings
+.claude/settings.json - Project settings
+.claude/settings.local.json - Local project settings (not committed)
+```
+
+Wherever you want to add GitButler to handle your commits automatically, you can add us as a hook by adding the following to the `hooks` array in whatever settings file you want to use:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "but claude pre-tool"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "but claude post-tool"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "but claude stop"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Essentially, you want to run the `but claude pre-tool` command before any code generation or editing, and the `but claude post-tool` command after it. The `but claude stop` command will run when you stop the agent, ensuring that all changes are committed and branches are updated accordingly.
+
+You also might want to add to your "memories" to ask Claude not to try commiting using Git as it will be handled by GitButler. You can do something like this:
+
+```
+❯ cat ~/.claude/CLAUDE.md
+## Development Workflow
+- Never use the git commit command after a task is finished.
+```
+
+## Using GitButler with Claude Code
+
+With the hooks setup, Claude will tell GitButler when it has generated code or edited files and in which session, which helps GitButler to try to isolate the changes into a single branch per session.
+
+For example, if you have three sessions of Claude Code running at the same time, each will be communicating with GitButler at each step and GitButler will be assigning each change to the correct branch automatically.
+
+When the agent is done, GitButler will commit all the changes and write a more sophisticated commit message based on what you had prompted your agent.
