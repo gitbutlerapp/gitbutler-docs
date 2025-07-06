@@ -4,4 +4,52 @@ title: GitHub Integration
 
 import ImageSection from "@/components/ImageSection"
 
-GitButler integrates with GitHub to provide a seamless experience for managing your repositories, branches, and commits. This integration allows you to leverage GitHub's powerful features while using GitButler's unique capabilities.
+GitButler integrates seamlessly with GitHub, allowing you to manage the pull requests associated with your branches directly from the GitButler client.
+
+## Setting up GitHub Integration
+
+To set up GitHub integration, you need to connect your GitButler client to your GitHub account. This is done through the GitButler settings.
+
+Open the GitButler settings by clicking on the gear icon in the sidebar, then navigate to the "Integrations" tab, then click on the "Authorize" button for GitHub.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/github-setup-1.png"
+  width="800"
+  height="600"
+  subtitle="GitHub authentication via the Integrations settings tab"
+/>
+
+Now copy the generated code and open the GitHub authorization page in your browser.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/github-copy-code.png"
+  width="800"
+  height="600"
+  subtitle="github-copy-code.png"
+/>
+
+Once you are on the GitHub authorization page, paste the code into the input field and it should let you know that you are authorized.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/github-auth.png"
+  width="800"
+  height="600"
+  subtitle="github-auth.png"
+/>
+
+## Using GitButler to Manage Pull Requests
+
+Once you have set up GitHub integration, you can open your pull requests directly from the GitButler branch.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/create-pr.png"
+  width="800"
+  height="600"
+  subtitle="create-pr.png"
+/>
+
+When you create a new branch or commit changes, GitButler will automatically check if there are any associated pull requests on GitHub. You can view these pull requests in the "Pull Requests" tab in the sidebar of the Branches page.
