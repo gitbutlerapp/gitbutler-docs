@@ -1,10 +1,10 @@
 {
-  "title": "Virtual Branches",
+  "title": "Branch Management",
   "pages": [
-    "overview",
-    "butler-flow",
-    "branch-lanes",
+    "virtual-branches",
+    "stacked-branches",
     "commits",
+    "branch-lanes",
     "pushing-and-fetching",
     "integration-branch",
     "merging",

@@ -52,12 +52,18 @@ can be put in a separate virtual branch. On the other hand, a change that depend
 
 In fact GitButler implements stacked branches as Virtual Branches that are split into multiple dependent branches.
 
-<ImageSection src="/stacked-branches/11_overview.jpg" />
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/stacked-branches.png"
+  width="800"
+  height="600"
+  subtitle="stacked-branches.png"
+/>
 
 ## Workflow
 
-By default, virtual branches in the app are simply stacks of one. With version `0.14.0` or newer
-you can create a new dependent branch within a lane by clicking the `+` button above the branch name.
+By default, virtual branches in the app are simply stacks of one.
+With version `0.14.0` or newer you can create a new dependent branch within a lane by clicking the `+` button above the branch name.
 
 > The workflow below assumes a GitHub remote. If you are using a different forge, you can still use this functionality but will need to manually create/update the Pull/Merge Requests
 
@@ -83,18 +89,12 @@ you can create a new dependent branch within a lane by clicking the `+` button a
 
 6. You can drag changes into commits to amend them (e.g. incorporating review feedback) as well as move and squash commits.
 
-<ImageSection
-  src="/stacked-branches/6_modify_commits-amend.jpg"
-  subtitle="Amending a commit"
-/>
+<ImageSection src="/stacked-branches/6_modify_commits-amend.jpg" subtitle="Amending a commit" />
 <ImageSection
   src="/stacked-branches/6_modify_commits-move.jpg"
   subtitle="Moving a commit to a different branch"
 />
-<ImageSection
-  src="/stacked-branches/6_modify_commits-squash.jpg"
-  subtitle="Squashing commits"
-/>
+<ImageSection src="/stacked-branches/6_modify_commits-squash.jpg" subtitle="Squashing commits" />
 
 7. If a change in your stack is independent (e.g. an unrelated bugfix) it can be moved to a different virtual branch (or stack).
    This works for both uncommitted changes and existing commits that you may want to relocate.
