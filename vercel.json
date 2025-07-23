@@ -14,11 +14,19 @@
     },
     {
       "source": "/features/virtual-branches",
-      "destination": "/features/virtual-branches/overview"
+      "destination": "/features/virtual-branches/virtual-branches"
     },
     {
       "source": "/features/virtual-branches/verifying-commits",
       "destination": "/features/virtual-branches/signing-commits"
+    },
+    {
+      "source": "/features/stacked-branches",
+      "destination": "/features/virtual-branches/stacked-branches"
+    },
+    {
+      "source": "/features/gitlab-integration",
+      "destination": "/features/forge-integration/gitlab-integration"
     }
   ]
 }
