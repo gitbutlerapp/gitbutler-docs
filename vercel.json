@@ -27,6 +27,14 @@
     {
       "source": "/features/gitlab-integration",
       "destination": "/features/forge-integration/gitlab-integration"
+    },
+    {
+      "source": "/agentic-workflows",
+      "destination": "/features/ai-integration/ai-overview"
+    },
+    {
+      "source": "/agentic-workflows/cursor",
+      "destination": "/features/ai-integration/mcp-server"
     }
   ]
 }
