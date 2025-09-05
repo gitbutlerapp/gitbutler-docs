@@ -4,7 +4,8 @@
   "pages": [
     "virtual-branches", 
     "timeline", 
+    "forge-integration",
     "ai-integration", 
-    "forge-integration"
+    "agents-tab"
   ]
 }
