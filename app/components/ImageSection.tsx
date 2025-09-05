@@ -42,7 +42,8 @@ export default async function ImageSection({
   const isRemote = src.startsWith("http://") || src.startsWith("https://")
 
   if (isRemote) {
-    img = src
+    // Replace S3 URLs with CloudFront URLs
+    img = src.replace('gitbutler-docs-images-public.s3.us-east-1.amazonaws.com', 'd2m1ukvwmu7gz4.cloudfront.net')
     if (!propWidth || !propHeight) {
       throw new Error(`Remote image with src "${src}" requires explicit width and height props.`)
     }
