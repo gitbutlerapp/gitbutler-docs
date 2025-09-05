@@ -17,6 +17,10 @@ const config = {
       {
         protocol: "https",
         hostname: "gitbutler-docs-images-public.s3.us-east-1.amazonaws.com"
+      },
+      {
+        protocol: "https",
+        hostname: "d2m1ukvwmu7gz4.cloudfront.net"
       }
     ],
     localPatterns: [
