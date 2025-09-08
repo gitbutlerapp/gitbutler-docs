@@ -126,8 +126,6 @@ export async function generateMetadata(props: { params: Promise<{ slug?: string[
 
   if (!page) notFound()
 
-  return {
-    title: page.data.title,
-    description: page.data.description
-  }
+  const { generatePageMetadata } = await import("@/app/utils/metadata")
+  return await generatePageMetadata(page)
 }
