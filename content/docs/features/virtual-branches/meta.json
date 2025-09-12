@@ -8,6 +8,7 @@
     "pushing-and-fetching",
     "integration-branch",
     "merging",
+    "upstream-integration",
     "signing-commits"
   ]
 }

@@ -1,0 +1,56 @@
+---
+title: "Upstream Integration"
+description: Handle upstream commits and merge them into your virtual branches when collaborators push to the same remote branch.
+---
+
+Sometimes you work on a branch and someone else pushes to the same upstream branch. Often you won't know this until you try to push and Git tells you something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2014.49.08%402x.png"
+  width="800"
+  height="600"
+  subtitle="Oh no, someone else has pushed!"
+/>
+
+In this scenario, GitButler gives you some nice tooling to help you know when this happens as early as possible and help you deal with it easily.
+
+If someone else has pushed to a branch that you're working on, you will see the upstream commits without having to integrate them. You can look at the commits without having to merge them into your branch or rebase your work on top of them.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2014.42.06%402x.png"
+  width="800"
+  height="600"
+  subtitle="GitButler's view when someone else has pushed"
+/>
+
+When you decide that you do want to integrate the changes, you have two options - rebase or interactively integrate.
+
+## Rebase the changes
+
+If you select "Rebase upstream changes", it will do the equivalent of a `git pull --rebase` which rebases the commits you have locally on top of the ones that the other person has pushed, so you end up with a state like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2015.08.05%402x.png"
+  width="800"
+  height="600"
+  subtitle="Simple rebase of my changes on top of the upstream changes"
+/>
+
+Now you can push your commit back upstream without a force push. Easy peasy.
+
+## Interactively integrate the changes
+
+However, let's say that you want to do something more complex. Maybe the other implemented the same thing that you did and you want to drop one of them or one of yours, or squash commits together or reorder them. In any of these cases, you can choose the "Interactive integration" option and you get something that looks like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2014.42.42%402x.png"
+  width="800"
+  height="600"
+  subtitle="Upstream integration helper"
+/>
+
+Here you can reorder commits however you want, you can choose to skip some of them, you can squash some of them down, etc. Just make the commits look however you prefer and then hit the "Integrate changes" button and push your final result back to the server.
