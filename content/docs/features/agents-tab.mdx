@@ -39,11 +39,29 @@ Before you can use the agents tab, you need to have Claude Code installed as we 
   subtitle="Wherefor art thou, Claudius?"
 />
 
-To install Claude Code, you can read through the docs [here](https://docs.anthropic.com/en/docs/claude-code/quickstart), but the simple version is to have Node 18+ installed and run this:
+To install Claude Code, you can read through the docs [here](https://docs.anthropic.com/en/docs/claude-code/quickstart), but the simple version is to use their "Native Install" method:
 
-```
-npm install -g @anthropic-ai/claude-code
-```
+{/* <!-- prettier-ignore-start --> */}
+
+<Tabs groupId="platform" items={["macOS and Linux", "Windows PowerShell", "Windows CMD"]} persist>
+  <Tab value="macOS and Linux">
+    ```bash
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+  </Tab>
+  <Tab value="Windows PowerShell">
+  ```bash
+  irm https://claude.ai/install.ps1 | iex
+  ```
+  </Tab>
+  <Tab value="Windows CMD">
+    ```bash
+    curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del
+    install.cmd
+    ```
+  </Tab>
+</Tabs>
+{/* <!-- prettier-ignore-end --> */}
 
 You will then need to setup and login to Claude Code, which will require an Anthropic account. You can either connect it to an API key for direct billing or use one of the plans. You can learn more on the [Claude Code](https://www.anthropic.com/claude-code) page.
 
