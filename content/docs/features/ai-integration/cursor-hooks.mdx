@@ -1,0 +1,48 @@
+---
+title: Cursor Hooks
+description: Set up Cursor hooks to automatically manage commits and branches when using GitButler with AI coding in Cursor.
+---
+
+GitButler integrates seamlessly with Cursor through hooks that automatically manage your commits and branches while you're using AI coding features. This allows you to automatically maintain clean git history and organized virtual branches.
+
+Here's a short video showing how GitButler works with Cursor hooks:
+
+https://youtu.be/NOYK7LTFvZM
+
+Ok, let's get it set up.
+
+## Install the GitButler CLI
+
+First, you need to install the GitButler CLI, which can be done in your General settings. See the [MCP Server documentation](mcp-server) for more details on how to install the CLI.
+
+## Installing GitButler as a Hook
+
+Once the command line tool is installed, you can add the `but cursor` commands as hooks.
+
+You will need to create or edit your `~/.cursor/hooks.json` file (globally) or `[project]/.cursor/hooks.json` file (single project) to have `afterFileEdit` and `stop` hooks like this:
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "command": "but cursor after-edit"
+      }
+    ],
+    "stop": [
+      {
+        "command": "but cursor stop"
+      }
+    ]
+  }
+}
+```
+
+## Using GitButler with Cursor
+
+Once the hooks are setup, Cursor will automatically call GitButler when it edits files and when it's done with a task, which will trigger GitButler to:
+
+- Create a branch if the chat session is new
+- Assign edits to an active branch
+- Commit with a message based on the prompt when a task is done

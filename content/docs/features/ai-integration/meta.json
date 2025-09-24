@@ -1,5 +1,5 @@
 {
   "title": "AI Agent Integrations",
   "defaultOpen": false,
-  "pages": ["ai-overview", "mcp-server", "claude-code-hooks"]
+  "pages": ["ai-overview", "mcp-server", "claude-code-hooks", "cursor-hooks"]
 }
