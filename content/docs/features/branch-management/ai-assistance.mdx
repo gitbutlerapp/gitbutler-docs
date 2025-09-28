@@ -1,0 +1,132 @@
+---
+title: AI Assistance
+description: Let AI handle the busywork — generate branch names, commit messages, and pull request descriptions automatically in GitButler.
+---
+
+## Getting Started
+
+### Global AI Setup (One-time)
+
+1. Navigate to **Global settings** → **AI Options**
+2. Choose your AI provider:
+   - **GitButler API** (default): Uses OpenAI through GitButler's servers - no API key needed
+   - **Your own key**: Bring your own OpenAI, Claude, Ollama, or LM Studio credentials
+3. If using your own key, enter your API credentials
+
+### Per-Project Setup
+
+1. Open **Project settings** → **AI options**
+2. Enable **"Enable branch and commit message generation"**
+3. Optionally enable **"Enable experimental AI features"** for advanced functionality
+
+## Features
+
+### Branch Name Generation
+
+Automatically creates descriptive, kebab-case branch names based on your code changes.
+
+**Usage:**
+
+- Right-click on a branch header and select **Generate branch name**
+- GitButler analyzes commit messages in the branch and suggests an appropriate name
+- Generated names use kebab-case format and avoid conflicts with existing branches
+
+### Commit Message Generation
+
+Creates professional commit messages following best practices.
+
+**Features:**
+
+- Semantic prefixes (`feat:`, `fix:`, `refactor:`)
+- 50-character title limit, 72-character body wrap
+- Explains what changed and why
+- Real-time streaming as AI generates the message
+- Based on actual code diffs, not just file names
+
+**Usage:**
+
+1. Make changes to your files (staging is automatic in GitButler)
+2. Click the **Generate message** button in the commit message editor
+3. AI streams the generated message in real-time
+4. Review and edit before committing
+
+**Example format:**
+
+```
+feat: add user authentication system
+
+Implements JWT-based authentication with login and registration
+endpoints. Includes password hashing and session management
+to secure user accounts.
+```
+
+### Pull Request Descriptions
+
+Generates comprehensive PR descriptions when creating pull requests.
+
+**Usage:**
+
+1. Create a pull request from your branch
+2. In the PR creation dialog, click **Generate PR description**
+3. AI analyzes all commits in your branch and generates a description
+4. Review and edit the generated content before creating the PR
+
+**Generated content includes:**
+
+- High-level summary based on commit messages
+- Structured description following PR templates (if configured)
+- Context derived from the changes in your branch
+
+## Advanced Features
+
+### Custom Prompts
+
+- **Global Prompts**: Create custom prompts in **Global settings** → **AI Options**
+- **Project-Specific Prompts**: Assign specific prompts per project in **Project settings** → **AI options**
+- **Commit & Branch Prompts**: Separate customization for commit messages and branch names
+
+## Configuration
+
+### Global Settings (Global settings → AI Options)
+
+- **AI Provider**: Choose between OpenAI, Anthropic, Ollama, or LM Studio
+- **Key Options**: Use GitButler API or bring your own credentials for each provider
+- **Model Selection**: Choose specific models per provider (GPT-4o, Claude Sonnet, etc.)
+- **Amount of provided context**: Set how many characters of git diff to send to AI
+
+### Project Settings (Project settings → AI options)
+
+- **Enable branch and commit message generation**: Master toggle for AI features in this project
+- **Enable experimental AI features**: Access to advanced AI functionality (requires GitButler API)
+- **Custom prompts**: Assign specific prompts from global settings to this project for commits and branches
+
+## Troubleshooting
+
+**AI features not working?**
+
+1. **Check Global Settings**: Navigate to **Global settings** → **AI Options** and verify:
+   - AI provider is configured (OpenAI, Anthropic, etc.)
+   - Key option is selected (GitButler API or your own key)
+   - If using your own key, ensure it's entered correctly
+   - Model is selected for your chosen provider
+2. **Check Project Settings**: Open **Project settings** → **AI options** and ensure:
+   - **"Enable branch and commit message generation"** is turned ON
+   - This setting must be enabled for each project individually
+3. **Verify API Access**: Ensure sufficient API quota and valid credentials
+
+**AI buttons not appearing?**
+
+- The project-level toggle in **Project settings** → **AI options** controls button visibility
+- Without this enabled, Generate buttons won't appear in the UI
+
+**Need better suggestions?**
+
+- Customize prompt templates in **Global settings** → **AI Options**
+- Make meaningful code changes with clear patterns
+- Use descriptive variable names and comments in your code
+- Review [troubleshooting guide](https://docs.gitbutler.com/troubleshooting/custom-csp) for advanced configurations
+
+## Related Documentation
+
+- [AI Integration Overview](https://docs.gitbutler.com/features/ai-integration/ai-overview)
+- [MCP Server Setup](https://docs.gitbutler.com/features/ai-integration/mcp-server)
