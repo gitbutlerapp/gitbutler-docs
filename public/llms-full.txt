@@ -3,29 +3,84 @@
 
 ## Table of Contents 
 
+- [butler-flow](#butler-flow.mdx)
 - [guide](#guide.mdx)
 - [index](#index.mdx)
+- [overview](#overview.mdx)
 - [releases](#releases.mdx)
 - [why-gitbutler](#why-gitbutler.mdx)
 - [custom-csp](#custom-csp.mdx)
 - [fetch-push](#fetch-push.mdx)
 - [recovering-stuff](#recovering-stuff.mdx)
-- [overview](#overview.mdx)
-- [gitlab-integration](#gitlab-integration.mdx)
-- [mcp-server](#mcp-server.mdx)
-- [stacked-branches](#stacked-branches.mdx)
+- [agents-tab](#agents-tab.mdx)
 - [timeline](#timeline.mdx)
+- [github-integration](#github-integration.mdx)
+- [gitlab-integration](#gitlab-integration.mdx)
 - [branch-lanes](#branch-lanes.mdx)
-- [butler-flow](#butler-flow.mdx)
 - [commits](#commits.mdx)
 - [integration-branch](#integration-branch.mdx)
 - [merging](#merging.mdx)
 - [pushing-and-fetching](#pushing-and-fetching.mdx)
 - [signing-commits](#signing-commits.mdx)
+- [stacked-branches](#stacked-branches.mdx)
+- [upstream-integration](#upstream-integration.mdx)
+- [virtual-branches](#virtual-branches.mdx)
+- [ai-overview](#ai-overview.mdx)
+- [claude-code-hooks](#claude-code-hooks.mdx)
+- [mcp-server](#mcp-server.mdx)
 - [debugging](#debugging.mdx)
 - [contact-us](#contact-us.mdx)
 - [open-source](#open-source.mdx)
 - [supporters](#supporters.mdx)
+
+
+# butler-flow.mdx
+
+Butler Flow is a lightweight, branch-based workflow enabled by GitButler virtual branch functionality.
+
+Most modern software development teams today that want to set up a culture of shipping, who push to production every day, who are constantly testing and deploying, one of the most popular and effective development workflows is [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow).
+
+These are wise words, enterprising men quote 'em. Don't act surprised, you guys, [cuz I wrote 'em](https://scottchacon.com/2011/08/31/github-flow).
+
+However, a decade later, and with a new and more powerful branching toolset, we're able to amend that basic workflow to be simpler, faster, more flexible and less error prone. Let's take a quick minute to explore what the Butler Flow is for software development teams using GitButler and how this can make all of our lives easier.
+
+## Overview
+
+- In a nutshell, the basic development cycle is very simple.
+- All work is based off a "target branch", which is a representation of released production code.
+- All work immediately exists in a branch.
+- Work can be shared with teammates for review as early as possible.
+- All branches that are close to merging can be applied locally for integration testing.
+- Branches can be reviewed independently and merged after final review.
+- Integrated branches are automatically removed from developer context.
+
+### The Target Branch
+
+In stock Git tooling, there is nothing specified as the production branch, no special "trunk". It is only by convention that this is enforced.
+
+In GitButler, virtual branches will not work without the specification of a special "target branch". Everything exists in relation to this special branch, everything that differs from it must be accounted for by being owned by some other branch, until those changes are integrated.
+
+### Virtual Branches
+
+Once you choose a target branch, everything that is in your working directory and not ignored by the Git ignore specification must be owned by a virtual branch. If you don't have one active, GitButler will automatically create one for you.
+
+All subsequent changes to your working directory, either by applying other branches or directly modifying files, must be owned by a virtual branch.
+
+Branches are meant to be small, independent and rapidly integrated. However, longer lived branches can be continuously re-integrated, keeping them clean and mergeable for long periods of time if needed, while still being shareable and reviewable with your team.
+
+Virtual branches can be started and ended entirely independently of each other. Developers can work on longer branches, while starting, reviewing, finishing, merging and deleting small ones without ever changing branch context.
+
+### Collaboration
+
+All coworkers' work, whether created and managed by GitButler or not, exists on the central server as normal Git branches. These will automatically be pulled down and kept up to date by GitButler and can be converted into virtual branches and applied to your working directory in addition to your branches.
+
+This allows you to integrate work from the rest of your team continuously and early, while still keeping non-dependent changes separated and independently reviewable and mergable. It allows you to review code without needing to entirely switch contexts, and to do so early and often in an executable environment.
+
+Merge conflicts are known almost as soon as they occur and can be communicated about and collaborated on far before an upstream merge.
+
+### Maintenance
+
+Virtual branches can remain applied locally until they are merged into your upstream target branch. Once integrated by any fashion (squash merge, rebase, merge), the virtual branch is automatically disposed of, keeping cruft and overhead low.
 
 
 # guide.mdx
@@ -253,15 +308,21 @@ Just click the "Operations History" button in the sidebar, find the action you w
 
 GitButler is a new Source Code Management system designed to manage your branches, record and backup your work, be your Git client, help with your code and much more. Our focus is everything after writing code in your editor and before sharing it on GitHub. We're focused on your working directory and how we can help with everything you do there.
 
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/vbranch-ex.png"
+  width="800"
+  height="600"
+  subtitle="An example of the GitButler client with multiple applied branches and assigned changes."
+/>
+
 Here you will find documentation on the product and the way that we're running our beta and building our product with your help.
 
 ## Getting Started
 
-Check out our [Getting Started](/guide) guide to get started with GitButler.
+Check out our [Getting Started](/guide) guide to get started with GitButler, or check out our helpful video overview:
 
-## Latest Features
-
-https://www.youtube.com/watch?v=agfyTN3HpRM
+https://www.youtube.com/watch?v=DhJtNNhCNLM
 
 ## Why We're Doing This
 
@@ -271,74 +332,154 @@ Read about it over [Why GitButler](/why-gitbutler) Section.
 
 The GitButler client is a powerful Git client. You can manage your branches, work on multiple things at once, push and fetch from your Git server, easily rebase and modify commits and more. We have a unique approach to merge conflicts that help split up any conflicting work. It also keeps a timeline so that you can easily undo any operation.
 
-- [Virtual Branches](/features/virtual-branches/overview)
-- [First Class Conflicts](/features/virtual-branches/merging)
+- [Virtual Branches](/features/branch-management/virtual-branches)
+- [First Class Conflicts](/features/branch-management/merging)
 - [Project History](/features/timeline)
 
 <img src="/img/dots-bowtie.svg" className="mx-auto w-72" />
 
 
-# custom-csp.mdx
+# overview.mdx
 
 
-By default GitButler uses a strict Content Security Policy (CSP) to protect against various attacks, such as cross-site scripting (XSS) and data injection attacks. This policy restricts the sources from which content can be loaded, as well as the hosts the application can connect to, ensuring that only trusted sources are allowed.
+# Butler Review
 
-However, there are some cases where you may need to customize the CSP to allow certain features or integrations. Some examples include:
-- Self-hosted GitHub Enterprise instances
-- Self-hosted GitLab instances
-- Self-hosted Ollama instances
+<Callout type="warn">
+  We have paused work on Butler Review for now to concentrate more on the client experience. Review
+  will be coming back in our upcoming server functionality, stay tuned.
+</Callout>
 
-In those cases you are likely to observe an error message that looks something like this:
+Butler Review is a new approach to code review that focuses on reviewing code
+as a series of evolving patches rather than a unified diff of a whole branch.
 
-```
-Refused to connect to https://<YOURDOMAIN>.<TLD>/api/v4/projects/9/merge_requests because it does not appear in the connect-src directive of the Content Security Policy.
-```
+<ImageSection
+  alt="Butler Review"
+  src="/review/branch.png"
+  subtitle="A patch series in Butler Review"
+/>
 
-You can resolve this issue by adding your host to the CSP. 
+## Why Butler Review?
 
-## Adding a Custom CSP
+Traditional code review tools like GitHub and GitLab show changes as a single
+diff of the entire branch. This makes it hard to review changes in a branch
+incrementally, especially when the branch is large. It also discourages creating
+good commit or commit messages, since they are all sqaushed in review and
+messages are difficult to find and unrelated to the code review UI.
 
-You can add a custom CSP by editing the GitButler configuration file, found at the following location:
+Butler Review approaches the problem differently, by making it easy to review
+individual commits as patches and tracking changes to the series when you rebase
+or amend the branch.
 
-<Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
-  <Tab value="macOS">
-  ```bash
-  ~/Library/Application\ Support/gitbutler/settings.json
-  ```
-  </Tab>
-  <Tab value="Windows">
-  ```bash
-  C:\Users\[username]\AppData\Roaming\gitbutler\settings.json
-  ```
-  </Tab>
-  <Tab value="Linux">
-  ```bash
-  ~/.config/gitbutler/settings.json
-  ```
-  </Tab>
-</Tabs>
+This makes it easier to review changes incrementally and evolve a series rather
+than pushing poor commits to the branch to address feedback.
 
-The file is in JSONC format and follows the [following schema](https://github.com/gitbutlerapp/gitbutler/blob/master/crates/but-settings/assets/defaults.jsonc)
+## Enabling Butler Review
 
-In order to add your custom CSP entry, you want to add an `extraCsp` entry to the JSON file. The `extraCsp` entry is an object that contains a `hosts` array, which is where you can add your custom hosts. For example:
+To start using Butler Reviews, you need to enable the feature in your GitButler
+client in the project settings. Click the gear icon in the bottom left corner of
+the GitButler client and go to the Server tab.
 
-```json
-"extraCsp": {
-  "hosts": ["https://subdomain.example.com", "http://another-subdomain.example.com"]
-}
-```
+<ImageSection alt="Review Setting" src="/review/settings.png" subtitle="Turning on Butler Review" />
 
-Note that if `extraCsp` is the only entry in the JSON file, you may want to enclose it in a top-level object, like this:
+Once you enable Butler Review, you can start creating reviews for your branches.
 
-```json
-{
-  "extraCsp": {
-    "hosts": ["https://subdomain.example.com", "http://another-subdomain.example.com"]
-  }
-}
-```
+## Creating a Review
 
-The changes will take effect the next time you start GitButler.
+Once you have enabled Butler Review for a project, you can create a review for
+a branch by clicking the new "Create Butler Review" button in the branch header card.
+
+<ImageSection
+  alt="Create Review"
+  src="/review/create-review.png"
+  subtitle="Creating a Butler Review"
+/>
+
+Once you create a review, you will see a new card in the branch header that
+shows the status of the review.
+
+<ImageSection
+  alt="Butler Review Card"
+  src="/review/review-card.png"
+  subtitle="Butler Review Card"
+/>
+
+If you have GitHub integration enabled, you will see a dropdown to let you choose
+to create a PR or a Butler Review. You can also create both, in either order and
+they will be linked together.
+
+<ImageSection
+  alt="Butler Review Card"
+  src="/review/review-card-both.png"
+  subtitle="Branch header card with both PR and BR status"
+/>
+
+Once a Review has been opened, you will have a URL that you can share with your
+team to get feedback on your changes.
+
+## Reviewing a Series
+
+When a reviewer opens a review, they will see a list of patches that make up the branch.
+
+<ImageSection
+  alt="Butler Review"
+  src="/review/branch.png"
+  subtitle="A patch series in Butler Review"
+/>
+
+<Callout type="warn">
+  Currently, all reviews are "unlisted", meaning that anyone with the URL can see the review.
+  In the future, we will implement fully public and fully private reviews, but currently all reviews
+  are unlisted.
+
+However, if someone has the URL, they will only be able to see the patch data,
+they will not have access to all of your source code, nor will they be able to make changes,
+only approve or request changes.
+
+</Callout>
+
+Now the reviewer can hit "Start Review" to start reviewing the patches in the series.
+It will start them at the "bottom", the first patch and they can work their way up.
+The reviewer can also click on a patch to go directly to it.
+
+## Reviewing a Patch
+
+Once a reviewer starts reviewing a patch, they will see the changes in the commit
+and a chat window to leave comments.
+
+<ImageSection alt="Reviewing a Patch" src="/review/patch2.png" subtitle="Reviewing a Patch" />
+
+The reviewer can leave comments on the patch, approve the patch, or request changes.
+The chat discussion is real time, so reviewers can discuss the changes with the author
+as they review the patch.
+
+You can also select lines of code to comment on. This will highlight the line in the
+diff and show the comment in the chat window.
+
+Every patch needs to be approved before the branch is considered approved.
+
+## Requesting Changes
+
+A reviewer can either approve a patch or request changes. If they request changes,
+the author can amend that specific commit and publish the changes to the review.
+
+Reviewers will be able to see in the chat that a new version of the patch has been
+published and they can review the changes again.
+
+<Callout>
+  Currently we don't have interdiffs, so reviewers will need to review the entire patch again. We
+  plan to add interdiffs in the very near future.
+</Callout>
+
+## Approving a Patch
+
+Once a reviewer is happy with a patch, they can approve it. This will mark the patch
+as approved and move the reviewer to the next patch in the series.
+
+## Closing a Review
+
+Once the branch has been merged, it will automatically mark the review as closed.
+The author can also manually close the review if they decide to abandon the series.
+
 
 # releases.mdx
 
@@ -383,6 +524,35 @@ We bundle and ship GitButler for Mac OS, Windows, and Linux.
 > We've recently upgraded to Tauri v2 (as of Nightly `0.5.845` and Release `0.13.9`), and it now requires `libwebkit2gtk-4.1`. This version of the package is not available in the repositories for Ubuntu 20.04 and older as well as Debian 11 and older.
 >
 > For more information, check out the [pinned issue](https://github.com/tauri-apps/tauri/issues/9662) in the Tauri repository.
+
+
+# why-gitbutler.mdx
+
+The GitButler manifesto, as it were.
+
+Everyone loves a good manifesto. So, why is there a need for a new Git client in the world? Don't we have enough? Isn't the command line just fine?
+
+Having cofounded GitHub, trained dozens of corporate teams on distributed version control tools and literally written the book on Git, we have spent a lot of time and energy over the last decade thinking about the source code management tools that software developers use every day.
+
+GitHub has changed the way that millions of developers across the world collaborate and work with their source code, but as sophisticated and user friendly as that tool is in our daily coding lives, using GitHub or GitLab or Bitbucket still requires all of those developers to work with a command line tool that is confusing, difficult to use, error prone and not originally designed or built for the workflows and processes that most developers today use. That tool is Git.
+
+Sure, some small minority will use a GUI of some sort, but even those tools are mostly wrappers around the core concepts of Git itself, never reimagining what source code management could be or if Git itself is actually good at helping them with the tasks they face on a daily basis. I've never personally used one because they do little that Git itself doesn't and honestly it's generally easier to just do those tasks on the command line, where it's quick and efficient and I don't have to take my hands off the keyboard.
+
+But what if we broke down everything that you try to accomplish with Git, with source code management tools in general, reduce them down to first principles and imagine a tool that does all of those things better? Are you using Git because it's the best way you can imagine accomplishing those tasks, or are you using it because it's what is there, it's what works with GitHub, it's the only real option?
+
+The reality is that source code management tools have changed very little on a fundamental level in the last 40 years. If you look at the tools and commands and interface that RCS had in the 80s, or Subversion had in the 90s, is it really massively different than how you use Git today on a daily basis?
+
+Yes, Git has easy branching, acceptable merging, a nice network transport method to move your code around, but you're still making manual checkins, you're still trying to remember obscure arguments, you're still losing work when things get complicated.
+
+GitButler is rethinking everything between when you write code in your editor of choice and when you push that code to GitHub for review. Why are you making 'wip' commits when your SCM should be recording everything for you? Why are everyone's commit messages close to useless? Why is `git blame` the best way to get context on the code your team has written? Why can't you seamlessly transition work between computers?
+
+We are creating not only a new kind of Git client, but an entirely new way of thinking about managing the code that you work on. A tool that helps you at every step of the software development process. A code concierge, hard at work for you to ensure that you'll never lose a moment of work again. That you'll have all the context and support you'll need around every line of code you work on.
+
+Managing your source code can be different, smarter, leaps ahead of the 40 year old concepts that we're using today.
+
+Our goal is to make sure that nobody ever has to read Scott's book again. That you don't have to learn how to manage your source code management tool.
+
+<img src="/img/markus-chill.svg" className="mx-auto" />
 
 
 # fetch-push.mdx
@@ -476,125 +646,67 @@ If none of the available options helps, feel free to hop on our [Discord](https:
 
 
 
-# overview.mdx
+# custom-csp.mdx
 
 
-Work on several branches at the same time, committing and stashing them independently and simultaneously.
+By default GitButler uses a strict Content Security Policy (CSP) to protect against various attacks, such as cross-site scripting (XSS) and data injection attacks. This policy restricts the sources from which content can be loaded, as well as the hosts the application can connect to, ensuring that only trusted sources are allowed.
 
-One of the main strengths of GitButler is it's incredible versatility around branch management. You can decide to create multiple independent branches to work on from a single working directory simultaneously, or you can create dependent, stacked branches and merge them in a particular order.
+However, there are some cases where you may need to customize the CSP to allow certain features or integrations. Some examples include:
+- Self-hosted GitHub Enterprise instances
+- Self-hosted GitLab instances
+- Self-hosted Ollama instances
 
-We refer to our independent branches as "virtual" branches and our dependent branches as "stacked" branches.
+In those cases you are likely to observe an error message that looks something like this:
 
-This ability to do multiple dependant or independent branches at the same time is something that is not possible with vanilla Git.
+```
+Refused to connect to https://<YOURDOMAIN>.<TLD>/api/v4/projects/9/merge_requests because it does not appear in the connect-src directive of the Content Security Policy.
+```
 
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/vbranches-overview.png"
-  width="800"
-  height="600"
-  subtitle="The main workspace, showing multiple dependent and independent branches"
-/>
+You can resolve this issue by adding your host to the CSP. 
 
-<Callout type="warn">
-  When using GitButler, we will setup a special branch to handle the multiple branches in away that
-  Git can understand a bit better. This means that if you use vanilla git branching commands like
-  `git switch`, GitButler will pause and ask you to return to GitButler's method when you return.
-</Callout>
+## Adding a Custom CSP
 
-The reason is that stock Git can only handle one branch at a time, it does not have tooling to use or understand multiple, so most commands having to do with the index or HEAD or branching (commit, branch, checkout, etc) may behave unexpectedly.
+You can add a custom CSP by editing the GitButler configuration file, found at the following location:
 
-<Callout type="info">
-  To understand why and how to get out of any difficulties you run into, please read our
-  [integration branch](/features/virtual-branches/integration-branch) docs. We are working on making
-  this interaction better.
-</Callout>
+<Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
+  <Tab value="macOS">
+  ```bash
+  ~/Library/Application\ Support/gitbutler/settings.json
+  ```
+  </Tab>
+  <Tab value="Windows">
+  ```bash
+  C:\Users\[username]\AppData\Roaming\gitbutler\settings.json
+  ```
+  </Tab>
+  <Tab value="Linux">
+  ```bash
+  ~/.config/gitbutler/settings.json
+  ```
+  </Tab>
+</Tabs>
 
-## Target Branch
+The file is in JSONC format and follows the [following schema](https://github.com/gitbutlerapp/gitbutler/blob/master/crates/but-settings/assets/defaults.jsonc)
 
-With virtual branches, you are not working off of local main or master branches. Everything that you do is on a virtual branch, automatically.
+In order to add your custom CSP entry, you want to add an `extraCsp` entry to the JSON file. The `extraCsp` entry is an object that contains a `hosts` array, which is where you can add your custom hosts. For example:
 
-Similar to GitHub, where you specify a default branch to use to merge your Pull Requests into by default, GitButler requires a "Target Branch". This is understood to be whatever your concept of "production" is. Typically what represents deployed, production code that cannot or should not be rolled back. Generally this would be something like `origin/master` or `origin/main`.
+```json
+"extraCsp": {
+  "hosts": ["https://subdomain.example.com", "http://another-subdomain.example.com"]
+}
+```
 
-Once a target branch is specified, everything in your working directory that differs from it is branched code and must belong to a virtual branch.
+Note that if `extraCsp` is the only entry in the JSON file, you may want to enclose it in a top-level object, like this:
 
-This means that you don't have to create a new branch when you want to start working, you simply start working and then change the branch name later. There is no local "main" or "master" because it doesn't make sense. Everything is a branch, with work that is meant to eventually be integrated into your target branch.
+```json
+{
+  "extraCsp": {
+    "hosts": ["https://subdomain.example.com", "http://another-subdomain.example.com"]
+  }
+}
+```
 
-## Virtual Branches
-
-You can easily work in a single branch at a time, but GitButler can handle several virtual branches at the same time. If you have 3 different changes in one file, you can drag each of the changes to a different virtual branch lane and commit and push them independently.
-
-Each virtual branch is kept in a vertical lane, similar to a kanban board, and every file and difference is similar to a card that you can drag between the lanes until they are committed there.
-
-Each time you commit on a virtual branch, GitButler calculates what that branch would have looked like if the changes you dragged onto it were the only things in your working directory and commits a file tree that looks like that. If you push that commit and inspect it on GitHub (or whatever upstream service you use to collaborate), it should look like that was the only change you made, even though you could potentially still have multiple branches applied in your working directory.
-
-## Applying and Unapplying Branches
-
-Since there isn't just a single branch you can be on, you don't "switch" branches, which implies replacement. You simply "apply" branches, which takes whatever changes they represent and adds them to your working directory. If you don't want those changes in your working directory anymore, you can "unapply" them, which removes only those changes.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/unapply-stack.png"
-  width="800"
-  height="600"
-  subtitle="unapply-stack.png"
-  subtitle="Click 'unapply' for any branch to stash it and remove it's changes from the working directory"
-  alt="Virtual Branch Apply / Unapply"
-/>
-
-## Merging Upstream
-
-Eventually you will have work merged into the branch you chose as your target branch, which will need to be reconciled with all your virtual branches to keep them up to date with where they will eventually need to merge to.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/update-base.png"
-  width="800"
-  height="600"
-  subtitle="Updating from upstream will automatically remove integrated branches and rebase other branches on top of the new work."
-/>
-
-Upstream work will automatically be shown on the top of your window as "X upstream commits". When you click that, you will see the incoming work and how to update your active branches on top of it.
-
-For each virtual branch you have, we will show you if the incoming upstream work has conflicts with each branch. If there are conflicts, you can choose to stash the branch or go ahead and rebase with conflicts, which you can fix later.
-
-If a virtual branch is entirely integrated into upstream, it will be removed and deleted when those changes are integrated. So you can just keep a virtual branch applied locally until it is integrated and it will go away automatically.
-
-## Conflicting Branches
-
-If you do rebase work that has conflicts, the commit will be marked as being in a conflicted state and you can check it out and fix it whenever you wish.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/conflict-resolve.png"
-  width="800"
-  height="600"
-  subtitle="When your commits have conflicts"
-/>
-
-This is different from how you might have dealt with conflicts in Git before. If there is conflicting work in a commit, GitButler will ignore the parts that conflict and keep rebasing. In other words, rebases _always_ work. Then you can focus resolving each conflicted commit, one at a time.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/resolve-conflicts-mode.png"
-  width="800"
-  height="600"
-  subtitle="Resolving a conflict by individual commit"
-/>
-
-This will check out the conflicts into your working directory and you can let us know when you're done resolving it and we'll rebase everything above it.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/conflicts-resolved.png"
-  width="800"
-  height="600"
-  subtitle="Conflicts resolved!"
-/>
-
-## The End
-
-That is our general overview of how our branching model and workflow works. We've found that it's way easier and faster than constantly switching back and forth between branches, managing branches all the time, and all the other overhead that comes with branching in Git, while still being able to easily create pull requests and integrate features.
-
+The changes will take effect the next time you start GitButler.
 
 # recovering-stuff.mdx
 
@@ -691,7 +803,7 @@ Date:   Fri Feb 23 10:30:18 2024 +0100
     The sha for that commit was: 5e16e99667db9d26f78110df807853a896120ff3
 
     For more information about what we're doing here, check out our docs:
-    https://docs.gitbutler.com/features/virtual-branches/integration-branch
+    https://docs.gitbutler.com/features/branch-management/integration-branch
 ```
 
 You can see the two `gitbutler` refs under the "Here are the branches that are currently applied" section.
@@ -838,6 +950,334 @@ The virtual_branches tree has the actual contents of those computed branches in 
 This allows you to get contents of any file in any of your virtual branch states as well.
 
 
+# agents-tab.mdx
+
+
+GitButler can also orchestrate your coding agents and help automatically manage, checkpoint and commit the work that they do for you.
+
+<Callout type="info">
+  Currently the only supported agent is [Claude Code](https://www.anthropic.com/claude-code), but we
+  are working on more agent support.
+</Callout>
+
+You can access our agent management in the Agents Tab:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-04%20at%2015.37.39%402x.png"
+  width="800"
+  height="600"
+  subtitle="GitButler Agents Tab"
+/>
+
+The agents tab can run multiple Claude Code agents at the same time and will automatically try to assign file edits done by each to a specific branch. So each branch is essentially a context that an agent can directly work on.
+
+# Setup
+
+There is some basic setup that may need to be done the first time, if you've never used Claude Code before.
+
+### Installing Claude Code
+
+Before you can use the agents tab, you need to have Claude Code installed as we wrap the SDK that it provides. If we can't find the binary, you should see something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2014.37.45%402x.png"
+  width="800"
+  height="600"
+  subtitle="Wherefor art thou, Claudius?"
+/>
+
+To install Claude Code, you can read through the docs [here](https://docs.anthropic.com/en/docs/claude-code/quickstart), but the simple version is to use their "Native Install" method:
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Tabs groupId="platform" items={["macOS and Linux", "Windows PowerShell", "Windows CMD"]} persist>
+  <Tab value="macOS and Linux">
+    ```bash
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+  </Tab>
+  <Tab value="Windows PowerShell">
+  ```bash
+  irm https://claude.ai/install.ps1 | iex
+  ```
+  </Tab>
+  <Tab value="Windows CMD">
+    ```bash
+    curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del
+    install.cmd
+    ```
+  </Tab>
+</Tabs>
+{/* <!-- prettier-ignore-end --> */}
+
+You will then need to setup and login to Claude Code, which will require an Anthropic account. You can either connect it to an API key for direct billing or use one of the plans. You can learn more on the [Claude Code](https://www.anthropic.com/claude-code) page.
+
+<Callout type="info">
+  GitButler does not charge you for agent use, but Anthropic does. This goes directly through Claude
+  Code usage, we simply help manage the agent.
+</Callout>
+
+### Configuring the Agents Tab
+
+Once Claude Code is installed, we can run it for you and provide both a branch-specific execution environment and a nice UI. There are some settings you can configure before using the tab, which you can access with the settings button:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-04%20at%2015.49.17%402x.png"
+  width="800"
+  height="600"
+  subtitle="Agent settings modal"
+/>
+
+The first is the path for where we find the `claude` executable. You can also test to see if we can find it.
+
+Then you can set some desktop notifications when Claude needs permission to do something or when a task is completed.
+
+You can also auto-commit after a task is done, which will also generate a commit message from the prompt that you used and the diff that was introduced. If you prefer to do this yourself, we'll simply assign any modifications to the branch and let you commit it when you prefer.
+
+Finally, if you don't want Claude to bug you every time it needs permissions for a bash command or something, you can put it in YOLO mode but dangerously allowing all permissions. This is not set by default, but if you're feeling adventurous, it's there for you.
+
+# Generating Code in the Agents Tab
+
+Once your agent is setup, you can select a branch to work on, type in a prompt and we will run that though Claude Code, same as if you ran it in the terminal.
+
+We will do some cool things as it runs, however.
+
+### One Branch Per Session
+
+In GitButler, each branch is also an agent session with it's own context. You can see each branch in the Agents Tab sidebar. If you add a new session, it will create a new branch to store the output of that. If you want to continue work on a branch, you can simply click on it to switch contexts.
+
+You can have multiple agents working on branches at the same time - you can see which branches have active tasks running at a glance with the running indicator:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.34.07%402x.png"
+  width="800"
+  height="600"
+  subtitle="Multiple branches, one has a running agent"
+/>
+
+<Callout type="warn">
+  This won't _always_ work. If two agents modify lines in a file right next to each other, the hunk
+  can only be assigned to one lane. In the future, we will be able to automatically stack these
+  dependencies, but for now you just need to be aware that some post-commit moving things around may
+  be needed on occasion.
+</Callout>
+
+### ToDo Breakout
+
+Claude code typically will come up with a ToDo list, breaking down the steps it thinks it needs to do in order to get your task completed. It will update you on this as it goes, but it's easy for this to get lost in the conversation, so we intercept these updates and keep them in the sidebar for you:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.42.06%402x.png"
+  width="800"
+  height="600"
+  subtitle="Simple TODOs example, with one item done, one running and three to go"
+/>
+
+### Folding Tool Calls
+
+As the agent is running tool calls (read files, write files, run bash commands, etc), we fold the execution and results so it doesn't clutter up
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.46.58.gif"
+  width="800"
+  height="600"
+  subtitle="Folding and unfolding the agent tool calls"
+/>
+
+### Token and Cost Monitoring
+
+Running agents costs money, so we try to keep you reminded of how much you're spending running these models.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.52.08%402x.png"
+  width="800"
+  height="600"
+  subtitle="Usage overview for the branch - tokens and estimated cost"
+/>
+
+These costs are estimates, it may differ if you're running on a plan versus using a metered API token.
+
+### Model Selection
+
+There are a few different models that you can choose from for running your task. You can change your active model in the model selection dialog of the chat box.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.53.22%402x.png"
+  width="800"
+  height="600"
+  subtitle="You can choose from any of the active Anthropic models"
+/>
+
+### Thinking Modes
+
+Claude Code also allows for selection of a "thinking mode". The lower modes are faster, the higher modes tend to take longer and be more expensive, but can produce better results.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.53.51%402x.png"
+  width="800"
+  height="600"
+  subtitle="CleanShot 2025-09-05 at 11.53.51@2x.png"
+/>
+
+### Prompt Templates
+
+If you find that you're using similar prompts over and over, you can easily setup several prompt templates. Selecting one will seed the prompt with the contents of that template.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.56.50.gif"
+  width="800"
+  height="600"
+  subtitle="Prompt templates"
+/>
+
+You can also edit your available templates by selecting the "Edit templates" option, which opens up our JSON file in your editor of choice. The templates look something like this:
+
+````json
+{
+  "templates": [
+    {
+      "label": "Bug Fix",
+      "template": "Please fix the bug in this code:\n\n```\n// Your code here\n```\n\nExpected behavior:\nActual behavior:\nSteps to reproduce:"
+    },
+    {
+      "label": "Code Review",
+      "template": "Please review this code for:\n- Performance issues\n- Security vulnerabilities\n- Best practices\n- Code style\n\n```\n// Your code here\n```"
+    },
+    {
+      "label": "Refactor",
+      "template": "Please refactor this code to improve:\n- Readability\n- Performance\n- Maintainability\n\n```\n// Your code here\n```\n\nRequirements:"
+    },
+    {
+      "label": "Add Tests",
+      "template": "Please write comprehensive tests for this code:\n\n```\n// Your code here\n```\n\nTest cases should cover:\n- Happy path\n- Edge cases\n- Error conditions"
+    }
+  ]
+}
+````
+
+### Context Clearing
+
+After a while, your context in a single branch can get long. If you no longer need all the context but want to keep your agent working on the same branch, you can clear it with the "Clear Context" button at the top of the screen.
+
+### Modified Files Listing
+
+As files are assigned and committed to your branch, you can see an overview of the changes made in the sidebar. You can also alt-click on them to open them directly in your editor if you want to make manual changes.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2012.01.39%402x.png"
+  width="800"
+  height="600"
+  subtitle="A list of your modified files for this session in the sidebar"
+/>
+
+
+# timeline.mdx
+
+
+Undo nearly any of your actions or go back in time to an earlier state.
+
+## How it works
+
+Before GitButler does any major action, it records the state of everything (your virtual branch state, your uncommitted work, conflict state, etc) and stores it in your Git object database as snapshots. You can hit the 'revert' button on any of the entries and it will restore the state of all of these things to what they looked like when they were recorded, letting you go back in time.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/oplog.png"
+  width="800"
+  height="600"
+  subtitle="The operations history tab"
+/>
+
+## Restoring State
+
+If you hover over any of the entries, you will see a button named "Revert" that will restore the state of things to right before you did that action. So if you revert one that says "Create Commit", it will put you where you were right before you made that commit.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/oplog-restore.png"
+  width="800"
+  height="600"
+  subtitle="oplog-restore.png"
+/>
+
+## Recovering Content
+
+Occasionally, GitButler will also take snapshots of files that were changed recently, even if they weren't committed. If this, or any other action, sees changes in files, you can see which ones and view the change by clicking on the file name.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/preview-oplog.png"
+  width="800"
+  height="600"
+  subtitle="preview-oplog.png"
+/>
+
+
+# github-integration.mdx
+
+
+GitButler integrates seamlessly with GitHub, allowing you to manage the pull requests associated with your branches directly from the GitButler client.
+
+## Setting up GitHub Integration
+
+To set up GitHub integration, you need to connect your GitButler client to your GitHub account. This is done through the GitButler settings.
+
+Open the GitButler settings by clicking on the gear icon in the sidebar, then navigate to the "Integrations" tab, then click on the "Authorize" button for GitHub.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/github-setup-1.png"
+  width="800"
+  height="600"
+  subtitle="GitHub authentication via the Integrations settings tab"
+/>
+
+Now copy the generated code and open the GitHub authorization page in your browser.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/github-copy-code.png"
+  width="800"
+  height="600"
+  subtitle="github-copy-code.png"
+/>
+
+Once you are on the GitHub authorization page, paste the code into the input field and it should let you know that you are authorized.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/github-auth.png"
+  width="800"
+  height="600"
+  subtitle="github-auth.png"
+/>
+
+## Using GitButler to Manage Pull Requests
+
+Once you have set up GitHub integration, you can open your pull requests directly from the GitButler branch.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/create-pr.png"
+  width="800"
+  height="600"
+  subtitle="create-pr.png"
+/>
+
+When you create a new branch or commit changes, GitButler will automatically check if there are any associated pull requests on GitHub. You can view these pull requests in the "Pull Requests" tab in the sidebar of the Branches page.
+
+
 # gitlab-integration.mdx
 
 
@@ -886,184 +1326,510 @@ Once the Merge Request is created you will be able to see the status of it from 
 <ImageSection className="mx-auto" src="/gitlab/review-card.png" />
 
 
-# mcp-server.mdx
+# branch-lanes.mdx
 
 
-If you use an AI agent (such as Cursor, Windsurf, Claude Code) to help you with your code, you can easily setup GitButler to manage your commits automatically, keep save points, and more. You know, _vibe_ commit...
+All of your branches - remote, local, and virtual / applied or not - are managed in the Branch Tab. This is where you can see all of your branches, apply them to your workspace, and manage your virtual branches.
 
-## Setting up your Agent to use GitButler
+You can access the Branches tab by clicking on the "Branches" icon in the sidebar.
 
-The first step is to let your agent know about GitButler, which is done via MCP - you need to tell your agent to use the GitButler MCP server.
-
-### Installing the CLI
-
-GitButler provides a CLI that can be used to interact with the GitButler platform. Before you can setup AI Agent integration, you will need to install the CLI.
-
-This can be found by opening the GitButler global settings, and then clicking on the "Install CLI" button in the General settings.
+The interface looks something like this:
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/install-cli.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/branch-tab.png"
   width="800"
   height="600"
-  subtitle="How to install the GitButler CLI"
+  subtitle="The branch tab"
 />
 
-Now that you have the `but` CLI installed, your agent can use the CLI's MCP server to interact with GitButler.
+## Branch List
 
-### Cursor
+The first pane on the left shows you the virtual branches and stacks that you have as well as the other branches that you have available (legacy git branches, remote branches and PRs).
 
-To install the GitButler MCP server in Cursor, first go to the Cursor settings, and then click on the "Extensions" tab, then click on "Tools and Integrations" and click on "New MCP Server".
+All of these branches can be converted into virtual branches by clicking them and then clicking the "Apply to workspace" button on the top of the branch view (middle pane).
 
-This will open your `~/.cursor/mcp.json` file.
+Local branches can also be fully deleted here.
 
-Add the following to the `mcpServers` object:
+### Current Workspace Target
 
-```json
-{
-  "mcpServers": {
-    "gitbutler": {
-      "command": "but",
-      "args": ["mcp"]
-    }
-  }
-}
+The "Current workspace target" is the view of the target branch that you've set. It will show you essentially a `git log` of `origin/master` or whatever you set as your target branch, and it will show you if there are any commits upstream that you have not integrated locally yet. We will automatically check for new upstream changes every few minutes, but you can also click the update button to check immediately.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/workspace-target.png"
+  width="800"
+  height="600"
+  subtitle="workspace-target.png"
+/>
+
+
+# commits.mdx
+
+
+GitButler gives you a lot of tooling for creating, modifying, squashing, splitting and undoing commits.
+
+GitButler has lots of ways to craft the exact commits that you want to end up with. With other Git clients, you tend to have to run somewhat complicated `git rebase -i` type commands to change commit messages, split a commit up or absorb new changes into an existing commit. With GitButler, most of these are simply drag-and-drop operations.
+
+Here are some of the cool things you can do very easily with GitButler.
+
+## Creating Commits
+
+Once you have changes on a virtual branch and want to commit them, you can hit the "Start a Commit" button in any lane, which gives you an editor to write a summary and optional description for your commit message.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-edit.png"
+  width="800"
+  height="600"
+  subtitle="Crafting a commit message with our advanced floating mode editor"
+/>
+
+If you want AI to use your diff to generate a commit message, you can hit the "Generate message" button.
+
+## AI Commit Message Settings
+
+If you want to use AI for generating your commit messages or branch names from time to time, there are quite a few options in your user preferences. You can choose from [OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/), [Ollama](https://www.ollama.com/) or [LM Studio](https://lmstudio.ai/) as your engine.
+
+For both OpenAI and Anthropic, you can either use your own API key to directly send your request to their servers, or you can proxy via our server (which you need to be logged in for).
+
+<ImageSection alt="AI Commit Settings" src="/commits-02.png" />
+
+If you use your own key for OpenAI or Anthropic, you can choose which model you would like us to use.
+
+<ImageSection alt="AI Commit Settings" src="/commits-03.png" />
+
+If you don't want to send your diff to another server, you can also use Ollama or LM Studio, which are a local LLM servers.
+
+With Ollama, you can run nearly any open source large language model ([Llama 3](https://www.ollama.com/library/llama3), [Phi 3](https://www.ollama.com/library/phi3), [Mistral](https://www.ollama.com/library/mistral), [Gemma](https://www.ollama.com/library/gemma), etc) entirely locally.
+
+Note that if you choose to configure a self-hosted Ollama server, you will likely need to add a custom CSP (Content Security Policy) to allow GitButler to connect to it.
+
+You can find more information on how to do that in the [Custom Content Security Policy (CSP)](/troubleshooting/custom-csp) section of the documentation.
+
+With all of these models, you can also customize the prompt if you want something more specific. In the "Custom AI prompts" section, you can add new prompts and select which one you want to use per project. This is useful for following certain formats or generating messages in other languages, etc.
+
+<ImageSection alt="AI Commit Settings" src="/commits-04.png" />
+
+Custom prompts can contain three variables which we will replace with the appropriate values. Those include:
+
+- `%{emoji_style}` - Instructs the LLM whether or not to make use of [GitMoji](https://gitmoji.dev) in the title prefix, based on your settings.
+- `%{brief_style}` - Instructs the LLM to not exceed 1 sentence when generating the commit message.
+- `%{diff}` - The contents of the diff.
+- `%{branch_name}` - The name of the current branch. Available in "Commit Message" custom prompt only.
+
+## Absorbing New Work
+
+If you have a commit and get some feedback on it or find an issue and wish to amend it, you can very easily absorb changes into existing commits. Simply drag the file into the commit you want to absorb that change into and drop it there.
+
+This will both rewrite that commit to include the new changes and also rebase every commit upstream from it automatically.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/absorb-work.gif"
+  width="800"
+  height="600"
+  subtitle="Assigning work on a file to a lane, then into an existing commit"
+/>
+
+## Undoing Commits
+
+You can easily undo any commit in your stack by expanding the commit and hitting the 'Undo' button. This will rebase all the commits above it and leave whatever work was in that commit as new uncommitted changes.
+
+<Callout>
+  "Undo"ing a commit does not throw it away, it simply makes that work not in a commit anymore. It
+  will not discard the changes.
+</Callout>
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/undoing-commits.gif"
+  width="800"
+  height="600"
+  subtitle="Undoing a commit in GitButler"
+/>
+
+## Undoing One File in a Commit
+
+If you want to undo a single file in a commit, you can expand the commit and click on the file you want to undo. Then hit "Uncommit". This will remove that file from the commit and leave it as uncommitted changes.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/undoing-file-then-redoing.gif"
+  width="800"
+  height="600"
+  subtitle="Uncommitting a file, then adding it back into the commit"
+/>
+
+## Squashing Commits
+
+Squashing two commits into a single combined commit is also very simple. Just drag one commit on top of another one.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/squashing.gif"
+  width="800"
+  height="600"
+  subtitle="Squash commits together by dragging and dropping"
+/>
+
+## Splitting Commits
+
+Splitting commits is slightly more complex. GitButler allows you to create an "empty" commit anywhere and then drag changes into it. Here is an example of creating an empty commit between two other commits, dragging changes from both of them into it and then absorbing new work into it as well.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/splitting.gif"
+  width="800"
+  height="600"
+  subtitle="Splitting commits by adding an empty commit and dragging changes into it"
+/>
+
+You can also notice that I easily edit the commit message by just hitting the "edit message" button.
+
+## Moving Commits
+
+You can also arbitrarily change the order of your commits by dragging and dropping them, which rebases everything to change the order.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/reorder.gif"
+  width="800"
+  height="600"
+  subtitle="Reordering commits in a branch"
+/>
+
+## Edit Mode
+
+The other way that you can modify a commit is to go into "Edit Mode". When you click on a commit, there is a button that says "Edit patch". If you click this, GitButler will check out that commit by itself into your working directory (automatically stashing everything else temporarily).
+
+The screen will go into "Edit mode", indicating that you're in a special state where you're focusing on this one commit.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/edit-mode.gif"
+  width="800"
+  height="600"
+  subtitle="Going into edit mode to directly edit the state of a commit"
+/>
+
+Then you can change whatever you want and when you click "Save and exit", it will amend the commit you were editing and rebase anything on top of it.
+
+This is useful for things like getting feedback on a series and being able to go into the appropriate commit, make the changes and continue, as opposed to squashing work.
+
+
+# integration-branch.mdx
+
+
+Bundling all your virtual branches together
+
+Since GitButler does some pretty fun stuff with branches in order to enable virtual branches to work, some Git commands run from other git clients, including stock Git in the terminal are bound to behave a little strangely.
+
+We're getting the git data to think in three dimensions, then asking 2-D Git how to deal with it.
+
+While some commands cannot work well because of this single-branch limitation (commit, checkout), we do try our best to keep everything in a state where most other commands work reasonably well. Anything having to do with the index or HEAD is a little problematic, but doable in a smooshed state (all branches look like one), while commands like `log` or `blame` work totally fine with no shenanigans.
+
+## The Integration Commit
+The way that we handle this relatively well is by creating an "integration" commit every time you change the committed state of your collective virtual branches.
+
+<ImageSection
+  alt="Viewing Remote Branches"
+  src="/integration-01.png"
+  subtitle="An 'integration' commit example."
+/>
+
+
+So what is an "integration" commit? Well, when you apply or unapply branches, or you commit on one of your applied branches, you change the state of what GitButler sees as your overall committed state with regards to your working directory.
+
+## Status, Diff and Log
+
+To keep Git command output for things that look at the index and HEAD (such as `status` or `diff`) somewhat sane, we modify your index to look like the union of all the committed states of all your applied virtual branches. This makes `git diff` and `git status` behave more or less like you would expect.
+
+For instance, if you have two files on Branch A and two files on Branch B, then `git status` will simply list four files as modified.
+
+However, to help out, we also write out a branch with a custom commit message that tries to explain the state of things and what is happening. This is written to a branch we own called `gitbutler/workspace` and you shouldn't touch it.
+
+If you run `git log`, the first commit should be our custom commit message and the tree of that commit is the union of all the committed work on all your applied virtual branches, as though they were all merged together into one (something stock Git can understand).
+
+## Committing, Branching, Checking Out
+
+However, if you try to use something that writes to HEAD, like `git commit` or `git checkout`, then you might have some headaches. By default, our client will simply overwrite the `gitbutler/workspace` branch commit whenever something significant changes.
+
+We won't touch the working directory in an unexpected way, so whatever you commit won't be lost, but the commit itself will be forgotten. Don't do branch stuff in stock Git while trying to use GitButler for now. We have ideas on how to make this somewhat doable in the future, but right now it's easier on everyone to stick with one or the other.
+
+## Git Add and the Index
+
+If you attempt to modify the index directly (running `git add` or `git rm`), GitButler won't notice or care. It will simply overwrite it with whatever it needs during its operations, so while I wouldn't do it, there is also not a lot of danger.
+
+The worst that would happen is that you do some complex `git add -i` patch staging and then we wipe it out by rewriting the index. But again, you shouldn't be using stock Git commands related to committing or branching. You gotta choose one or the other for now, you can't go back and forth super easily.
+
+## Recovering or Stopping GitButler Usage
+
+If you want to stop using GitButler and go back to using stock Git commands for committing and branching, simply check out another branch. GitButler will realize that you've changed its branch and stop functioning until you reset it.
+
+To help with remembering where you were, the integration commit should have the branch name and commit SHA that you were on when GitButler was initially activated. You should be able to easily go back to that branch and its last known commit state.
+
+
+# pushing-and-fetching.mdx
+
+
+GitButler can authenticate with an upstream Git server in several different ways.
+
+ You can just tell us to use the system Git executable, which you can setup however you want. You can use our built in SSH protocol with your own SSH key (this does not require you to have Git installed), or you can use the default [Git credentials helper](https://git-scm.com/doc/credential-helpers).
+
+You can set your preference (and test if it works) in your project's "Git authentication" section:
+
+<ImageSection
+  alt="Git Authentication Settings"
+  src="/pushing.png"
+/>
+
+Once that's done, GitButler will be able to automatically fetch upstream work and push new branches to your upstream server.
+
+
+# merging.mdx
+
+
+By default, GitButler rebases the work on your virtual branches when you update your target branch (upstream) work.
+
+Often this works just fine and the commits are simply rebased. Occasionally, you will have conflicts with upstream work.
+
+In this case, GitButler will not do what Git normally does, which is to stop at each conflicted commit and make you fix it before moving on. Instead, it will apply the changes that it can and store the commit as a "conflicted" commit and continue the rebasing process.
+
+When you go to update from upstream, GitButler will show you all the branches that it will rebase and will let you know if any of them will have conflicts:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/update-will-conflict.png"
+  width="800"
+  height="600"
+  subtitle="Updating from upstream will let you know if there will be conflicts"
+/>
+
+In this case, when you perform the rebase, that branch will then contain "conflicted" commits. They will be marked in the UI as conflicted and you can click on them to get a "resolve conflict" button to start the resolution process.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/conflict-resolve.png"
+  width="800"
+  height="600"
+  subtitle="When your commits have conflicts"
+/>
+
+When you click that, GitButler will remove the other virtual branches and other work from your working directory and check out just this commit with it's conflict markers. It will show you a special "edit mode" screen, where you are directly editing this commit.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/resolve-conflicts-mode.png"
+  width="800"
+  height="600"
+  subtitle="Resolving a conflict by individual commit"
+/>
+
+If you want to cancel this conflict resolution, you can just hit 'Cancel' and it will go back to your normal state. If you have fixed all the issues, you can click "Save and Exit" and it will commit the conflict resolution and if needed, rebase any further commits on that branch on top of your new work.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/conflicts-resolved.png"
+  width="800"
+  height="600"
+  subtitle="conflicts-resolved.png"
+/>
+
+
+# signing-commits.mdx
+
+
+GitHub and GitLab provide a mechanism to verify signed commits using an uploaded public SSH or GPG key. GitButler can be configured automatically sign all your commits.
+
+Git provides a mechanism to sign your commits with a GPG key or SSH key. This enables other developers to make sure that you were actually the person who committed it, rather than someone else just setting their email to yours and committing it as if they were you.
+
+To make this work, a signature is added to the commit header and then that signature is checked against public key stored somewhere, generally for most people the most useful way to verify these signatures is through GitHub or GitLab.
+
+This is what a verified commit looks like on both systems:
+
+<ImageSection
+  alt="Viewing Remote Branches"
+  src="/signing-01.png"
+  subtitle="A verified commit on GitLab."
+/>
+
+<ImageSection
+  alt="Viewing Remote Branches"
+  src="/signing-02.png"
+  subtitle="Verified and non-verified commits on GitHub."
+/>
+
+This means that the server has a public key that you used to sign the commits that is associated to your account and has verified that this user actually signed this commit.
+
+In order for this to work, you need to:
+
+1. Tell GitButler to sign your commits
+2. Upload your key as a "signing key" to GitHub or GitLab (or elsewhere)
+
+## Telling GitButler to Sign
+
+For GitButler to sign commits, you need to setup Git to sign commits, as we do roughly the same thing that Git itself tries to do, and we read and respect most of the same Git config settings.
+
+The main difference is that instead of only the `commit.gpgSign` as the flag that tells Git to automatically sign commits, we look for `gitbutler.signCommits` first. Thus, if Git would sign, GitButler will attempt to sign your commits with the normal Git settings as well.
+But if something goes wrong, `gitbutler.signCommits` will be set to `false` in the repository-local settings to prevent commits from
+failing generally.
+
+We look to see if we have a signing key in `user.signingkey`. If we have a key, we look for 'ssh' in `gpg.format`, otherwise we use GPG. We will respect `gpg.ssh.program` for ssh if there is a different binary path, and `gpg.program` for GPG. We also identify literal SSH keys in the `user.signingkey` field.
+
+The only major thing we don't support yet is `gpg.ssh.defaultKeyCommand` for other ways to get a key other than the `user.signingkey` field. We also don't support the X.509 smime stuff.
+
+Here is an example, if you have a public key here `.ssh/id_ed25519.pub` then you can setup signing with something like this:
+
+```bash title="Terminal"
+$ git config --global user.signingkey "/Users/schacon/.ssh/id_ed25519.pub"
+$ git config --global gpg.format ssh
+$ git config --global gitbutler.signCommits true
 ```
 
-You should see the GitButler MCP server in the list of MCP servers and it should have the tool `gitbutler_update_branches` available.
+You can also set this up in your project settings, perhaps a little more easily:
 
-### VSCode
+<ImageSection
+  alt="Viewing Remote Branches"
+  src="/signing-03.png"
+/>
 
-To install the GitButler MCP server in VSCode, you need to select "MCP: List Servers" from the actions menu. Then select "Add Server". Select "stdio" as the server type.
+The nice thing here is that you can also test the settings easily by hitting the "Test Signing" button.
 
-Now you can type your command (`but mcp`) and name it something. After this, it should open up your settings file and show you something like this:
+There are lots of other ways to set up GPG or SSH commit signing:
 
-```json
-  "mcp": {
-    "servers": {
-      Running | Stop | Restart | 1 tools
-      "gitbutler-mcp": {
-        "type": "stdio",
-        "command": "but",
-        "args": ["mcp"]
-      }
-    }
-  }
-```
+- 1Password is a very easy way to [SSH sign commits](https://blog.1password.com/git-commit-signing/).
+- GitHub has a [good guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key) on how to setup GPG or SSH keysigning.
+- Here is a nice simple gist for [GPG signing on Windows](https://gist.github.com/BoGnY/f9b1be6393234537c3e247f33e74094a).
 
-However, if you have Cursor's MCP already setup, VSCode will notice and help you automatically reuse the settings.
+<Callout title="Using GitButler's Generated SSH Key">
+Earlier versions of GitButler would only sign with it's generated SSH key. Although we've removed that functionality, you can easily set it back up by pointing the signingKey at the generated SSH Key. The key is located in the following locations:
+
+<Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
+  <Tab value="macOS">
+  ```bash
+  /Users/[username]/Library/Application Support/com.gitbutler.app/keys/ed25519.pub
+  ```
+  </Tab>
+  <Tab value="Windows">
+  ```bash
+  C:\Users\[username]\AppData\Roaming\com.gitbutler.app\keys\ed25519.pub
+  ```
+  </Tab>
+  <Tab value="Linux">
+  ```bash
+  ~/.local/share/gitbutler-tauri/keys/ed25519.pub
+  ```
+  </Tab>
+</Tabs>
+
+</Callout>
+
+## Upload Your Signing Key
+
+For GitHub or GitLab to verify your signatures, you need to say that the SSH or GPG public key we are using is a valid signing key for your user.
+
+### Adding to GitHub
+
+You can click on the "Add key to GitHub" link in the settings page right about the signing toggle, or you can go here (https://github.com/settings/ssh/new) to paste that public key in.
+
+<ImageSection
+  alt="Adding a key to GitHub"
+  src="/signing-04.png"
+  subtitle="Be sure to change the type to 'Signing Key'"
+/>
+
+Now your signed commits should show up as "Verified".
+
+### Adding to GitLab
+
+For GitLab you need to go to "SSH Keys" in your profile: https://gitlab.com/-/profile/keys and click the "Add new key" button.
+
+<ImageSection
+  alt="Adding a key to GitHub"
+  src="/signing-05.png"
+  subtitle="Add new key here."
+/>
+
+Now paste in the public SSH key you copied from GitButler, name it and make sure the "Usage Type" is either "Signing" or "Authentication and Signing".
+
+<ImageSection
+  alt="Adding a key to GitHub"
+  src="/signing-06.png"
+  subtitle="Now all your GitButler generated commits will be verified on that platform!"
+/>
+
+
+# upstream-integration.mdx
+
+Sometimes you work on a branch and someone else pushes to the same upstream branch. Often you won't know this until you try to push and Git tells you something like this:
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/vscode-mcp-cursor.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2014.49.08%402x.png"
   width="800"
   height="600"
-  subtitle="vscode-mcp-cursor.png"
+  subtitle="Oh no, someone else has pushed!"
 />
 
-### Claude Code
+In this scenario, GitButler gives you some nice tooling to help you know when this happens as early as possible and help you deal with it easily.
 
-Adding an MCP server to Claude Code is done by running the `claude mcp add` command.
-
-```
-❯ claude mcp add gitbutler but mcp
-Added stdio MCP server gitbutler with command: but mcp to local config
-
-❯ claude mcp list
-gitbutler: but mcp
-```
-
-## Rules: How to configure auto committing
-
-Once you have installed the MCP server in your editor or agent, you can optionally configure it to automatically commit your changes.
-
-We've found that adding something like this to your rules works well:
-
-```
-If you generate code or modify files, run the gitbutler update branches MCP tool.
-```
-
-## How to add rules
-
-Cursor stores it's rules in `~/.cursor/rules` file, but you can also manually set them by going to the Cursor Settings pane, clicking 'Rules' and adding them to the User Rules section.
-
-In VSCode's Copilot Agent Mode, you can use ["custom instructions"](https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions) to accomplish this.
-
-In Claude Code, they are now called "memories" and you can add them by hitting '#' and storing them in user memory (or local if you just want them in one project).
+If someone else has pushed to a branch that you're working on, you will see the upstream commits without having to integrate them. You can look at the commits without having to merge them into your branch or rebase your work on top of them.
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/claude-memories.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2014.42.06%402x.png"
   width="800"
   height="600"
-  subtitle="Adding memories in Claude Code"
+  subtitle="GitButler's view when someone else has pushed"
 />
 
-## Using GitButler with your agent
+When you decide that you do want to integrate the changes, you have two options - rebase or interactively integrate.
 
-If you've set up a rule/instruction/memory, then every time a chat session is completed, the agent will send the changes and prompt to GitButler and it will automatically commit the changes.
+## Rebase the changes
+
+If you select "Rebase upstream changes", it will do the equivalent of a `git pull --rebase` which rebases the commits you have locally on top of the ones that the other person has pushed, so you end up with a state like this:
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/update-branches.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2015.08.05%402x.png"
   width="800"
   height="600"
-  subtitle="Notice the automatic 'Called gitbutler_update_branches' after a change was made"
+  subtitle="Simple rebase of my changes on top of the upstream changes"
 />
 
-If you're using Claude Code, it may look something like this:
+Now you can push your commit back upstream without a force push. Easy peasy.
+
+## Interactively integrate the changes
+
+However, let's say that you want to do something more complex. Maybe the other implemented the same thing that you did and you want to drop one of them or one of yours, or squash commits together or reorder them. In any of these cases, you can choose the "Interactive integration" option and you get something that looks like this:
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/claude-mcp-call.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-12%20at%2014.42.42%402x.png"
   width="800"
   height="600"
-  subtitle="Claude Code will show the full MCP prompt after a change was made"
+  subtitle="Upstream integration helper"
 />
 
-If you don't have the agent setup to automatically call our tool, then you can also just manually type 'update gitbutler branches' in the chat, but that's a little less magical.
+Here you can reorder commits however you want, you can choose to skip some of them, you can squash some of them down, etc. Just make the commits look however you prefer and then hit the "Integrate changes" button and push your final result back to the server.
 
-## GitButler interface
 
-There are two phases to GitButler's MCP agent interaction. The first is the agent sending the changes and prompt to GitButler, which GitButler will quickly record and then return a success to the agent. The second is GitButler processing that raw recorded change and attempting to process that change into a commit.
+# ai-overview.mdx
 
-### Recording the changes
 
-When your agent calls the `gitbutler_update_branches` tool, GitButler will record the changes and prompt and then immediately return to the agent, so the call should be very fast.
+If you're using AI agent tools like Cursor, Windsurf, or Claude Code, GitButler can enhance your coding experience by managing commits, saving points, and more. These integrations allow you to focus on coding with your agents while GitButler handles the version control aspects.
 
-So for instance, let's say that I prompted my coding agent to update my `README.md` file to add a list of contributing authors. When the agent is done, it should call the update branches MCP tool, which will record a commit that looks something like this:
+https://www.youtube.com/watch?v=J6xV_Wyz9zg
 
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-raw.png"
-  width="800"
-  height="600"
-  subtitle="The recorded commit message with prompt and summary data from the agent"
-/>
+There are currently two main ways to integrate AI tools with GitButler:
 
-### Processing the changes
+1. **Using the MCP Server**: This method allows you to set up your AI agent to communicate with GitButler's MCP server, enabling features like automatic commits and save points.
+2. **Using the Hooks in Claude Code**: This method allows you to use GitButler's hooks to manage commits and branches directly from within the Claude Code environment.
 
-Then, if you have AI tooling setup, GitButler will see that and turn it into a commit message like this:
+## Enabling the experimental feature flag
 
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-updated.png"
-  width="800"
-  height="600"
-  subtitle="The updated commit message"
-/>
-
-You can see all of these steps in the "Actions" section of the GitButler interface, which you can toggle by hitting the "Actions" button in the top right of the interface.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/actions.png"
-  width="800"
-  height="600"
-  subtitle="The 'Actions' section of the GitButler interface"
-/>
-
-In the near future, we will also be able to do more interesting things like auto-absorbing changes into existing commits, creating new branches based on the prompt theme, creating stacked branches, and more.
+Note that as of GitButler version `0.15.2` these features have to be enabled via an experimental feature flag. You can find that under `Global Settings` -> `Experimental` -> `GitButler Actions`.
 
 
 # stacked-branches.mdx
@@ -1233,557 +1999,305 @@ In this case it will merged in the parent branch.
 In order to recover from this situation you can simply force push the branches and then re-create the PR that was incorrectly merged.
 
 
-# timeline.mdx
+# virtual-branches.mdx
 
 
-Undo nearly any of your actions or go back in time to an earlier state.
-
-## How it works
-
-Before GitButler does any major action, it records the state of everything (your virtual branch state, your uncommitted work, conflict state, etc) and stores it in your Git object database as snapshots. You can hit the 'revert' button on any of the entries and it will restore the state of all of these things to what they looked like when they were recorded, letting you go back in time.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/oplog.png"
-  width="800"
-  height="600"
-  subtitle="The operations history tab"
-/>
-
-## Restoring State
-
-If you hover over any of the entries, you will see a button named "Revert" that will restore the state of things to right before you did that action. So if you revert one that says "Create Commit", it will put you where you were right before you made that commit.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/oplog-restore.png"
-  width="800"
-  height="600"
-  subtitle="oplog-restore.png"
-/>
-
-## Recovering Content
-
-Occasionally, GitButler will also take snapshots of files that were changed recently, even if they weren't committed. If this, or any other action, sees changes in files, you can see which ones and view the change by clicking on the file name.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/preview-oplog.png"
-  width="800"
-  height="600"
-  subtitle="preview-oplog.png"
-/>
-
-
-# branch-lanes.mdx
-
-
-All of your branches - remote, local, and virtual / applied or not - are managed in the Branch Tab. This is where you can see all of your branches, apply them to your workspace, and manage your virtual branches.
-
-You can access the Branches tab by clicking on the "Branches" icon in the sidebar.
-
-The interface looks something like this:
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/branch-tab.png"
-  width="800"
-  height="600"
-  subtitle="The branch tab"
-/>
-
-## Branch List
-
-The first pane on the left shows you the virtual branches and stacks that you have as well as the other branches that you have available (legacy git branches, remote branches and PRs).
-
-All of these branches can be converted into virtual branches by clicking them and then clicking the "Apply to workspace" button on the top of the branch view (middle pane).
-
-Local branches can also be fully deleted here.
-
-### Current Workspace Target
-
-The "Current workspace target" is the view of the target branch that you've set. It will show you essentially a `git log` of `origin/master` or whatever you set as your target branch, and it will show you if there are any commits upstream that you have not integrated locally yet. We will automatically check for new upstream changes every few minutes, but you can also click the update button to check immediately.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/workspace-target.png"
-  width="800"
-  height="600"
-  subtitle="workspace-target.png"
-/>
-
-
-# why-gitbutler.mdx
-
-The GitButler manifesto, as it were.
-
-Everyone loves a good manifesto. So, why is there a need for a new Git client in the world? Don't we have enough? Isn't the command line just fine?
-
-Having cofounded GitHub, trained dozens of corporate teams on distributed version control tools and literally written the book on Git, we have spent a lot of time and energy over the last decade thinking about the source code management tools that software developers use every day.
-
-GitHub has changed the way that millions of developers across the world collaborate and work with their source code, but as sophisticated and user friendly as that tool is in our daily coding lives, using GitHub or GitLab or Bitbucket still requires all of those developers to work with a command line tool that is confusing, difficult to use, error prone and not originally designed or built for the workflows and processes that most developers today use. That tool is Git.
-
-Sure, some small minority will use a GUI of some sort, but even those tools are mostly wrappers around the core concepts of Git itself, never reimagining what source code management could be or if Git itself is actually good at helping them with the tasks they face on a daily basis. I've never personally used one because they do little that Git itself doesn't and honestly it's generally easier to just do those tasks on the command line, where it's quick and efficient and I don't have to take my hands off the keyboard.
-
-But what if we broke down everything that you try to accomplish with Git, with source code management tools in general, reduce them down to first principles and imagine a tool that does all of those things better? Are you using Git because it's the best way you can imagine accomplishing those tasks, or are you using it because it's what is there, it's what works with GitHub, it's the only real option?
-
-The reality is that source code management tools have changed very little on a fundamental level in the last 40 years. If you look at the tools and commands and interface that RCS had in the 80s, or Subversion had in the 90s, is it really massively different than how you use Git today on a daily basis?
-
-Yes, Git has easy branching, acceptable merging, a nice network transport method to move your code around, but you're still making manual checkins, you're still trying to remember obscure arguments, you're still losing work when things get complicated.
-
-GitButler is rethinking everything between when you write code in your editor of choice and when you push that code to GitHub for review. Why are you making 'wip' commits when your SCM should be recording everything for you? Why are everyone's commit messages close to useless? Why is `git blame` the best way to get context on the code your team has written? Why can't you seamlessly transition work between computers?
-
-We are creating not only a new kind of Git client, but an entirely new way of thinking about managing the code that you work on. A tool that helps you at every step of the software development process. A code concierge, hard at work for you to ensure that you'll never lose a moment of work again. That you'll have all the context and support you'll need around every line of code you work on.
-
-Managing your source code can be different, smarter, leaps ahead of the 40 year old concepts that we're using today.
-
-Our goal is to make sure that nobody ever has to read Scott's book again. That you don't have to learn how to manage your source code management tool.
-
-<img src="/img/markus-chill.svg" className="mx-auto" />
-
-
-# butler-flow.mdx
-
-Butler Flow is a lightweight, branch-based workflow enabled by GitButler virtual branch functionality.
-
-Most modern software development teams today that want to set up a culture of shipping, who push to production every day, who are constantly testing and deploying, one of the most popular and effective development workflows is [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow).
-
-These are wise words, enterprising men quote 'em. Don't act surprised, you guys, [cuz I wrote 'em](https://scottchacon.com/2011/08/31/github-flow).
-
-However, a decade later, and with a new and more powerful branching toolset, we're able to amend that basic workflow to be simpler, faster, more flexible and less error prone. Let's take a quick minute to explore what the Butler Flow is for software development teams using GitButler and how this can make all of our lives easier.
+Virtual branches are a powerful feature of GitButler that allow you to work on multiple branches at the same time, committing to them independently and simultaneously. This is a key part of the GitButler experience, allowing you to manage your work in a flexible and efficient way that is not possible with traditional Git tooling.
 
 ## Overview
 
-- In a nutshell, the basic development cycle is very simple.
-- All work is based off a "target branch", which is a representation of released production code.
-- All work immediately exists in a branch.
-- Work can be shared with teammates for review as early as possible.
-- All branches that are close to merging can be applied locally for integration testing.
-- Branches can be reviewed independently and merged after final review.
-- Integrated branches are automatically removed from developer context.
+With normal Git branching, you can only work on one branch at a time. There is one `HEAD` reference and one index.
 
-### The Target Branch
+With virtual branches, you can have multiple branches applied to your working directory at the same time. Each branch is represented as a vertical lane, and you can drag changes between these lanes to commit them independently.
 
-In stock Git tooling, there is nothing specified as the production branch, no special "trunk". It is only by convention that this is enforced.
-
-In GitButler, virtual branches will not work without the specification of a special "target branch". Everything exists in relation to this special branch, everything that differs from it must be accounted for by being owned by some other branch, until those changes are integrated.
-
-### Virtual Branches
-
-Once you choose a target branch, everything that is in your working directory and not ignored by the Git ignore specification must be owned by a virtual branch. If you don't have one active, GitButler will automatically create one for you.
-
-All subsequent changes to your working directory, either by applying other branches or directly modifying files, must be owned by a virtual branch.
-
-Branches are meant to be small, independent and rapidly integrated. However, longer lived branches can be continuously re-integrated, keeping them clean and mergeable for long periods of time if needed, while still being shareable and reviewable with your team.
-
-Virtual branches can be started and ended entirely independently of each other. Developers can work on longer branches, while starting, reviewing, finishing, merging and deleting small ones without ever changing branch context.
-
-### Collaboration
-
-All coworkers' work, whether created and managed by GitButler or not, exists on the central server as normal Git branches. These will automatically be pulled down and kept up to date by GitButler and can be converted into virtual branches and applied to your working directory in addition to your branches.
-
-This allows you to integrate work from the rest of your team continuously and early, while still keeping non-dependent changes separated and independently reviewable and mergable. It allows you to review code without needing to entirely switch contexts, and to do so early and often in an executable environment.
-
-Merge conflicts are known almost as soon as they occur and can be communicated about and collaborated on far before an upstream merge.
-
-### Maintenance
-
-Virtual branches can remain applied locally until they are merged into your upstream target branch. Once integrated by any fashion (squash merge, rebase, merge), the virtual branch is automatically disposed of, keeping cruft and overhead low.
-
-
-# integration-branch.mdx
-
-
-Bundling all your virtual branches together
-
-Since GitButler does some pretty fun stuff with branches in order to enable virtual branches to work, some Git commands run from other git clients, including stock Git in the terminal are bound to behave a little strangely.
-
-We're getting the git data to think in three dimensions, then asking 2-D Git how to deal with it.
-
-While some commands cannot work well because of this single-branch limitation (commit, checkout), we do try our best to keep everything in a state where most other commands work reasonably well. Anything having to do with the index or HEAD is a little problematic, but doable in a smooshed state (all branches look like one), while commands like `log` or `blame` work totally fine with no shenanigans.
-
-## The Integration Commit
-The way that we handle this relatively well is by creating an "integration" commit every time you change the committed state of your collective virtual branches.
-
-<ImageSection
-  alt="Viewing Remote Branches"
-  src="/integration-01.png"
-  subtitle="An 'integration' commit example."
-/>
-
-
-So what is an "integration" commit? Well, when you apply or unapply branches, or you commit on one of your applied branches, you change the state of what GitButler sees as your overall committed state with regards to your working directory.
-
-## Status, Diff and Log
-
-To keep Git command output for things that look at the index and HEAD (such as `status` or `diff`) somewhat sane, we modify your index to look like the union of all the committed states of all your applied virtual branches. This makes `git diff` and `git status` behave more or less like you would expect.
-
-For instance, if you have two files on Branch A and two files on Branch B, then `git status` will simply list four files as modified.
-
-However, to help out, we also write out a branch with a custom commit message that tries to explain the state of things and what is happening. This is written to a branch we own called `gitbutler/workspace` and you shouldn't touch it.
-
-If you run `git log`, the first commit should be our custom commit message and the tree of that commit is the union of all the committed work on all your applied virtual branches, as though they were all merged together into one (something stock Git can understand).
-
-## Committing, Branching, Checking Out
-
-However, if you try to use something that writes to HEAD, like `git commit` or `git checkout`, then you might have some headaches. By default, our client will simply overwrite the `gitbutler/workspace` branch commit whenever something significant changes.
-
-We won't touch the working directory in an unexpected way, so whatever you commit won't be lost, but the commit itself will be forgotten. Don't do branch stuff in stock Git while trying to use GitButler for now. We have ideas on how to make this somewhat doable in the future, but right now it's easier on everyone to stick with one or the other.
-
-## Git Add and the Index
-
-If you attempt to modify the index directly (running `git add` or `git rm`), GitButler won't notice or care. It will simply overwrite it with whatever it needs during its operations, so while I wouldn't do it, there is also not a lot of danger.
-
-The worst that would happen is that you do some complex `git add -i` patch staging and then we wipe it out by rewriting the index. But again, you shouldn't be using stock Git commands related to committing or branching. You gotta choose one or the other for now, you can't go back and forth super easily.
-
-## Recovering or Stopping GitButler Usage
-
-If you want to stop using GitButler and go back to using stock Git commands for committing and branching, simply check out another branch. GitButler will realize that you've changed its branch and stop functioning until you reset it.
-
-To help with remembering where you were, the integration commit should have the branch name and commit SHA that you were on when GitButler was initially activated. You should be able to easily go back to that branch and its last known commit state.
-
-
-# pushing-and-fetching.mdx
-
-
-GitButler can authenticate with an upstream Git server in several different ways.
-
- You can just tell us to use the system Git executable, which you can setup however you want. You can use our built in SSH protocol with your own SSH key (this does not require you to have Git installed), or you can use the default [Git credentials helper](https://git-scm.com/doc/credential-helpers).
-
-You can set your preference (and test if it works) in your project's "Git authentication" section:
-
-<ImageSection
-  alt="Git Authentication Settings"
-  src="/pushing.png"
-/>
-
-Once that's done, GitButler will be able to automatically fetch upstream work and push new branches to your upstream server.
-
-
-# commits.mdx
-
-
-GitButler gives you a lot of tooling for creating, modifying, squashing, splitting and undoing commits.
-
-GitButler has lots of ways to craft the exact commits that you want to end up with. With other Git clients, you tend to have to run somewhat complicated `git rebase -i` type commands to change commit messages, split a commit up or absorb new changes into an existing commit. With GitButler, most of these are simply drag-and-drop operations.
-
-Here are some of the cool things you can do very easily with GitButler.
-
-## Creating Commits
-
-Once you have changes on a virtual branch and want to commit them, you can hit the "Start a Commit" button in any lane, which gives you an editor to write a summary and optional description for your commit message.
+Each lane also has it's own staging area, so you can stage changes for each branch before deciding to commit them.
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-edit.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/vbranch-ex.png"
   width="800"
   height="600"
-  subtitle="Crafting a commit message with our advanced floating mode editor"
+  subtitle="A project with three simultaneous branches, plus some staged changes in each one and some unstaged (unassigned) changes."
 />
 
-If you want AI to use your diff to generate a commit message, you can hit the "Generate message" button.
+## How it works
 
-## AI Commit Message Settings
+Let's say that you make changes to two different files and `git status` would list two modified files. In GitButler, you can "assign" the change in each file to a different "virtual" branch, then when you commit, it will create a commit that only contains the changes in that file for that branch.
 
-If you want to use AI for generating your commit messages or branch names from time to time, there are quite a few options in your user preferences. You can choose from [OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/), [Ollama](https://www.ollama.com/) or [LM Studio](https://lmstudio.ai/) as your engine.
-
-For both OpenAI and Anthropic, you can either use your own API key to directly send your request to their servers, or you can proxy via our server (which you need to be logged in for).
-
-<ImageSection alt="AI Commit Settings" src="/commits-02.png" />
-
-If you use your own key for OpenAI or Anthropic, you can choose which model you would like us to use.
-
-<ImageSection alt="AI Commit Settings" src="/commits-03.png" />
-
-If you don't want to send your diff to another server, you can also use Ollama or LM Studio, which are a local LLM servers.
-
-With Ollama, you can run nearly any open source large language model ([Llama 3](https://www.ollama.com/library/llama3), [Phi 3](https://www.ollama.com/library/phi3), [Mistral](https://www.ollama.com/library/mistral), [Gemma](https://www.ollama.com/library/gemma), etc) entirely locally.
-
-Note that if you choose to configure a self-hosted Ollama server, you will likely need to add a custom CSP (Content Security Policy) to allow GitButler to connect to it.
-
-You can find more information on how to do that in the [Custom Content Security Policy (CSP)](/troubleshooting/custom-csp) section of the documentation.
-
-With all of these models, you can also customize the prompt if you want something more specific. In the "Custom AI prompts" section, you can add new prompts and select which one you want to use per project. This is useful for following certain formats or generating messages in other languages, etc.
-
-<ImageSection alt="AI Commit Settings" src="/commits-04.png" />
-
-Custom prompts can contain three variables which we will replace with the appropriate values. Those include:
-
-- `%{emoji_style}` - Instructs the LLM whether or not to make use of [GitMoji](https://gitmoji.dev) in the title prefix, based on your settings.
-- `%{brief_style}` - Instructs the LLM to not exceed 1 sentence when generating the commit message.
-- `%{diff}` - The contents of the diff.
-- `%{branch_name}` - The name of the current branch. Available in "Commit Message" custom prompt only.
-
-## Absorbing New Work
-
-If you have a commit and get some feedback on it or find an issue and wish to amend it, you can very easily absorb changes into existing commits. Simply drag the file into the commit you want to absorb that change into and drop it there.
-
-This will both rewrite that commit to include the new changes and also rebase every commit upstream from it automatically.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/absorb-work.gif"
-  width="800"
-  height="600"
-  subtitle="Assigning work on a file to a lane, then into an existing commit"
-/>
-
-## Undoing Commits
-
-You can easily undo any commit in your stack by expanding the commit and hitting the 'Undo' button. This will rebase all the commits above it and leave whatever work was in that commit as new uncommitted changes.
-
-<Callout>
-  "Undo"ing a commit does not throw it away, it simply makes that work not in a commit anymore. It
-  will not discard the changes.
-</Callout>
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/undoing-commits.gif"
-  width="800"
-  height="600"
-  subtitle="Undoing a commit in GitButler"
-/>
-
-## Undoing One File in a Commit
-
-If you want to undo a single file in a commit, you can expand the commit and click on the file you want to undo. Then hit "Uncommit". This will remove that file from the commit and leave it as uncommitted changes.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/undoing-file-then-redoing.gif"
-  width="800"
-  height="600"
-  subtitle="Uncommitting a file, then adding it back into the commit"
-/>
-
-## Squashing Commits
-
-Squashing two commits into a single combined commit is also very simple. Just drag one commit on top of another one.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/squashing.gif"
-  width="800"
-  height="600"
-  subtitle="Squash commits together by dragging and dropping"
-/>
-
-## Splitting Commits
-
-Splitting commits is slightly more complex. GitButler allows you to create an "empty" commit anywhere and then drag changes into it. Here is an example of creating an empty commit between two other commits, dragging changes from both of them into it and then absorbing new work into it as well.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/splitting.gif"
-  width="800"
-  height="600"
-  subtitle="Splitting commits by adding an empty commit and dragging changes into it"
-/>
-
-You can also notice that I easily edit the commit message by just hitting the "edit message" button.
-
-## Moving Commits
-
-You can also arbitrarily change the order of your commits by dragging and dropping them, which rebases everything to change the order.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/reorder.gif"
-  width="800"
-  height="600"
-  subtitle="Reordering commits in a branch"
-/>
-
-## Edit Mode
-
-The other way that you can modify a commit is to go into "Edit Mode". When you click on a commit, there is a button that says "Edit patch". If you click this, GitButler will check out that commit by itself into your working directory (automatically stashing everything else temporarily).
-
-The screen will go into "Edit mode", indicating that you're in a special state where you're focusing on this one commit.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/edit-mode.gif"
-  width="800"
-  height="600"
-  subtitle="Going into edit mode to directly edit the state of a commit"
-/>
-
-Then you can change whatever you want and when you click "Save and exit", it will amend the commit you were editing and rebase anything on top of it.
-
-This is useful for things like getting feedback on a series and being able to go into the appropriate commit, make the changes and continue, as opposed to squashing work.
-
-# signing-commits.mdx
+One of the nice things with this approach is that since you're starting from changes in a single working directory, you can be sure that all branches that you create from it will merge cleanly, as you're essentially starting from the merge product and extracting branches of work from it.
 
 
-GitHub and GitLab provide a mechanism to verify signed commits using an uploaded public SSH or GPG key. GitButler can be configured automatically sign all your commits.
+# claude-code-hooks.mdx
 
-Git provides a mechanism to sign your commits with a GPG key or SSH key. This enables other developers to make sure that you were actually the person who committed it, rather than someone else just setting their email to yours and committing it as if they were you.
+If you are using Claude Code, you can use the new ["hooks"](https://docs.anthropic.com/en/docs/claude-code/hooks) functionality to manage the output of even multiple simultaneous instances, while isolating all the generated code into virtual or stacked branches automatically. In this case, there is no need to set up the MCP server, as the hooks will handle everything for you.
 
-To make this work, a signature is added to the commit header and then that signature is checked against public key stored somewhere, generally for most people the most useful way to verify these signatures is through GitHub or GitLab.
+Here's a short video showing how GitButler works with Claude Code:
 
-This is what a verified commit looks like on both systems:
+https://youtu.be/AwwPwSc9qhA
 
-<ImageSection
-  alt="Viewing Remote Branches"
-  src="/signing-01.png"
-  subtitle="A verified commit on GitLab."
-/>
+Ok, let's get it set up.
 
-<ImageSection
-  alt="Viewing Remote Branches"
-  src="/signing-02.png"
-  subtitle="Verified and non-verified commits on GitHub."
-/>
+## Install the GitButler CLI
 
-This means that the server has a public key that you used to sign the commits that is associated to your account and has verified that this user actually signed this commit.
+First, you need to install the GitButler CLI, which can be done in your General settings. See the [MCP Server documentation](mcp-server) for more details on how to install the CLI.
 
-In order for this to work, you need to:
+## Installing GitButler as a Hook
 
-1. Tell GitButler to sign your commits
-2. Upload your key as a "signing key" to GitHub or GitLab (or elsewhere)
+Hooks in Claude Code are defined in one of your settings files.
 
-## Telling GitButler to Sign
-
-For GitButler to sign commits, you need to setup Git to sign commits, as we do roughly the same thing that Git itself tries to do, and we read and respect most of the same Git config settings.
-
-The main difference is that instead of only the `commit.gpgSign` as the flag that tells Git to automatically sign commits, we look for `gitbutler.signCommits` first. Thus, if Git would sign, GitButler will attempt to sign your commits with the normal Git settings as well.
-But if something goes wrong, `gitbutler.signCommits` will be set to `false` in the repository-local settings to prevent commits from
-failing generally.
-
-We look to see if we have a signing key in `user.signingkey`. If we have a key, we look for 'ssh' in `gpg.format`, otherwise we use GPG. We will respect `gpg.ssh.program` for ssh if there is a different binary path, and `gpg.program` for GPG. We also identify literal SSH keys in the `user.signingkey` field.
-
-The only major thing we don't support yet is `gpg.ssh.defaultKeyCommand` for other ways to get a key other than the `user.signingkey` field. We also don't support the X.509 smime stuff.
-
-Here is an example, if you have a public key here `.ssh/id_ed25519.pub` then you can setup signing with something like this:
-
-```bash title="Terminal"
-$ git config --global user.signingkey "/Users/schacon/.ssh/id_ed25519.pub"
-$ git config --global gpg.format ssh
-$ git config --global gitbutler.signCommits true
+```
+~/.claude/settings.json - User settings
+.claude/settings.json - Project settings
+.claude/settings.local.json - Local project settings (not committed)
 ```
 
-You can also set this up in your project settings, perhaps a little more easily:
+Wherever you want to add GitButler to handle your commits automatically, you can add us as a hook by adding the following to the `hooks` array in whatever settings file you want to use:
 
-<ImageSection
-  alt="Viewing Remote Branches"
-  src="/signing-03.png"
-/>
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "but claude pre-tool"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "but claude post-tool"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "but claude stop"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
-The nice thing here is that you can also test the settings easily by hitting the "Test Signing" button.
+Essentially, you want to run the `but claude pre-tool` command before any code generation or editing, and the `but claude post-tool` command after it. The `but claude stop` command will run when you stop the agent, ensuring that all changes are committed and branches are updated accordingly.
 
-There are lots of other ways to set up GPG or SSH commit signing:
+You also might want to add to your "memories" to ask Claude not to try commiting using Git as it will be handled by GitButler. You can do something like this:
 
-- 1Password is a very easy way to [SSH sign commits](https://blog.1password.com/git-commit-signing/).
-- GitHub has a [good guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key) on how to setup GPG or SSH keysigning.
-- Here is a nice simple gist for [GPG signing on Windows](https://gist.github.com/BoGnY/f9b1be6393234537c3e247f33e74094a).
+```
+❯ cat ~/.claude/CLAUDE.md
+## Development Workflow
+- Never use the git commit command after a task is finished.
+```
 
-<Callout title="Using GitButler's Generated SSH Key">
-Earlier versions of GitButler would only sign with it's generated SSH key. Although we've removed that functionality, you can easily set it back up by pointing the signingKey at the generated SSH Key. The key is located in the following locations:
+## Using GitButler with Claude Code
 
-<Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
-  <Tab value="macOS">
-  ```bash
-  /Users/[username]/Library/Application Support/com.gitbutler.app/keys/ed25519.pub
-  ```
-  </Tab>
-  <Tab value="Windows">
-  ```bash
-  C:\Users\[username]\AppData\Roaming\com.gitbutler.app\keys\ed25519.pub
-  ```
-  </Tab>
-  <Tab value="Linux">
-  ```bash
-  ~/.local/share/gitbutler-tauri/keys/ed25519.pub
-  ```
-  </Tab>
-</Tabs>
+With the hooks setup, Claude will tell GitButler when it has generated code or edited files and in which session, which helps GitButler to try to isolate the changes into a single branch per session.
 
-</Callout>
+For example, if you have three sessions of Claude Code running at the same time, each will be communicating with GitButler at each step and GitButler will be assigning each change to the correct branch automatically.
 
-## Upload Your Signing Key
-
-For GitHub or GitLab to verify your signatures, you need to say that the SSH or GPG public key we are using is a valid signing key for your user.
-
-### Adding to GitHub
-
-You can click on the "Add key to GitHub" link in the settings page right about the signing toggle, or you can go here (https://github.com/settings/ssh/new) to paste that public key in.
-
-<ImageSection
-  alt="Adding a key to GitHub"
-  src="/signing-04.png"
-  subtitle="Be sure to change the type to 'Signing Key'"
-/>
-
-Now your signed commits should show up as "Verified".
-
-### Adding to GitLab
-
-For GitLab you need to go to "SSH Keys" in your profile: https://gitlab.com/-/profile/keys and click the "Add new key" button.
-
-<ImageSection
-  alt="Adding a key to GitHub"
-  src="/signing-05.png"
-  subtitle="Add new key here."
-/>
-
-Now paste in the public SSH key you copied from GitButler, name it and make sure the "Usage Type" is either "Signing" or "Authentication and Signing".
-
-<ImageSection
-  alt="Adding a key to GitHub"
-  src="/signing-06.png"
-  subtitle="Now all your GitButler generated commits will be verified on that platform!"
-/>
+When the agent is done, GitButler will commit all the changes and write a more sophisticated commit message based on what you had prompted your agent.
 
 
-# merging.mdx
+# mcp-server.mdx
 
 
-By default, GitButler rebases the work on your virtual branches when you update your target branch (upstream) work.
+If you use an AI agent (such as Cursor, Windsurf, Claude Code) to help you with your code, you can easily setup GitButler to manage your commits automatically, keep save points, and more. You know, _vibe_ commit...
 
-Often this works just fine and the commits are simply rebased. Occasionally, you will have conflicts with upstream work.
+## Setting up your Agent to use GitButler
 
-In this case, GitButler will not do what Git normally does, which is to stop at each conflicted commit and make you fix it before moving on. Instead, it will apply the changes that it can and store the commit as a "conflicted" commit and continue the rebasing process.
+The first step is to let your agent know about GitButler, which is done via MCP - you need to tell your agent to use the GitButler MCP server.
 
-When you go to update from upstream, GitButler will show you all the branches that it will rebase and will let you know if any of them will have conflicts:
+### Installing the CLI
+
+GitButler provides a CLI that can be used to interact with the GitButler platform. Before you can setup AI Agent integration, you will need to install the CLI.
+
+This can be found by opening the GitButler global settings, and then clicking on the "Install CLI" button in the General settings.
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/update-will-conflict.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/install-cli.png"
   width="800"
   height="600"
-  subtitle="Updating from upstream will let you know if there will be conflicts"
+  subtitle="How to install the GitButler CLI"
 />
 
-In this case, when you perform the rebase, that branch will then contain "conflicted" commits. They will be marked in the UI as conflicted and you can click on them to get a "resolve conflict" button to start the resolution process.
+Now that you have the `but` CLI installed, your agent can use the CLI's MCP server to interact with GitButler.
+
+### Cursor
+
+To install the GitButler MCP server in Cursor, first go to the Cursor settings, and then click on the "Extensions" tab, then click on "Tools and Integrations" and click on "New MCP Server".
+
+This will open your `~/.cursor/mcp.json` file.
+
+Add the following to the `mcpServers` object:
+
+```json
+{
+  "mcpServers": {
+    "gitbutler": {
+      "command": "but",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+You should see the GitButler MCP server in the list of MCP servers and it should have the tool `gitbutler_update_branches` available.
+
+### VSCode
+
+To install the GitButler MCP server in VSCode, you need to select "MCP: List Servers" from the actions menu. Then select "Add Server". Select "stdio" as the server type.
+
+Now you can type your command (`but mcp`) and name it something. After this, it should open up your settings file and show you something like this:
+
+```json
+  "mcp": {
+    "servers": {
+      Running | Stop | Restart | 1 tools
+      "gitbutler-mcp": {
+        "type": "stdio",
+        "command": "but",
+        "args": ["mcp"]
+      }
+    }
+  }
+```
+
+However, if you have Cursor's MCP already setup, VSCode will notice and help you automatically reuse the settings.
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/conflict-resolve.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/vscode-mcp-cursor.png"
   width="800"
   height="600"
-  subtitle="When your commits have conflicts"
+  subtitle="vscode-mcp-cursor.png"
 />
 
-When you click that, GitButler will remove the other virtual branches and other work from your working directory and check out just this commit with it's conflict markers. It will show you a special "edit mode" screen, where you are directly editing this commit.
+### Claude Code
+
+Adding an MCP server to Claude Code is done by running the `claude mcp add` command.
+
+```
+❯ claude mcp add gitbutler but mcp
+Added stdio MCP server gitbutler with command: but mcp to local config
+
+❯ claude mcp list
+gitbutler: but mcp
+```
+
+## Rules: How to configure auto committing
+
+Once you have installed the MCP server in your editor or agent, you can optionally configure it to automatically commit your changes.
+
+We've found that adding something like this to your rules works well:
+
+```
+If you generate code or modify files, run the gitbutler update branches MCP tool.
+```
+
+## How to add rules
+
+Cursor stores it's rules in `~/.cursor/rules` file, but you can also manually set them by going to the Cursor Settings pane, clicking 'Rules' and adding them to the User Rules section.
+
+In VSCode's Copilot Agent Mode, you can use ["custom instructions"](https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions) to accomplish this.
+
+In Claude Code, they are now called "memories" and you can add them by hitting '#' and storing them in user memory (or local if you just want them in one project).
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/resolve-conflicts-mode.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/claude-memories.png"
   width="800"
   height="600"
-  subtitle="Resolving a conflict by individual commit"
+  subtitle="Adding memories in Claude Code"
 />
 
-If you want to cancel this conflict resolution, you can just hit 'Cancel' and it will go back to your normal state. If you have fixed all the issues, you can click "Save and Exit" and it will commit the conflict resolution and if needed, rebase any further commits on that branch on top of your new work.
+Or directly in your `~/.claude/CLAUDE.md` rules file:
+
+```
+❯ cat ~/.claude/CLAUDE.md
+## Development Workflow
+- When you're done with a task where code was created or files edited, please run the gitbutler mcp update_branches command.
+```
+
+## Using GitButler with your agent
+
+If you've set up a rule/instruction/memory, then every time a chat session is completed, the agent will send the changes and prompt to GitButler and it will automatically commit the changes.
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/conflicts-resolved.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/update-branches.png"
   width="800"
   height="600"
-  subtitle="conflicts-resolved.png"
+  subtitle="Notice the automatic 'Called gitbutler_update_branches' after a change was made"
 />
+
+If you're using Claude Code, it may look something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/claude-mcp-call.png"
+  width="800"
+  height="600"
+  subtitle="Claude Code will show the full MCP prompt after a change was made"
+/>
+
+If you don't have the agent setup to automatically call our tool, then you can also just manually type 'update gitbutler branches' in the chat, but that's a little less magical.
+
+## GitButler interface
+
+There are two phases to GitButler's MCP agent interaction. The first is the agent sending the changes and prompt to GitButler, which GitButler will quickly record and then return a success to the agent. The second is GitButler processing that raw recorded change and attempting to process that change into a commit.
+
+### Recording the changes
+
+When your agent calls the `gitbutler_update_branches` tool, GitButler will record the changes and prompt and then immediately return to the agent, so the call should be very fast.
+
+So for instance, let's say that I prompted my coding agent to update my `README.md` file to add a list of contributing authors. When the agent is done, it should call the update branches MCP tool, which will record a commit that looks something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-raw.png"
+  width="800"
+  height="600"
+  subtitle="The recorded commit message with prompt and summary data from the agent"
+/>
+
+### Processing the changes
+
+Then, if you have AI tooling setup, GitButler will see that and turn it into a commit message like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/commit-updated.png"
+  width="800"
+  height="600"
+  subtitle="The updated commit message"
+/>
+
+You can see all of these steps in the "Actions" section of the GitButler interface, which you can toggle by hitting the "Actions" button in the top right of the interface.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/actions.png"
+  width="800"
+  height="600"
+  subtitle="The 'Actions' section of the GitButler interface"
+/>
+
+In the near future, we will also be able to do more interesting things like auto-absorbing changes into existing commits, creating new branches based on the prompt theme, creating stacked branches, and more.
 
 
 # debugging.mdx
@@ -1974,6 +2488,15 @@ There are a few ways to get in touch with us for feedback, bug reports, feature 
 </Cards>
 
 
+# open-source.mdx
+
+GitButler is a [Fair Source software project](https://blog.gitbutler.com/gitbutler-is-now-fair-source/), built on a vast foundation of open source software. We're committed to giving back to the community and supporting the projects that we rely on.
+
+As part of our commitment to open source, we are an early member of the [Open Source Pledge](https://osspledge.com/). We have pledged to give back to the open source community by donating $2000 per year per full time software developer that we employ to the OSS projects and maintainers that we depend on.
+
+You can read more about our reasoning to join the Open Source Pledge in our announcement blog post and 2024 report: [GitButler Joins the Open Source Pledge](https://blog.gitbutler.com/open-source-pledge-2024).
+
+
 # supporters.mdx
 
 
@@ -2010,12 +2533,3 @@ Thanks, from the GitButler Crew!
 
 <img src="/img/pixel-bowtie.svg" className="" />
 
-
-
-# open-source.mdx
-
-GitButler is a [Fair Source software project](https://blog.gitbutler.com/gitbutler-is-now-fair-source/), built on a vast foundation of open source software. We're committed to giving back to the community and supporting the projects that we rely on.
-
-As part of our commitment to open source, we are an early member of the [Open Source Pledge](https://osspledge.com/). We have pledged to give back to the open source community by donating $2000 per year per full time software developer that we employ to the OSS projects and maintainers that we depend on.
-
-You can read more about our reasoning to join the Open Source Pledge in our announcement blog post and 2024 report: [GitButler Joins the Open Source Pledge](https://blog.gitbutler.com/open-source-pledge-2024).
