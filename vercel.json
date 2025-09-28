@@ -14,15 +14,15 @@
     },
     {
       "source": "/features/virtual-branches",
-      "destination": "/features/virtual-branches/virtual-branches"
+      "destination": "/features/branch-management/virtual-branches"
     },
     {
       "source": "/features/virtual-branches/verifying-commits",
-      "destination": "/features/virtual-branches/signing-commits"
+      "destination": "/features/branch-management/signing-commits"
     },
     {
       "source": "/features/stacked-branches",
-      "destination": "/features/virtual-branches/stacked-branches"
+      "destination": "/features/branch-management/stacked-branches"
     },
     {
       "source": "/features/gitlab-integration",
