@@ -13,12 +13,12 @@
       "destination": "/why-gitbutler"
     },
     {
-      "source": "/features/virtual-branches",
-      "destination": "/features/branch-management/virtual-branches"
-    },
-    {
       "source": "/features/virtual-branches/verifying-commits",
       "destination": "/features/branch-management/signing-commits"
+    },
+    {
+      "source": "/features/virtual-branches/:path*",
+      "destination": "/features/branch-management/:path*"
     },
     {
       "source": "/features/stacked-branches",
