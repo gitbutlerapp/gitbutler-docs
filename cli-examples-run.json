@@ -1,0 +1,10 @@
+{
+  "exampleProjectPath": "/Users/schacon/projects/why",
+  "startingHash": "f0f437258043",
+  "ansi_senor_path": "/Users/schacon/.cargo/bin/ansi-senor",
+  "but_path": "/usr/local/bin/but",
+  "config": {
+    "cacheDir": "public/cache/cli-output",
+    "outputFormat": "html"
+  }
+}

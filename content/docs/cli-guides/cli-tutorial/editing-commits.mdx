@@ -1,0 +1,41 @@
+---
+title: Editing Commits
+description: Editing commit messages and edit mode with GitButler.
+---
+
+While you can rub changes in and out of commits, you can also edit the commit
+message of any commit in your workspace quite easily.
+
+## Editing Commit Messages
+
+You can edit commit messages with the `but describe` command. So if we have this status:
+
+{/* restore [d69fffa7c6eb] */}
+
+```cli [8e0965d4ad557bc8, 242px]
+but status
+```
+
+Then you can edit the message of any commit by running `but describe <sha>`, which will open up your editor of choice with the existing commit message and when you exit the editor, replace that message in the commit and rebase everything above it.
+
+The editor would look something like this:
+
+```
+add user changes
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Changes in this commit:
+#       modified:   app/models/user.rb
+#       modified:   config/routes.rb
+#
+~
+~
+~
+~
+```
+
+Pretty simple.
+
+{/* TODO: Edit Mode */}

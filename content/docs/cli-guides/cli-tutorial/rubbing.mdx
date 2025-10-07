@@ -1,0 +1,360 @@
+---
+title: Rubbing
+description: Learn how to use the rub command to apply changes to branches.
+---
+
+# Rubbing
+
+As we saw in the [Branching and Committing](branching-and-commiting) section, the `but rub` command can be used to assign changes to branch lanes.
+
+However, it can be used to do _so much_ more. Rubbing is essentially combining two things. Since there are lots of _things_ in the tool, combining them together can do lots of different operations. Most of them should be fairly intuitive once you understand the concept.
+
+Let’s take a look at what is possible with this very straightforward command.
+
+# Unassigning Changes
+
+We already showed how you can use `rub` to assign a file change or set of changes to a branch for later committing (rubbing a file and a branch), but what if you want to undo that? Move assignments to a different lane or revert them to being unassigned for later?
+
+As you may have noticed in the `but status` output, there is a special identifier `00` which is always the “unassigned” ID. If you rub anything to `00` then it will move it to unassigned.
+
+So given this status:
+
+```cli [6b9e5de490fe3c8c, 462px]
+but status
+```
+
+We can re-unassign the `README.new.md` file with `but rub np 00`. Or, we can re-assign that file to the `sc-branch-26` parallel branch with `but rub np q6`.
+
+# Amending Commits
+
+However, assignment is not all we can do with rubbing. We can also use it to move things to and from commits. A common example would be to amend a commit with new work.
+
+Let’s say that we sent commits out for review and got feedback and instead of creating new commits to address the review, we wanted to actually fix up our commits to be better. This is somewhat complicated to do in Git (something something [fixup commit, autosquash](https://blog.gitbutler.com/git-autosquash), etc). However, with `rub` it’s incredibly simple. Just rub the new changes into the target commit rather than a branch.
+
+Let’s say that we have a branch with some commits in it, we’ve made changes to two files and want to amend two different commits with the new changes.
+
+```cli [6b9e5de490fe3c8c, 462px]
+but status
+```
+
+If we want to update the first commit (`5d70b6f`) with the `like_button.rb` changes and the last commit (`9ed9612`) with the `liked_tweets.html.erb` changes, we can run the following two `rub` commands:
+
+[rub command]
+
+Notice that the SHAs have changed, but the commit identifiers have not. It has rewritten the commits to have the same messages but incorporated the changes you rubbed into those patches.
+
+If you wanted to rub all the unassigned changes into a specific commit, you could also do that by rubbing the unassigned section to a commit, for example `but rub 00 1l` which would take all unassigned changes and amend commit `1l` with them.
+
+# Squashing Commits
+
+File changes are not the only thing that you can rub. You can also rub commits into things. To squash two commits together, you simply rub them together. Let’s take the last status output and squash the first commit into the third:
+
+```
+❯ but rub ux 1l
+
+Squashed commits:
+  - 8df823d ("Show recent active users on admin page")
+into:
+	- d78fe05 ("Add liked tweets section to the LikesController")
+```
+
+Now we can see that we only have two commits in our branch:
+
+```
+❯ but status
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+****
+╭ **8x** **[sc-liked-tweets]**
+● **9r** 7a4ecf4 Add Liked Tweets page to dashboard
+● **1l** 7de8f04 Add liked tweets section to the LikesController
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+If we look at `1l` now, it has combined the commit messages and associated changes into a single commit. It’s possible that this will introduce a merge conflict to the commit that was in the middle (_which won’t happen if you squash two neighboring commits, but in this case we used a slightly more complex skip-squash_), but you can always [undo it](https://www.notion.so/Operations-Log-2545a4bfdeac8087a518dcf7448f62d3?pvs=21) or [resolve the conflict](https://www.notion.so/Resolving-Conflicts-2545a4bfdeac80b7a587c2b9f23ca890?pvs=21).
+
+You probably want to [edit the commit message](https://www.notion.so/Editing-Commits-2545a4bfdeac809b985ec774d1beb32f?pvs=21) after this too, since it will simply combine the two commit messages.
+
+# Uncommitting
+
+Let’s say that we want to just _undo_ a commit - that is, pretend that we had not made that commit and instead put the changes back to unassigned status. In this case we would use the special `00` ID that we talked about earlier, just like unassigning changes, we can unassign commits.
+
+So, if we’re back to this status:
+
+```
+❯ but status
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+****
+╭ **8x** **[sc-liked-tweets]**
+● **ux** 8df823d Show recent active users on admin page
+● **9r** 937ace4 Add Liked Tweets page to dashboard
+● **1l** d78fe05 Add liked tweets section to the LikesController
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+And we want to un-commit the first commit (`1l`) as though we had never made it, you can rub to `00`:
+
+```
+❯ but rub 1l 00
+
+Uncommitted d78fe05 ("Add liked tweets section to the LikesController")
+
+Newly unassigned changes:
+**gt** M  app/views/dashboard/liked_tweets.html.erb
+**6i** M  app/components/tweet/like_button.rb
+```
+
+Now if we look at our status again, we will see that commit removed and those files back in the unassigned status:
+
+```
+❯ but status
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+****
+╭ **8x** **[sc-liked-tweets]**
+● **ux** 9ed9612 Show recent active users on admin page
+● **9r** 1970ca4 Add Liked Tweets page to dashboard
+╯
+
+**00** **Unassigned Changes
+gt** M  app/views/dashboard/liked_tweets.html.erb
+**6i** M  app/components/tweet/like_button.rb
+```
+
+# Moving Commits
+
+We can also use rubbing to move a commit from one branch to another branch if we have multiple active branches and committed to the wrong one, or otherwise decide that we want to split up independent work.
+
+Let’s say that we have two commits on one branch and one commit on a second parallel branch and want to move one:
+
+```
+❯ but status
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+
+****╭  **p3** **[liked-tweets]**
+●  **2p** 2acf832 liked tweets view
+╯
+╭  **8x** **[cache-tester]**
+●  **e8** f8f3e3a test tweeting functionality
+●  **q9** a9cfef2 add cache tests
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+We can move the “tweeting tests” commit to the `liked-tweets` branch with `but rub`:
+
+```
+❯ but rub e8 p3
+
+Moved commit f8f3e3a ("test tweeting functionality...")
+	to: branch **liked-tweets**
+```
+
+Now we can see that the commit has been moved to the top of the new branch:
+
+```
+❯ but status
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+
+****╭  **p3** **[liked-tweets]**
+●  **e8** 8efdea6 test tweeting functionality
+●  **2p** 2acf832 liked tweets view
+╯
+╭  **8x** **[cache-tester]**
+●  **q9** a9cfef2 add cache tests
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+Notice that the only SHA that changed was the one that moved, since nothing else needed to be rebased. Rubbing a commit to another branch always adds it to the top of that branch. If you then want to move it lower in the branch, you can use the [`but move`](https://www.notion.so/move-2065a4bfdeac802a88cff5498b409ec2?pvs=21) command.
+
+As you might imagine, you can also simultaneously move and squash by rubbing a commit in one branch on a commit in another branch too.
+
+# Moving Files and Hunks between Commits
+
+You can also move files, hunks, or lines from one commit to another, or from unassigned to a commit, much like you can move stuff from unassigned to a lane via “[Partial Assigning](https://www.notion.so/Branching-and-Committing-2545a4bfdeac80c5a48ffb6cf219181c?pvs=21)” (ranges and whatnot).
+
+To do that, you need identifiers for the files and hunks in an existing commit, which you can get via a `but status -f`, or `but status --files` that tells status to also list commit file IDs.
+
+```
+❯ but status -f
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+
+****╭  **p3** **[liked-tweets]**
+●  **e8** 8efdea6 **test tweeting functionality**
+│  **6i** M  app/components/tweet/like_button.rb
+│  **gt** M  app/views/dashboard/liked_tweets.html.erb
+│
+●  **2p** 2acf832 **liked tweets view**
+│  **i4** M  app/controllers/tweet_controller.rb
+╯
+╭  **8x** **[cache-tester]**
+●  **q9** a9cfef2 **add cache tests**
+│  **6q** A  tests/scripts/cache_tester.t
+│  **dx** A  scripts/debug/cache_tester.sh
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+So now we can move the changes from one commit to another by rubbing pretty easily. Let’s take the `liked_tweets.html.erb` change and move it down to the “liked tweets view” commit:
+
+```
+❯ but rub gt 2p
+
+Moved to commit 2acf832 ("liked tweets view..."):
+  - M  app/views/dashboard/liked_tweets.html.erb
+```
+
+Now the change is in the previous commit:
+
+```
+❯ but status -f
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+
+****╭  **p3** **[liked-tweets]**
+●  **e8** ed3fde4 **test tweeting functionality**
+│  **6i** M  app/components/tweet/like_button.rb
+│
+●  **2p** c4def87 **liked tweets view**
+│  **i4** M  app/controllers/tweet_controller.rb
+│  **gt** M  app/views/dashboard/liked_tweets.html.erb
+╯
+╭  **8x** **[cache-tester]**
+●  **q9** a9cfef2 **add cache tests**
+│  **6q** A  tests/scripts/cache_tester.t
+│  **dx** A  scripts/debug/cache_tester.sh
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+Even hunks within files are movable, the same way that we saw in the “[Partial Assigning](https://www.notion.so/Branching-and-Committing-2545a4bfdeac80c5a48ffb6cf219181c?pvs=21)” section:
+
+```
+❯ but rub gt:3-5 2p
+
+Moved to commit 2acf832 ("liked tweets view..."):
+  - M  app/views/dashboard/liked_tweets.html.erb (3-5)
+```
+
+Now parts of the change to that file are in two different commits:
+
+```
+❯ but status -f
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+
+****╭  **p3** **[liked-tweets]**
+●  **e8** ed3fde4 **test tweeting functionality**
+│  **6i** M  app/components/tweet/like_button.rb
+│  **gt** M  app/views/dashboard/liked_tweets.html.erb (1-2, 6-9)
+│
+●  **2p** c4def87 **liked tweets view**
+│  **i4** M  app/controllers/tweet_controller.rb
+│  **gt** M  app/views/dashboard/liked_tweets.html.erb (3-5)
+╯
+╭  **8x** **[cache-tester]**
+●  **q9** a9cfef2 **add cache tests**
+│  **6q** A  tests/scripts/cache_tester.t
+│  **dx** A  scripts/debug/cache_tester.sh
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+# Splitting Commits
+
+Ok, so now we can be pretty specifc about moving changes around to all these different states. The last thing we’ll cover here is splitting commits, which requires a new command that creates a new empty commit called `but new`.
+
+By default, `but new` will create a new empty commit at the top of the most recently created branch, however you can specify a different branch, or even a specific place within a branch with existing commits.
+
+Let’s say that we’re back to this state:
+
+```
+❯ but status
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+
+****╭  **p3** **[liked-tweets]**
+●  **e8** 8efdea6 test tweeting functionality
+●  **2p** 2acf832 liked tweets view
+╯
+╭  **8x** **[cache-tester]**
+●  **q9** a9cfef2 add cache tests
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+Now we want to split the “liked tweets view” back into two separate commits. The way we do this is to insert a blank commit in between `e8` and `2p` and then rub changes into it (then probably edit the commit message).
+
+We can insert a blank commit by running `but new p3` which inserts a blank commit at the top of that branch. Or, we could also say `but new e8`, specifying the first commit on that branch and it will insert one above that. Or we could say `but new 2p` which would insert a blank in between the two commits on that branch. Or, we could insert one at the base of the branch by putting one below `2p` with `but new -b 2p` (short for `--below`). Let’s do the simple version of just adding it to the top of the branch:
+
+```
+❯ but new p3
+
+Created new blank commit above:
+  - 8efdea6 test tweeting functionality
+```
+
+Now we have a blank commit:
+
+```
+❯ but status
+
+📍 Base: origin/main @ 83afc2a
+🔺 You are 32 commits behind origin/main
+    (Run `but base update` to rebase your stack)
+
+****╭  **p3** **[liked-tweets]**
+●  **6w** f4f96e3 (blank)
+****●  **e8** 8efdea6 test tweeting functionality
+●  **2p** 2acf832 liked tweets view
+╯
+╭  **8x** **[cache-tester]**
+●  **q9** a9cfef2 add cache tests
+╯
+
+**00** **Unassigned Changes**
+   (none)
+```
+
+Now we can use the previous method of moving file changes from other commits into it, then edit the commit message with `but describe 6w` (for more on the `describe` command, see [Editing Commits](https://www.notion.so/Editing-Commits-2545a4bfdeac809b985ec774d1beb32f?pvs=21), coming up next).

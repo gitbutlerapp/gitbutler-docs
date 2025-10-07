@@ -1,0 +1,35 @@
+{
+  "Basics": [
+    "but-init"
+  ],
+  "Inspection": [
+    "but-log",
+    "but-status"
+  ],
+  "Committing": [
+    "but-base",
+    "but-branch",
+    "but-rub",
+    "but-commit",
+    "but-mark",
+    "but-unmark"
+  ],
+  "Editing": [
+    "but-describe",
+    "but-new"
+  ],
+  "Forges": [
+    "but-push",
+    "but-publish",
+    "but-forge"
+  ],
+  "Operations Log": [
+    "but-oplog",
+    "but-undo",
+    "but-restore",
+    "but-snapshot"
+  ],
+  "AI Tools": [
+    "but-mcp"
+  ]
+}

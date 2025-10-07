@@ -8,6 +8,7 @@ import { Callout } from "fumadocs-ui/components/callout"
 import { TypeTable } from "fumadocs-ui/components/type-table"
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion"
 import ImageSection from "@/app/components/ImageSection"
+import CliBlock from "@/app/components/CliBlock"
 import type { ComponentProps, FC } from "react"
 
 interface Param {
@@ -103,6 +104,7 @@ export default async function Page(props: { params: Promise<Param> }): Promise<R
             Accordion,
             Accordions,
             ImageSection,
+            CliBlock,
             blockquote: Callout as unknown as FC<ComponentProps<"blockquote">>,
             APIPage: openapi.APIPage
           }}

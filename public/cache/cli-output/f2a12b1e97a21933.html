@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>@font-face {font-family: ansi2-custom-font;src: url(https://fonts.cdnfonts.com/s/98875/JetBrainsMonoRegular.woff);}.m{display:flex;flex-direction:column;}.r{display:flex;}.t{margin:0;padding:0;font-family:ansi2-custom-font;white-space:pre;display:inline-block;font-size:16px}div{color:#000000}:root{background:#F9FAFB}</style></head><body><div class='m'><div class='r'><p class='t text:0:53 color:0:0 bg:0:0 bold:0:0 blink:0:0 dim:0:0 italic:0:0 underline:0:0 hide:0:0 strike:0:0'>Overview of the uncommitted changes in the repository</p></div><div class='r'><br></div><div class='r'><p class='t text:55:82 color:0:0 bg:0:0 bold:0:0 blink:0:0 dim:0:0 italic:0:0 underline:0:0 hide:0:0 strike:0:0'>Usage: but status [OPTIONS]</p></div><div class='r'><br></div><div class='r'><p class='t text:84:92 color:0:0 bg:0:0 bold:0:0 blink:0:0 dim:0:0 italic:0:0 underline:0:0 hide:0:0 strike:0:0'>Options:</p></div><div class='r'><p class='t text:93:172 color:0:0 bg:0:0 bold:0:0 blink:0:0 dim:0:0 italic:0:0 underline:0:0 hide:0:0 strike:0:0'>  -f             Determines whether the committed files should be shown as well</p></div><div class='r'><p class='t text:173:242 color:0:0 bg:0:0 bold:0:0 blink:0:0 dim:0:0 italic:0:0 underline:0:0 hide:0:0 strike:0:0'>  -v, --verbose  Show verbose output with commit author and timestamp</p></div><div class='r'><p class='t text:243:270 color:0:0 bg:0:0 bold:0:0 blink:0:0 dim:0:0 italic:0:0 underline:0:0 hide:0:0 strike:0:0'>  -h, --help     Print help</p></div><div class='r'><br></div></div>
+<script>
+function sendHeightToParent() {
+  const height = Math.max(
+    document.body.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.clientHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight
+  );
+  window.parent.postMessage({ height: height, hash: 'f2a12b1e97a21933' }, '*');
+}
+
+// Send height on load and resize
+window.addEventListener('load', sendHeightToParent);
+window.addEventListener('resize', sendHeightToParent);
+
+// Send height after a short delay to ensure content is fully rendered
+setTimeout(sendHeightToParent, 100);
+</script></body></html>

@@ -1,0 +1,8 @@
+{
+  "title": "Guides",
+  "defaultOpen": false,
+  "pages": [
+    "installation",
+    "cli-tutorial"
+  ]
+}
