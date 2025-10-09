@@ -11,6 +11,9 @@ importers:
       '@fumadocs/mdx-remote':
         specifier: ^0.2.3
         version: 0.2.4(acorn@8.12.1)(fumadocs-core@14.7.7(@types/react@18.3.12)(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@gitbutler/design-core':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@radix-ui/react-dialog':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -410,6 +413,9 @@ packages:
   '@fumari/json-schema-to-typescript@1.1.1':
     resolution: {integrity: sha512-vVnuwLqW8WJsg09EanNHnXnzsjYYsZE7JlD4M1sLvDnWGjvYJKNU6VpRqDxOiDChUszDZFKhxQSNYGShF0bKJg==}
     engines: {node: '>=18.0.0'}
+
+  '@gitbutler/design-core@1.2.0':
+    resolution: {integrity: sha512-FP1e1ysMw+x7sANuhfFLJzVXFdWgPkhZbNaiXzeTK1iWxE5BBAL949SNoWFpXJ7TAcKAq0/MUNySZ7TLZVFODA==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -4539,6 +4545,8 @@ snapshots:
       '@apidevtools/json-schema-ref-parser': 11.7.2
       js-yaml: 4.1.0
       prettier: 3.3.3
+
+  '@gitbutler/design-core@1.2.0': {}
 
   '@humanfs/core@0.19.1': {}
 

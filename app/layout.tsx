@@ -3,6 +3,8 @@ import { Provider } from "./provider"
 import { Inter } from "next/font/google"
 import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
+import "@gitbutler/design-core/fonts"
+
 import Script from "next/script"
 
 const baseUrl =

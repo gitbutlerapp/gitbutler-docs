@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@fumadocs/mdx-remote": "^0.2.3",
+    "@gitbutler/design-core": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@shikijs/transformers": "^1.22.2",
     "cmdk": "^1.0.4",
