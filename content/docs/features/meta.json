@@ -1,5 +1,5 @@
 {
   "title": "Features",
   "defaultOpen": false,
-  "pages": ["branch-management", "timeline", "forge-integration", "ai-integration", "agents-tab"]
+  "pages": ["branch-management", "timeline", "forge-integration", "ai-integration", "agents-tab", "gerrit-mode"]
 }
