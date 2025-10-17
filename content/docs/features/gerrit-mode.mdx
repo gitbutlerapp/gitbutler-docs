@@ -1,0 +1,67 @@
+---
+title: Gerrit Mode
+description: Use Gerrit mode in GitButler to have a simple and powerful client for the Gerrit code review system
+---
+
+Not _everyone_ uses GitHub or GitLab to review code and collaborate. If you use the [Gerrit](https://www.gerritcodereview.com/) code review tool, GitButler has a mode for you! In fact, GitButler is the best Gerrit client there is.
+
+## What is Gerrit
+
+If you've never heard of Gerrit, it's used by large teams like the Android or Chrome projects to manage huge numbers of changes and users across large numbers of interdependent repositories.
+
+Here is an example of incoming changesets on the [Android project](https://android-review.googlesource.com/q/status:open+-is:wip,50):
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.03.44%402x.png"
+  width="800"
+  height="600"
+  subtitle="The Android project's Gerrit code review"
+/>
+
+## How is Gerrit different than Pull/Merge Requests?
+
+Good question. With GitHub or GitLab, when you send a pull/merge request, the review process is branch based. If you add more commits on top of your branch, the changes are squished into one big unified diff for review. Most teams tend to avoid rebasing anything that was already shared.
+
+Gerrit is a commit based review system. Every review is based on exactly one commit. It's very common to edit shared commits and submit new versions of them to address feedback.
+
+This model works _very well_ with GitButler's easy [commit editing](/features/branch-management/commits) features. With any other Git client, interactive rebasing and amending tends to be quite painful and error prone, making it fairly difficult to work with Gerrit's model. With GitButler, it's ideal. Just drag and drop changes and update your changesets easily.
+
+## How to turn on Gerrit Mode
+
+To turn on Gerrit Mode in GitButler, you just have to set a Git config option called `gitbutler.gerritMode` in the project you want to act in a Gerrit compatible fashion:
+
+```
+❯ cd my_project
+❯ git config gitbutler.gerritMode 1
+```
+
+## What is Gerrit Mode
+
+Now GitButler will change it's behavior in the following ways:
+
+- When you commit, we will automatically inject a `Change-Id` trailer into the commit in the format that Gerrit expects. You do not need to [setup a `commit-msg` hook](https://gerrit-review.googlesource.com/Documentation/cmd-hook-commit-msg.html) like you do with other Git clients.
+- When you push, it will not push to a matching branch name on the remote. Instead it will push to `refs/for/main` (or whatever the name of the target branch is set to be).
+- After a push, we record the change url and show you the link and number for each commit automatically.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.21.06%402x.png"
+  width="800"
+  height="600"
+  subtitle="Gerrit Change numbers and URLs are shown and linked to"
+/>
+
+We can also set some extra push options when we push, including:
+
+- [Topics](https://gerrit-review.googlesource.com/Documentation/cross-repository-changes.html)
+- [Hashtags](https://gerrit-review.googlesource.com/Documentation/intro-user.html#hashtags)
+- [WIP status](https://gerrit-review.googlesource.com/Documentation/intro-user.html#wip)
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.50.07%402x.png"
+  width="800"
+  height="600"
+  subtitle="Set a topic, hashtag or wip status on push"
+/>
