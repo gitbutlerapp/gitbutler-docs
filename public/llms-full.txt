@@ -1323,7 +1323,7 @@ We will do some cool things as it runs, however.
 
 ### One Branch Per Session
 
-In GitButler, each branch is also an agent session with it's own context. You can see each branch in the Agents Tab sidebar. If you add a new session, it will create a new branch to store the output of that. If you want to continue work on a branch, you can simply click on it to switch contexts.
+In GitButler, each branch is also an agent session with its own context. You can see each branch in the Agents Tab sidebar. If you add a new session, it will create a new branch to store the output of that. If you want to continue work on a branch, you can simply click on it to switch contexts.
 
 You can have multiple agents working on branches at the same time - you can see which branches have active tasks running at a glance with the running indicator:
 
@@ -1487,7 +1487,7 @@ In this case, when you perform the rebase, that branch will then contain "confli
   subtitle="When your commits have conflicts"
 />
 
-When you click that, GitButler will remove the other virtual branches and other work from your working directory and check out just this commit with it's conflict markers. It will show you a special "edit mode" screen, where you are directly editing this commit.
+When you click that, GitButler will remove the other virtual branches and other work from your working directory and check out just this commit with its conflict markers. It will show you a special "edit mode" screen, where you are directly editing this commit.
 
 <ImageSection
   className="mx-auto"
@@ -1835,7 +1835,7 @@ There are lots of other ways to set up GPG or SSH commit signing:
 - Here is a nice simple gist for [GPG signing on Windows](https://gist.github.com/BoGnY/f9b1be6393234537c3e247f33e74094a).
 
 <Callout title="Using GitButler's Generated SSH Key">
-Earlier versions of GitButler would only sign with it's generated SSH key. Although we've removed that functionality, you can easily set it back up by pointing the signingKey at the generated SSH Key. The key is located in the following locations:
+Earlier versions of GitButler would only sign with its generated SSH key. Although we've removed that functionality, you can easily set it back up by pointing the signingKey at the generated SSH Key. The key is located in the following locations:
 
 <Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
   <Tab value="macOS">
@@ -2043,7 +2043,7 @@ With normal Git branching, you can only work on one branch at a time. There is o
 
 With virtual branches, you can have multiple branches applied to your working directory at the same time. Each branch is represented as a vertical lane, and you can drag changes between these lanes to commit them independently.
 
-Each lane also has it's own staging area, so you can stage changes for each branch before deciding to commit them.
+Each lane also has its own staging area, so you can stage changes for each branch before deciding to commit them.
 
 <ImageSection
   className="mx-auto"
@@ -2343,7 +2343,7 @@ If you generate code or modify files, run the gitbutler update branches MCP tool
 
 ## How to add rules
 
-Cursor stores it's rules in `~/.cursor/rules` file, but you can also manually set them by going to the Cursor Settings pane, clicking 'Rules' and adding them to the User Rules section.
+Cursor stores its rules in `~/.cursor/rules` file, but you can also manually set them by going to the Cursor Settings pane, clicking 'Rules' and adding them to the User Rules section.
 
 In VSCode's Copilot Agent Mode, you can use ["custom instructions"](https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions) to accomplish this.
 
@@ -2500,7 +2500,7 @@ In this directory, there should be rolling daily logs:
 
 ## Data Files
 
-GitButler also keeps it's own data about each of your projects. The virtual branch metadata, your user config stuff, a log of changes in each file, etc. If you want to inspect what GitButler is doing or debug or reset everything, you can go to our data directory.
+GitButler also keeps its own data about each of your projects. The virtual branch metadata, your user config stuff, a log of changes in each file, etc. If you want to inspect what GitButler is doing or debug or reset everything, you can go to our data directory.
 
 <Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
   <Tab value="macOS">

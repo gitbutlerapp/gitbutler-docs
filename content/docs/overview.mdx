@@ -8,11 +8,11 @@ import ImageSection from "@/components/ImageSection"
 
 GitButler lets you work on several branches at the same time, committing and stashing them independently and simultaneously. Here is a general overview of how this works and how you can use it.
 
-One of the main strengths of GitButler is it's incredible versatility around branch management. You can decide to create multiple independent branches to work on from a single working directory simultaneously, or you can create dependent, stacked branches and merge them in a particular order.
+One of the main strengths of GitButler is its incredible versatility around branch management. You can decide to create multiple independent branches to work on from a single working directory simultaneously, or you can create dependent, stacked branches and merge them in a particular order.
 
 We refer to our independent branches as "virtual" branches and our dependent branches as "stacked" branches.
 
-This ability to do multiple dependant or independent branches at the same time is something that is not possible with vanilla Git.
+This ability to do multiple dependent or independent branches at the same time is something that is not possible with vanilla Git.
 
 <ImageSection
   className="mx-auto"
@@ -23,7 +23,7 @@ This ability to do multiple dependant or independent branches at the same time i
 />
 
 <Callout type="warn">
-  When using GitButler, we will setup a special branch to handle the multiple branches in away that
+  When using GitButler, we will setup a special branch to handle the multiple branches in a way that
   Git can understand a bit better. This means that if you use vanilla git branching commands like
   `git switch`, GitButler will pause and ask you to return to GitButler's method when you return.
 </Callout>
@@ -63,7 +63,7 @@ Since there isn't just a single branch you can be on, you don't "switch" branche
   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/unapply-stack.png"
   width="800"
   height="600"
-  subtitle="Click 'unapply' for any branch to stash it and remove it's changes from the working directory"
+  subtitle="Click 'unapply' for any branch to stash it and remove its changes from the working directory"
   alt="Virtual Branch Apply / Unapply"
 />
 
