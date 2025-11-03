@@ -1,0 +1,88 @@
+---
+title: Updating the Base
+description: Learn how to manage and update your base branch in GitButler.
+---
+
+The base branch is the foundation that your feature branches build upon. Keeping it updated and managing it properly is crucial for a smooth workflow.
+
+## Understanding the Base Branch
+
+The base branch is typically your main development branch that acts as the basis
+for all your local branches.
+
+In practice, this is actually the branch on whatever server you're using to collaborate and merge changes into, so generally it's actually `origin/main` or `origin/master`.
+
+When GitButler is first initialized in a project, you are asked to choose a branch to target, as everything in your working directory that doesn't exactly match the tip of this branch is technically a fork of what is considered production. Whatever that target branch looks like when you choose it is set as your 'base'.
+
+When you start working, everything that is different from that base goes into a branch based off of it.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-11-03%20at%2016.01.08%402x.png"
+  width="800"
+  height="600"
+  subtitle="Setting a base from a target branch, then doing some work"
+/>
+
+## Understanding Upstream
+
+When you first set your base branch (ie, `origin/main`), we record the state of the branch at that time.
+
+However, if someone else merges work into that branch while you're working, the base branch moves forward, but the work you're doing is still based off of where it was. We call this 'upstream' work.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-11-03%20at%2016.03.00%402x.png"
+  width="800"
+  height="600"
+  subtitle="Some work has been merged in upstream, now our branch is out of date"
+/>
+
+The problem is that now the stuff we're working on is out of date. It may conflict with what is upstream, it may need the work that is upstream, etc. So how do we get our branch up to date?
+
+## Viewing Upstream
+
+You can see what is upstream and if you're out of date by running `but base check`. This will essentially fetch `origin/main` (or whatever your targeted base branch is) and see if there is anything there that is newer than your base.
+
+{/* restore [64dcebb] */}
+{/* run git push -f origin 32a2175758f7f649ed7a030a17fd21213a5e400f:refs/heads/main */}
+
+Let's take a look at what this looks like. Let's say that our project is at this state:
+
+```cli [f53ff654c67d268e, 462px]
+but status
+```
+
+Let's see if we're up to date with `but base check`:
+
+```cli [1df4a75e976dd98d, 462px]
+but base check
+```
+
+This will also check that upstream work against your currently applied branches to see if anything has been integrated (and thus we can remove), anything conflicts with upstream work, or a merge/rebase should work cleanly.
+
+In this example, we can see that `feature-bookmarks` has been integrated (merged) upstream already, `sc-branch-26` is conflicted with upstream work and `gemfile-fixes` can be cleanly rebased or merged.
+
+## Updating the Base
+
+When you feel like you want to get your active branches up to date, you can run `but base update`. This will rebase your branches on top of the new base commit.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-11-03%20at%2016.05.16%402x.png"
+  width="800"
+  height="600"
+  subtitle="Rebasing our work onto the new upstream work, updating our base"
+/>
+
+Let's run it in our example.
+
+```cli [9184aa27f8f241fd, 88px]
+but base update
+```
+
+```cli [8ee36a00318dadf8, 396px]
+but status
+```
+
+OK, now we can see that our integrated branch was removed, our `gemfile-fixes` branch was successfully rebased and our `sc-branch-26` work is marked as conflicted. We'll see how to deal with that state in a minute.

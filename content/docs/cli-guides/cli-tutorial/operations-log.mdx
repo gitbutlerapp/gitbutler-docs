@@ -1,0 +1,28 @@
+---
+title: Operations Log
+description: Understanding and using GitButler's operations log to track and undo changes.
+---
+
+GitButler maintains a detailed log of all operations, making it easy to track what happened and undo changes when needed.
+
+## Viewing the Operations Log
+
+See all recent GitButler operations:
+
+```cli [61a4ed332fc62e70, 550px]
+but oplog
+```
+
+## Undoing the last operation
+
+Undo the last operation:
+
+```cli [95763a83f458be55, 132px]
+but undo
+```
+
+## Restoring to a previous point
+
+```cli [1de5d82a8ddf7ce1, 220px]
+but restore -f 6fdd8fb1d547
+```
