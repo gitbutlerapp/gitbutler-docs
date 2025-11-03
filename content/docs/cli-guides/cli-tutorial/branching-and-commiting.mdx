@@ -66,7 +66,7 @@ but status
 
 Now we can commit our unassigned changes to that branch. You can simply assign your changes to the branch first to commit later (we’ll cover that later in [Rubbing](https://www.notion.so/Rubbing-2545a4bfdeac80209d37cd4d629316cc?pvs=21)), but for now let’s keep it simple and just commit them directly using the `but commit` command.
 
-```cli [927c817ed73b68c7, 88px]
+```cli [d717a67c1accab44, 88px]
 but commit -m 'all the user bookmarks'
 ```
 
@@ -74,7 +74,7 @@ If you don’t specify the `-m` commit message, GitButler will try to open an ed
 
 Now our status looks like this, with all unassigned files in a new commit on our new branch:
 
-```cli [0000fdfa2b5ec92b, 220px]
+```cli [bdaa2dcbd8b894ef, 220px]
 but status
 ```
 
@@ -98,19 +98,19 @@ but branch new liked-tweets
 
 Now if we run `but status` we can see our previous branch and our new empty branch.
 
-```cli [b5b56bebb89dedc3, 330px]
+```cli [29d022b78235e251, 330px]
 but status
 ```
 
 We can see our previous branch and the commit we made, our new empty branch and a couple of modified files. Now we can commit the unassigned changes to that branch with `but commit -m "liked tweets changes" liked-tweets`
 
-```cli [bd4f40610e40f1b5, 88px]
+```cli [5d0f6f51e7449095, 88px]
 but commit -m "liked tweets changes" liked-tweets
 ```
 
 And now we have one commit in each lane.
 
-```cli [1eccbe4db529d72f, 308px]
+```cli [6656c445d61aa876, 308px]
 but status
 ```
 
@@ -120,7 +120,7 @@ If you don’t specify a branch identifier and you have more than one active bra
 
 We can also see which files were modified in each commit with the `--files` or `-f` option to `but status`:
 
-```cli [f3c56e67a1e24971, 484px]
+```cli [f808c081358b0b3d, 484px]
 but status -f
 ```
 
@@ -143,11 +143,11 @@ but status
 
 Now we can commit to our stacked branch.
 
-```cli [de923765534564a6, 88px]
+```cli [d6a4f4f7e6193ab3, 88px]
 but commit -m "liked tweets changes" liked-tweets-stacked
 ```
 
-```cli [9d97a568b3786b14, 286px]
+```cli [b3259abf9ec92476, 286px]
 but status
 ```
 
@@ -202,23 +202,23 @@ Now, if we want to create a commit in the `user-bookmarks` branch, we can either
 
 Or, we can make a commit with _only_ the assigned files in `user-bookmarks` by using the `-o` option to `but commit`.
 
-```cli [79a511563972cc8f, 88px]
+```cli [db9986aeb0ff50fa, 88px]
 but commit -o -m "liked tweets view" h4
 ```
 
 Now if we look at our status we can see a commit on our branch instead of the assigned changes:
 
-```cli [24f5456cca204e8d, 396px]
+```cli [fc68154f9c1f9d0a, 396px]
 but status
 ```
 
 Now let's commit all the rest of the changes (assigned and unassigned) to our other branch:
 
-```cli [682139bab4bdc57d, 88px]
+```cli [0a82b554b0ccd94a, 88px]
 but commit -m 'bookmarks stuff' nd
 ```
 
-```cli [f93e374ac2785a90, 308px]
+```cli [a8645f9c1c4ed254, 308px]
 but status
 ```
 

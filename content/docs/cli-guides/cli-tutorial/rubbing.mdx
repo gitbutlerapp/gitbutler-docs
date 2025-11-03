@@ -141,13 +141,13 @@ but status -f
 
 So now we can move the changes from one commit to another by rubbing pretty easily. Let’s take the `app/controllers/bookmarks_controller.rb` change and move it down to the "add bookmark model and associations" commit:
 
-```cli [03420f08f4e2df55, 176px]
-but rub pm f5
+```cli [20c8dd61540479ef, 88px]
+but rub vo f5
 ```
 
 Now the change is in the previous commit:
 
-```cli [2f4817399ff46441, 682px]
+```cli [6b84f918aca6eb05, 682px]
 but status -f
 ```
 
@@ -167,16 +167,16 @@ but status
 
 Now we want to split the "add bookmark model and associations" into two separate commits. The way we do this is to insert a blank commit in between `06` and `f5` and then rub changes into it (then probably edit the commit message).
 
-We can insert a blank commit by running `but new 06` which inserts a blank commit under the specified commit.
+We can insert a blank commit by running `but new f5` which inserts a blank commit under the specified commit.
 
-```cli [711027350744cca1, 88px]
-but new 06
+```cli [5326a91276d35e82, 88px]
+but new f5
 ```
 
 Now we have a blank commit:
 
-```cli [bfafb0a0ab77bc27, 704px]
+```cli [814da470705a208e, 726px]
 but status -f
 ```
 
-Now we can use the previous method of moving file changes from other commits into it, then edit the commit message with `but describe 6w` (for more on the `describe` command, see [Editing Commits](editing-commits), coming up next).
+Now we can use the previous method of moving file changes from other commits into it, then edit the commit message with `but describe 54` (for more on the `describe` command, see [Editing Commits](editing-commits), coming up next).
