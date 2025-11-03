@@ -7,14 +7,17 @@
     "build:llmstxt": "node scripts/generate-llmstxt.js",
     "build": "pnpm build:llmstxt && next build",
     "dev": "next dev",
-    "start": "next start"
+    "start": "next start",
+    "update-cli": "node scripts/update-cli-outputs.js"
   },
   "dependencies": {
     "@fumadocs/mdx-remote": "^0.2.3",
     "@gitbutler/design-core": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@shikijs/transformers": "^1.22.2",
+    "ansi2": "^0.3.0",
     "cmdk": "^1.0.4",
+    "glob": "^10.3.10",
     "fumadocs-core": "14.7.7",
     "fumadocs-mdx": "11.5.7",
     "fumadocs-openapi": "^5.7.5",

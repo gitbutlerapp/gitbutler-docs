@@ -1,0 +1,244 @@
+---
+title: Branching and Commiting
+description: Branch and commit and whatnot
+---
+
+Now that your project is setup and GitButler is installed and configured, you can start branching and committing.
+
+## The Simple Flow
+
+Let’s begin with a simple workflow, one that should be familiar to Git users. We will:
+
+- Do some work
+- Create a new branch
+- Commit to that branch
+
+### Status
+
+Let’s begin by seeing what the status of the working directory is by running `but status`. This will tell you a little more than `git status`, it will list:
+
+1. All files in your working directory that differ from your base branch (`origin/main`) the last time you updated it that aren’t assigned to a branch
+2. A list of the active branches that you have and
+   1. All assigned file changes in each branch
+   2. All commits in each branch
+
+So it's sort of like a combination of `git status` and a shortlog of what is on your branches that is not on `origin/master`.
+
+It looks something like this:
+
+{/* restore [f0f437258043] */}
+{/* run but rub wu gemfile-fixes */}
+{/* run but rub te feature-bookmarks */}
+
+```cli [bbbd3383f636a9b4, 462px]
+but status
+```
+
+Here we can see three applied branches: `gemfile-fixes` stacked on `feature-bookmarks` and independent `sc-branch-26`. There are also three unassigned files.
+
+### Create a Branch
+
+Let’s look at a very simple case first. Let’s say we’ve just modified some files and don’t have a branch yet. Our status might look like this:
+
+{/* restore [04d62f15beb4] */}
+
+```cli [e9ed409178fbcced, 264px]
+but status
+```
+
+Now let’s say that we want to put those unassigned file changes into a commit on a new branch called `user-bookmarks`.
+
+To do this, you can use the `but branch new <branch-name>` command.
+
+{/* run git branch -D user-bookmarks */}
+
+```cli [577ab5c5f0035947, 88px]
+but branch new user-bookmarks
+```
+
+Now if you run `but status` you can see your new empty branch:
+
+```cli [f7e1c84e128c0e56, 330px]
+but status
+```
+
+### Commit to a Branch
+
+Now we can commit our unassigned changes to that branch. You can simply assign your changes to the branch first to commit later (we’ll cover that later in [Rubbing](https://www.notion.so/Rubbing-2545a4bfdeac80209d37cd4d629316cc?pvs=21)), but for now let’s keep it simple and just commit them directly using the `but commit` command.
+
+```cli [927c817ed73b68c7, 88px]
+but commit -m 'all the user bookmarks'
+```
+
+If you don’t specify the `-m` commit message, GitButler will try to open an editor with a tempfile where you can write a longer commit message. It will use the `$EDITOR` environment variable if it’s set, or the `core.editor` Git or GitButler config setting, or it will prompt you for a command to run if you’re in an interactive terminal.
+
+Now our status looks like this, with all unassigned files in a new commit on our new branch:
+
+```cli [0000fdfa2b5ec92b, 220px]
+but status
+```
+
+## Stacked and Parallel Branches
+
+Ok, that’s the simple case, pretty straightforward. However, GitButler can also do some pretty cool things that Git either cannot do or struggles with, namely having multiple active branches that you can work on in parallel, and managing stacked branches. That is, both multiple independent and dependent active branches.
+
+### Parallel Branches
+
+Parallel branches is very simple, you can create multiple simultaneously active branches that you can assign and commit changes to in your workspace.
+
+To create a parallel branch, you simply create a new branch the same way we did before. Let’s say that we want to create a `liked-tweets` branch alongside our existing `user-bookmarks`. We simply run the same `but branch new` command again:
+
+{/* run git branch -D liked-tweets */}
+{/* run echo 'test' > app/controllers/likes_controller.rb */}
+{/* run echo 'test' > app/models/like.rb */}
+
+```cli [c197f357f5e62892, 88px]
+but branch new liked-tweets
+```
+
+Now if we run `but status` we can see our previous branch and our new empty branch.
+
+```cli [b5b56bebb89dedc3, 330px]
+but status
+```
+
+We can see our previous branch and the commit we made, our new empty branch and a couple of modified files. Now we can commit the unassigned changes to that branch with `but commit -m "liked tweets changes" liked-tweets`
+
+```cli [bd4f40610e40f1b5, 88px]
+but commit -m "liked tweets changes" liked-tweets
+```
+
+And now we have one commit in each lane.
+
+```cli [1eccbe4db529d72f, 308px]
+but status
+```
+
+Here we specified the entire branch name as the commit target (as there is more than one), but you can also use the two character short code that is next to each one.
+
+If you don’t specify a branch identifier and you have more than one active branch, then GitButler will prompt you for which branch you wish to commit the unassigned changes to.
+
+We can also see which files were modified in each commit with the `--files` or `-f` option to `but status`:
+
+```cli [f3c56e67a1e24971, 484px]
+but status -f
+```
+
+### Stacked Branches
+
+The other way you can create new branches is to make them stacked, that is, one depends on another one and has to be merged in that order.
+
+To create a new stacked branch in GitButler, you can run `but branch new` with a target branch ID. If we go back in time and instead stack our `liked-tweets` branch, we can make it dependent on the `user-bookmarks` branch by providing it as a stacking "anchor" with `-a` option:
+
+{/* run git branch -D liked-tweets-stacked */}
+{/* restore [e32713a1f41c] */}
+
+```cli [85004f4877113a64, 88px]
+but branch new -a user-bookmarks liked-tweets-stacked
+```
+
+```cli [d68eac2e6f9222fb, 330px]
+but status
+```
+
+Now we can commit to our stacked branch.
+
+```cli [de923765534564a6, 88px]
+but commit -m "liked tweets changes" liked-tweets-stacked
+```
+
+```cli [9d97a568b3786b14, 286px]
+but status
+```
+
+Now if you push to a forge, GitButler will set up the reviews (Pull Request or Merge Request) as a stacked request, where `user-bookmarks` has to be merged either before or with `liked-tweets` but they can be reviewed independently.
+
+## Assigning and Committing Changes
+
+The other way to commit to a branch is to explicitly assign changes to it. This is somewhat like running `git add` in Git, where you’re staging some changes for a future commit. However, unlike Git where you have to do this or override it with `-a` or something, the default in GitButler is to commit all changes by default and only leave out unassigned changes with the flag `-o` or `--only`.
+
+### Assigning Changes
+
+So, how do we assign changes to a specific branch and then only commit those changes?
+
+Let’s look at an example `but status` with six modified files and two empty, parallel branches and assign and commit one file to each branch as a separate commit.
+
+{/* restore [d5c7317b0fd4] */}
+
+```cli [24b3331a2def26d5, 396px]
+but status
+```
+
+We will assign each file to a different branch and then see the result. We assign file changes to branches using the `but rub` command, which combines things. We'll go more into all that rubbing can do later.
+
+You can either rub the file identifier that you see next to each file, or all or part of the file path. For example, in this case to identify the `app/models/bookmark.rb` file, you can do any of:
+
+- `xw`
+- `app/models/`
+- `bookmark`
+- `app/models/bookmark.rb`
+
+In order to differentiate a shortcode from a path, a shortcode is exactly 2 characters and a path needs to be at least 3. This is the same pattern matching used for the branch ID too.
+
+So lets rub the bookmark changes into the bookmarks branch:
+
+```cli [f2990f43c97b0a13, 132px]
+but rub xw,ie,rt user-bookmarks
+```
+
+Now let's rub the user changes into the `user-changes` branch:
+
+```cli [a52570b3640e3743, 88px]
+but rub ku user-changes
+```
+
+Now we have some file changes assigned to each branch and still some unassigned changes:
+
+```cli [d82bd6f8faa2d86e, 396px]
+but status
+```
+
+Now, if we want to create a commit in the `user-bookmarks` branch, we can either run `but commit nd` which will create a commit with the files assigned as well as both files that are unassigned, but _not_ the file assigned to the `user-changes` lane.
+
+Or, we can make a commit with _only_ the assigned files in `user-bookmarks` by using the `-o` option to `but commit`.
+
+```cli [79a511563972cc8f, 88px]
+but commit -o -m "liked tweets view" h4
+```
+
+Now if we look at our status we can see a commit on our branch instead of the assigned changes:
+
+```cli [24f5456cca204e8d, 396px]
+but status
+```
+
+Now let's commit all the rest of the changes (assigned and unassigned) to our other branch:
+
+```cli [682139bab4bdc57d, 88px]
+but commit -m 'bookmarks stuff' nd
+```
+
+```cli [f93e374ac2785a90, 308px]
+but status
+```
+
+### Assigning Ranges
+
+If you happen to have a large number of changes, you can also use ranges or lists for rubbing assignment. So for example, if we go back to this status:
+
+{/* restore [6fdd8fb1d547] */}
+{/* run but rub nd 00 */}
+
+```cli [24b3331a2def26d5, 396px]
+but status
+```
+
+Then you can assign the first, third, and fifth file to a branch with:
+
+```cli [22fb3e53f7ffdf99, 132px]
+but rub nx,xw,rt user-bookmarks
+```
+
+```cli [6fad05e228ab9095, 396px]
+but status
+```

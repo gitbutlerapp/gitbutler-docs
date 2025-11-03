@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import JetBrains Mono Nerd Font */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 @import "open-props/easings";
 @import "open-props/animations";
 
@@ -61,4 +64,18 @@ iframe[src*="youtube"] {
 
 .font-accent {
   font-family: var(--font-accent);
+}
+
+/* Override fumadocs description paragraph margin */
+p.mb-8.text-lg.text-fd-muted-foreground,
+p.mb-8[class*="text-fd-muted-foreground"],
+p[class*="mb-8"][class*="text-lg"][class*="text-fd-muted-foreground"] {
+  @apply mb-4 !important;
+}
+
+/* CLI output styling - remove vertical padding from pre tags */
+.cli-output-container pre {
+  margin: 0;
+  padding: 0;
+  line-height: 22px;
 }

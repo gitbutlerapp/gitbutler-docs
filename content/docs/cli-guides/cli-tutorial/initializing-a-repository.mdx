@@ -1,0 +1,26 @@
+---
+title: Initializing a Repository
+description: How to initialize a GitButler workspace in your repository.
+---
+
+If you run any `but` command in a repository that has never been seen by GitButler before, it will automatically run the `but init` command, which will need to have you confirm the upstream base branch (`origin/main` for example).
+
+You can also run `but init` manually to set that up first, or import it as a GitButler project in the GUI.
+
+```
+❯ but init
+Initialized GitButler project from .
+The default target is origin/main
+```
+
+If there is an `origin/HEAD` reference (servers will often set this as a target branch), GitButler will use this.
+
+Otherwise, the `but init` command will try to guess a default base branch by looking for `origin/main` or `origin/master`, as these are very common. If it finds one of these, it will set it and move on. If it does not, it will ask you which remote branch it should use as it’s target base.
+
+A base branch has to be set on every project GitButler operates on. This is important to tell what is or is not considered "integrated".
+
+<Callout type="info">
+
+Currently a base branch needs to be on a remote. Our workflow currently assumes you are pushing to a forge and merging after review on that branch to the target base. Support for local-only workflows is coming, but not current possible.
+
+</Callout>
