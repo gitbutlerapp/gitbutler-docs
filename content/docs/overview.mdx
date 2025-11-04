@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Desktop Overview
 description: Learn how GitButler enables working on multiple branches simultaneously with virtual branches, target branches, and conflict resolution.
 ---
 
@@ -23,17 +23,17 @@ This ability to do multiple dependant or independent branches at the same time i
 />
 
 <Callout type="warn">
-  When using GitButler, we setup a special branch to handle the multiple branches in a way that
-  Git can understand a bit better. This means if you use vanilla git branching commands like
-  `git switch`, GitButler will pause and ask you to return to GitButler's method when you return.
+  When using GitButler, we setup a special branch to handle the multiple branches in a way that Git
+  can understand a bit better. This means if you use vanilla git branching commands like `git
+  switch`, GitButler will pause and ask you to return to GitButler's method when you return.
 </Callout>
 
 The reason is stock Git can only handle one branch at a time, it does not have tooling to use or understand multiple branches, so most commands having to do with the index or HEAD or branching (commit, branch, checkout, etc) may behave unexpectedly.
 
 <Callout type="info">
   To understand why and how to get out of any difficulties you run into, please read our
-  [integration branch](/features/branch-management/integration-branch) docs. We are working on making
-  this interaction better.
+  [integration branch](/features/branch-management/integration-branch) docs. We are working on
+  making this interaction better.
 </Callout>
 
 ## Target Branch
