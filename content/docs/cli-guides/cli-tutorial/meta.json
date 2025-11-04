@@ -1,0 +1,12 @@
+{
+  "title": "CLI Tutorial",
+  "pages": [
+    "tutorial-overview",
+    "initializing-a-repository",
+    "branching-and-commiting",
+    "rubbing",
+    "editing-commits",
+    "operations-log",
+    "updating-the-base"
+  ]
+}
