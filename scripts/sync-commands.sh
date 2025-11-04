@@ -40,7 +40,7 @@ fi
 
 # Remove existing MDX files (but keep groups.json and meta.json)
 echo "Removing existing MDX files..."
-rm -f "$TARGET_DIR"/*.mdx
+rm -f "$TARGET_DIR"/but-*.mdx
 
 # Copy MDX files from source
 echo "Copying MDX files from source repository..."
