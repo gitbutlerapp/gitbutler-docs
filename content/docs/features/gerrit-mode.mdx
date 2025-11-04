@@ -39,7 +39,7 @@ To manually turn on Gerrit Mode in GitButler, you just have to set a Git config 
 
 ## What is Gerrit Mode
 
-Now GitButler will change it's behavior in the following ways:
+Now GitButler will change its behavior in the following ways:
 
 - When you commit, we will automatically inject a `Change-Id` trailer into the commit in the format that Gerrit expects. You do not need to [setup a `commit-msg` hook](https://gerrit-review.googlesource.com/Documentation/cmd-hook-commit-msg.html) like you do with other Git clients.
 - When you push, it will not push to a matching branch name on the remote. Instead it will push to `refs/for/main` (or whatever the name of the target branch is set to be).
