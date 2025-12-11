@@ -1,0 +1,83 @@
+---
+title: Moving Branches Between Stacks
+description: Learn how to reorganize your branches by moving them between different stacks
+---
+
+## Overview
+
+GitButler allows you to move branches between stacks through a simple drag-and-drop interface. This is useful when you want to reorganize your work, change branch dependencies, or consolidate related branches into a single stack.
+
+## Moving a Branch to Another Stack
+
+You can move a branch from one stack to another by dragging it to a specific position in the target stack.
+
+### How to Move a Branch
+
+1. **Drag the branch header** - Click and hold on the branch header (the section displaying the branch name)
+2. **Drop on target location** - Drag it to the position where you want to insert it in another stack
+
+When you hover over a valid drop target during the drag operation, you'll see visual indicators showing where the branch will be placed.
+
+<video width="100%" controls muted>
+  <source src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/drag-branches.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+### Drop Zones
+
+There are two types of drop zones when moving branches:
+
+- **Between branches** - Drop the branch between two existing branches in a stack to insert it at that position
+- **Top of stack** - Drop at the top of a stack to make the moved branch the first branch
+
+The drop zones appear as horizontal lines with visual feedback when you hover over them during a drag operation.
+
+## Creating a New Stack (Tearing Off)
+
+You can also separate a branch from its current stack and create a new independent stack for it. This is called "tearing off" a branch.
+
+### How to Tear Off a Branch
+
+1. **Drag the branch header** - Click and hold on the branch header you want to separate
+2. **Drop outside the stacks area** - Drag it to the designated dropzone outside of the existing stacks
+
+This creates a new standalone stack containing just that branch.
+
+<video width="100%" controls muted>
+  <source src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/tearoff-stack.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+## Important Considerations
+
+### Branch Requirements
+
+Not all branches can be moved. A branch must meet these conditions to be movable:
+
+- **No conflicts** - The branch must not have any merge conflicts
+- **Has commits** - The branch must contain at least one commit
+- **Different target stack** - You can only move branches to different stacks (not within the same stack)
+
+### What Happens During a Move
+
+When you move a branch:
+
+1. **Branch is extracted** - The branch and its commits are extracted from the source stack
+2. **Rebasing occurs** - The branch is rebased onto the new base in the target stack
+3. **References updated** - Git references are updated to reflect the new structure
+4. **Stack cleanup** - If the moved branch was the last one in its stack, that stack is deleted
+
+### Pull Request Updates
+
+If you're using GitHub integration and the branch has an associated pull request:
+
+- **PR descriptions are automatically updated** - The PR base and description are updated to reflect the new stack structure
+- **Stack PRs are synchronized** - All PRs in both the source and target stacks have their descriptions updated to maintain proper stacking information
+
+
+## Related Features
+
+- [Stacked Branches](/docs/features/branch-management/stacked-branches) - Learn about working with stacked branches
+- [Branch Lanes](/docs/features/branch-management/branch-lanes) - Understand the branch lane interface
+- [Virtual Branches](/docs/features/branch-management/virtual-branches) - Core concepts of GitButler's virtual branch system
