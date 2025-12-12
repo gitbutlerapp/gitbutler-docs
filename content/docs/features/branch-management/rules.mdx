@@ -1,0 +1,169 @@
+---
+title: Rules
+description: Automate change assignment with rules that match file patterns and automatically route changes to the right branch.
+---
+
+import ImageSection from "@/components/ImageSection";
+
+Rules are a powerful automation feature in GitButler that automatically assign file changes to specific branches based on conditions you define. Instead of manually dragging changes between lanes, you can set up rules that automatically route changes where they belong.
+
+## Overview
+
+When you're working on multiple branches simultaneously, you often know in advance which types of changes should go to which branch. For example, documentation updates might always go to a `docs` branch, while UI changes go to a `feature/ui-redesign` branch.
+
+Rules eliminate the manual work of assigning changes by automatically evaluating your uncommitted changes and routing them to the appropriate branch based on filters you define.
+
+## How Rules Work
+
+Rules are evaluated whenever files change in your working directory (the `fileSytemChange` trigger). Each rule consists of:
+
+1. **Filters**: Conditions that determine which changes the rule applies to
+2. **Action**: Assigns matching changes to a specific branch
+
+Multiple rules can exist, and they are evaluated in order. Within a single rule, multiple filters are combined with AND logic - all conditions must match for the rule to apply.
+
+## Creating a Rule
+
+To create a rule:
+
+1. Open the **Rules** drawer at the bottom of the GitButler interface
+2. Click the **+** button to add a new rule
+3. Select the target branch where matching changes should be assigned:
+   - A specific branch by name
+   - **Leftmost lane**: The leftmost branch in your workspace
+   - **Rightmost lane**: The rightmost branch in your workspace
+4. (Optional) Add filters to specify which changes should match
+5. Click **Save rule**
+
+If you don't add any filters, the rule will match all changes.
+
+<video
+	src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/rule-left-rightmost.mp4"
+	controls
+	muted
+	autoPlay
+	loop
+	className="rounded-lg border border-gray-200 dark:border-gray-800"
+>
+	Your browser does not support the video tag.
+</video>
+<p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+	Creating a rule that assigns changes to the leftmost lane
+</p>
+
+## Filter Types
+
+Rules support several types of filters to match changes:
+
+### Path Matches Regex
+
+Matches file paths using a regular expression pattern.
+
+**Example use cases:**
+
+- Match all TypeScript files: `.*\.ts$`
+- Match files in a specific directory: `^src/components/.*`
+- Match documentation files: `.*\.(md|mdx)$`
+
+### Content Matches Regex
+
+Matches the content of changed lines using a regular expression pattern. This filter only looks at added lines (lines that start with `+` in the diff).
+
+**Example use cases:**
+
+- Match changes containing TODOs: `TODO`
+- Match changes with specific function calls: `console\.log`
+- Match changes with certain patterns: `@deprecated`
+
+<video 
+   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/rule-text-match.mp4"
+   controls
+   muted
+   autoPlay
+   loop
+   className="rounded-lg border border-gray-200 dark:border-gray-800"
+>
+   Your browser does not support the video tag.
+</video>
+<p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+   Creating a rule that assigns changes containing "fix" to a specific branch
+</p>
+
+### Claude Code Session ID
+
+Matches changes that originated from a specific Claude Code session. This filter is automatically used when GitButler's AI features create branches and rules for you.
+
+**Note**: Rules with Claude Code Session ID filters have lower priority than manually created rules. If a change matches both an AI-generated rule and a manual rule, the manual rule takes precedence.
+
+<video 
+   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/rule-ai.mp4"
+   controls
+   muted
+   autoPlay
+   loop
+   className="rounded-lg border border-gray-200 dark:border-gray-800"
+>
+   Your browser does not support the video tag.
+</video>
+<p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+   AI-generated rules based on Claude Code sessions
+</p>
+
+## Managing Rules
+
+### Editing Rules
+
+To edit an existing rule:
+
+1. Double-click the rule or click the kebab menu (...) and select "Edit rule"
+2. Modify the branch assignment or filters
+3. Click **Save rule**
+
+### Deleting Rules
+
+To delete a rule:
+
+1. Click the kebab menu (...) on the rule
+2. Select "Delete rule"
+3. Confirm the deletion
+
+**Note**: AI-generated rules and implicit rules cannot be edited.
+
+## Understanding Rule Evaluation
+
+### Order Matters
+
+Rules are evaluated in the order they appear in the Rules drawer (most recent first). The first matching rule determines where a change is assigned.
+
+### AND Logic Within Rules
+
+When a rule has multiple filters, **all filters must match** for the rule to apply. For example, a rule with both "Path Matches Regex: `.*\.ts$`" and "Content Matches Regex: `TODO`" will only match TypeScript files that contain the text "TODO" in their changes.
+
+### OR Logic Across Rules
+
+If you want to match changes that meet any of several conditions (OR logic), create separate rules for each condition.
+
+### Interaction with Hunk Dependencies
+
+Rules respect hunk dependencies (locks). If a change depends on a commit in a specific branch, it cannot be automatically reassigned by rules, even if it matches a rule's filters.
+
+## Best Practices
+
+1. **Start simple**: Begin with one or two basic path-matching rules before adding complex filters
+2. **Order your rules**: Place more specific rules before general catch-all rules
+3. **Test your regex**: Make sure your regular expressions match what you intend - it's easy to be too broad or too narrow
+4. **Use catch-all rules carefully**: A rule with no filters will match everything, which can interfere with other rules
+5. **Consider your workflow**: Rules work best when you have predictable patterns in how your work is organized
+6. **Leverage leftmost/rightmost**: Using position-based targeting lets you reorganize lanes without updating rules
+
+## Limitations
+
+- Rules can only assign changes to branches that exist in your workspace (applied branches)
+- Implicit (AI-determined) rules cannot be edited through the UI
+- Rules currently only support the `assign` action for filesystem changes
+
+## Related Features
+
+- [Virtual Branches](/docs/features/branch-management/virtual-branches): Understanding the branch system that rules work with
+- [Branch Lanes](/docs/features/branch-management/branch-lanes): How lanes are organized and how rules interact with lane positioning
+- [AI Assistance](/docs/features/branch-management/ai-assistance): How AI can create and manage rules automatically
