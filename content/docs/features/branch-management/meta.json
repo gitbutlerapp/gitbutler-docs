@@ -5,6 +5,7 @@
     "stacked-branches",
     "commits",
     "branch-lanes",
+    "rules",
     "moving-branches",
     "pushing-and-fetching",
     "integration-branch",
