@@ -1,0 +1,207 @@
+---
+title: Fixing conflicts outside of GitButler
+description: Resolve situations where conflicts have occured and GitButler is unresponsive.
+---
+
+If you have ended up with conflicted commits and GitButler is completely
+unresponsive, they can be recovered using plain git commands in the following
+manner:
+
+## Consider hopping on a call with one of us.
+
+The resolution steps make use of some advanced git functions, if you are not
+comfortable with any of the steps - we are more than happy to walk you through
+any recovery processes.
+
+Join our Discord and let us know about your situation. One of us will help you
+work through your problem either through text or via a call.
+
+## Backup!
+
+First, make a copy of your entire repo. We don't want to lose any data if we
+make a mistake in recovery.
+
+## Make a new branch
+
+Conflicts often come up as part of a cherry pick so we want to re-perform
+the rebase manually - resolving any conflicted commits as we go.
+
+I want the commits to sit on top of origin/master, so I'll run the following
+commands to make a new and empty branch to re-build the branch on top of:
+
+```
+git switch -c reconstruction
+git reset --hard origin/master
+```
+
+## Looking at the commits
+
+We can now get an idea of what operations we need to perform to reconstruct the
+branch.
+
+By running:
+
+```
+git log --graph --oneline <original-branch-name>
+```
+
+We can see all the commits that are in our branch.
+
+For my branch, it looks as follows:
+
+```
+> git log --oneline --graph reimplement-insert-blank-commit
+* b1b1bf07d (reimplement-insert-blank-commit) Improvements to rebase engine for better composability
+* c8f5b92a0 Rename reword_commit to commit_reword
+* e1fc3b9f5 Reimplement insert blank commit
+```
+
+We want to work from the bottom of this list to the top.
+
+To get a better idea of the state of a given commit, we can run:
+
+```
+git cat-file -p <commit-id>
+```
+
+We can identify if the commit is conflicted by the presence of a header that
+looks as follows:
+
+```
+gitbutler-conflicted <N>
+```
+
+## Reconstructing the branch
+
+Depending on the state of a commit and it's parent, there are some different
+operations we want to perform to re-perform the rebase.
+
+### If a commit is conflicted
+
+If a commit is conflicted, we want to first look at the tree of the conflicted
+commit. We can do that with the following command:
+
+```
+git cat-file -p <commit-id>^{tree}
+```
+
+For the first commit in my list, that looks like:
+
+```
+> git cat-file -p e1fc3b9f5^{tree}
+040000 tree 24e291fb0867efec629b933c00aaeaff39365efd    .auto-resolution
+040000 tree ffde17e2a4d4c045869b300b4ec9027851581e33    .conflict-base-0
+100644 blob dca5869dd76a1eeadeba9387ec7f94b318085c7e    .conflict-files
+040000 tree 3b23a61344b84fa3f7b93b1ca058d24846a31f57    .conflict-side-0
+040000 tree b5a91de1f2ce0a248472d03c1701a20289e4d657    .conflict-side-1
+100644 blob 2af04b7f1384300b742f6112005cddc5a87be022    README.txt
+```
+
+Here we see the conflicted representation of a commit in GitButler.
+
+There are four entries that are relevant here:
+
+- `.auto-resolution` - This contains a resolution attempt that GitButler made
+  when cherry-picking the commit.
+- `.conflict-base-0` - This contains the tree of the commit that was
+  cherry-picked to produce the conflicted commit.
+- `.conflict-side-0` - This contains the tree of the commit that we tried to
+  cherry-pick onto.
+- `.conflict-side-1` - This contains the tree of the origional commit before it
+  was cherry-picked.
+
+To re-perform the cherry-pick that GitButler was trying to do. We do that by
+first making a commit that holds the `.conflict-base-0` tree which can be done
+by running:
+
+```
+git commit-tree <id-of-conflict-base-0> -p HEAD -m "base"
+```
+
+For me, that looks like:
+
+```
+> git commit-tree ffde17e2a4d4c045869b300b4ec9027851581e33 -p HEAD -m "base"
+0100ea63fe63a2894567de42371f8d6cf79e4a85
+```
+
+This has given us an OID in return. This is the object ID of the commit we just created.
+
+We then want to create a commit that contains the `.conflict-side-1` tree, and
+has that new "base" commit as it's parent. We can do that by running:
+
+```
+git commit-tree <id-of-conflict-side-1> -p <id-of-base-commit> -m "Desired commit message"
+```
+
+For me this looks like:
+
+```
+git commit-tree b5a91de1f2ce0a248472d03c1701a20289e4d657 -p 0100ea63fe63a2894567de42371f8d6cf79e4a85 -m "Reimplement insert blank commit"
+35d518d2ea68635631593faff34b11e3b1904014
+```
+
+Using that returned commit OID, we can then bring that commit on top of our
+branch with:
+
+```
+git cherry-pick <returned commit id>
+```
+
+For me, that looked like:
+
+```
+git cherry-pick 35d518d2ea68635631593faff34b11e3b1904014
+```
+
+Git may prompt you to solve some conflicts here which you can resolve in the
+standard manner.
+
+### If a commit is **not conflicted**, but has a **conflicted parent**.
+
+If the commit is not conflicted, but the commit before it in your log WAS
+conflicted, then we similarly need to create a commit to cherry-pick on our own.
+
+First, you will want to take a look at that parent's commit tree with:
+
+```
+git cat-file -p <parent-commit-oid>
+```
+
+We want to make a base commit that uses the `.auto-resolution` tree. We can do
+that with:
+
+```
+git commit-tree <id-of-auto-resolution-tree> -p HEAD -m "Desired commit message"
+```
+
+We then want to make a commit that has the tree of the non-conflicted commit,
+with the parent as the base commit we just made.
+
+We can first find the tree of the non-conflicted commit by running:
+
+```
+git cat-file -p <unconflicted-commit-id>
+```
+
+and copying the entry after `tree`.
+
+We then want to make our commit to cherry pick with:
+
+```
+git commit-tree <id-of-unconflicted-commit> -p <id-of-base-commit> -m "desired commit message"
+```
+
+We can then cherry-pick that commit with `git cherry-pick` onto our branch,
+following the standard conflict flow if applicable.
+
+### If the commit is **not conflicted** and its parent is **not conflicted**
+
+If this is the case, we can run the standard `git cherry-pick` command to bring
+that commit into our reconstruction branch, following the standard conflict flow
+if applicable.
+
+## Pushing your reconstructed branch
+
+Once you have finished bringing all of your commits into your reconstruction
+branch, you can then push it to your remote via `git push`.
