@@ -1,53 +1,29 @@
 ---
-title: 'but commit'
-description: 'Commit changes to a stack'
+title: "`but commit`"
+description: "Commit changes to a stack."
 ---
 
-## Usage
+Commit changes to a stack.
 
-```
-but commit [OPTIONS]
-```
+The but commit command allows you to create a new commit on a specified branch (stack) with the current uncommitted changes.
+
+If there is only one branch applied, it will commit to that branch by default.
+
+If there are multiple branches applied, you must specify which branch to commit to, or if in interactive mode, you will be prompted to select one.
+
+By default, all uncommitted changes and all changes already assigned to that branch will be included in the commit. If you only want to commit the changes that are already assigned to that branch, you can use the --only flag.
+
+It will not commit changes assigned to other branches.
+
+**Usage:** `but commit [BRANCH] [OPTIONS]`
+
+## Arguments
+
+* `<BRANCH>` — Branch CLI ID or name to derive the stack to commit to
 
 ## Options
 
-### `-m, --message <MESSAGE>`
+* `-m`, `--message` `<MESSAGE>` — Commit message
+* `-c`, `--create` — Whether to create a new branch for this commit. If the branch name given matches an existing branch, that branch will be used instead. If no branch name is given, a new branch with a generated name will be created
+* `-o`, `--only` — Only commit assigned files, not unassigned files
 
-Commit message.
-
-- **Type:** String
-- **Required:** Optional
-
-### `--branch <BRANCH>`
-
-Branch CLI ID or name to derive the stack to commit to.
-
-- **Type:** String
-- **Required:** Optional
-
-### `-o, --only`
-
-Only commit assigned files, not unassigned files.
-
-- **Type:** Flag (boolean)
-- **Default:** `false`
-
-## Examples
-
-Commit with a message:
-
-```
-but commit -m "Add new feature"
-```
-
-Commit to a specific branch:
-
-```
-but commit -m "Fix bug" --branch my-feature-branch
-```
-
-Commit only assigned files:
-
-```
-but commit -m "Update docs" --only
-```

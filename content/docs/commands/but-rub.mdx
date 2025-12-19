@@ -1,67 +1,41 @@
 ---
-title: 'but rub'
-description: 'Combine two entities together to perform an operation'
+title: "`but rub`"
+description: "Combines two entities together to perform an operation."
 ---
 
-## Usage
+Combines two entities together to perform an operation.
 
-```
-but rub <SOURCE> <TARGET>
-```
+The rub command is a simple verb that helps you do a number of editing operations by doing combinations of two things.
 
-## Description
+For example, you can "rub" a file onto a branch to assign that file to the branch. You can also "rub" a commit onto another commit to squash them together. You can rub a commit onto a branch to move that commit. You can rub a file from one commit to another.
 
-The `rub` command is a versatile operation that combines two entities together to perform various operations depending on the types of entities provided.
+Non-exhaustive list of operations:
 
-### Supported Operations
+        │Source     │Target
+  ──────┼───────────┼──────
+  Amend │File,Branch│Commit
+  Squash│Commit     │Commit
+  Assign│File,Branch│Branch
+  Move  │Commit     │Branch
 
-| Source | Target | Operation |
-| ------ | ------ | --------- |
-| File   | Commit | Amend     |
-| Branch | Commit | Amend     |
-| Commit | Commit | Squash    |
-| File   | Branch | Assign    |
-| Branch | Branch | Assign    |
-| Commit | Branch | Move      |
+**Usage:** `but rub <SOURCE> <TARGET>`
 
 ## Arguments
 
-### `<SOURCE>`
-
-The source entity to combine.
-
-- **Type:** String
-- **Required:** Yes
-
-### `<TARGET>`
-
-The target entity to combine with the source.
-
-- **Type:** String
-- **Required:** Yes
+* `<SOURCE>` — The source entity to combine (required)
+* `<TARGET>` — The target entity to combine with the source (required)
 
 ## Examples
 
-Amend a file to a commit:
+Squashing two commits into one (combining the commit messages):
 
-```
-but rub path/to/file.txt abc123
-```
+  but rub 3868155 abe3f53f
 
-Squash two commits:
+Amending a commit with the contents of a modified file:
 
-```
-but rub abc123 def456
-```
+  but rub README.md abe3f53f
 
-Assign a file to a branch:
+Moving a commit from one branch to another:
 
-```
-but rub path/to/file.txt my-feature-branch
-```
+  but rub 3868155 feature-branch
 
-Move a commit to a different branch:
-
-```
-but rub abc123 my-other-branch
-```

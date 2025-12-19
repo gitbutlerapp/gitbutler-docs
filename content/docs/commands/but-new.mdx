@@ -1,33 +1,19 @@
 ---
-title: 'but new'
-description: 'Insert a blank commit before a specified commit or at the top of a stack'
+title: "`but new`"
+description: "Insert a blank commit before the specified commit, or at the top of a stack."
 ---
 
-## Usage
+Insert a blank commit before the specified commit, or at the top of a stack.
 
-```
-but new <TARGET>
-```
+This is useful for creating a placeholder commit that you can then amend changes into later using but mark, but rub or but absorb.
+
+You can modify the empty commit message at any time using but describe.
+
+This allows for a more Jujutsu style workflow where you create commits first and then fill them in as you work. Create an empty commit, mark it for auto-commit, and then just work on your changes. Write the commit message whenever you prefer.
+
+**Usage:** `but new <TARGET>`
 
 ## Arguments
 
-### `<TARGET>`
+* `<TARGET>` — Commit ID to insert before, or branch ID to insert at top of stack (required)
 
-Commit ID to insert before, or branch ID to insert at top of stack.
-
-- **Type:** String
-- **Required:** Yes
-
-## Examples
-
-Insert a blank commit before a specific commit:
-
-```
-but new abc123
-```
-
-Insert a blank commit at the top of a branch's stack:
-
-```
-but new my-feature-branch
-```
