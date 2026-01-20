@@ -1,5 +1,5 @@
 ---
-title: Agents Tab
+title: Code Agent Assistant
 ---
 
 import ImageSection from "@/components/ImageSection"
@@ -11,17 +11,17 @@ GitButler can also orchestrate your coding agents and help automatically manage,
   are working on more agent support.
 </Callout>
 
-You can access our agent management in the Agents Tab:
+You can access our agent management in the by clicking the AI Stars in the upper right corner of the GitButler window:
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-04%20at%2015.37.39%402x.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/agent-button.png"
   width="800"
   height="600"
-  subtitle="GitButler Agents Tab"
+  subtitle="GitButler Window"
 />
 
-The agents tab can run multiple Claude Code agents at the same time and will automatically try to assign file edits done by each to a specific branch. So each branch is essentially a context that an agent can directly work on.
+The code agent assistant can run multiple agents at the same time and will automatically try to assign file edits done by each to a specific branch. So each branch is essentially context for an agent to directly work on.
 
 # Setup
 
@@ -70,76 +70,11 @@ You will then need to setup and login to Claude Code, which will require an Anth
   Code usage, we simply help manage the agent.
 </Callout>
 
-### Configuring the Agents Tab
-
-Once Claude Code is installed, we can run it for you and provide both a branch-specific execution environment and a nice UI. There are some settings you can configure before using the tab, which you can access with the settings button:
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-04%20at%2015.49.17%402x.png"
-  width="800"
-  height="600"
-  subtitle="Agent settings modal"
-/>
-
-The first is the path for where we find the `claude` executable. You can also test to see if we can find it.
-
-Then you can set some desktop notifications when Claude needs permission to do something or when a task is completed.
-
-You can also auto-commit after a task is done, which will also generate a commit message from the prompt that you used and the diff that was introduced. If you prefer to do this yourself, we'll simply assign any modifications to the branch and let you commit it when you prefer.
-
-Finally, if you don't want Claude to bug you every time it needs permissions for a bash command or something, you can put it in YOLO mode but dangerously allowing all permissions. This is not set by default, but if you're feeling adventurous, it's there for you.
-
 # Generating Code in the Agents Tab
 
 Once your agent is setup, you can select a branch to work on, type in a prompt and we will run that though Claude Code, same as if you ran it in the terminal.
 
 We will do some cool things as it runs, however.
-
-### One Branch Per Session
-
-In GitButler, each branch is also an agent session with its own context. You can see each branch in the Agents Tab sidebar. If you add a new session, it will create a new branch to store the output of that. If you want to continue work on a branch, you can simply click on it to switch contexts.
-
-You can have multiple agents working on branches at the same time - you can see which branches have active tasks running at a glance with the running indicator:
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.34.07%402x.png"
-  width="800"
-  height="600"
-  subtitle="Multiple branches, one has a running agent"
-/>
-
-<Callout type="warn">
-  This won't _always_ work. If two agents modify lines in a file right next to each other, the hunk
-  can only be assigned to one lane. In the future, we will be able to automatically stack these
-  dependencies, but for now you just need to be aware that some post-commit moving things around may
-  be needed on occasion.
-</Callout>
-
-### ToDo Breakout
-
-Claude code typically will come up with a ToDo list, breaking down the steps it thinks it needs to do in order to get your task completed. It will update you on this as it goes, but it's easy for this to get lost in the conversation, so we intercept these updates and keep them in the sidebar for you:
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.42.06%402x.png"
-  width="800"
-  height="600"
-  subtitle="Simple TODOs example, with one item done, one running and three to go"
-/>
-
-### Folding Tool Calls
-
-As the agent is running tool calls (read files, write files, run bash commands, etc), we fold the execution and results so it doesn't clutter up
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.46.58.gif"
-  width="800"
-  height="600"
-  subtitle="Folding and unfolding the agent tool calls"
-/>
 
 ### Token and Cost Monitoring
 
