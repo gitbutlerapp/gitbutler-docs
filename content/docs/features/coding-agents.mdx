@@ -11,7 +11,7 @@ GitButler can also orchestrate your coding agents and help automatically manage,
   are working on more agent support.
 </Callout>
 
-You can access our agent management in the by clicking the AI Stars in the upper right corner of the GitButler window (NOTE: if there is already a session, the stars will appear above the commits. You can also find the AI stars on a branch header):
+You can start a session by clicking the AI stars on a branch header, or use the shortcut for a new branch and AI session in the top right corner of the window.
 
 <ImageSection
   className="mx-auto"
@@ -21,7 +21,7 @@ You can access our agent management in the by clicking the AI Stars in the upper
   subtitle="GitButler Window"
 />
 
-The code agent assistant can run multiple agents at the same time and will automatically try to assign file edits done by each to a specific branch. So each branch is essentially context for an agent to directly work on.
+Each session is tied to a branch such that you can run them in parallel, and changes are assigned to the respective branch as long as they are mutually exclusive. Information about the branch is also added to the respective context, giving the agent knowledge of the work they contain.
 
 # Setup
 
@@ -29,7 +29,7 @@ There is some basic setup that may need to be done the first time, if you've nev
 
 ### Installing Claude Code
 
-Before you can use the agents tab, you need to have Claude Code installed as we wrap the SDK that it provides. If we can't find the binary, you should see something like this:
+Before you can use the agents integration, you need to have Claude Code installed as we wrap the SDK that it provides. If we can't find the binary, you should see something like this:
 
 <ImageSection
   className="mx-auto"
@@ -75,20 +75,6 @@ You will then need to setup and login to Claude Code, which will require an Anth
 Once your agent is setup, you can select a branch to work on, type in a prompt and we will run that though Claude Code, same as if you ran it in the terminal.
 
 We will do some cool things as it runs, however.
-
-### Token and Cost Monitoring
-
-Running agents costs money, so we try to keep you reminded of how much you're spending running these models.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.52.08%402x.png"
-  width="800"
-  height="600"
-  subtitle="Usage overview for the branch - tokens and estimated cost"
-/>
-
-These costs are estimates, it may differ if you're running on a plan versus using a metered API token.
 
 ### Model Selection
 
@@ -153,16 +139,4 @@ You can also edit your available templates by selecting the "Edit templates" opt
 
 ### Context Clearing
 
-After a while, your context in a single branch can get long. If you no longer need all the context but want to keep your agent working on the same branch, you can clear it with the "Clear Context" button at the top of the screen.
-
-### Modified Files Listing
-
-As files are assigned and committed to your branch, you can see an overview of the changes made in the sidebar. You can also alt-click on them to open them directly in your editor if you want to make manual changes.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2012.01.39%402x.png"
-  width="800"
-  height="600"
-  subtitle="A list of your modified files for this session in the sidebar"
-/>
+After a while, your context in a single branch can get long. If you no longer need all the context but want to keep your agent working on the same branch, you can clear it with the "Clear Context" button in the context menu.
