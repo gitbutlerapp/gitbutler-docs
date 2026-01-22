@@ -953,17 +953,17 @@ GitButler can also orchestrate your coding agents and help automatically manage,
   are working on more agent support.
 </Callout>
 
-You can access our agent management in the Agents Tab:
+You can access our agent management with the assistive Coding Agent button:
 
 <ImageSection
   className="mx-auto"
   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-04%20at%2015.37.39%402x.png"
   width="800"
   height="600"
-  subtitle="GitButler Agents Tab"
+  subtitle="GitButler Agent"
 />
 
-The agents tab can run multiple Claude Code agents at the same time and will automatically try to assign file edits done by each to a specific branch. So each branch is essentially a context that an agent can directly work on.
+The coding agent lane can run multiple Claude Code agents at the same time and will automatically try to assign file edits done by each to a specific branch. So each branch is essentially a context that an agent can directly work on.
 
 # Setup
 
@@ -971,7 +971,7 @@ There is some basic setup that may need to be done the first time, if you've nev
 
 ### Installing Claude Code
 
-Before you can use the agents tab, you need to have Claude Code installed as we wrap the SDK that it provides. If we can't find the binary, you should see something like this:
+Before you can use the code agent, you need to have Claude Code installed as we wrap the SDK that it provides. If we can't find the binary, you should see something like this:
 
 <ImageSection
   className="mx-auto"
@@ -1012,7 +1012,7 @@ You will then need to setup and login to Claude Code, which will require an Anth
   Code usage, we simply help manage the agent.
 </Callout>
 
-### Configuring the Agents Tab
+### Configuring the Code Agent
 
 Once Claude Code is installed, we can run it for you and provide both a branch-specific execution environment and a nice UI. There are some settings you can configure before using the tab, which you can access with the settings button:
 
@@ -1032,7 +1032,7 @@ You can also auto-commit after a task is done, which will also generate a commit
 
 Finally, if you don't want Claude to bug you every time it needs permissions for a bash command or something, you can put it in YOLO mode but dangerously allowing all permissions. This is not set by default, but if you're feeling adventurous, it's there for you.
 
-# Generating Code in the Agents Tab
+# Generating Code with the Code Agent Assistant
 
 Once your agent is setup, you can select a branch to work on, type in a prompt and we will run that though Claude Code, same as if you ran it in the terminal.
 
@@ -1040,7 +1040,7 @@ We will do some cool things as it runs, however.
 
 ### One Branch Per Session
 
-In GitButler, each branch is also an agent session with its own context. You can see each branch in the Agents Tab sidebar. If you add a new session, it will create a new branch to store the output of that. If you want to continue work on a branch, you can simply click on it to switch contexts.
+In GitButler, each branch is also an agent session with its own context. You can see each branch in the Agent lane If you add a new session, it will create a new branch to store the output of that. If you want to continue work on a branch, you can simply click on it to switch contexts.
 
 You can have multiple agents working on branches at the same time - you can see which branches have active tasks running at a glance with the running indicator:
 
@@ -2188,7 +2188,7 @@ https://www.youtube.com/watch?v=J6xV_Wyz9zg
 
 There are currently three main ways to use AI tools with GitButler:
 
-1. **Our Agents Tab**: If you have Claude Code setup, you can use our [Agents tab](/features/agents-tab) as a GUI for running Claude Code directly.
+1. **Our ACode Agent Assistant**: If you have Claude Code setup, you can use our [Agent Assistant](/features/coding-agents) as a GUI for running Claude Code directly.
 2. **Using Hooks in Claude Code or Cursor**: This method allows you to use GitButler's CLI as hook commands to manage commits and branches in either Claude Code or Cursor.
 3. **Using the MCP Server**: This method allows you to set up your AI agent to communicate with GitButler's MCP server, enabling features like automatic commits and save points.
 

@@ -1,0 +1,142 @@
+---
+title: Code Agent Assistant
+---
+
+import ImageSection from "@/components/ImageSection"
+
+GitButler can also orchestrate your coding agents and help automatically manage, checkpoint and commit the work that they do for you.
+
+<Callout type="info">
+  Currently the only supported agent is [Claude Code](https://www.anthropic.com/claude-code), but we
+  are working on more agent support.
+</Callout>
+
+You can start a session by clicking the AI stars on a branch header, or use the shortcut for a new branch and AI session in the top right corner of the window.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/agent-button.png"
+  width="800"
+  height="600"
+  subtitle="GitButler Window"
+/>
+
+Each session is tied to a branch such that you can run them in parallel, and changes are assigned to the respective branch as long as they are mutually exclusive. Information about the branch is also added to the respective context, giving the agent knowledge of the work they contain.
+
+# Setup
+
+There is some basic setup that may need to be done the first time, if you've never used Claude Code before.
+
+### Installing Claude Code
+
+Before you can use the agents integration, you need to have Claude Code installed as we wrap the SDK that it provides. If we can't find the binary, you should see something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2014.37.45%402x.png"
+  width="800"
+  height="600"
+  subtitle="Wherefor art thou, Claudius?"
+/>
+
+To install Claude Code, you can read through the docs [here](https://docs.anthropic.com/en/docs/claude-code/quickstart), but the simple version is to use their "Native Install" method:
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Tabs groupId="platform" items={["macOS and Linux", "Windows PowerShell", "Windows CMD"]} persist>
+  <Tab value="macOS and Linux">
+    ```bash
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+  </Tab>
+  <Tab value="Windows PowerShell">
+  ```bash
+  irm https://claude.ai/install.ps1 | iex
+  ```
+  </Tab>
+  <Tab value="Windows CMD">
+    ```bash
+    curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del
+    install.cmd
+    ```
+  </Tab>
+</Tabs>
+{/* <!-- prettier-ignore-end --> */}
+
+You will then need to setup and login to Claude Code, which will require an Anthropic account. You can either connect it to an API key for direct billing or use one of the plans. You can learn more on the [Claude Code](https://www.anthropic.com/claude-code) page.
+
+<Callout type="info">
+  GitButler does not charge you for agent use, but Anthropic does. This goes directly through Claude
+  Code usage, we simply help manage the agent.
+</Callout>
+
+# Generating Code in the Agents Tab
+
+Once your agent is setup, you can select a branch to work on, type in a prompt and we will run that though Claude Code, same as if you ran it in the terminal.
+
+We will do some cool things as it runs, however.
+
+### Model Selection
+
+There are a few different models that you can choose from for running your task. You can change your active model in the model selection dialog of the chat box.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.53.22%402x.png"
+  width="800"
+  height="600"
+  subtitle="You can choose from any of the active Anthropic models"
+/>
+
+### Thinking Modes
+
+Claude Code also allows for selection of a "thinking mode". The lower modes are faster, the higher modes tend to take longer and be more expensive, but can produce better results.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.53.51%402x.png"
+  width="800"
+  height="600"
+  subtitle="CleanShot 2025-09-05 at 11.53.51@2x.png"
+/>
+
+### Prompt Templates
+
+If you find that you're using similar prompts over and over, you can easily setup several prompt templates. Selecting one will seed the prompt with the contents of that template.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.56.50.gif"
+  width="800"
+  height="600"
+  subtitle="Prompt templates"
+/>
+
+You can also edit your available templates by selecting the "Edit templates" option, which opens up our JSON file in your editor of choice. The templates look something like this:
+
+````json
+{
+  "templates": [
+    {
+      "label": "Bug Fix",
+      "template": "Please fix the bug in this code:\n\n```\n// Your code here\n```\n\nExpected behavior:\nActual behavior:\nSteps to reproduce:"
+    },
+    {
+      "label": "Code Review",
+      "template": "Please review this code for:\n- Performance issues\n- Security vulnerabilities\n- Best practices\n- Code style\n\n```\n// Your code here\n```"
+    },
+    {
+      "label": "Refactor",
+      "template": "Please refactor this code to improve:\n- Readability\n- Performance\n- Maintainability\n\n```\n// Your code here\n```\n\nRequirements:"
+    },
+    {
+      "label": "Add Tests",
+      "template": "Please write comprehensive tests for this code:\n\n```\n// Your code here\n```\n\nTest cases should cover:\n- Happy path\n- Edge cases\n- Error conditions"
+    }
+  ]
+}
+````
+
+### Context Clearing
+
+After a while, your context in a single branch can get long. If you no longer need all the context but want to keep your agent working on the same branch, you can clear it with the "Clear Context" button in the context menu.
