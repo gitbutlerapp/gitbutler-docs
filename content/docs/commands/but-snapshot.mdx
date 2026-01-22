@@ -1,43 +1,17 @@
 ---
-title: 'but snapshot'
-description: 'Create an on-demand snapshot with optional message'
+title: "`but snapshot`"
+description: "Create an on-demand snapshot with optional message."
 ---
 
-## Usage
+Create an on-demand snapshot with optional message.
 
-```
-but snapshot [OPTIONS]
-```
+This allows you to create a named snapshot of the current state, which can be helpful to always be able to return to a known good state.
 
-## Description
+You can provide an optional message to describe the snapshot.
 
-Creates a snapshot of the current workspace state in the operation log. This is useful for creating manual checkpoints before making significant changes.
+**Usage:** `but snapshot [OPTIONS]`
 
 ## Options
 
-### `-m, --message <MESSAGE>`
+* `-m`, `--message` `<MESSAGE>` — Message to include with the snapshot
 
-Message to include with the snapshot.
-
-- **Type:** String
-- **Required:** Optional
-
-## Examples
-
-Create a snapshot without a message:
-
-```
-but snapshot
-```
-
-Create a snapshot with a descriptive message:
-
-```
-but snapshot -m "Before refactoring authentication module"
-```
-
-## Related Commands
-
-- [`but oplog`](but-oplog) - Show operation history
-- [`but undo`](but-undo) - Undo the last operation
-- [`but restore`](but-restore) - Restore to a specific oplog snapshot

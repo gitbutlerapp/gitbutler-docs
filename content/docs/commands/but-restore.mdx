@@ -1,48 +1,21 @@
 ---
-title: 'but restore'
-description: 'Restore to a specific oplog snapshot'
+title: "`but restore`"
+description: "Restore to a specific oplog snapshot."
 ---
 
-## Usage
+Restore to a specific oplog snapshot.
 
-```
-but restore [OPTIONS] <OPLOG_SHA>
-```
+This command allows you to revert the repository to a previous state captured in an oplog snapshot.
+
+You need to provide the SHA of the oplog entry you want to restore to, which you can find by running but oplog.
+
+**Usage:** `but restore <OPLOG_SHA> [OPTIONS]`
 
 ## Arguments
 
-### `<OPLOG_SHA>`
-
-Oplog SHA to restore to.
-
-- **Type:** String
-- **Required:** Yes
+* `<OPLOG_SHA>` — Oplog SHA to restore to (required)
 
 ## Options
 
-### `-f, --force`
+* `-f`, `--force` — Skip confirmation prompt
 
-Skip confirmation prompt.
-
-- **Type:** Flag (boolean)
-- **Default:** `false`
-
-## Examples
-
-Restore to a specific snapshot (with confirmation):
-
-```
-but restore abc123def456
-```
-
-Restore without confirmation prompt:
-
-```
-but restore abc123def456 --force
-```
-
-## Related Commands
-
-- [`but oplog`](but-oplog) - Show operation history
-- [`but undo`](but-undo) - Undo the last operation
-- [`but snapshot`](but-snapshot) - Create an on-demand snapshot

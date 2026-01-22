@@ -1,64 +1,41 @@
 ---
-title: 'but forge'
-description: 'Commands for interacting with forges like GitHub, GitLab, etc.'
+title: "`but forge`"
+description: "Commands for interacting with forges like GitHub, GitLab (coming soon), etc."
 ---
 
-## Usage
+Commands for interacting with forges like GitHub, GitLab (coming soon), etc.
 
-```
-but forge <SUBCOMMAND>
-```
+The but forge tools allow you to authenticate with a forge from the CLI, which then enables features like creating pull requests with the but review commands.
+
+Start by running but forge auth to authenticate with your forge.
+
+You can also authenticate several different users on a forge and see them listed with but forge list-users or forget a user with but forge forget.
+
+Currently only GitHub is supported, but more forges will be added in the near future.
+
+**Usage:** `but forge <COMMAND>`
 
 ## Subcommands
 
-### auth
+### `but forge auth`
 
-Authenticate with your forge provider (at the moment, only GitHub is supported).
+Authenticate with your forge provider (at the moment, only GitHub is supported)
 
-```
-but forge auth
-```
+**Usage:** `but forge auth`
 
-Initiates a device OAuth flow to authenticate with GitHub. You'll be provided with a code and URL to complete the authentication process.
+### `but forge list-users`
 
-### list-users
+List authenticated forge accounts known to GitButler
 
-List authenticated forge accounts known to GitButler.
+**Usage:** `but forge list-users`
 
-```
-but forge list-users
-```
+### `but forge forget`
 
-Displays a list of all GitHub usernames that have been authenticated with GitButler.
+Forget a previously authenticated forge account
 
-### forget
+**Usage:** `but forge forget [USERNAME]`
 
-Forget a previously authenticated forge account.
+**Arguments:**
 
-```
-but forge forget <USERNAME>
-```
+* `<USERNAME>` — The username of the forge account to forget If not provided, you'll be prompted to select which account(s) to forget. If only one account exists, it will be forgotten automatically
 
-#### Arguments
-
-- `<USERNAME>` - The username of the forge account to forget (required)
-
-## Examples
-
-Authenticate with GitHub:
-
-```
-but forge auth
-```
-
-List authenticated users:
-
-```
-but forge list-users
-```
-
-Forget a GitHub account:
-
-```
-but forge forget octocat
-```

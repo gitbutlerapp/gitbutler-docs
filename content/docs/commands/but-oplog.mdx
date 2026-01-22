@@ -1,43 +1,19 @@
 ---
-title: 'but oplog'
-description: 'Show operation history'
+title: "`but oplog`"
+description: "Show operation history."
 ---
 
-## Usage
+Show operation history.
 
-```
-but oplog [OPTIONS]
-```
+Displays a list of past operations performed in the repository, including their timestamps and descriptions.
 
-## Description
+This allows you to restore to any previous point in the history of the project. All state is preserved in operations, including uncommitted changes.
 
-Displays the operation log (oplog) which tracks all operations performed in your GitButler workspace. This is useful for understanding what changes have been made and for potentially undoing or restoring to previous states.
+You can use but restore <oplog-sha> to restore to a specific state.
+
+**Usage:** `but oplog [OPTIONS]`
 
 ## Options
 
-### `--since <SHA>`
+* `--since` `<SINCE>` — Start from this oplog SHA instead of the head
 
-Start from this oplog SHA instead of the head.
-
-- **Type:** String
-- **Required:** Optional
-
-## Examples
-
-Show recent operation history:
-
-```
-but oplog
-```
-
-Show operation history from a specific point:
-
-```
-but oplog --since abc123def456
-```
-
-## Related Commands
-
-- [`but undo`](but-undo) - Undo the last operation
-- [`but restore`](but-restore) - Restore to a specific oplog snapshot
-- [`but snapshot`](but-snapshot) - Create an on-demand snapshot

@@ -1,67 +1,27 @@
 ---
-title: 'but status'
-description: 'Overview of the uncommitted changes in the repository'
+title: "`but status`"
+description: "Overview of the project workspace state."
 ---
 
-## Usage
+Overview of the project workspace state.
 
-```
-but status [OPTIONS]
-```
+This shows unassigned files, files assigned to stacks, all applied branches (stacked or parallel), commits on each of those branches, upstream commits that are unintegrated, commit status (pushed or local), and base branch information.
 
-## Alias
-
-This command can also be invoked using the shorter alias `st`:
-
-```
-but st [OPTIONS]
-```
-
-## Example Output
-
-```ansi but-st-c43eb45a
-but status
-```
+**Usage:** `but status [OPTIONS]`
 
 ## Options
 
-### `-f, --files`
-
-Determines whether the committed files should be shown as well.
-
-- **Type:** Flag (boolean)
-- **Default:** `false`
-
-### `-v, --verbose`
-
-Show verbose output with commit author and timestamp.
-
-- **Type:** Flag (boolean)
-- **Default:** `false`
-
-### `-r, --review`
-
-Show the forge review information.
-
-- **Type:** Flag (boolean)
-- **Default:** `false`
+* `-f` — Determines whether the committed files should be shown as well (default: `false`)
+* `-v`, `--verbose` — Show verbose output with commit author and timestamp (default: `false`)
+* `-r`, `--review` — Show the forge review information (default: `false`)
 
 ## Examples
 
-Show basic status:
+Normal usage:
 
-```
-but status
-```
+  but status
 
-Show status with files:
+Shorthand with listing files modified
 
-```
-but status --files
-```
+  but status -f
 
-Show verbose status with review information:
-
-```
-but status -v -r
-```

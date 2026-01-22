@@ -1,32 +1,11 @@
 ---
-title: 'but undo'
-description: 'Undo the last operation by reverting to the previous snapshot'
+title: "`but undo`"
+description: "Undo the last operation by reverting to the previous snapshot."
 ---
 
-## Usage
+Undo the last operation by reverting to the previous snapshot.
 
-```
-but undo
-```
+This is a shorthand for restoring to the last oplog entry before the current one. It allows you to quickly undo the most recent operation.
 
-## Description
+**Usage:** `but undo`
 
-Reverts the workspace to the state it was in before the last operation. This uses the operation log (oplog) to roll back changes.
-
-## Options
-
-This command takes no specific options.
-
-## Examples
-
-Undo the last operation:
-
-```
-but undo
-```
-
-## Related Commands
-
-- [`but oplog`](but-oplog) - Show operation history
-- [`but restore`](but-restore) - Restore to a specific oplog snapshot
-- [`but snapshot`](but-snapshot) - Create an on-demand snapshot

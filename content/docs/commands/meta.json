@@ -2,7 +2,6 @@
   "title": "Commands",
   "defaultOpen": false,
   "pages": [
-    "commands-overview",
     "---Basics---",
     "but-init",
     "---Inspection---",
@@ -19,14 +18,17 @@
     "but-new",
     "---Forge Stuff---",
     "but-push",
-    "but-publish",
     "but-forge",
     "---Operations Log---",
     "but-oplog",
     "but-undo",
     "but-restore",
     "but-snapshot",
-    "---AI Tools---",
-    "but-mcp"
+    "---Miscellaneous---",
+    "but-absorb",
+    "but-gui",
+    "but-lazy",
+    "but-review",
+    "commands-overview"
   ]
 }
