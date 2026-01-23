@@ -1,43 +1,52 @@
 ---
-title: 'but oplog'
-description: 'Show operation history'
+title: "`but oplog`"
+description: "Commands for viewing and managing operation history."
 ---
 
-## Usage
+# Commands for viewing and managing operation history.
 
-```
-but oplog [OPTIONS]
-```
+Commands for viewing and managing operation history.
 
-## Description
+Displays a list of past operations performed in the repository, including their timestamps and descriptions.
 
-Displays the operation log (oplog) which tracks all operations performed in your GitButler workspace. This is useful for understanding what changes have been made and for potentially undoing or restoring to previous states.
+This allows you to restore to any previous point in the history of the project. All state is preserved in operations, including uncommitted changes.
 
-## Options
+You can use but restore `<oplog-sha>` to restore to a specific state.
 
-### `--since <SHA>`
+By default, shows the last 20 oplog entries (same as but oplog list).
 
-Start from this oplog SHA instead of the head.
+**Usage:** `but oplog <COMMAND>`
 
-- **Type:** String
-- **Required:** Optional
+## Subcommands
 
-## Examples
+### `but oplog list`
 
-Show recent operation history:
+List operation history.
 
-```
-but oplog
-```
+Displays a list of past operations performed in the repository, including their timestamps and descriptions.
 
-Show operation history from a specific point:
+This allows you to restore to any previous point in the history of the project. All state is preserved in operations, including uncommitted changes.
 
-```
-but oplog --since abc123def456
-```
+You can use but restore `<oplog-sha>` to restore to a specific state.
 
-## Related Commands
+**Usage:** `but oplog list [OPTIONS]`
 
-- [`but undo`](but-undo) - Undo the last operation
-- [`but restore`](but-restore) - Restore to a specific oplog snapshot
-- [`but snapshot`](but-snapshot) - Create an on-demand snapshot
+**Options:**
+
+* `--since` `<SINCE>` — Start from this oplog SHA instead of the head
+* `-s`, `--snapshot` — Show only on-demand snapshot entries
+
+### `but oplog snapshot`
+
+Create an on-demand snapshot with optional message.
+
+This allows you to create a named snapshot of the current state, which can be helpful to always be able to return to a known good state.
+
+You can provide an optional message to describe the snapshot.
+
+**Usage:** `but oplog snapshot [OPTIONS]`
+
+**Options:**
+
+* `-m`, `--message` `<MESSAGE>` — Message to include with the snapshot
+

@@ -1,67 +1,44 @@
 ---
-title: 'but rub'
-description: 'Combine two entities together to perform an operation'
+title: "`but rub`"
+description: "Combines two entities together to perform an operation like amend, squash, stage, or move."
 ---
 
-## Usage
+# Combines two entities together to perform an operation like amend, squash, stage, or move.
 
-```
-but rub <SOURCE> <TARGET>
-```
+Combines two entities together to perform an operation like amend, squash, stage, or move.
 
-## Description
+The rub command is a simple verb that helps you do a number of editing operations by doing combinations of two things.
 
-The `rub` command is a versatile operation that combines two entities together to perform various operations depending on the types of entities provided.
+For example, you can "rub" a file onto a branch to stage that file to the branch. You can also "rub" a commit onto another commit to squash them together. You can rub a commit onto a branch to move that commit. You can rub a file from one commit to another.
 
-### Supported Operations
+Non-exhaustive list of operations:
 
-| Source | Target | Operation |
-| ------ | ------ | --------- |
-| File   | Commit | Amend     |
-| Branch | Commit | Amend     |
-| Commit | Commit | Squash    |
-| File   | Branch | Assign    |
-| Branch | Branch | Assign    |
-| Commit | Branch | Move      |
+        │Source     │Target
+  ──────┼───────────┼──────
+  Amend │File,Branch│Commit
+  Squash│Commit     │Commit
+  Stage │File,Branch│Branch
+  Move  │Commit     │Branch
+
+Examples
+
+Squashing two commits into one (combining the commit messages):
+
+  but rub 3868155 abe3f53f
+
+Amending a commit with the contents of a modified file:
+
+  but rub README.md abe3f53f
+
+Moving a commit from one branch to another:
+
+  but rub 3868155 feature-branch
+
+
+**Usage:** `but rub <SOURCE> <TARGET>`
 
 ## Arguments
 
-### `<SOURCE>`
+* `<SOURCE>` — The source entity to combine (required)
+* `<TARGET>` — The target entity to combine with the source (required)
 
-The source entity to combine.
-
-- **Type:** String
-- **Required:** Yes
-
-### `<TARGET>`
-
-The target entity to combine with the source.
-
-- **Type:** String
-- **Required:** Yes
-
-## Examples
-
-Amend a file to a commit:
-
-```
-but rub path/to/file.txt abc123
-```
-
-Squash two commits:
-
-```
-but rub abc123 def456
-```
-
-Assign a file to a branch:
-
-```
-but rub path/to/file.txt my-feature-branch
-```
-
-Move a commit to a different branch:
-
-```
-but rub abc123 my-other-branch
-```

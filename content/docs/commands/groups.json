@@ -1,35 +1,47 @@
 {
   "Basics": [
-    "but-init"
+    "but-setup",
+    "but-teardown"
   ],
   "Inspection": [
-    "but-log",
-    "but-status"
+    "but-status",
+    "but-diff",
+    "but-show"
   ],
-  "Committing": [
-    "but-base",
-    "but-branch",
-    "but-rub",
+  "Branching and Committing": [
     "but-commit",
+    "but-stage",
+    "but-branch",
+    "but-merge",
+    "but-discard",
+    "but-resolve"
+  ],
+  "Rules": [
     "but-mark",
     "but-unmark"
   ],
-  "Editing": [
-    "but-describe",
-    "but-new"
-  ],
-  "Forge Stuff": [
+  "Server Interactions": [
     "but-push",
-    "but-publish",
-    "but-forge"
+    "but-pull",
+    "but-pr"
+  ],
+  "Editing Commits": [
+    "but-rub",
+    "but-absorb",
+    "but-reword",
+    "but-uncommit",
+    "but-amend",
+    "but-squash"
   ],
   "Operations Log": [
     "but-oplog",
     "but-undo",
-    "but-restore",
-    "but-snapshot"
+    "but-restore"
   ],
-  "AI Tools": [
-    "but-mcp"
+  "Helper Commands": [
+    "but-gui",
+    "but-update",
+    "but-alias",
+    "but-config"
   ]
 }

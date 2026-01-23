@@ -1,0 +1,31 @@
+---
+title: "`but update`"
+description: "Check for and install updates to the GitButler CLI"
+---
+
+# Check for and install updates to the GitButler CLI
+
+**Usage:** `but update <COMMAND>`
+
+## Subcommands
+
+### `but update check`
+
+Check for available updates to the GitButler CLI.
+
+Queries the update server to see if a newer version is available for your platform and release channel.
+
+**Usage:** `but update check`
+
+### `but update suppress`
+
+Suppress update notifications for a specified duration, defaulting to 1 day.
+
+Temporarily hide update notifications for the CLI. The suppression will automatically expire after the specified number of days (default: 1 day). Maximum suppression duration is 30 days.
+
+**Usage:** `but update suppress [DAYS]`
+
+**Arguments:**
+
+* `<DAYS>` — Number of days to suppress update notifications (1-30, default: 1)
+
