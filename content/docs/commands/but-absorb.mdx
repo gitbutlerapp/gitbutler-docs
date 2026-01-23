@@ -1,0 +1,34 @@
+---
+title: "`but absorb`"
+description: "Amends changes into the appropriate commits where they belong."
+---
+
+# Amends changes into the appropriate commits where they belong.
+
+Amends changes into the appropriate commits where they belong.
+
+The semantic for finding "the appropriate commit" is as follows:
+
+- Changes are amended into the topmost commit of the leftmost (first) lane (branch)
+- If a change is staged to a particular lane (branch), it will be amended into a commit there
+- If there are no commits in this branch, a new commit is created
+- If a change has a dependency to a particular commit, it will be amended into that particular commit
+
+Optionally an identifier to an Uncommitted File or a Branch (stack) may be provided.
+
+- If an Uncommitted File id is provided, absorb will be performed for just that file
+- If a Branch (stack) id is provided, absorb will be performed for all changes staged to that stack
+- If no source is provided, absorb is performed for all uncommitted changes
+
+If --dry-run is specified, no changes will be made; instead, the absorption plan (what changes would be absorbed by which commits) will be shown.
+
+**Usage:** `but absorb [SOURCE] [OPTIONS]`
+
+## Arguments
+
+* `<SOURCE>` — If the Source is an uncommitted change - the change will be absorbed. If the Source is a stack - anything staged to the stack will be absorbed accordingly. If not provided, everything that is uncommitted will be absorbed
+
+## Options
+
+* `--dry-run` — Show the absorption plan without making any changes
+

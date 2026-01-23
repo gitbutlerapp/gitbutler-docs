@@ -1,0 +1,113 @@
+---
+title: "`but config`"
+description: "View and manage GitButler configuration."
+---
+
+# View and manage GitButler configuration.
+
+View and manage GitButler configuration.
+
+Without a subcommand, displays an overview of important settings including user information, target branch, forge configuration, and AI setup.
+
+Examples
+
+View configuration overview:
+
+  but config
+
+View/set user configuration:
+
+  but config user
+  but config user set name "John Doe"
+  but config user set email john@example.com
+
+View/set forge configuration:
+
+  but config forge
+
+View/set target branch:
+
+  but config target
+
+
+**Usage:** `but config <COMMAND>`
+
+## Subcommands
+
+### `but config user`
+
+View and configure user information (name, email, editor).
+
+Without arguments, displays current user.name, user.email, and core.editor. Use subcommands to set or unset configuration values.
+
+Examples
+
+View user configuration:
+
+  but config user
+
+Set user name (locally):
+
+  but config user set name "John Doe"
+
+Set user email globally:
+
+  but config user set --global email john@example.com
+
+Unset a local value:
+
+  but config user unset name
+
+
+**Usage:** `but config user`
+
+### `but config forge`
+
+View and manage forge configuration.
+
+Shows configured forge accounts (GitHub, GitLab, etc.) and authentication status. Use subcommands to authenticate or forget accounts.
+
+Examples
+
+View configured forge accounts:
+
+  but config forge
+
+Authenticate with a forge:
+
+  but config forge auth
+
+List authenticated accounts:
+
+  but config forge list-users
+
+Forget an account:
+
+  but config forge forget username
+
+
+**Usage:** `but config forge`
+
+### `but config target`
+
+View or set the target branch.
+
+Without arguments, displays the current target branch. With a branch name, sets the target branch.
+
+Examples
+
+View current target:
+
+  but config target
+
+Set target branch:
+
+  but config target origin/main
+
+
+**Usage:** `but config target [BRANCH]`
+
+**Arguments:**
+
+* `<BRANCH>` — New target branch to set (e.g., "origin/main")
+
