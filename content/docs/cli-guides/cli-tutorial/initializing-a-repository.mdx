@@ -3,24 +3,33 @@ title: Initializing a Repository
 description: How to initialize a GitButler workspace in your repository.
 ---
 
-If you run any `but` command in a repository that has never been seen by GitButler before, it will automatically run the `but init` command, which will need to have you confirm the upstream base branch (`origin/main` for example).
+If you run any `but` command in a repository that has never been seen by GitButler before, it will automatically ask you if you want to setup the repository for GitButler.
 
-You can also run `but init` manually to set that up first, or import it as a GitButler project in the GUI.
+It will guess most things needed, but everything can be changed later if it got anything wrong. The most important thing is to figure out the target branch - the main branch that you'll want to merge things into and you consider 'production' or 'golden'. Normally this is something like `origin/main`, but GitButler should be pretty good at guessing.
 
+You can also run `but setup` manually to set everything up explicitly:
+
+```ansi but-setup-5faf7f36
+but setup
 ```
-❯ but init
-Initialized GitButler project from .
-The default target is origin/main
-```
 
-If there is an `origin/HEAD` reference (servers will often set this as a target branch), GitButler will use this.
+As the command says, it does a few things to prepare your repository for being managed by GitButler.
 
-Otherwise, the `but init` command will try to guess a default base branch by looking for `origin/main` or `origin/master`, as these are very common. If it finds one of these, it will set it and move on. If it does not, it will ask you which remote branch it should use as it’s target base.
+Unlike a tool like [Jujutsu](https://docs.jj-vcs.dev/latest/git-compatibility/) or [Sapling](https://sapling-scm.com/docs/git/git_support_modes/), GitButler mainly operates on normal Git repositories, so nearly all Git commands will work with anything produced or managed by GitButler. You can think of it more like a new porcelain than a different system.
 
-A base branch has to be set on every project GitButler operates on. This is important to tell what is or is not considered "integrated".
+However, one thing we need to do in order to enable having parallel applied branches is create a "megamerge" commit that automatically merges in the heads of all your applied branches, so that other tools `git status` will correctly show you what you expect.
+
+This means that we do two things:
+
+- We create a new branch called `gitbutler/workspace` pointing to a constantly rewritten and ephemeral merge commit and check this branch out so HEAD is pointing to it (again, for `git status` reasons in tools like VSCode or whatever)
+- We add custom `pre-commit` and `post-checkout` hooks (moving and continuing to call any existing hooks) to try to prevent you from accidentally committing on top of our managed mega-merge commit.
 
 <Callout type="info">
 
-Currently a base branch needs to be on a remote. Our workflow currently assumes you are pushing to a forge and merging after review on that branch to the target base. Support for local-only workflows is coming, but not current possible.
+The mega-merge workspace commit will soon only be needed once you actually have more than one branch applied, so at some point we won't automatically do it on setup, but we're working on it.
 
 </Callout>
+
+Both of these things can be quickly and easily undone by running `but teardown`, doing any Git committing stuff you need to do and then re-running `but setup` to go back to GitButler tooling.
+
+You can also simply checkout a git branch with `git checkout <branch>` and the `post-checkout` hook we installed should clean up after itself.

@@ -1,0 +1,122 @@
+---
+title: Inspecting and Diffing
+description: Looking at commits, branches and work in progress with GitButler
+---
+
+When you're working with projects, sometimes you'll need to inspect things to see what the differences are or summarize work.
+
+The first thing to remember is that GitButler is basically an advanced Git client, which means that you can use any Git inspection command without problems when you're using GitButler.
+
+This includes things like `git show`, `git diff`, `git log`, `git blame`, `git bisect`, etc. So we have not tried to recreate the functionality of these, but instead focused on some of the common needs in a modern workflow that these tools may not do well.
+
+Let's look at a simple scenario.
+
+{/* restore [bd526ee8c76c] */}
+{/* run but stage h0 us */}
+{/* run git push -f origin 32a2175758f7f649ed7a030a17fd21213a5e400f:refs/heads/main */}
+
+```cli [inspecting-but-status-1, 440px]
+but status --files
+```
+
+Here we have an unstaged file (`Gemfile`), a file staged to the `user-bookmarks` branch (`README.md`), and two commits on our branch.
+
+## Diffing things
+
+For most of this, you could use `git diff`. For example, to see everything that is uncommitted, you can just run `git diff`.
+
+```cli [inspecting-git-1, 836px]
+git diff HEAD
+```
+
+However, I don't find that a super readable format, even if it's useful in applying with the Unix `patch` command. Since most people tend not to be emailing patches around, we tried to optimize for a much more human readable format:
+
+```cli [inspecting-but-diff-1, 814px]
+but diff
+```
+
+You can see that this is the same information, but a bit more easily understandable.
+
+You can also focus the diff output to any of the short codes in that status output. For example, to just see what is staged to `user-bookmarks` you can run `but diff l0`. To only see the changes committed to the bookmarks controller file in the "create bookmarks" commit you can run `but diff n0`, to only see what modifications have not been staged you can run `but diff zz`, and so on.
+
+## Listing Branches
+
+When GitButler creates and modifies branches, it is manipulating real Git branches, so you can see them and inspect them with normal Git commands as well. While you can use the `git branch` command to see all your branches, the `but branch` command is a bit nicer.
+
+Here is what `git branch` might output (this example repo has over 100 branches, so let's just truncate it):
+
+```cli [inspecting-git-2, 286px]
+git branch | head -10
+```
+
+<Callout type="info">
+
+This output is actually _better_ than the default Git output for this, because I have a config setting of `branch.sort -comitterdate`, so at least it's showing me the branches by last commit rather than the default of alphabetically.
+
+</Callout>
+
+The `but branch` command, however, is built specifically to help you identify the branches you're looking for and give you some useful information about them. Let's give it a try:
+
+```cli [inspecting-but-branch-1, 660px]
+but branch
+```
+
+You can immediately notice that this is a very different type of listing. We're not just showing the names of the branches, but also some very useful information about all of the branches that are available to us.
+
+First, we show any applied branches - these are the branches that are currently applied into your workspace. Next, all the _unapplied_ branches - that is, the other branches that you don't currently have active in your working directory.
+
+For each branch, you'll see how many commits "ahead" it is, that is, how many commits are on that branch that are not on the target branch (eg `origin/main`). In other words, if this branch were merged to production, what would come in with it?
+
+There is also a "✓" or "✗" that indicates if this branch is cleanly mergeable with your target branch.
+
+It also shows the last author of a commit on that branch and orders everything by how long ago the last commit was.
+
+The point of this listing is to help you easily see what work you have available, not merged into your target, that you might want to work on.
+
+## Filtering your Branches
+
+Running `but branch` defaults to running `but branch list`, which has a bunch of other options (filtering to only local or remote branches, not calculating mergability for speed, etc). The most useful option might be the filtering, for example, you can type a partial match string and it will filter the output:
+
+```cli [inspecting-but-branch-2, 242px]
+but branch list book
+```
+
+## Looking at a Branches
+
+If you want to see what is on a branch, you can inspect a specific branch by running `but branch show <branch>`. This will show the commits on this branch ahead of your target.
+
+Essentially, it runs the equivalent of `git log origin/main..<branch>` with some more introspection.
+
+```cli [inspecting-git-3, 308px]
+git log origin/main..feature-awesome-thing
+```
+
+Now let's look at `but branch show`
+
+```cli [inspecting-but-branch-3, 286px]
+but branch show feature-awesome-thing
+```
+
+Pretty much a short log of the branch difference from our target branch. However, there are a bunch of options if you want to dig in further.
+
+The `-r` option will show you PR information if one is opened on this branch. The `-f` option will show you the files modified in each commit.
+
+The real fun one is adding `--ai`, which will take a look at the changes and summarize what the changes actually do.
+
+Let's run all of them at the same time:
+
+```cli [inspecting-but-branch-4, 704px]
+but branch show sc-branch-28 --ai -r -f
+```
+
+## Showing a Commit
+
+If you want to look at a specific commit in any of these circumstances, you can use the `but show` command with the commit hash.
+
+```cli [inspecting-but-show-1, 286px]
+but show a42580b96ed7b432
+```
+
+## Deleting Branches
+
+As long as we're talking about branches, let's show how to get rid of them. If you've merged one, it will by default not be shown anymore with `but branch` anyhow, but if you have one with some work on it that you want to abandon, you can also easily delete it with `but branch delete` (or `-d`).

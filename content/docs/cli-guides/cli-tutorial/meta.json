@@ -4,9 +4,14 @@
     "tutorial-overview",
     "initializing-a-repository",
     "branching-and-commiting",
+    "inspecting",
     "rubbing",
     "editing-commits",
     "operations-log",
-    "updating-the-base"
+    "updating-the-base",
+    "conflict-resolution",
+    "forges",
+    "configuration",
+    "conclusion"
   ]
 }

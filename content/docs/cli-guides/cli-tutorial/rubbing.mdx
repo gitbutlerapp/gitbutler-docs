@@ -3,9 +3,9 @@ title: Rubbing
 description: Learn how to use the rub command to apply changes to branches.
 ---
 
-As we saw in the [Branching and Committing](branching-and-commiting) section, the `but rub` command can be used to assign changes to branch lanes.
+As we saw in the [Branching and Committing](branching-and-commiting) section, the `but stage` command can be used to assign changes to branch lanes.
 
-However, it can be used to do _so much_ more. Rubbing is essentially combining two things. Since there are lots of _things_ in the tool, combining them together can do lots of different operations. Most of them should be fairly intuitive once you understand the concept.
+However, we can also do this with a command called `but rub`. Not only can it stage changes though, it can be used to do _so much_ more. Rubbing is essentially combining two things. Since there are lots of _things_ in the tool, combining them together can do lots of different operations. Most of them should be fairly intuitive once you understand the concept.
 
 Let’s take a look at what is possible with this very straightforward command.
 
@@ -13,19 +13,18 @@ Let’s take a look at what is possible with this very straightforward command.
 
 We already showed how you can use `rub` to assign a file change or set of changes to a branch for later committing (rubbing a file and a branch), but what if you want to undo that? Move assignments to a different lane or revert them to being unassigned for later?
 
-As you may have noticed in the `but status` output, there is a special identifier `00` which is always the “unassigned” ID. If you rub anything to `00` then it will move it to unassigned.
+As you may have noticed in the `but status` output, there is a special identifier `zz` which is always the “unassigned” ID. If you rub anything to `zz` then it will move it to unassigned.
 
 So given this status:
 
 {/* restore [f0f437258043] */}
-{/* run but rub wu gemfile-fixes */}
-{/* run but rub te feature-bookmarks */}
+{/* run but rub g0,h0 gemfile-fixes */}
 
-```cli [de43f2edf09f5070, 462px]
+```cli [rubbing-but-status-1, 572px]
 but status
 ```
 
-We can re-unassign the `README.new.md` file with `but rub np 00`. Or, we can re-assign that file to the `sc-branch-26` parallel branch with `but rub np q6`.
+We can re-unassign the `README.new.md` file with `but rub h0 zz`. Or, we can re-assign that file to the `sc-branch-26` parallel branch with `but rub h0 sc-branch-26`.
 
 ## Amending Commits
 
@@ -37,41 +36,49 @@ However, with `rub` it’s incredibly simple. Just rub the new changes into the 
 
 Let’s say that we have a branch with some commits in it, we’ve made changes to two files and want to amend two different commits with the new changes.
 
-```cli [de43f2edf09f5070, 462px]
+```cli [rubbing-but-status-2, 572px]
 but status
 ```
 
 If we want to update the first commit (`da42d06`) with the `README-es.md` changes and the last commit (`fdbd753`) with the `app/views/bookmarks/index.html.erb` changes, we can run the following two `rub` commands:
 
-```cli [01f7bcfe8175a154, 88px]
-but rub q2 da
+```cli [rubbing-but-rub-1, 110px]
+but rub h0 da42d06
 ```
 
-```cli [8df04f3225dfabd3, 88px]
-but rub rt fd
+```cli [rubbing-but-rub-2, 110px]
+but rub app/views/bookmarks/index.html.erb fdbd753
 ```
 
-```cli [194379d8cf135c2d, 682px]
+```cli [rubbing-but-status-3, 814px]
 but status --files
 ```
 
 Notice that the SHAs have changed for those commits. It has rewritten the commits to have the same messages but incorporated the changes you rubbed into those patches.
 
-If you wanted to rub all the unassigned changes into a specific commit, you could also do that by rubbing the unassigned section to a commit, for example `but rub 00 1l` which would take all unassigned changes and amend commit `1l` with them.
+Also notice that you can use either the commit SHA or file path instead of the short ID if you prefer more typing.
+
+If you wanted to rub all the unassigned changes into a specific commit, you could also do that by rubbing the unstaged section to a commit, for example `but rub zz f55a30e` which would take all unstaged changes (if there were any) and amend commit `f55a30e` with them.
 
 ## Squashing Commits
 
-File changes are not the only thing that you can rub. You can also rub commits into things. To squash two commits together, you simply rub them together. Let’s take the last status output and squash the two commits in `gemfile-fixes` together:
+File changes are not the only thing that you can rub. You can also rub commits into things. To squash two commits together, you simply rub them together. Let’s look at a simple example of a branch with two commits on it. We'll squash them into one:
 
-{/* restore [f2eae624cc2f] */}
+{/* restore [eb63f26e885a] */}
 
-```cli [860ebbd1902dc6d4, 88px]
-but rub 21 f6
+```cli [rubbing-but-status-4, 374px]
+but status
+```
+
+We can absorb the top commit into the bottom one by running `but rub <commit-squash> <commit-target>`:
+
+```cli [rubbing-but-rub-3, 110px]
+but rub 0f 08
 ```
 
 Now we can see that we only have one commit in our branch:
 
-```cli [50aed1645949b06d, 396px]
+```cli [rubbing-but-status-5, 352px]
 but status
 ```
 
@@ -83,21 +90,21 @@ Let’s say that we want to just _undo_ a commit - that is, pretend that we had 
 
 So, if we’re back to this status:
 
-{/* restore [f0f437258043] */}
+{/* restore [eb63f26e885a] */}
 
-```cli [bbbd3383f636a9b4, 462px]
+```cli [rubbing-but-status-6, 374px]
 but status
 ```
 
-And we want to un-commit the first commit (`fdbd753`) as though we had never made it, you can rub to `00`:
+And we want to un-commit the first commit (`0fa2965`) as though we had never made it, you can rub to `zz`:
 
-```cli [8b9c7d07db297441, 88px]
-but rub fd 00
+```cli [rubbing-but-rub-4, 110px]
+but rub 0f zz
 ```
 
 Now if we look at our status again, we will see that commit removed and those files back in the unassigned status:
 
-```cli [06337d5a688f418c, 462px]
+```cli [rubbing-but-status-7, 462px]
 but status
 ```
 
@@ -105,23 +112,23 @@ but status
 
 We can also use rubbing to move a commit from one branch to another branch if we have multiple active branches and committed to the wrong one, or otherwise decide that we want to split up independent work.
 
-Let’s say that we have two commits on one branch and one commit on a second parallel branch and want to move one:
+Let’s say that we have two commits on one branch and created a second parallel branch to move one of the commits to so it's not dependent.
 
-{/* restore [f2eae624cc2f] */}
+{/* restore [f71c049739a9] */}
 
-```cli [8350792b8d9d13f6, 418px]
+```cli [rubbing-but-status-8, 440px]
 but status
 ```
 
-We can move the “Add Spanish README and bookmarks feature” commit to the `sc-branch-26` branch with `but rub`:
+We can move the “second commit” commit to the `move-second-commit` branch with `but rub`:
 
-```cli [d80e33b45a9aaf22, 88px]
-but rub 21 q6
+```cli [rubbing-but-rub-5, 110px]
+but rub 0f mo
 ```
 
-Now we can see that the commit has been moved to the top of the `sc-branch-26` branch:
+Now we can see that the commit has been moved to the `move-second-commit` branch, breaking up the series into two independent branches with one commit each.
 
-```cli [d5ab704c72c309c6, 418px]
+```cli [rubbing-but-status-9, 440px]
 but status
 ```
 
@@ -133,50 +140,54 @@ As you might imagine, you can also simultaneously move and squash by rubbing a c
 
 You can also move specific file changes from one commit to another.
 
+{/* restore [6ccc38e33e0e] */}
+
 To do that, you need identifiers for the files and hunks in an existing commit, which you can get via a `but status -f`, or `but status --files` that tells status to also list commit file IDs.
 
-```cli [2f4817399ff46441, 682px]
+```cli [rubbing-but-status-10, 682px]
 but status -f
 ```
 
-So now we can move the changes from one commit to another by rubbing pretty easily. Let’s take the `app/controllers/bookmarks_controller.rb` change and move it down to the "add bookmark model and associations" commit:
+So now we can move the changes from one commit to another by rubbing pretty easily. Let’s take the `app/controllers/bookmarks_controller.rb` change and move it down to the "second commit" commit on the other branch:
 
-```cli [20c8dd61540479ef, 88px]
-but rub vo f5
+```cli [rubbing-but-rub-6, 88px]
+but rub l0 2e
 ```
 
-Now the change is in the previous commit:
+Now the change is in the "second commit" on the other branch:
 
-```cli [6b84f918aca6eb05, 682px]
+```cli [rubbing-but-status-11, 682px]
 but status -f
 ```
+
+Also notice that the SHAs of both commits were changed, as they both needed to have content modified.
 
 ## Splitting Commits
 
-Ok, so now we can be pretty specifc about moving changes around to all these different states. The last thing we’ll cover here is splitting commits, which requires a new command that creates a new empty commit called `but new`.
+Ok, so now we can be pretty specifc about moving changes around to all these different states. The last thing we’ll cover here is splitting commits, which requires a new command that creates a new empty commit called `but commit empty`.
 
-By default, `but new` will create a new empty commit at the top of the most recently created branch, however you can specify a different branch, or even a specific place within a branch with existing commits.
+The general strategy here is that to split a commit, you would make a new empty commit above or below it, then rub changes from the one commit into the empty commit until it's how you want it to look, then you're done.
 
-Let’s say that we’re back to this state:
+Let’s say we have a branch with a single commit on it and want to split it into two commits.
 
-{/* restore [f0f437258043] */}
+{/* restore [64df45a76e99] */}
 
-```cli [bbbd3383f636a9b4, 462px]
+```cli [rubbing-but-status-12, 352px]
 but status
 ```
 
 Now we want to split the "add bookmark model and associations" into two separate commits. The way we do this is to insert a blank commit in between `06` and `f5` and then rub changes into it (then probably edit the commit message).
 
-We can insert a blank commit by running `but new f5` which inserts a blank commit under the specified commit.
+We can insert a blank commit by running `but commit empty --after 6a` which inserts a blank commit above the specified commit.
 
-```cli [5326a91276d35e82, 88px]
-but new f5
+```cli [rubbing-but-commit-1, 88px]
+but commit empty --after 6a
 ```
 
 Now we have a blank commit:
 
-```cli [814da470705a208e, 726px]
+```cli [rubbing-but-status-13, 484px]
 but status -f
 ```
 
-Now we can use the previous method of moving file changes from other commits into it, then edit the commit message with `but describe 54` (for more on the `describe` command, see [Editing Commits](editing-commits), coming up next).
+Now we can use the previous method of moving file changes from other commits into it, then edit the commit message with `but reword 54` (for more on the `reword` command, see [Editing Commits](editing-commits), coming up next).

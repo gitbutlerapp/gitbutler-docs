@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>git diff HEAD</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #24292e;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 20px;
+            margin: 0;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <pre>diff --git c/Gemfile w/Gemfile
+index 5cd27fa8..5c76922c 100644
+--- c/Gemfile
++++ w/Gemfile
+@@ -21,7 +21,7 @@ gem &quot;jbuilder&quot;
+ # gem &quot;bcrypt&quot;, &quot;~&gt; 3.1.7&quot;
+ 
+ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+-gem &quot;tzinfo-data&quot;, platforms: %i[ windows jruby ]
++gem &quot;tzinfo-data&quot;, platforms: %i[ mingw mswin x64_mingw jruby ]
+ 
+ # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+ gem &quot;solid_cache&quot;
+@@ -42,7 +42,7 @@ gem &quot;thruster&quot;, require: false
+ 
+ group :development, :test do
+   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+-  gem &quot;debug&quot;, platforms: %i[ mri windows ], require: &quot;debug/prelude&quot;
++  gem &quot;debug&quot;, platforms: %i[ mri mingw mswin x64_mingw ], require: &quot;debug/prelude&quot;
+ 
+   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+   gem &quot;brakeman&quot;, require: false
+diff --git c/README.md w/README.md
+index 32fb79f3..57d59121 100644
+--- c/README.md
++++ w/README.md
+@@ -76,6 +76,6 @@ bundle exec rubocop
+ 
+ This project is open source and available under the [MIT License](LICENSE).
+ 
+-## New Stuff
++## Even More New Stuff
+ 
+-New stuff is always coming
++New stuff is always coming, and more is on the way!
+</pre>
+</body>
+</html>

@@ -27,6 +27,8 @@ If you're running on a Mac and use Homebrew, you can install GitButler via `brew
 
 ## Setup
 
-There isn't currently much setup you can do, but this will change in the near future, such as setting your name and email for commits or the editor to use for your commit messages.
+If you go into any existing Git repository and run `but setup`, it will make some neccesary changes to your setup in order for GitButler to manage your data.
 
-The next step is to initialize an existing Git repository to use GitButler branching and tooling, which you can read about in the next section, the Tutorial.
+If you run almost any `but` command in an existing Git repository in an interactive terminal, it will ask you if you want to set it up and then run the command you were trying to run. So basically just run `but` anywhere to get started.
+
+At any time after this, you can run `but teardown` to undo the GitButler changes and go back to being a boring old Git project. It will not remove GitButler metadata, so feel free to go back and forth if you need to.

@@ -9,7 +9,7 @@ GitButler maintains a detailed log of all operations, making it easy to track wh
 
 See all recent GitButler operations:
 
-```cli [d56ec4583e46b761, 550px]
+```cli [operations-log-but-oplog-1, 550px]
 but oplog
 ```
 
@@ -17,12 +17,32 @@ but oplog
 
 Undo the last operation:
 
-```cli [a5c655fd3216bb9d, 132px]
+```cli [operations-log-but-undo-1, 154px]
 but undo
 ```
 
 ## Restoring to a previous point
 
-```cli [1de5d82a8ddf7ce1, 220px]
+You can easily restore to any point in the operations history by running the `but restore` command. If it will modify your working directory (maybe it's just changes to the commit history or staging stuff), then it will prompt you if you want to continue. If you don't want that, you can pass `-f` or `--force` to make it do it anyhow.
+
+```cli [operations-log-but-restore-1, 176px]
 but restore -f 6fdd8fb1d547
 ```
+
+Restorations create a new oplog entry before running, so you can always easily undo it in the same manner.
+
+<Callout type="info">
+
+It can be a bit confusing as to what state it restores to. It will restore to what your project looked like _before_ the operation was run. So for example, if there is a `CreateCommit` operation and you restore to that SHA, it will put your state back to the moment before the commit happened.
+
+</Callout>
+
+## Creating Snapshots
+
+You can also manually create snapshots of moments that you want to be able to revert to at any point, without some other operation needing to automatically save it.
+
+```cli [operations-log-but-oplog-2, 154px]
+but oplog snapshot
+```
+
+Now you can copy that SHA and restore to that exact point at any time in the future.

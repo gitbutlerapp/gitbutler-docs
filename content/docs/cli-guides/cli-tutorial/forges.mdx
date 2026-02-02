@@ -1,0 +1,72 @@
+---
+title: Remote Servers and Forges
+description: Now that we have amazing work, how do we get it out to other people?
+---
+
+We've touched on how to update your local branches with `but pull`, but what about when you want to take your awesome new branches of work and put them on a server to get them integrated or collaborate with other people?
+
+The two main commands to get work out are `but push` and `but pr`. Let's start with `but push` as it's a little simpler.
+
+## Pushing
+
+The very simple example would be to simply run `but push <branch-name>`.
+
+```
+❯ but push update-homepage
+
+✓ Push completed successfully
+
+  update-homepage -> origin/update-homepage ((new branch) -> 1d31833)
+```
+
+You can also run `but push` by itself. If there is only one applied branch, it will push that one. If there are several applied branches, you can choose which to push or select 'all' to push all of them.
+
+You can also supply `-d` or `--dry-run` to see what _would_ be pushed up.
+
+## Pull Requests
+
+That's the simple way to push branches to your default remote and update already pushed ones.
+
+The other common thing to do is to open Pull Requests on GitHub. GitButler's CLI has a built in command for opening and updating PRs, called `but pr`.
+
+Much like `but push`, if there is only one branch, it will open a PR for that, otherwise it will ask you which branch to open one for. Or you can be explicit with something like `but pr <branch>`.
+
+```
+❯ but pr
+Do you want to open a new PR on branch 'sc-switch-wording-to-x'? [Y/n]: y
+→ Pushing sc-switch-wording-to-x...
+  ✓ Pushed to origin
+→ Creating PR for sc-switch-wording-to-x → main...
+
+✓ Created PR #69
+  Title: Switch Wording to X
+  Branch: sc-switch-wording-to-x
+  URL: https://github.com/schacon/why/pull/69
+```
+
+Once it's opened, you'll get a URL you can view the pull request on.
+
+## Forge Authentication
+
+In order to open a PR on GitHub, you'll need to authenticate to that forge. You can see which authentications you have by running `but config`:
+
+```cli [forges-but-config-1, 484px]
+but config
+```
+
+If you have not authenticated to a forge yet, you can run `but config forge auth`, which will ask you which type of authentication you would like to do:
+
+```
+❯ but config forge auth
+? Select an authentication method:
+> Device flow (OAuth)
+  Personal Access Token (PAT)
+  GitHub Enterprise
+```
+
+Selecting one of the options will allow you to provide an authentication token for GitButler to use for opening and modifying PRs.
+
+<Callout type="info">
+  Currently, GitButler only authenticates to GitHub servers, but support for Merge Requests on
+  GitLab and other forges is coming.
+</Callout>

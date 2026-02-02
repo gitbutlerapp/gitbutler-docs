@@ -1,0 +1,143 @@
+---
+title: Conflict Resolution
+description: How to deal with conflicts in upstream work
+---
+
+In this world nothing can be said to be certain, except death, taxes and merge conflicts.
+
+There are several different ways that you can run into merge conflicts when using Git (and thus, GitButler, or any other branching version control system).
+
+Perhaps there are changes that have been merged upstream that modified the same files as you did in your branch. Or maybe you uncommitted something that commits above it depended on.
+
+## First Class Conflicts in GitButler
+
+First, it's important to understand how GitButler deals with conflicts. While Git generally has to check out conflicts in your working directory and make you resolve them before you can commit, GitButler can partially apply a conflicting change and store the commit marked as "conflicted".
+
+This means that:
+
+- Rebases _always_ succeed, just sometimes it results with commits in a conflicted state.
+- You can deal with conflicts in any order and at any time.
+
+So, let's take a look at what this looks like and how we can deal with conflicted commits when they arise.
+
+{/* restore [e53a4a85d83d] */}
+{/* run git push -f origin 96ccca9:main */}
+
+```cli [conflict-resolution-but-status-1, 440px]
+but status
+```
+
+Let's say that this is our status and we've decided to pull in from upstream. The changes that have been merged in by someone else upstream conflict with ours. When we run `but pull`, it will result in conflicts in our branch (but it will succeed).
+
+```cli [conflict-resolution-but-pull-1, 308px]
+but pull
+```
+
+Ok, the `pull` tells us that we have conflicts and it also gives us a cheat sheet for what to do to resolve them, which is essentially "run `but resolve`".
+
+So first let's see what our conflicted branch looks like with `but status`.
+
+```cli [conflict-resolution-but-status-2, 462px]
+but status
+```
+
+Notice how we have _two_ commits that are conflicted, but one that is not. You could have any number of commits marked as conflicted in a branch, and you'll need to resolve each of them one by one.
+
+If we were to dig into the details here, a few things have actually happened.
+
+First of all, we have applied the upstream changes, so if we were to look at the files that conflict, we will see the upstream version rather than what we had done.
+
+Second, the commits that are not in a conflicted state are still applied - those changes are still in your working directory. In fact, even the conflicted commit's changes will be applied in the areas where they don't conflict.
+
+You could potentially have several conflicted commits in your branch. When you resolve one, everything above it is rebased and may introduce new conflicts or may resolve other conflicts, depending on the resolution.
+
+However, for now, let's look at a simple resolution flow. All you really need is one command: `but resolve`.
+
+If you run `but resolve`, it will look through all your applied branches for any conflicted commits. If it finds any, it will list them out and ask you which you want to start with and default to the lowest one on the first branch.
+
+```
+❯ but resolve
+Found conflicted commits:
+
+Branch: update-homepage
+  ● 42165fe branding change: readme
+  ● 404b604 hero update - new branding
+
+Would you like to start resolving these conflicts?
+Enter commit ID to resolve [default: 42165fe]:
+```
+
+If you hit enter, it will check out the conflict markers in that commit into your working directory.
+
+```
+❯ but resolve
+You are currently in conflict resolution mode.
+ - resolve all conflicts
+ - finalize with but resolve finish
+ - OR cancel with but resolve cancel
+
+Conflicted files remaining:
+  ✗ README.md
+Checking out conflicted commit 42165fe
+```
+
+So now you're in a special mode called "Edit Mode" in GitButler, where we've directly checked out a commit to work on. If you run any other commands, we'll warn you that you're currently in this mode.
+
+For the conflicts, we put in zdiff3 style headers, so you can see your side, their side and also the ancestor. For example, if we look at the conflicted README.md file
+
+```
+❯ head README.md
+<<<<<< ours
+# The Why Experience
+|||||| ancestor
+# Twitter Clone
+======
+# X Clone
+>>>>>> theirs
+```
+
+So you can see that we started with "Twitter Clone" and upstream changed it to "X Clone" and locally I changed the same line to "The Why Experience". Now I can resolve these three versions into a single line.
+
+If I do that and then again run `but status`, you can see that GitButler notices that the conflicts in the README file has been resolved.
+
+```
+❯ butd st
+Initiated a background sync...
+You are currently in conflict resolution mode.
+ - resolve all conflicts
+ - finalize with but resolve finish
+ - OR cancel with but resolve cancel
+
+No conflicted files remaining!
+Files resolved:
+  ✓ README.md
+```
+
+If you had other conflicted files, it would give you a list of what was still unresolved so you could work your way through the list.
+
+However, now that we've resolved everything, we can either run `but resolve finish` or just `but resolve` and it will move us to the next step. Technically you can just keep running `but resolve` and it will figure out what the next thing to do is.
+
+```
+❯ butd resolve
+You are currently in conflict resolution mode.
+ - resolve all conflicts
+ - finalize with but resolve finish
+ - OR cancel with but resolve cancel
+
+No conflicted files remaining!
+Files resolved:
+  ✓ README.md
+
+All conflicts have been resolved!
+Finalize the resolution now? [Y/n]: y
+
+Initiated a background sync...
+✓ Conflict resolution finalized successfully!
+The commit has been updated with your resolved changes.
+
+⚠ Warning: New conflicts were introduced during the rebase:
+
+  ● 4f671a1 hero update - new branding
+
+Run but status to see all conflicted commits, or but resolve <commit> to resolve them.
+```

@@ -1,10 +1,20 @@
 import { utils } from "@/app/source"
 import type { DocsLayoutProps } from "fumadocs-ui/layouts/docs"
 import type { HomeLayoutProps } from "fumadocs-ui/layouts/home"
+import type { PageTree } from "fumadocs-core/server"
 
 import Logo from "@/components/Logo"
 import Discord from "@/components/logos/discord"
 import GitButler from "@/components/logos/gitbutler-wordmark"
+
+// Strip backticks from page tree titles
+function stripBackticksFromTree(tree: PageTree): PageTree {
+  return {
+    ...tree,
+    name: tree.name.replace(/`/g, ''),
+    children: tree.children?.map(child => stripBackticksFromTree(child))
+  }
+}
 
 // shared configuration
 export const baseOptions: HomeLayoutProps = {
@@ -33,5 +43,5 @@ export const docsOptions: DocsLayoutProps = {
   sidebar: {
     defaultOpenLevel: 0
   },
-  tree: utils.pageTree
+  tree: stripBackticksFromTree(utils.pageTree)
 }

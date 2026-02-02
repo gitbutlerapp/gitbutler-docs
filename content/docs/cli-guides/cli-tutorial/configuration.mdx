@@ -1,0 +1,24 @@
+---
+title: Configuration and Aliases
+description: How to customize your GitButler CLI experience
+---
+
+We've already covered `but config` a bit in dealing with forges and target branches.
+
+You can also use it for some basic user configuration, such as setting your name and email address for commits and your default editor.
+
+```cli [configuration-but-config-1, 308px]
+but config user
+```
+
+## Aliases
+
+GitButler also has a built in aliasing system in case you want to provide some shorthands.
+
+```cli [configuration-but-alias-1, 308px]
+but alias
+```
+
+To add a new alias, you can run `but alias add <alias> <expansion>`, which you can also provide a `-g` or `--global` if you want it to be a global alias. This will put this data in your local or global Git config file.
+
+You will notice that there is a `default` alias, which is what runs when you just run `but` with no arguments. If you overwrite the `default` alias, you can set up something other than `status` to run by default.
