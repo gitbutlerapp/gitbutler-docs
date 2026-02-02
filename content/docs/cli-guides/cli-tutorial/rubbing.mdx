@@ -20,7 +20,7 @@ So given this status:
 {/* restore [f0f437258043] */}
 {/* run but rub g0,h0 gemfile-fixes */}
 
-```cli [rubbing-but-status-1, 572px]
+```cli [rubbing-but-status-1, 528px]
 but status
 ```
 
@@ -36,7 +36,7 @@ However, with `rub` it’s incredibly simple. Just rub the new changes into the 
 
 Let’s say that we have a branch with some commits in it, we’ve made changes to two files and want to amend two different commits with the new changes.
 
-```cli [rubbing-but-status-2, 572px]
+```cli [rubbing-but-status-2, 528px]
 but status
 ```
 
@@ -50,7 +50,7 @@ but rub h0 da42d06
 but rub app/views/bookmarks/index.html.erb fdbd753
 ```
 
-```cli [rubbing-but-status-3, 814px]
+```cli [rubbing-but-status-3, 770px]
 but status --files
 ```
 
@@ -66,7 +66,7 @@ File changes are not the only thing that you can rub. You can also rub commits i
 
 {/* restore [eb63f26e885a] */}
 
-```cli [rubbing-but-status-4, 374px]
+```cli [rubbing-but-status-4, 330px]
 but status
 ```
 
@@ -78,7 +78,7 @@ but rub 0f 08
 
 Now we can see that we only have one commit in our branch:
 
-```cli [rubbing-but-status-5, 352px]
+```cli [rubbing-but-status-5, 308px]
 but status
 ```
 
@@ -92,7 +92,7 @@ So, if we’re back to this status:
 
 {/* restore [eb63f26e885a] */}
 
-```cli [rubbing-but-status-6, 374px]
+```cli [rubbing-but-status-6, 330px]
 but status
 ```
 
@@ -104,7 +104,7 @@ but rub 0f zz
 
 Now if we look at our status again, we will see that commit removed and those files back in the unassigned status:
 
-```cli [rubbing-but-status-7, 462px]
+```cli [rubbing-but-status-7, 418px]
 but status
 ```
 
@@ -116,7 +116,7 @@ Let’s say that we have two commits on one branch and created a second parallel
 
 {/* restore [f71c049739a9] */}
 
-```cli [rubbing-but-status-8, 440px]
+```cli [rubbing-but-status-8, 396px]
 but status
 ```
 
@@ -128,7 +128,7 @@ but rub 0f mo
 
 Now we can see that the commit has been moved to the `move-second-commit` branch, breaking up the series into two independent branches with one commit each.
 
-```cli [rubbing-but-status-9, 440px]
+```cli [rubbing-but-status-9, 396px]
 but status
 ```
 
@@ -144,19 +144,19 @@ You can also move specific file changes from one commit to another.
 
 To do that, you need identifiers for the files and hunks in an existing commit, which you can get via a `but status -f`, or `but status --files` that tells status to also list commit file IDs.
 
-```cli [rubbing-but-status-10, 682px]
+```cli [rubbing-but-status-10, 638px]
 but status -f
 ```
 
 So now we can move the changes from one commit to another by rubbing pretty easily. Let’s take the `app/controllers/bookmarks_controller.rb` change and move it down to the "second commit" commit on the other branch:
 
 ```cli [rubbing-but-rub-6, 88px]
-but rub l0 2e
+but rub 08:3 2e
 ```
 
 Now the change is in the "second commit" on the other branch:
 
-```cli [rubbing-but-status-11, 682px]
+```cli [rubbing-but-status-11, 638px]
 but status -f
 ```
 
@@ -172,7 +172,7 @@ Let’s say we have a branch with a single commit on it and want to split it int
 
 {/* restore [64df45a76e99] */}
 
-```cli [rubbing-but-status-12, 352px]
+```cli [rubbing-but-status-12, 308px]
 but status
 ```
 
@@ -186,7 +186,7 @@ but commit empty --after 6a
 
 Now we have a blank commit:
 
-```cli [rubbing-but-status-13, 484px]
+```cli [rubbing-but-status-13, 440px]
 but status -f
 ```
 
