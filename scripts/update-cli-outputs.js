@@ -86,7 +86,7 @@ class CliOutputUpdater {
 
     console.log(`Restoring to starting hash: ${startingHash}`);
     try {
-      const restoreCommand = this.replaceButCommand(`but restore --force ${startingHash}`);
+      const restoreCommand = this.replaceButCommand(`but oplog restore --force ${startingHash}`);
       execSync(restoreCommand, { stdio: 'inherit' });
     } catch (error) {
       console.warn(`Warning: Failed to restore to starting hash ${startingHash}: ${error.message}`);
@@ -312,8 +312,8 @@ class CliOutputUpdater {
 
         // Run restore command if needed
         if (currentRestore) {
-          console.log(`Running restore: but restore ${currentRestore}`);
-          const restoreCommand = this.replaceButCommand(`but restore --force ${currentRestore}`);
+          console.log(`Running restore: but oplog restore ${currentRestore}`);
+          const restoreCommand = this.replaceButCommand(`but oplog restore --force ${currentRestore}`);
           await this.runCommand(restoreCommand, this.config.exampleProjectPath);
           currentRestore = null; // Reset after use
         }

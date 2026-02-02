@@ -30,7 +30,7 @@ It looks something like this:
 {/* run but rub wu gemfile-fixes */}
 {/* run but rub te feature-bookmarks */}
 
-```cli [branching-and-commiting-but-status-1, 550px]
+```cli [branching-and-commiting-but-status-1, 506px]
 but status
 ```
 
@@ -48,7 +48,7 @@ Let’s look at a very simple case first. Let’s say we’ve just modified some
 
 {/* restore [04d62f15beb4] */}
 
-```cli [branching-and-commiting-but-status-2, 352px]
+```cli [branching-and-commiting-but-status-2, 308px]
 but status
 ```
 
@@ -64,7 +64,7 @@ but branch new user-bookmarks
 
 Now if you run `but status` you can see your new empty branch:
 
-```cli [branching-and-commiting-but-status-3, 418px]
+```cli [branching-and-commiting-but-status-3, 374px]
 but status
 ```
 
@@ -80,7 +80,7 @@ If you don’t specify the `-m` commit message, GitButler will try to open an ed
 
 Now our status looks like this, with all unassigned files in a new commit on our new branch:
 
-```cli [branching-and-commiting-but-status-4, 330px]
+```cli [branching-and-commiting-but-status-4, 286px]
 but status
 ```
 
@@ -115,7 +115,7 @@ but branch new liked-tweets
 
 Now if we run `but status` we can see our previous branch and our new empty branch.
 
-```cli [branching-and-commiting-but-status-5, 418px]
+```cli [branching-and-commiting-but-status-5, 374px]
 but status
 ```
 
@@ -127,7 +127,7 @@ but commit -m "liked tweets changes" liked-tweets
 
 And now we have one commit in each lane.
 
-```cli [branching-and-commiting-but-status-6, 418px]
+```cli [branching-and-commiting-but-status-6, 374px]
 but status
 ```
 
@@ -137,7 +137,7 @@ If you don’t specify a branch identifier and you have more than one active bra
 
 We can also see which files were modified in each commit with the `--files` or `-f` option to `but status`:
 
-```cli [branching-and-commiting-but-status-7, 594px]
+```cli [branching-and-commiting-but-status-7, 550px]
 but status -f
 ```
 
@@ -154,7 +154,7 @@ To create a new stacked branch in GitButler, you can run `but branch new` with a
 but branch new -a user-bookmarks liked-tweets-stacked
 ```
 
-```cli [branching-and-commiting-but-status-8, 418px]
+```cli [branching-and-commiting-but-status-8, 374px]
 but status
 ```
 
@@ -164,7 +164,7 @@ Now we can commit to our stacked branch.
 but commit -m "liked tweets changes" liked-tweets-stacked
 ```
 
-```cli [branching-and-commiting-but-status-9, 396px]
+```cli [branching-and-commiting-but-status-9, 352px]
 but status
 ```
 
@@ -182,7 +182,7 @@ Let’s look at an example `but status` with six modified files and two empty, p
 
 {/* restore [d5c7317b0fd4] */}
 
-```cli [branching-and-commiting-but-status-10, 484px]
+```cli [branching-and-commiting-but-status-10, 440px]
 but status
 ```
 
@@ -195,25 +195,25 @@ You can either stage the file identifier that you see next to each file, or all 
 
 So lets stage the bookmark changes to the bookmarks branch:
 
-```cli [branching-and-commiting-but-rub-1, 154px]
-but rub h0,i0,k0 user-bookmarks
+```cli [branching-and-commiting-but-stage-1, 154px]
+but stage h0,i0,k0 user-bookmarks
 ```
 
 Now we can run `status` and see that these are staged.
 
-```cli [branching-and-commiting-but-st-1, 528px]
+```cli [branching-and-commiting-but-st-1, 484px]
 but st
 ```
 
 Now let's rub the user changes into the `user-changes` branch:
 
-```cli [branching-and-commiting-but-rub-2, 110px]
-but rub h0 user-changes
+```cli [branching-and-commiting-but-stage-2, 110px]
+but stage h0 user-changes
 ```
 
 Now we have some file changes assigned to each branch and still some unassigned changes:
 
-```cli [branching-and-commiting-but-status-11, 572px]
+```cli [branching-and-commiting-but-status-11, 528px]
 but status
 ```
 
@@ -227,7 +227,7 @@ but commit -o -m "liked tweets view" bo
 
 Now if we look at our status we can see a commit on our branch instead of the assigned changes:
 
-```cli [branching-and-commiting-but-st-2, 484px]
+```cli [branching-and-commiting-but-st-2, 440px]
 but st
 ```
 
@@ -237,7 +237,7 @@ Now let's commit all the rest of the changes (assigned and unassigned) to our ot
 but commit -m 'bookmarks stuff' ch
 ```
 
-```cli [branching-and-commiting-but-status-12, 418px]
+```cli [branching-and-commiting-but-status-12, 374px]
 but status
 ```
 
@@ -272,16 +272,16 @@ If you happen to have a large number of changes, you can also use ranges or list
 {/* restore [6fdd8fb1d547] */}
 {/* run but rub l0 zz */}
 
-```cli [branching-and-commiting-but-status-13, 528px]
+```cli [branching-and-commiting-but-status-13, 484px]
 but status
 ```
 
 Then you can assign the everything in `app/` to a branch with:
 
-```cli [branching-and-commiting-but-rub-3, 176px]
-but rub h0-k0 user-bookmarks
+```cli [branching-and-commiting-but-stage-3, 154px]
+but stage h0-j0 user-bookmarks
 ```
 
-```cli [branching-and-commiting-but-status-14, 572px]
+```cli [branching-and-commiting-but-status-14, 528px]
 but status
 ```

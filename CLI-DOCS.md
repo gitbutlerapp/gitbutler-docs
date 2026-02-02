@@ -164,6 +164,8 @@ Run the update script to process all MDX files and update CLI outputs:
 export CLICOLOR_FORCE=1
 export GIT_AUTHOR_DATE="2020-09-09 09:06:03 +0800"
 export GIT_COMMITTER_DATE="2020-10-09 09:06:03 +0800"
+export NO_BG_TASKS=1
+git config gitbutler.testing.changeId 42
 pnpm update-cli
 ````
 
