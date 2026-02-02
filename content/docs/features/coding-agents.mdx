@@ -1,5 +1,6 @@
 ---
 title: Code Agent Assistant
+description: Use our Claude Code integration to assign coding agents to specific branches, even multiple parallel branches at one time
 ---
 
 import ImageSection from "@/components/ImageSection"
@@ -15,10 +16,10 @@ You can start a session by clicking the AI stars on a branch header, or use the 
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/agent-button.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202026-02-02%20at%2015.55.07%402x.png"
   width="800"
   height="600"
-  subtitle="GitButler Window"
+  subtitle="A coding agent attached to a GitButler branch"
 />
 
 Each session is tied to a branch such that you can run them in parallel, and changes are assigned to the respective branch as long as they are mutually exclusive. Information about the branch is also added to the respective context, giving the agent knowledge of the work they contain.
@@ -33,7 +34,7 @@ Before you can use the agents integration, you need to have Claude Code installe
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2014.37.45%402x.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202026-02-02%20at%2015.57.24%402x.png"
   width="800"
   height="600"
   subtitle="Wherefor art thou, Claudius?"
@@ -70,11 +71,19 @@ You will then need to setup and login to Claude Code, which will require an Anth
   Code usage, we simply help manage the agent.
 </Callout>
 
-# Generating Code in the Agents Tab
+# Generating Code with an Agent
 
 Once your agent is setup, you can select a branch to work on, type in a prompt and we will run that though Claude Code, same as if you ran it in the terminal.
 
-We will do some cool things as it runs, however.
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202026-02-02%20at%2015.58.33%402x.png"
+  width="800"
+  height="600"
+  subtitle="Click this to start a branch based session"
+/>
+
+While this is still running Claude Code, running through the GitButler UI will make sure that each agent works on the branch it is attached to. You can run multiple agents at once, each committing to their attached branches.
 
 ### Model Selection
 
@@ -82,7 +91,7 @@ There are a few different models that you can choose from for running your task.
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.53.22%402x.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202026-02-02%20at%2016.00.31%402x.png"
   width="800"
   height="600"
   subtitle="You can choose from any of the active Anthropic models"
@@ -94,10 +103,10 @@ Claude Code also allows for selection of a "thinking mode". The lower modes are 
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.53.51%402x.png"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202026-02-02%20at%2016.01.06%402x.png"
   width="800"
   height="600"
-  subtitle="CleanShot 2025-09-05 at 11.53.51@2x.png"
+  subtitle="Also choose your thinking mode"
 />
 
 ### Prompt Templates
@@ -106,7 +115,7 @@ If you find that you're using similar prompts over and over, you can easily setu
 
 <ImageSection
   className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-09-05%20at%2011.56.50.gif"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202026-02-02%20at%2016.01.43%402x.png"
   width="800"
   height="600"
   subtitle="Prompt templates"

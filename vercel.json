@@ -39,6 +39,10 @@
     {
       "source": "/features/branch-management/integration-branch",
       "destination": "/workspace-branch"
+    },
+    {
+      "source": "/features/agents-tab",
+      "destination": "/features/coding-agents"
     }
   ]
 }
