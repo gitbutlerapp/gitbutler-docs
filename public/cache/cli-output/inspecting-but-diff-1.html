@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>/usr/local/bin/but diff</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #24292e;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 20px;
+            margin: 0;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <pre><span style='opacity:0.67'>──────────</span>╮
+<u><span style='color:var(--blue,#00a)'>i0</span></u> <span style='color:var(--bright-white,#fff)'>Gemfile</span>│
+<span style='opacity:0.67'>──────────</span>╯
+   <span style='opacity:0.67'>21 21</span>│ # gem &quot;bcrypt&quot;, &quot;~&gt; 3.1.7&quot;
+   <span style='opacity:0.67'>22 22</span>│ 
+   <span style='opacity:0.67'>23 23</span>│ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+   <span style='color:var(--red,#a00)'>24   │-gem &quot;tzinfo-data&quot;, platforms: %i[ windows jruby ]</span>
+   <span style='color:var(--green,#0a0)'>   24│+gem &quot;tzinfo-data&quot;, platforms: %i[ mingw mswin x64_mingw jruby ]</span>
+   <span style='opacity:0.67'>25 25</span>│ 
+   <span style='opacity:0.67'>26 26</span>│ # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+   <span style='opacity:0.67'>27 27</span>│ gem &quot;solid_cache&quot;
+<span style='opacity:0.67'>──────────</span>╮
+<u><span style='color:var(--blue,#00a)'>j0</span></u> <span style='color:var(--bright-white,#fff)'>Gemfile</span>│
+<span style='opacity:0.67'>──────────</span>╯
+   <span style='opacity:0.67'>42 42</span>│ 
+   <span style='opacity:0.67'>43 43</span>│ group :development, :test do
+   <span style='opacity:0.67'>44 44</span>│   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+   <span style='color:var(--red,#a00)'>45   │-  gem &quot;debug&quot;, platforms: %i[ mri windows ], require: &quot;debug/prelude&quot;</span>
+   <span style='color:var(--green,#0a0)'>   45│+  gem &quot;debug&quot;, platforms: %i[ mri mingw mswin x64_mingw ], require: &quot;debug/prelude&quot;</span>
+   <span style='opacity:0.67'>46 46</span>│ 
+   <span style='opacity:0.67'>47 47</span>│   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+   <span style='opacity:0.67'>48 48</span>│   gem &quot;brakeman&quot;, require: false
+<span style='opacity:0.67'>────────────</span>╮
+<u><span style='color:var(--blue,#00a)'>k0</span></u> <span style='color:var(--bright-white,#fff)'>README.md</span>│
+<span style='opacity:0.67'>────────────</span>╯
+   <span style='opacity:0.67'>76 76</span>│ 
+   <span style='opacity:0.67'>77 77</span>│ This project is open source and available under the [MIT License](LICENSE).
+   <span style='opacity:0.67'>78 78</span>│ 
+   <span style='color:var(--red,#a00)'>79   │-## New Stuff</span>
+   <span style='color:var(--green,#0a0)'>   79│+## Even More New Stuff</span>
+   <span style='opacity:0.67'>80 80</span>│ 
+   <span style='color:var(--red,#a00)'>81   │-New stuff is always coming</span>
+   <span style='color:var(--green,#0a0)'>   81│+New stuff is always coming, and more is on the way!</span>
+
+</pre>
+</body>
+</html>

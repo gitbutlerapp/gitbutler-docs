@@ -35,6 +35,10 @@
     {
       "source": "/agentic-workflows/cursor",
       "destination": "/features/ai-integration/mcp-server"
+    },
+    {
+      "source": "/features/branch-management/integration-branch",
+      "destination": "/workspace-branch"
     }
   ]
 }

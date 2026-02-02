@@ -1,0 +1,76 @@
+---
+title: Workspace Branch
+description: What is the `gitbutler/workspace` branch and merge commit it points to? Also, why do we need it?
+---
+
+If you run some normal Git commands (like `git log`) while in GitButler mode, you'll see a few special branches that GitButler maintains behind the scenes. The one that most people get confused by is the `gitbutler/workspace` commit.
+
+There are a few different reasons that we need it, so let's take a quick look.
+
+If you run a normal `git log` on a GitButler managed repository, you will see something like this:
+
+```git
+commit de56d20e282f7641d48d288b510141996c3c3cfc (HEAD -> gitbutler/workspace)
+Author: GitButler <gitbutler@gitbutler.com>
+Date:   Wed Sep 9 09:06:03 2020 +0800
+
+    GitButler Workspace Commit
+
+    This is is a merge commit of the virtual branches in your workspace.
+
+    For GitButler to manage multiple parallel branches, we maintain
+    this commit automatically so other tooling works properly.
+
+    If you switch to another branch, GitButler will need to be
+    reinitialized.
+
+    Here are the branches that are currently applied:
+
+     - update-homepage (refs/gitbutler/update-homepage)
+       branch head: a32f33273948837078e5f5a4e1677ab6274a4629
+
+    For more information about what we're doing here, check out our docs:
+    https://docs.gitbutler.com/workspace-branch
+
+commit a32f33273948837078e5f5a4e1677ab6274a4629 (update-homepage)
+Author: Scott Chacon <schacon@gmail.com>
+Date:   Mon Jan 26 07:33:31 2026 +0500
+
+    hero update - new branding
+
+```
+
+That first commit is a merge commit that we rebuild as you modify branches in GitButler. The reason that it exists is mainly because if you have more than one branch applied in your workspace, when other tools run `git status`, it will look strange, since Git has no concept of having several branches applied at once.
+
+## Status, Diff and Log
+
+To keep Git command output for things that look at the index and HEAD (such as status or diff) somewhat sane, we modify your index to look like the union of all the committed states of all your applied virtual branches. This makes git diff and git status behave more or less like you would expect.
+
+For instance, if you have two files on Branch A and two files on Branch B, then git status will simply list four files as modified.
+
+If you run git log, the first commit should be our custom commit message and the tree of that commit is the union of all the committed work on all your applied virtual branches, as though they were all merged together into one (something stock Git can understand).
+
+## Committing, Branching, Checking Out
+
+However, if you try to use something that writes to HEAD, like git commit or git checkout, then you might have some headaches. For this reason, we install custom Git hooks for `pre-commit` and `post-checkout` that will protect this from happening.
+
+If you try to commit when in GitButler managed mode, the `pre-commit` hook should disallow it and tell you how to fix it.
+
+```git
+❯ git commit -am 'commit on the workspace branch'
+
+GITBUTLER_ERROR: Cannot commit directly to gitbutler/workspace branch.
+
+GitButler manages commits on this branch. Please use GitButler to commit your changes:
+  - Use the GitButler app to create commits
+  - Or run 'but commit' from the command line
+
+If you want to exit GitButler mode and use normal git:
+  - Run 'but teardown' to switch to a regular branch
+  - Or directly checkout another branch: git checkout <branch>
+
+If you no longer have the GitButler CLI installed, you can simply remove this hook and checkout another branch:
+  rm ".git/hooks/pre-commit"
+```
+
+If you want to get out of this mode, you can follow any of those instructions. The easiest is running `but teardown`, but simply switching directly to a normal Git branch will also do the trick.

@@ -89,7 +89,7 @@ export default async function Page(props: { params: Promise<Param> }): Promise<R
         footer
       }}
     >
-      <DocsTitle>{page.data.title}</DocsTitle>
+      <DocsTitle>{page.data.title.replace(/`/g, '')}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <page.data.body

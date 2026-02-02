@@ -99,3 +99,41 @@ p[class*="mb-8"][class*="text-lg"][class*="text-fd-muted-foreground"] {
 .shiki code span {
   font-size: 1.1em;
 }
+
+/* Preserve whitespace and blank lines in code blocks */
+pre code {
+  white-space: pre !important;
+}
+
+.prose pre {
+  white-space: pre !important;
+}
+
+.prose code {
+  white-space: pre !important;
+}
+
+.not-prose pre {
+  white-space: pre !important;
+}
+
+.not-prose code {
+  white-space: pre !important;
+}
+
+.not-prose pre code {
+  white-space: pre !important;
+}
+
+/* Ensure empty line spans still render with height */
+.not-prose pre code .line:empty::before,
+.not-prose pre code .line:not(:has(*))::before {
+  content: '\200b'; /* Zero-width space to ensure line height */
+  display: inline-block;
+}
+
+.prose pre code .line:empty::before,
+.prose pre code .line:not(:has(*))::before {
+  content: '\200b';
+  display: inline-block;
+}

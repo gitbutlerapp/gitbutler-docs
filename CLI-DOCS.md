@@ -18,6 +18,7 @@ This system automatically captures and caches CLI command outputs in MDX files, 
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
@@ -28,15 +29,17 @@ pnpm install
 
 Use special `cli` code blocks in your MDX files:
 
-```mdx
+````mdx
 Here's how to check status:
 
 ```cli
 but status
 ```
+````
 
 The output will be automatically captured and cached.
-```
+
+````
 
 ### Restore Commands
 
@@ -47,10 +50,11 @@ To restore to a specific state before running commands, add a restore comment:
 
 ```cli
 but status
-```
+````
 
 This will run `but restore [commit-hash]` before executing the cli command.
-```
+
+````
 
 ### Updating CLI Outputs
 
@@ -58,9 +62,10 @@ Run the update script to process all MDX files and update CLI outputs:
 
 ```bash
 pnpm update-cli
-```
+````
 
 This will:
+
 - Read your `ansi-run.json` configuration
 - Change to your example project directory
 - Restore to the starting hash
@@ -101,7 +106,8 @@ This will:
 ### Example Workflow
 
 1. Create a new MDX file with CLI commands:
-```mdx
+
+````mdx
 # Status Command
 
 Check your workspace status:
@@ -109,14 +115,17 @@ Check your workspace status:
 ```cli
 but status
 ```
-```
+````
+
+````
 
 2. Run the update script:
 ```bash
 pnpm update-cli
-```
+````
 
 3. The script will show output like:
+
 ```
 Processing: content/docs/commands/status.mdx
 Found CLI command: but status
@@ -125,7 +134,8 @@ Updated: content/docs/commands/status.mdx
 ```
 
 4. Your MDX file is now updated:
-```mdx
+
+````mdx
 # Status Command
 
 Check your workspace status:
@@ -133,7 +143,9 @@ Check your workspace status:
 ```cli [abc123def456]
 but status
 ```
-```
+````
+
+````
 
 5. When rendered, users see the actual command output in SVG format.
 
@@ -153,7 +165,7 @@ export CLICOLOR_FORCE=1
 export GIT_AUTHOR_DATE="2020-09-09 09:06:03 +0800"
 export GIT_COMMITTER_DATE="2020-10-09 09:06:03 +0800"
 pnpm update-cli
-```
+````
 
 ## Commands
 
@@ -161,4 +173,10 @@ The command "man pages" are copied from `../gitbutler/cli-docs` so that changes 
 
 To update the command man-pages, you can run ./scripts/sync-commands.sh
 
+## Manual Runs
 
+You can also simply run `ansi-senor <command>` and ansi-senor will output an html file that you can copy to the `public/cli-examples/` directory and reference in a doc with this syntax:
+
+```ansi but-setup-5faf7f36
+but setup
+```

@@ -1,0 +1,2687 @@
+
+> gitbutler-docs@0.0.0 update-cli /Users/schacon/projects/gitbutler-docs
+> node scripts/update-cli-outputs.js
+
+Starting CLI output update process...
+Changing to example project: /Users/schacon/projects/why
+Found setup script: /Users/schacon/projects/gitbutler-docs/scripts/pre-update-cli.sh
+Executing setup script...
+Running pre-update-cli setup...
+Pre-update-cli setup completed
+Setup script completed
+Restoring to starting hash: f0f437258043
+
+[1;32m✓[0m Restore completed successfully!
+[32m
+Workspace has been restored to the selected snapshot.[0m
+
+Returning to docs directory: /Users/schacon/projects/gitbutler-docs
+Found 85 MDX files
+Found restore command: f0f437258043
+Found run command: but rub wu gemfile-fixes
+Run command output:
+
+
+Found run command: but rub te feature-bookmarks
+Run command output:
+
+
+Found CLI command: but status
+Running restore: but restore f0f437258043
+Cache filename for command "but status": branching-and-commiting-but-status-1
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-8be57a65a091d9ff.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34mda[0m[34m42d06[0m
+┊   [4;34mh0[0m A [32mREADME.new.md[0m 
+┊   [4;34mi0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34mda[0m[2m42d06[0m Add Spanish README and bookmarks feature  
+┊●   [4;34mfd[0m[2mbd753[0m just the one  
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[32m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34mda[0m[34m42d06[0m
+┊   [4;34mh0[0m A [32mREADME.new.md[0m 
+┊   [4;34mi0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34mda[0m[2m42d06[0m Add Spanish README and bookmarks feature  
+┊●   [4;34mfd[0m[2mbd753[0m just the one  
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[32m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-8be57a65a091d9ff.html
+
+Calculated height: 506px (23 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found restore command: 04d62f15beb4
+Found CLI command: but status
+Running restore: but restore 04d62f15beb4
+Cache filename for command "but status": branching-and-commiting-but-status-2
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e188332abfd8d0cd.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but branch new` to create a new branch to work on[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but branch new` to create a new branch to work on[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e188332abfd8d0cd.html
+
+Calculated height: 308px (14 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found run command: git branch -D user-bookmarks
+Run command output:
+Deleted branch user-bookmarks (was b4eeb4c1).
+
+Found CLI command: but branch new user-bookmarks
+Cache filename for command "but branch new user-bookmarks": branching-and-commiting-but-branch-3
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-6b34daff1a48ef1c.html" -t light '/usr/local/bin/but branch new user-bookmarks'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Created branch user-bookmarks
+
+---
+❯ /usr/local/bin/but branch new user-bookmarks took 0s
+Created branch user-bookmarks
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-6b34daff1a48ef1c.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-4
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-36986c929421ca8a.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-36986c929421ca8a.html
+
+Calculated height: 374px (17 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but commit -m 'all the user bookmarks'
+Cache filename for command "but commit -m 'all the user bookmarks'": branching-and-commiting-but-commit-5
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-cfe062541d58853a.html" -t light '/usr/local/bin/but commit -m 'all the user bookmarks''
+Working directory: /Users/schacon/projects/why
+Calculated height: 110px (5 lines)
+Content or height changed for command "but commit -m 'all the user bookmarks'" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-6
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9be6da62cac191b4.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9be6da62cac191b4.html
+
+Calculated height: 286px (13 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found run command: git branch -D liked-tweets
+Run command output:
+Deleted branch liked-tweets (was 96485a2e).
+
+Found run command: echo 'test' > app/controllers/likes_controller.rb
+Run command output:
+
+Found run command: echo 'test' > app/models/like.rb
+Run command output:
+
+Found CLI command: but branch new liked-tweets
+Cache filename for command "but branch new liked-tweets": branching-and-commiting-but-branch-7
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-de1beedc45ce956b.html" -t light '/usr/local/bin/but branch new liked-tweets'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Created branch liked-tweets
+
+---
+❯ /usr/local/bin/but branch new liked-tweets took 0s
+Created branch liked-tweets
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-de1beedc45ce956b.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-8
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9e143f12c3f8f27f.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mapp/controllers/likes_controller.rb[0m 
+┊   [4;34mh0[0m M [33mapp/models/like.rb[0m 
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+├╯
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mapp/controllers/likes_controller.rb[0m 
+┊   [4;34mh0[0m M [33mapp/models/like.rb[0m 
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+├╯
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9e143f12c3f8f27f.html
+
+Calculated height: 374px (17 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but commit -m "liked tweets changes" liked-tweets
+Cache filename for command "but commit -m "liked tweets changes" liked-tweets": branching-and-commiting-but-commit-9
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-69819772575a954b.html" -t light '/usr/local/bin/but commit -m "liked tweets changes" liked-tweets'
+Working directory: /Users/schacon/projects/why
+Calculated height: 110px (5 lines)
+Content or height changed for command "but commit -m "liked tweets changes" liked-tweets" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-10
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-d9f17c8a3b218993.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+├╯
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets[0m] [2;3m[0m 
+┊●   [4;34m8a[0m[2mb788d[0m liked tweets changes  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+├╯
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets[0m] [2;3m[0m 
+┊●   [4;34m8a[0m[2mb788d[0m liked tweets changes  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-d9f17c8a3b218993.html
+
+Calculated height: 374px (17 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but status -f
+Cache filename for command "but status -f": branching-and-commiting-but-status-11
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-50f9b1154039cfe8.html" -t light '/usr/local/bin/but status -f'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+┊│     [4;34mi0[0m M [33mGemfile[0m
+┊│     [4;34mj0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mk0[0m A [32mapp/models/bookmark.rb[0m
+┊│     [4;34ml0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mm0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mn0[0m M [33mconfig/routes.rb[0m
+├╯
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets[0m] [2;3m[0m 
+┊●   [4;34m8a[0m[2mb788d[0m liked tweets changes  
+┊│     [4;34mo0[0m M [33mapp/controllers/likes_controller.rb[0m
+┊│     [4;34mp0[0m M [33mapp/models/like.rb[0m
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status -f took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mbf[0m[2m8942e[0m all the user bookmarks  
+┊│     [4;34mi0[0m M [33mGemfile[0m
+┊│     [4;34mj0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mk0[0m A [32mapp/models/bookmark.rb[0m
+┊│     [4;34ml0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mm0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mn0[0m M [33mconfig/routes.rb[0m
+├╯
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets[0m] [2;3m[0m 
+┊●   [4;34m8a[0m[2mb788d[0m liked tweets changes  
+┊│     [4;34mo0[0m M [33mapp/controllers/likes_controller.rb[0m
+┊│     [4;34mp0[0m M [33mapp/models/like.rb[0m
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-50f9b1154039cfe8.html
+
+Calculated height: 550px (25 lines)
+Content or height changed for command "but status -f" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found run command: git branch -D liked-tweets-stacked
+Run command output:
+Deleted branch liked-tweets-stacked (was 6fb3f76b).
+
+Found restore command: e32713a1f41c
+Found CLI command: but branch new -a user-bookmarks liked-tweets-stacked
+Running restore: but restore e32713a1f41c
+Cache filename for command "but branch new -a user-bookmarks liked-tweets-stacked": branching-and-commiting-but-branch-12
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e17635e4acf1cc3d.html" -t light '/usr/local/bin/but branch new -a user-bookmarks liked-tweets-stacked'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Created branch liked-tweets-stacked
+
+---
+❯ /usr/local/bin/but branch new -a user-bookmarks liked-tweets-stacked took 0s
+Created branch liked-tweets-stacked
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e17635e4acf1cc3d.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-13
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c7ec12b0d550f239.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mi0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets-stacked[0m] [2;3m(no commits)[0m 
+┊│
+┊├┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34me6[0m[2m77a2e[0m user bookmarks feature  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mi0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets-stacked[0m] [2;3m(no commits)[0m 
+┊│
+┊├┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34me6[0m[2m77a2e[0m user bookmarks feature  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c7ec12b0d550f239.html
+
+Calculated height: 374px (17 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but commit -m "liked tweets changes" liked-tweets-stacked
+Cache filename for command "but commit -m "liked tweets changes" liked-tweets-stacked": branching-and-commiting-but-commit-14
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-46925730f1f7ea14.html" -t light '/usr/local/bin/but commit -m "liked tweets changes" liked-tweets-stacked'
+Working directory: /Users/schacon/projects/why
+Calculated height: 110px (5 lines)
+Content or height changed for command "but commit -m "liked tweets changes" liked-tweets-stacked" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-15
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-5f7cd7a98e2d1a08.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets-stacked[0m] [2;3m[0m 
+┊●   [4;34me4[0m[2mb87ad[0m liked tweets changes  
+┊│
+┊├┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34me6[0m[2m77a2e[0m user bookmarks feature  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mli[0m [[1;32mliked-tweets-stacked[0m] [2;3m[0m 
+┊●   [4;34me4[0m[2mb87ad[0m liked tweets changes  
+┊│
+┊├┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34me6[0m[2m77a2e[0m user bookmarks feature  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-5f7cd7a98e2d1a08.html
+
+Calculated height: 352px (16 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found restore command: d5c7317b0fd4
+Found CLI command: but status
+Running restore: but restore d5c7317b0fd4
+Cache filename for command "but status": branching-and-commiting-but-status-16
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-0af1191992cb144f.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-0af1191992cb144f.html
+
+Calculated height: 440px (20 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but rub h0,i0,k0 user-bookmarks
+Cache filename for command "but rub h0,i0,k0 user-bookmarks": branching-and-commiting-but-rub-17
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-bbe18bb161931b17.html" -t light '/usr/local/bin/but rub h0,i0,k0 user-bookmarks'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Staged the only hunk in app/controllers/bookmarks_controller.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/models/bookmark.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/views/bookmarks/index.html.erb in the unassigned area → [32m[user-bookmarks][0m.
+
+---
+❯ /usr/local/bin/but rub h0,i0,k0 user-bookmarks took 0s
+Staged the only hunk in app/controllers/bookmarks_controller.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/models/bookmark.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/views/bookmarks/index.html.erb in the unassigned area → [32m[user-bookmarks][0m.
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-bbe18bb161931b17.html
+
+Calculated height: 154px (7 lines)
+Found CLI command: but st
+Cache filename for command "but st": branching-and-commiting-but-st-18
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-14d8c0ab27666c95.html" -t light '/usr/local/bin/but st'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mi0[0m M [33mconfig/routes.rb[0m 
+┊
+┊  ╭┄[4;34mu0[0m [[1;36mstaged to user-bookmarks[0m]
+┊  [2m│[0m [4;34mj0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊  [2m│[0m [4;34mk0[0m A [32mapp/models/bookmark.rb[0m 
+┊  [2m│[0m [4;34ml0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but st took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mi0[0m M [33mconfig/routes.rb[0m 
+┊
+┊  ╭┄[4;34mu0[0m [[1;36mstaged to user-bookmarks[0m]
+┊  [2m│[0m [4;34mj0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊  [2m│[0m [4;34mk0[0m A [32mapp/models/bookmark.rb[0m 
+┊  [2m│[0m [4;34ml0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-14d8c0ab27666c95.html
+
+Calculated height: 484px (22 lines)
+Content or height changed for command "but st" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but rub h0 user-changes
+Cache filename for command "but rub h0 user-changes": branching-and-commiting-but-rub-19
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-2fae59f663dc1b65.html" -t light '/usr/local/bin/but rub h0 user-changes'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Staged all hunks in app/models/user.rb in the unassigned area → [32m[user-changes][0m.
+
+---
+❯ /usr/local/bin/but rub h0 user-changes took 0s
+Staged all hunks in app/models/user.rb in the unassigned area → [32m[user-changes][0m.
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-2fae59f663dc1b65.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-20
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-d9a9ad83301496ad.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mconfig/routes.rb[0m 
+┊
+┊  ╭┄[4;34mu0[0m [[1;36mstaged to user-bookmarks[0m]
+┊  [2m│[0m [4;34mj0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊  [2m│[0m [4;34mk0[0m A [32mapp/models/bookmark.rb[0m 
+┊  [2m│[0m [4;34ml0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊  ╭┄[4;34mv0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34mi0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mconfig/routes.rb[0m 
+┊
+┊  ╭┄[4;34mu0[0m [[1;36mstaged to user-bookmarks[0m]
+┊  [2m│[0m [4;34mj0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊  [2m│[0m [4;34mk0[0m A [32mapp/models/bookmark.rb[0m 
+┊  [2m│[0m [4;34ml0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊  ╭┄[4;34mv0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34mi0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-d9a9ad83301496ad.html
+
+Calculated height: 528px (24 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but commit -o -m "liked tweets view" bo
+Cache filename for command "but commit -o -m "liked tweets view" bo": branching-and-commiting-but-commit-21
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c4ec80e8978391b1.html" -t light '/usr/local/bin/but commit -o -m "liked tweets view" bo'
+Working directory: /Users/schacon/projects/why
+Calculated height: 110px (5 lines)
+Content or height changed for command "but commit -o -m "liked tweets view" bo" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but st
+Cache filename for command "but st": branching-and-commiting-but-st-22
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-411b7ed4740b6c72.html" -t light '/usr/local/bin/but st'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m72[0m[2m8ba67[0m liked tweets view  
+├╯
+┊
+┊  ╭┄[4;34mp0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34mi0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but st took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m72[0m[2m8ba67[0m liked tweets view  
+├╯
+┊
+┊  ╭┄[4;34mp0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34mi0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-411b7ed4740b6c72.html
+
+Calculated height: 440px (20 lines)
+Content or height changed for command "but st" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but commit -m 'bookmarks stuff' ch
+Cache filename for command "but commit -m 'bookmarks stuff' ch": branching-and-commiting-but-commit-23
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c2fd883a91fa3a7b.html" -t light '/usr/local/bin/but commit -m 'bookmarks stuff' ch'
+Working directory: /Users/schacon/projects/why
+Calculated height: 110px (5 lines)
+Content or height changed for command "but commit -m 'bookmarks stuff' ch" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-24
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-41f81d7c852e0013.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m72[0m[2m8ba67[0m liked tweets view  
+├╯
+┊
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m[0m 
+┊●   [4;34m6b[0m[2m3618f[0m bookmarks stuff  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m72[0m[2m8ba67[0m liked tweets view  
+├╯
+┊
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m[0m 
+┊●   [4;34m6b[0m[2m3618f[0m bookmarks stuff  
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-41f81d7c852e0013.html
+
+Calculated height: 374px (17 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found restore command: 6fdd8fb1d547
+Found run command: but rub l0 zz
+Run command output:
+Uncommitted changes
+
+
+Found CLI command: but status
+Running restore: but restore 6fdd8fb1d547
+Cache filename for command "but status": branching-and-commiting-but-status-25
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c5ea113d7fb7a0a7.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34mk0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊  ╭┄[4;34mv0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34ml0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊   [4;34mi0[0m A [32mapp/models/bookmark.rb[0m 
+┊   [4;34mj0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34mk0[0m M [33mconfig/routes.rb[0m 
+┊
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊  ╭┄[4;34mv0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34ml0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c5ea113d7fb7a0a7.html
+
+Calculated height: 484px (22 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Found CLI command: but rub h0-k0 user-bookmarks
+Cache filename for command "but rub h0-k0 user-bookmarks": branching-and-commiting-but-rub-26
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-59309021a44dd8a3.html" -t light '/usr/local/bin/but rub h0-k0 user-bookmarks'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Staged the only hunk in app/controllers/bookmarks_controller.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/models/bookmark.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/views/bookmarks/index.html.erb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in config/routes.rb in the unassigned area → [32m[user-bookmarks][0m.
+
+---
+❯ /usr/local/bin/but rub h0-k0 user-bookmarks took 0s
+Staged the only hunk in app/controllers/bookmarks_controller.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/models/bookmark.rb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in app/views/bookmarks/index.html.erb in the unassigned area → [32m[user-bookmarks][0m.
+Staged the only hunk in config/routes.rb in the unassigned area → [32m[user-bookmarks][0m.
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-59309021a44dd8a3.html
+
+Calculated height: 176px (8 lines)
+Found CLI command: but status
+Cache filename for command "but status": branching-and-commiting-but-status-27
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-8881c467c23cbda6.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊
+┊  ╭┄[4;34mu0[0m [[1;36mstaged to user-bookmarks[0m]
+┊  [2m│[0m [4;34mi0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊  [2m│[0m [4;34mj0[0m A [32mapp/models/bookmark.rb[0m 
+┊  [2m│[0m [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊  [2m│[0m [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊  ╭┄[4;34mv0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34mh0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊
+┊  ╭┄[4;34mu0[0m [[1;36mstaged to user-bookmarks[0m]
+┊  [2m│[0m [4;34mi0[0m A [32mapp/controllers/bookmarks_controller.rb[0m 
+┊  [2m│[0m [4;34mj0[0m A [32mapp/models/bookmark.rb[0m 
+┊  [2m│[0m [4;34mk0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊  [2m│[0m [4;34ml0[0m M [33mconfig/routes.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mbo[0m [[1;32muser-bookmarks[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊  ╭┄[4;34mv0[0m [[1;36mstaged to user-changes[0m]
+┊  [2m│[0m [4;34mh0[0m M [33mapp/models/user.rb[0m 
+┊  [2m│[0m
+┊╭┄[4;34mch[0m [[1;32muser-changes[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┴ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-8881c467c23cbda6.html
+
+Calculated height: 528px (24 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+  Content hash changed
+Updated: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Found restore command: bd526ee8c76c
+Found run command: but stage h0 us
+Run command output:
+
+
+Found run command: git push -f origin 32a2175758f7f649ed7a030a17fd21213a5e400f:refs/heads/main
+Run command output:
+
+Found CLI command: but status --files
+Running restore: but restore bd526ee8c76c
+Cache filename for command "but status --files": inspecting-but-status-1
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-20fe90d95f7a8756.html" -t light '/usr/local/bin/but status --files'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mREADME.md[0m 
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mfd[0m[2me72a6[0m add user changes  
+┊│     [4;34mm0[0m M [33mapp/models/user.rb[0m
+┊●   [4;34m85[0m[2mefe19[0m create bookmarks  
+┊│     [4;34mn0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mo0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+├╯
+┊
+┴ [2m32a2175[0m (common base) [[1;32morigin/main[0m] [2m2025-11-03[0m Merge pull request #65 from schacon/feature-bookma[2m(checked 2 minutes ago)[0m
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status --files took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mGemfile[0m 
+┊   [4;34mh0[0m M [33mREADME.md[0m 
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mfd[0m[2me72a6[0m add user changes  
+┊│     [4;34mm0[0m M [33mapp/models/user.rb[0m
+┊●   [4;34m85[0m[2mefe19[0m create bookmarks  
+┊│     [4;34mn0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mo0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+├╯
+┊
+┴ [2m32a2175[0m (common base) [[1;32morigin/main[0m] [2m2025-11-03[0m Merge pull request #65 from schacon/feature-bookma[2m(checked 2 minutes ago)[0m
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-20fe90d95f7a8756.html
+
+Calculated height: 396px (18 lines)
+Content or height changed for command "but status --files" in content/docs/cli-guides/cli-tutorial/inspecting.mdx
+  Content hash changed
+Found CLI command: git diff HEAD
+Cache filename for command "git diff HEAD": inspecting-git-1
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-1c88163b9597b1d4.html" -t light 'git diff HEAD'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: diff --git c/Gemfile w/Gemfile
+index 5cd27fa8..5c76922c 100644
+--- c/Gemfile
++++ w/Gemfile
+@@ -21,7 +21,7 @@ gem "jbuilder"
+ # gem "bcrypt", "~> 3.1.7"
+ 
+ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+-gem "tzinfo-data", platforms: %i[ windows jruby ]
++gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+ 
+ # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+ gem "solid_cache"
+@@ -42,7 +42,7 @@ gem "thruster", require: false
+ 
+ group :development, :test do
+   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
++  gem "debug", platforms: %i[ mri mingw mswin x64_mingw ], require: "debug/prelude"
+ 
+   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+   gem "brakeman", require: false
+diff --git c/README.md w/README.md
+index 32fb79f3..57d59121 100644
+--- c/README.md
++++ w/README.md
+@@ -76,6 +76,6 @@ bundle exec rubocop
+ 
+ This project is open source and available under the [MIT License](LICENSE).
+ 
+-## New Stuff
++## Even More New Stuff
+ 
+-New stuff is always coming
++New stuff is always coming, and more is on the way!
+
+---
+❯ git diff HEAD took 0s
+diff --git c/Gemfile w/Gemfile
+index 5cd27fa8..5c76922c 100644
+--- c/Gemfile
++++ w/Gemfile
+@@ -21,7 +21,7 @@ gem "jbuilder"
+ # gem "bcrypt", "~> 3.1.7"
+ 
+ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+-gem "tzinfo-data", platforms: %i[ windows jruby ]
++gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+ 
+ # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+ gem "solid_cache"
+@@ -42,7 +42,7 @@ gem "thruster", require: false
+ 
+ group :development, :test do
+   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
++  gem "debug", platforms: %i[ mri mingw mswin x64_mingw ], require: "debug/prelude"
+ 
+   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+   gem "brakeman", require: false
+diff --git c/README.md w/README.md
+index 32fb79f3..57d59121 100644
+--- c/README.md
++++ w/README.md
+@@ -76,6 +76,6 @@ bundle exec rubocop
+ 
+ This project is open source and available under the [MIT License](LICENSE).
+ 
+-## New Stuff
++## Even More New Stuff
+ 
+-New stuff is always coming
++New stuff is always coming, and more is on the way!
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-1c88163b9597b1d4.html
+
+Calculated height: 836px (38 lines)
+Found CLI command: but diff
+Cache filename for command "but diff": inspecting-but-diff-2
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-6ed556a9835f0fd4.html" -t light '/usr/local/bin/but diff'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: [2m──────────[0m╮
+[4;34mi0[0m [97mGemfile[0m│
+[2m──────────[0m╯
+   [2m21 21[0m│ # gem "bcrypt", "~> 3.1.7"
+   [2m22 22[0m│ 
+   [2m23 23[0m│ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+   [31m24   │-gem "tzinfo-data", platforms: %i[ windows jruby ][0m
+   [32m   24│+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ][0m
+   [2m25 25[0m│ 
+   [2m26 26[0m│ # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+   [2m27 27[0m│ gem "solid_cache"
+[2m──────────[0m╮
+[4;34mj0[0m [97mGemfile[0m│
+[2m──────────[0m╯
+   [2m42 42[0m│ 
+   [2m43 43[0m│ group :development, :test do
+   [2m44 44[0m│   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+   [31m45   │-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"[0m
+   [32m   45│+  gem "debug", platforms: %i[ mri mingw mswin x64_mingw ], require: "debug/prelude"[0m
+   [2m46 46[0m│ 
+   [2m47 47[0m│   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+   [2m48 48[0m│   gem "brakeman", require: false
+[2m────────────[0m╮
+[4;34mk0[0m [97mREADME.md[0m│
+[2m────────────[0m╯
+   [2m76 76[0m│ 
+   [2m77 77[0m│ This project is open source and available under the [MIT License](LICENSE).
+   [2m78 78[0m│ 
+   [31m79   │-## New Stuff[0m
+   [32m   79│+## Even More New Stuff[0m
+   [2m80 80[0m│ 
+   [31m81   │-New stuff is always coming[0m
+   [32m   81│+New stuff is always coming, and more is on the way![0m
+
+---
+❯ /usr/local/bin/but diff took 0s
+[2m──────────[0m╮
+[4;34mi0[0m [97mGemfile[0m│
+[2m──────────[0m╯
+   [2m21 21[0m│ # gem "bcrypt", "~> 3.1.7"
+   [2m22 22[0m│ 
+   [2m23 23[0m│ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+   [31m24   │-gem "tzinfo-data", platforms: %i[ windows jruby ][0m
+   [32m   24│+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ][0m
+   [2m25 25[0m│ 
+   [2m26 26[0m│ # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+   [2m27 27[0m│ gem "solid_cache"
+[2m──────────[0m╮
+[4;34mj0[0m [97mGemfile[0m│
+[2m──────────[0m╯
+   [2m42 42[0m│ 
+   [2m43 43[0m│ group :development, :test do
+   [2m44 44[0m│   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+   [31m45   │-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"[0m
+   [32m   45│+  gem "debug", platforms: %i[ mri mingw mswin x64_mingw ], require: "debug/prelude"[0m
+   [2m46 46[0m│ 
+   [2m47 47[0m│   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+   [2m48 48[0m│   gem "brakeman", require: false
+[2m────────────[0m╮
+[4;34mk0[0m [97mREADME.md[0m│
+[2m────────────[0m╯
+   [2m76 76[0m│ 
+   [2m77 77[0m│ This project is open source and available under the [MIT License](LICENSE).
+   [2m78 78[0m│ 
+   [31m79   │-## New Stuff[0m
+   [32m   79│+## Even More New Stuff[0m
+   [2m80 80[0m│ 
+   [31m81   │-New stuff is always coming[0m
+   [32m   81│+New stuff is always coming, and more is on the way![0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-6ed556a9835f0fd4.html
+
+Calculated height: 814px (37 lines)
+Found CLI command: git branch | head -10
+Cache filename for command "git branch | head -10": inspecting-git-2
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-0eb5521f2e801ab0.html" -t light 'git branch | head -10'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: * gitbutler/workspace
+  user-bookmarks
+  sc-lefty-branch
+  sc-tests-controllers
+  sc-bookmarks-comments2
+  sc-likes
+  docs-tests-likes-bookmarks
+  sc-branch-30
+  sc-branch-29
+  gitbutler/edit
+
+---
+❯ git branch | head -10 took 0s
+* gitbutler/workspace
+  user-bookmarks
+  sc-lefty-branch
+  sc-tests-controllers
+  sc-bookmarks-comments2
+  sc-likes
+  docs-tests-likes-bookmarks
+  sc-branch-30
+  sc-branch-29
+  gitbutler/edit
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-0eb5521f2e801ab0.html
+
+Calculated height: 286px (13 lines)
+Found CLI command: but branch
+Cache filename for command "but branch": inspecting-but-branch-3
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-12584193bff14467.html" -t light '/usr/local/bin/but branch'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: [32mApplied Branches[0m
+[2m00[0m   [32mactive[0m  [32m✓ [0m[32m*[0muser-bookmark…        [2mtoday[0m      [2mScott Chacon[0m      
+Unapplied Branches
+[2m01[0m   local   [32m✓ [0msc-lefty-branch              [96m↑1[0m     [2m1w ago[0m     [2mScott Chacon[0m      
+[2m02[0m   local   [32m✓ [0msc-tests-controllers         [96m↑1[0m     [2m1w ago[0m     [2mScott Chacon[0m      
+[2m03[0m   local   [32m✓ [0msc-likes                     [96m↑1[0m     [2m2w ago[0m     [2mScott Chacon[0m      
+[2m04[0m   local   [32m✓ [0msc-bookmarks-comments2       [96m↑2[0m     [2m2w ago[0m     [2mScott Chacon[0m      
+[2m05[0m   local   [32m✓ [0mdocs-tests-likes-bookmarks   [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m06[0m   local   [31m✗ [0msc-branch-30                 [96m↑3[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m07[0m   local   [31m✗ [0msc-branch-29                 [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m08[0m   local   [32m✓ [0mgitbutler/worktree/2c7f3480… [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m09[0m   [2mremote[0m  [32m✓ [0mtest                         [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m0a[0m   local   [32m✓ [0mtest-branch-delete-me        [96m↑4[0m     [2m2mo ago[0m    [2mGitButler[0m         
+[2m0b[0m   local   [32m✓ [0mfeature-a-frontend           [96m↑3[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m0c[0m   local   [32m✓ [0mfeature-a-backend            [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m0d[0m   local   [32m✓ [0msc-routes-changes            [96m↑1[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0e[0m   local   [32m✓ [0msc-branch-28                 [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0f[0m   [2mremote[0m  [32m✓ [0mschacon-patch-1              [96m↑0[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0g[0m   local   [32m✓ [0mfeature-awesome-thing        [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0h[0m   local   [32m✓ [0mnew-branch-name              [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0i[0m   local   [32m✓ [0mgemfile-fixes                [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0j[0m   local   [32m✓ [0mfeature-bookmarks            [96m↑0[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0k[0m   local   [32m✓ [0msc-branch-26                 [96m↑1[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+... and 115 more branches (use --all to show all)
+
+---
+❯ /usr/local/bin/but branch took 0s
+[32mApplied Branches[0m
+[2m00[0m   [32mactive[0m  [32m✓ [0m[32m*[0muser-bookmark…        [2mtoday[0m      [2mScott Chacon[0m      
+
+Unapplied Branches
+[2m01[0m   local   [32m✓ [0msc-lefty-branch              [96m↑1[0m     [2m1w ago[0m     [2mScott Chacon[0m      
+[2m02[0m   local   [32m✓ [0msc-tests-controllers         [96m↑1[0m     [2m1w ago[0m     [2mScott Chacon[0m      
+[2m03[0m   local   [32m✓ [0msc-likes                     [96m↑1[0m     [2m2w ago[0m     [2mScott Chacon[0m      
+[2m04[0m   local   [32m✓ [0msc-bookmarks-comments2       [96m↑2[0m     [2m2w ago[0m     [2mScott Chacon[0m      
+[2m05[0m   local   [32m✓ [0mdocs-tests-likes-bookmarks   [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m06[0m   local   [31m✗ [0msc-branch-30                 [96m↑3[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m07[0m   local   [31m✗ [0msc-branch-29                 [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m08[0m   local   [32m✓ [0mgitbutler/worktree/2c7f3480… [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m09[0m   [2mremote[0m  [32m✓ [0mtest                         [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m0a[0m   local   [32m✓ [0mtest-branch-delete-me        [96m↑4[0m     [2m2mo ago[0m    [2mGitButler[0m         
+[2m0b[0m   local   [32m✓ [0mfeature-a-frontend           [96m↑3[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m0c[0m   local   [32m✓ [0mfeature-a-backend            [96m↑1[0m     [2m2mo ago[0m    [2mScott Chacon[0m      
+[2m0d[0m   local   [32m✓ [0msc-routes-changes            [96m↑1[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0e[0m   local   [32m✓ [0msc-branch-28                 [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0f[0m   [2mremote[0m  [32m✓ [0mschacon-patch-1              [96m↑0[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0g[0m   local   [32m✓ [0mfeature-awesome-thing        [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0h[0m   local   [32m✓ [0mnew-branch-name              [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0i[0m   local   [32m✓ [0mgemfile-fixes                [96m↑2[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0j[0m   local   [32m✓ [0mfeature-bookmarks            [96m↑0[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+[2m0k[0m   local   [32m✓ [0msc-branch-26                 [96m↑1[0m     [2m3mo ago[0m    [2mScott Chacon[0m      
+
+... and 115 more branches (use --all to show all)
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-12584193bff14467.html
+
+Calculated height: 660px (30 lines)
+Content or height changed for command "but branch" in content/docs/cli-guides/cli-tutorial/inspecting.mdx
+  Content hash changed
+Updated: content/docs/cli-guides/cli-tutorial/inspecting.mdx
+Found restore command: f0f437258043
+Found run command: but rub g0,h0 gemfile-fixes
+Run command output:
+
+
+Found CLI command: but status
+Running restore: but restore f0f437258043
+Cache filename for command "but status": rubbing-but-status-1
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9a464b53b2a0f6b0.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34mda[0m[34m42d06[0m
+┊   [4;34mh0[0m A [32mREADME.new.md[0m 
+┊   [4;34mi0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34mda[0m[2m42d06[0m Add Spanish README and bookmarks feature  
+┊●   [4;34mfd[0m[2mbd753[0m just the one  
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[35m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34mda[0m[34m42d06[0m
+┊   [4;34mh0[0m A [32mREADME.new.md[0m 
+┊   [4;34mi0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34mda[0m[2m42d06[0m Add Spanish README and bookmarks feature  
+┊●   [4;34mfd[0m[2mbd753[0m just the one  
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[35m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9a464b53b2a0f6b0.html
+
+Calculated height: 528px (24 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found CLI command: but status
+Cache filename for command "but status": rubbing-but-status-2
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c4bfaf4db3741ee6.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34mda[0m[34m42d06[0m
+┊   [4;34mh0[0m A [32mREADME.new.md[0m 
+┊   [4;34mi0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34mda[0m[2m42d06[0m Add Spanish README and bookmarks feature  
+┊●   [4;34mfd[0m[2mbd753[0m just the one  
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[35m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34mda[0m[34m42d06[0m
+┊   [4;34mh0[0m A [32mREADME.new.md[0m 
+┊   [4;34mi0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34mda[0m[2m42d06[0m Add Spanish README and bookmarks feature  
+┊●   [4;34mfd[0m[2mbd753[0m just the one  
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[35m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c4bfaf4db3741ee6.html
+
+Calculated height: 528px (24 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found CLI command: but rub h0 da42d06
+Cache filename for command "but rub h0 da42d06": rubbing-but-rub-3
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-856846d57d449539.html" -t light '/usr/local/bin/but rub h0 da42d06'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Amended the only hunk in README.new.md in the unassigned area → [4;34mfa[0m[34m2544d[0m
+
+---
+❯ /usr/local/bin/but rub h0 da42d06 took 0s
+Amended the only hunk in README.new.md in the unassigned area → [4;34mfa[0m[34m2544d[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-856846d57d449539.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but rub app/views/bookmarks/index.html.erb fdbd753
+Cache filename for command "but rub app/views/bookmarks/index.html.erb fdbd753": rubbing-but-rub-4
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e67326e0637ad212.html" -t light '/usr/local/bin/but rub app/views/bookmarks/index.html.erb fdbd753'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Amended the only hunk in app/views/bookmarks/index.html.erb in the unassigned area → [4;34m41[0m[34m28746[0m
+
+---
+❯ /usr/local/bin/but rub app/views/bookmarks/index.html.erb fdbd753 took 0s
+Amended the only hunk in app/views/bookmarks/index.html.erb in the unassigned area → [4;34m41[0m[34m28746[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e67326e0637ad212.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status --files
+Cache filename for command "but status --files": rubbing-but-status-5
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c14402ca93a8a5da.html" -t light '/usr/local/bin/but status --files'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34m27[0m[34m118eb[0m
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34m27[0m[2m118eb[0m Add Spanish README and bookmarks feature  
+┊│     [4;34mk0[0m M [33mGemfile[0m
+┊│     [4;34ml0[0m A [32mREADME-es.md[0m
+┊│     [4;34mm0[0m A [32mREADME.new.md[0m
+┊│     [4;34mn0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mo0[0m M [33mapp/views/dashboard/index.html.erb[0m
+┊●   [4;34m41[0m[2m28746[0m just the one  
+┊│     [4;34mp0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mq0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[35m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+┊│     [4;34mr0[0m A [32mapp/models/bookmark.rb[0m
+┊│     [4;34ms0[0m M [33mconfig/routes.rb[0m
+┊│     [4;34mt0[0m A [32mspacer.txt[0m
+┊│     [4;34mu0[0m A [32mtesting.md[0m
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+┊│     [4;34mv0[0m M [33mapp/models/tweet.rb[0m
+┊│     [4;34mw0[0m A [32mdb/migrate/20250925000001_create_bookmarks.rb[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status --files took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mREADME-es.md[0m 🔒 [4;34m27[0m[34m118eb[0m
+┊
+┊╭┄[4;34mge[0m [[1;32mgemfile-fixes[0m] [2;3m[0m 
+┊●   [4;34m27[0m[2m118eb[0m Add Spanish README and bookmarks feature  
+┊│     [4;34mk0[0m M [33mGemfile[0m
+┊│     [4;34ml0[0m A [32mREADME-es.md[0m
+┊│     [4;34mm0[0m A [32mREADME.new.md[0m
+┊│     [4;34mn0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mo0[0m M [33mapp/views/dashboard/index.html.erb[0m
+┊●   [4;34m41[0m[2m28746[0m just the one  
+┊│     [4;34mp0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mq0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│
+┊├┄[4;34mat[0m [[1;32mfeature-bookmarks[0m] [2;3m[0m 
+┊[35m●[0m   [4;34m22[0m[2m3fdd6[0m feat: Add bookmarks table to store user-tweet rela  
+┊│     [4;34mr0[0m A [32mapp/models/bookmark.rb[0m
+┊│     [4;34ms0[0m M [33mconfig/routes.rb[0m
+┊│     [4;34mt0[0m A [32mspacer.txt[0m
+┊│     [4;34mu0[0m A [32mtesting.md[0m
+├╯
+┊
+┊╭┄[4;34msc[0m [[1;32msc-branch-26[0m] [2;3m[0m 
+┊●   [4;34mf5[0m[2m5a30e[0m add bookmark model and associations  
+┊│     [4;34mv0[0m M [33mapp/models/tweet.rb[0m
+┊│     [4;34mw0[0m A [32mdb/migrate/20250925000001_create_bookmarks.rb[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-c14402ca93a8a5da.html
+
+Calculated height: 770px (35 lines)
+Content or height changed for command "but status --files" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found restore command: eb63f26e885a
+Found CLI command: but status
+Running restore: but restore eb63f26e885a
+Cache filename for command "but status": rubbing-but-status-6
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f29cd7a269df405c.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m0f[0m[2ma2965[0m the second commit  
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m0f[0m[2ma2965[0m the second commit  
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f29cd7a269df405c.html
+
+Calculated height: 330px (15 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found CLI command: but rub 0f 08
+Cache filename for command "but rub 0f 08": rubbing-but-rub-7
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-3abf3cca22d39d5c.html" -t light '/usr/local/bin/but rub 0f 08'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Squashed [34m0fa2965[0m → [34m9f1384c[0m
+
+---
+❯ /usr/local/bin/but rub 0f 08 took 0s
+Squashed [34m0fa2965[0m → [34m9f1384c[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-3abf3cca22d39d5c.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": rubbing-but-status-8
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-b6912bc96a8d4563.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m9f[0m[2m1384c[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m9f[0m[2m1384c[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-b6912bc96a8d4563.html
+
+Calculated height: 308px (14 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found restore command: eb63f26e885a
+Found CLI command: but status
+Running restore: but restore eb63f26e885a
+Cache filename for command "but status": rubbing-but-status-9
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-b4d0ac75ca5ecefa.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m0f[0m[2ma2965[0m the second commit  
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m0f[0m[2ma2965[0m the second commit  
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-b4d0ac75ca5ecefa.html
+
+Calculated height: 330px (15 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found CLI command: but rub 0f zz
+Cache filename for command "but rub 0f zz": rubbing-but-rub-10
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-05496b1b7fe1d6ce.html" -t light '/usr/local/bin/but rub 0f zz'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Uncommitted [34m0fa2965[0m
+
+---
+❯ /usr/local/bin/but rub 0f zz took 0s
+Uncommitted [34m0fa2965[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-05496b1b7fe1d6ce.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": rubbing-but-status-11
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-cde082e1493f4978.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mh0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34mi0[0m M [33mapp/views/dashboard/index.html.erb[0m 
+┊   [4;34mj0[0m M [33mconfig/routes.rb[0m 
+┊   [4;34mk0[0m A [32mspacer.txt[0m 
+┊   [4;34ml0[0m A [32mtesting.md[0m 
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊   [4;34mg0[0m M [33mapp/models/user.rb[0m 
+┊   [4;34mh0[0m A [32mapp/views/bookmarks/index.html.erb[0m 
+┊   [4;34mi0[0m M [33mapp/views/dashboard/index.html.erb[0m 
+┊   [4;34mj0[0m M [33mconfig/routes.rb[0m 
+┊   [4;34mk0[0m A [32mspacer.txt[0m 
+┊   [4;34ml0[0m A [32mtesting.md[0m 
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but diff` to see uncommitted changes and `but stage <file>` to stage them to a branch[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-cde082e1493f4978.html
+
+Calculated height: 418px (19 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found restore command: f71c049739a9
+Found CLI command: but status
+Running restore: but restore f71c049739a9
+Cache filename for command "but status": rubbing-but-status-12
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f90c846c1b9df0b2.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m0f[0m[2ma2965[0m the second commit  
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m0f[0m[2ma2965[0m the second commit  
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m(no commits)[0m 
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f90c846c1b9df0b2.html
+
+Calculated height: 396px (18 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found CLI command: but rub 0f mo
+Cache filename for command "but rub 0f mo": rubbing-but-rub-13
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e78da1044314d836.html" -t light '/usr/local/bin/but rub 0f mo'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Moved [34m0fa2965[0m → [32m[move-second-commit][0m
+
+---
+❯ /usr/local/bin/but rub 0f mo took 0s
+Moved [34m0fa2965[0m → [32m[move-second-commit][0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e78da1044314d836.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": rubbing-but-status-14
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-29cad7f0b50cd170.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m[0m 
+┊●   [4;34m5b[0m[2me95a8[0m the second commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m[0m 
+┊●   [4;34m5b[0m[2me95a8[0m the second commit  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-29cad7f0b50cd170.html
+
+Calculated height: 396px (18 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found restore command: 6ccc38e33e0e
+Found CLI command: but status -f
+Running restore: but restore 6ccc38e33e0e
+Cache filename for command "but status -f": rubbing-but-status-15
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-87a4e0e665d6dbfc.html" -t light '/usr/local/bin/but status -f'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+┊│     [4;34mi0[0m M [33mGemfile[0m
+┊│     [4;34mj0[0m A [32mREADME-es.md[0m
+┊│     [4;34mk0[0m A [32mREADME.new.md[0m
+┊│     [4;34ml0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mm0[0m A [32mapp/models/bookmark.rb[0m
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m[0m 
+┊●   [4;34m2e[0m[2mf4df5[0m the second commit  
+┊│     [4;34mn0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mo0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mp0[0m M [33mapp/views/dashboard/index.html.erb[0m
+┊│     [4;34mq0[0m M [33mconfig/routes.rb[0m
+┊│     [4;34mr0[0m A [32mspacer.txt[0m
+┊│     [4;34ms0[0m A [32mtesting.md[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status -f took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m08[0m[2m0a970[0m the original commit  
+┊│     [4;34mi0[0m M [33mGemfile[0m
+┊│     [4;34mj0[0m A [32mREADME-es.md[0m
+┊│     [4;34mk0[0m A [32mREADME.new.md[0m
+┊│     [4;34ml0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mm0[0m A [32mapp/models/bookmark.rb[0m
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m[0m 
+┊●   [4;34m2e[0m[2mf4df5[0m the second commit  
+┊│     [4;34mn0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mo0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mp0[0m M [33mapp/views/dashboard/index.html.erb[0m
+┊│     [4;34mq0[0m M [33mconfig/routes.rb[0m
+┊│     [4;34mr0[0m A [32mspacer.txt[0m
+┊│     [4;34ms0[0m A [32mtesting.md[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-87a4e0e665d6dbfc.html
+
+Calculated height: 638px (29 lines)
+Content or height changed for command "but status -f" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found CLI command: but rub l0 2e
+Cache filename for command "but rub l0 2e": rubbing-but-rub-16
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-a487f1738ff4cf0c.html" -t light '/usr/local/bin/but rub l0 2e'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Moved files between commits!
+
+---
+❯ /usr/local/bin/but rub l0 2e took 0s
+Moved files between commits!
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-a487f1738ff4cf0c.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status -f
+Cache filename for command "but status -f": rubbing-but-status-17
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e5dea8fb3ec819fb.html" -t light '/usr/local/bin/but status -f'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m95[0m[2mb1d19[0m the original commit  
+┊│     [4;34mi0[0m M [33mGemfile[0m
+┊│     [4;34mj0[0m A [32mREADME-es.md[0m
+┊│     [4;34mk0[0m A [32mREADME.new.md[0m
+┊│     [4;34ml0[0m A [32mapp/models/bookmark.rb[0m
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m[0m 
+┊●   [4;34m6b[0m[2ma5abc[0m the second commit  
+┊│     [4;34mm0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mn0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mo0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mp0[0m M [33mapp/views/dashboard/index.html.erb[0m
+┊│     [4;34mq0[0m M [33mconfig/routes.rb[0m
+┊│     [4;34mr0[0m A [32mspacer.txt[0m
+┊│     [4;34ms0[0m A [32mtesting.md[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status -f took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34msq[0m [[1;32msquash-example[0m] [2;3m[0m 
+┊●   [4;34m95[0m[2mb1d19[0m the original commit  
+┊│     [4;34mi0[0m M [33mGemfile[0m
+┊│     [4;34mj0[0m A [32mREADME-es.md[0m
+┊│     [4;34mk0[0m A [32mREADME.new.md[0m
+┊│     [4;34ml0[0m A [32mapp/models/bookmark.rb[0m
+├╯
+┊
+┊╭┄[4;34mmo[0m [[1;32mmove-second-commit[0m] [2;3m[0m 
+┊●   [4;34m6b[0m[2ma5abc[0m the second commit  
+┊│     [4;34mm0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mn0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34mo0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mp0[0m M [33mapp/views/dashboard/index.html.erb[0m
+┊│     [4;34mq0[0m M [33mconfig/routes.rb[0m
+┊│     [4;34mr0[0m A [32mspacer.txt[0m
+┊│     [4;34ms0[0m A [32mtesting.md[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e5dea8fb3ec819fb.html
+
+Calculated height: 638px (29 lines)
+Content or height changed for command "but status -f" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found restore command: 64df45a76e99
+Found CLI command: but status
+Running restore: but restore 64df45a76e99
+Cache filename for command "but status": rubbing-but-status-18
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f1c632cd7fb3571b.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m6a[0m[2m62ad5[0m all of the changes  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m6a[0m[2m62ad5[0m all of the changes  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f1c632cd7fb3571b.html
+
+Calculated height: 308px (14 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Found CLI command: but new 6a
+Cache filename for command "but new 6a": rubbing-but-new-19
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-547164a436828794.html" -t light '/usr/local/bin/but new 6a'
+Working directory: /Users/schacon/projects/why
+Calculated height: 88px (4 lines)
+Found CLI command: but status -f
+Cache filename for command "but status -f": rubbing-but-status-20
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e2fade418c3ebd12.html" -t light '/usr/local/bin/but status -f'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m6a[0m[2m62ad5[0m all of the changes  
+┊│     [4;34mh0[0m M [33mGemfile[0m
+┊│     [4;34mi0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mj0[0m A [32mapp/models/bookmark.rb[0m
+┊│     [4;34mk0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34ml0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mm0[0m M [33mconfig/routes.rb[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status -f took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m6a[0m[2m62ad5[0m all of the changes  
+┊│     [4;34mh0[0m M [33mGemfile[0m
+┊│     [4;34mi0[0m A [32mapp/controllers/bookmarks_controller.rb[0m
+┊│     [4;34mj0[0m A [32mapp/models/bookmark.rb[0m
+┊│     [4;34mk0[0m M [33mapp/models/user.rb[0m
+┊│     [4;34ml0[0m A [32mapp/views/bookmarks/index.html.erb[0m
+┊│     [4;34mm0[0m M [33mconfig/routes.rb[0m
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-e2fade418c3ebd12.html
+
+Calculated height: 440px (20 lines)
+Content or height changed for command "but status -f" in content/docs/cli-guides/cli-tutorial/rubbing.mdx
+  Content hash changed
+Updated: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Found restore command: d69fffa7c6eb
+Found CLI command: but status
+Running restore: but restore d69fffa7c6eb
+Cache filename for command "but status": editing-commits-but-status-1
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-feadc74be67dd86b.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m46[0m[2m4aae4[0m add user changes  
+┊●   [4;34mca[0m[2m81308[0m create bookmarks  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34m46[0m[2m4aae4[0m add user changes  
+┊●   [4;34mca[0m[2m81308[0m create bookmarks  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-feadc74be67dd86b.html
+
+Calculated height: 330px (15 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/editing-commits.mdx
+  Content hash changed
+Found CLI command: but reword -m feature-awesome-thing us
+Cache filename for command "but reword -m feature-awesome-thing us": editing-commits-but-reword-2
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-118b96fe724b39ea.html" -t light '/usr/local/bin/but reword -m feature-awesome-thing us'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: Renamed branch 'user-bookmarks' to 'feature-awesome-thing'
+
+---
+❯ /usr/local/bin/but reword -m feature-awesome-thing us took 0s
+Renamed branch 'user-bookmarks' to 'feature-awesome-thing'
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-118b96fe724b39ea.html
+
+Calculated height: 110px (5 lines)
+Found CLI command: but status
+Cache filename for command "but status": editing-commits-but-status-3
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f23642288a4c02db.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mat[0m [[1;32mfeature-awesome-thing[0m] [2;3m[0m 
+┊●   [4;34m46[0m[2m4aae4[0m add user changes  
+┊●   [4;34mca[0m[2m81308[0m create bookmarks  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mat[0m [[1;32mfeature-awesome-thing[0m] [2;3m[0m 
+┊●   [4;34m46[0m[2m4aae4[0m add user changes  
+┊●   [4;34mca[0m[2m81308[0m create bookmarks  
+├╯
+┊
+┊[33m●[0m [2m32a2175[0m (upstream) ⏫ 2 new commits [2m(checked 2 minutes ago)[0m
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-f23642288a4c02db.html
+
+Calculated height: 330px (15 lines)
+Content or height changed for command "but status" in content/docs/cli-guides/cli-tutorial/editing-commits.mdx
+  Content hash changed
+Updated: content/docs/cli-guides/cli-tutorial/editing-commits.mdx
+Found CLI command: but oplog
+Cache filename for command "but oplog": operations-log-but-oplog-1
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-71dba91f0312919c.html" -t light '/usr/local/bin/but oplog'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: [1;34mOperations History[0m
+[2m──────────────────────────────────────────────────[0m
+[4;34ma1271f7[0m[2;34mb176c[0m [2m2020-10-09 09:06:03[0m [OTHER] UpdateDependentBranchName
+[4;34m07ecb3d[0m[2;34m0bf29[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m3ac0b4c[0m[2;34m4ca95[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m1ed9a6a[0m[2;34m52b05[0m [2m2020-10-09 09:06:03[0m [OTHER] FileChanges
+[4;34mf1d81c1[0m[2;34m84bb2[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34mb1f6ab5[0m[2;34m5c71d[0m [2m2020-10-09 09:06:03[0m [[36mMOVE[0m] MoveCommit
+[4;34mc01494b[0m[2;34m7a171[0m [2m2020-10-09 09:06:03[0m [[36mMOVE[0m] MoveCommit
+[4;34m40a3d3a[0m[2;34m49821[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m15acb0a[0m[2;34mb2b11[0m [2m2020-10-09 09:06:03[0m [[31mUNDO[0m] UndoCommit
+[4;34me38af09[0m[2;34m4c896[0m [2m2020-10-09 09:06:03[0m [[31mUNDO[0m] UndoCommit
+[4;34mab65318[0m[2;34me3101[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m6405d01[0m[2;34md26a5[0m [2m2020-10-09 09:06:03[0m [SQUASH] SquashCommit
+[4;34m4575def[0m[2;34ma41d9[0m [2m2020-10-09 09:06:03[0m [SQUASH] SquashCommit
+[4;34m569536c[0m[2;34md88bb[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34ma63cc76[0m[2;34mf935e[0m [2m2020-10-09 09:06:03[0m [[33mAMEND[0m] AmendCommit
+[4;34mf620098[0m[2;34m2ef2f[0m [2m2020-10-09 09:06:03[0m [[33mAMEND[0m] AmendCommit
+[4;34ma25e9e0[0m[2;34m7273e[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m3cd4f24[0m[2;34m34a17[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m2daba36[0m[2;34m3cb4b[0m [2m2020-10-09 09:06:03[0m [[36mMOVE_HUNK[0m] MoveHunk
+[4;34md7cb035[0m[2;34mf5af7[0m [2m2020-10-09 09:06:03[0m [[36mMOVE_HUNK[0m] MoveHunk
+
+---
+❯ /usr/local/bin/but oplog took 0s
+[1;34mOperations History[0m
+[2m──────────────────────────────────────────────────[0m
+[4;34ma1271f7[0m[2;34mb176c[0m [2m2020-10-09 09:06:03[0m [OTHER] UpdateDependentBranchName
+[4;34m07ecb3d[0m[2;34m0bf29[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m3ac0b4c[0m[2;34m4ca95[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m1ed9a6a[0m[2;34m52b05[0m [2m2020-10-09 09:06:03[0m [OTHER] FileChanges
+[4;34mf1d81c1[0m[2;34m84bb2[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34mb1f6ab5[0m[2;34m5c71d[0m [2m2020-10-09 09:06:03[0m [[36mMOVE[0m] MoveCommit
+[4;34mc01494b[0m[2;34m7a171[0m [2m2020-10-09 09:06:03[0m [[36mMOVE[0m] MoveCommit
+[4;34m40a3d3a[0m[2;34m49821[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m15acb0a[0m[2;34mb2b11[0m [2m2020-10-09 09:06:03[0m [[31mUNDO[0m] UndoCommit
+[4;34me38af09[0m[2;34m4c896[0m [2m2020-10-09 09:06:03[0m [[31mUNDO[0m] UndoCommit
+[4;34mab65318[0m[2;34me3101[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m6405d01[0m[2;34md26a5[0m [2m2020-10-09 09:06:03[0m [SQUASH] SquashCommit
+[4;34m4575def[0m[2;34ma41d9[0m [2m2020-10-09 09:06:03[0m [SQUASH] SquashCommit
+[4;34m569536c[0m[2;34md88bb[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34ma63cc76[0m[2;34mf935e[0m [2m2020-10-09 09:06:03[0m [[33mAMEND[0m] AmendCommit
+[4;34mf620098[0m[2;34m2ef2f[0m [2m2020-10-09 09:06:03[0m [[33mAMEND[0m] AmendCommit
+[4;34ma25e9e0[0m[2;34m7273e[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m3cd4f24[0m[2;34m34a17[0m [2m2020-10-09 09:06:03[0m [[31mRESTORE[0m] Restored from snapshot
+[4;34m2daba36[0m[2;34m3cb4b[0m [2m2020-10-09 09:06:03[0m [[36mMOVE_HUNK[0m] MoveHunk
+[4;34md7cb035[0m[2;34mf5af7[0m [2m2020-10-09 09:06:03[0m [[36mMOVE_HUNK[0m] MoveHunk
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-71dba91f0312919c.html
+
+Calculated height: 550px (25 lines)
+Content or height changed for command "but oplog" in content/docs/cli-guides/cli-tutorial/operations-log.mdx
+  Content hash changed
+Found CLI command: but undo
+Cache filename for command "but undo": operations-log-but-undo-2
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-47a1225ced144de9.html" -t light '/usr/local/bin/but undo'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: [1;34mUndoing operation...[0m
+  Reverting to: [32mRestored from snapshot[0m ([2m2020-10-09 09:06:03[0m)
+[1;32m✓[0m Undo completed successfully! Restored to snapshot: [4;34m07ecb3d[0m[2;34m0bf29[0m
+
+---
+❯ /usr/local/bin/but undo took 0s
+[1;34mUndoing operation...[0m
+  Reverting to: [32mRestored from snapshot[0m ([2m2020-10-09 09:06:03[0m)
+[1;32m✓[0m Undo completed successfully! Restored to snapshot: [4;34m07ecb3d[0m[2;34m0bf29[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-47a1225ced144de9.html
+
+Calculated height: 154px (7 lines)
+Content or height changed for command "but undo" in content/docs/cli-guides/cli-tutorial/operations-log.mdx
+  Content hash changed
+Found CLI command: but restore -f 6fdd8fb1d547
+Cache filename for command "but restore -f 6fdd8fb1d547": operations-log-but-restore-3
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-48f832acfda2af91.html" -t light '/usr/local/bin/but restore -f 6fdd8fb1d547'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: 
+[1;32m✓[0m Restore completed successfully!
+[32m
+Workspace has been restored to the selected snapshot.[0m
+
+---
+❯ /usr/local/bin/but restore -f 6fdd8fb1d547 took 0s
+
+[1;32m✓[0m Restore completed successfully!
+[32m
+Workspace has been restored to the selected snapshot.[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-48f832acfda2af91.html
+
+Calculated height: 176px (8 lines)
+Found CLI command: but oplog snapshot
+Cache filename for command "but oplog snapshot": operations-log-but-oplog-4
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-2b036abaff2e2e7d.html" -t light '/usr/local/bin/but oplog snapshot'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: [1;32mSnapshot created successfully![0m
+  Snapshot ID: [4;34mf1ba549[0m[2;34m68971[0m
+[94m💡[0m Use 'but restore f1ba549' to restore to this snapshot later.
+
+---
+❯ /usr/local/bin/but oplog snapshot took 0s
+[1;32mSnapshot created successfully![0m
+  Snapshot ID: [4;34mf1ba549[0m[2;34m68971[0m
+
+[94m💡[0m Use 'but restore f1ba549' to restore to this snapshot later.
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-2b036abaff2e2e7d.html
+
+Calculated height: 154px (7 lines)
+Content or height changed for command "but oplog snapshot" in content/docs/cli-guides/cli-tutorial/operations-log.mdx
+  Content hash changed
+Updated: content/docs/cli-guides/cli-tutorial/operations-log.mdx
+Found CLI command: but config
+Cache filename for command "but config": updating-the-base-but-config-1
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9786a4f202364d9a.html" -t light '/usr/local/bin/but config'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: 
+[1mGitButler Configuration[0m
+[1mUser[0m:
+    [2mName[0m: [36mScott Chacon[0m [2m(global)[0m
+   [2mEmail[0m: [36mschacon@gmail.com[0m [2m(global)[0m
+  [2mEditor[0m: [36mnvim[0m [2m(global)[0m
+[1mTarget Branch[0m:
+    [36morigin/main[0m
+[1mForge[0m:
+  • [36mGitHub[0m schacon
+[2mAvailable subcommands:[0m
+  [2;34mbut config user[0m   - User settings (name, email, editor)
+  [2;34mbut config forge[0m  - Forge settings (GitHub, etc)
+  [2;34mbut config target[0m - Target branch settings
+
+---
+❯ /usr/local/bin/but config took 0s
+
+[1mGitButler Configuration[0m
+
+[1mUser[0m:
+    [2mName[0m: [36mScott Chacon[0m [2m(global)[0m
+   [2mEmail[0m: [36mschacon@gmail.com[0m [2m(global)[0m
+  [2mEditor[0m: [36mnvim[0m [2m(global)[0m
+
+[1mTarget Branch[0m:
+    [36morigin/main[0m
+
+[1mForge[0m:
+  • [36mGitHub[0m schacon
+
+[2mAvailable subcommands:[0m
+  [2;34mbut config user[0m   - User settings (name, email, editor)
+  [2;34mbut config forge[0m  - Forge settings (GitHub, etc)
+  [2;34mbut config target[0m - Target branch settings
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-9786a4f202364d9a.html
+
+Calculated height: 484px (22 lines)
+Found CLI command: but config target
+Cache filename for command "but config target": updating-the-base-but-config-2
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-d83dd2c7e5f4a71c.html" -t light '/usr/local/bin/but config target'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: [2mUsed to determine common base to calculate commits unique to each branch (not yet integrated)
+[0m
+[1mTarget Branch[0m:
+  [36morigin/main[0m
+  [2mRemote[0m: git@github.com:schacon/why.git
+  [2mSHA[0m:    204e309a8298ec047e7d79497a9efcec808ddc95
+[2mTo change target branch[0m:
+  [2;34mbut config target <branch_name>[0m
+
+---
+❯ /usr/local/bin/but config target took 0s
+[2mUsed to determine common base to calculate commits unique to each branch (not yet integrated)
+[0m
+[1mTarget Branch[0m:
+
+  [36morigin/main[0m
+
+  [2mRemote[0m: git@github.com:schacon/why.git
+  [2mSHA[0m:    204e309a8298ec047e7d79497a9efcec808ddc95
+
+[2mTo change target branch[0m:
+  [2;34mbut config target <branch_name>[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-d83dd2c7e5f4a71c.html
+
+Calculated height: 330px (15 lines)
+Found restore command: cc9d20b8099c
+Found run command: git push -f origin 32a2175758f7f649ed7a030a17fd21213a5e400f:refs/heads/main
+Run command output:
+
+Found CLI command: but status -u
+Running restore: but restore cc9d20b8099c
+Cache filename for command "but status -u": updating-the-base-but-status-3
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-7d561008dff525b3.html" -t light '/usr/local/bin/but status -u'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m][34m [✓ upstream merges cleanly][0m [2;3m[0m 
+┊●   [4;34m46[0m[2m4aae4[0m add user changes  
+┊●   [4;34mca[0m[2m81308[0m create bookmarks  
+├╯
+┊
+┊╭┄(upstream) ⏫ 2 new commits[2m(checked 3 minutes ago)[0m
+┊[33m●[0m [33m32a2175[0m [2mMerge pull request #65 from schacon/feature-bookmarks  feat: Add bookmar[0m
+┊[33m●[0m [33mc6d8414[0m [2mMerge pull request #57 from schacon/schacon-patch-1  Update README.md[0m
+┊┊
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status -u took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m][34m [✓ upstream merges cleanly][0m [2;3m[0m 
+┊●   [4;34m46[0m[2m4aae4[0m add user changes  
+┊●   [4;34mca[0m[2m81308[0m create bookmarks  
+├╯
+┊
+┊╭┄(upstream) ⏫ 2 new commits[2m(checked 3 minutes ago)[0m
+┊[33m●[0m [33m32a2175[0m [2mMerge pull request #65 from schacon/feature-bookmarks  feat: Add bookmar[0m
+┊[33m●[0m [33mc6d8414[0m [2mMerge pull request #57 from schacon/schacon-patch-1  Update README.md[0m
+┊┊
+├╯ [2m204e309[0m (common base) [[1;32morigin/main[0m] [2m2025-07-06[0m Merge pull request #10 from schacon/sc-description
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-7d561008dff525b3.html
+
+Calculated height: 396px (18 lines)
+Content or height changed for command "but status -u" in content/docs/cli-guides/cli-tutorial/updating-the-base.mdx
+  Content hash changed
+Found CLI command: but pull --check
+Cache filename for command "but pull --check": updating-the-base-but-pull-4
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-87363c0c476014bd.html" -t light '/usr/local/bin/but pull --check'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: 
+[2mBase branch:[0m	[36morigin/main[0m
+[2mUpstream:[0m	[33m2 new commits on origin/main[0m
+  [33m32a2175[0m [2mMerge pull request #65 from schacon/feature-bookmarks  feat: Add bookmar[0m
+  [33mc6d8414[0m [2mMerge pull request #57 from schacon/schacon-patch-1  Update README.md[0m
+[1mBranch Status[0m
+  [32m[ok][0m user-bookmarks
+[2mRun `but pull` to update your branches[0m
+
+---
+❯ /usr/local/bin/but pull --check took 4s
+
+[2mBase branch:[0m	[36morigin/main[0m
+[2mUpstream:[0m	[33m2 new commits on origin/main[0m
+
+  [33m32a2175[0m [2mMerge pull request #65 from schacon/feature-bookmarks  feat: Add bookmar[0m
+  [33mc6d8414[0m [2mMerge pull request #57 from schacon/schacon-patch-1  Update README.md[0m
+
+[1mBranch Status[0m
+  [32m[ok][0m user-bookmarks
+
+[2mRun `but pull` to update your branches[0m
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-87363c0c476014bd.html
+
+Calculated height: 330px (15 lines)
+Found CLI command: but pull
+Cache filename for command "but pull": updating-the-base-but-pull-5
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-90ef27dd89588254.html" -t light '/usr/local/bin/but pull'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: 
+[97mFound[0m [93m2[0m upstream commits on [96morigin/main[0m
+   [90m32a2175[0m Merge pull request #65 from schacon/feature-bookmarks
+   [90mc6d8414[0m Merge pull request #57 from schacon/schacon-patch-1
+[96mUpdating[0m [93m1[0m active branches...
+[97mRebase[0m of [96muser-bookmarks[0m [32msuccessful[0m
+[1mSummary[0m
+────────
+  [96muser-bookmarks[0m - [32mrebased[0m
+[97mTo undo this operation:[0m
+  Run `but undo`
+
+---
+❯ /usr/local/bin/but pull took 4s
+
+[97mFound[0m [93m2[0m upstream commits on [96morigin/main[0m
+   [90m32a2175[0m Merge pull request #65 from schacon/feature-bookmarks
+   [90mc6d8414[0m Merge pull request #57 from schacon/schacon-patch-1
+
+[96mUpdating[0m [93m1[0m active branches...
+
+[97mRebase[0m of [96muser-bookmarks[0m [32msuccessful[0m
+
+[1mSummary[0m
+────────
+  [96muser-bookmarks[0m - [32mrebased[0m
+
+[97mTo undo this operation:[0m
+  Run `but undo`
+
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-90ef27dd89588254.html
+
+Calculated height: 418px (19 lines)
+Found CLI command: but status
+Cache filename for command "but status": updating-the-base-but-status-6
+Running ansi-senor command: "/Users/schacon/.cargo/bin/ansi-senor" -o "/Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-ec141b574d59d50c.html" -t light '/usr/local/bin/but status'
+Working directory: /Users/schacon/projects/why
+ansi-senor output: ╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mb4[0m[2meeb4c[0m add user changes  
+┊●   [4;34m94[0m[2m14216[0m create bookmarks  
+├╯
+┊
+┴ [2m32a2175[0m (common base) [[1;32morigin/main[0m] [2m2025-11-03[0m Merge pull request #65 from schacon/feature-bookma[2m(checked 0 seconds ago)[0m
+[2mHint: run `but help` for all commands[0m
+
+---
+❯ /usr/local/bin/but status took 0s
+╭┄[4;34mzz[0m [[1;36munstaged changes[0m] 
+┊     [2;3mno changes[0m
+┊
+┊╭┄[4;34mus[0m [[1;32muser-bookmarks[0m] [2;3m[0m 
+┊●   [4;34mb4[0m[2meeb4c[0m add user changes  
+┊●   [4;34m94[0m[2m14216[0m create bookmarks  
+├╯
+┊
+┴ [2m32a2175[0m (common base) [[1;32morigin/main[0m] [2m2025-11-03[0m Merge pull request #65 from schacon/feature-bookma[2m(checked 0 seconds ago)[0m
+
+[2mHint: run `but help` for all commands[0m
+---
+
+Output saved to /Users/schacon/projects/gitbutler-docs/public/cache/cli-output/tmp-ec141b574d59d50c.html
+
+Calculated height: 308px (14 lines)
+Updated: content/docs/cli-guides/cli-tutorial/updating-the-base.mdx
+
+=== CHANGES DETECTED ===
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-1 → branching-and-commiting-but-status-1
+Height: 506px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-2 → branching-and-commiting-but-status-2
+Height: 308px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-4 → branching-and-commiting-but-status-4
+Height: 374px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but commit -m 'all the user bookmarks'
+Hash changed: branching-and-commiting-but-commit-5 → branching-and-commiting-but-commit-5
+Height: 110px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-6 → branching-and-commiting-but-status-6
+Height: 286px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-8 → branching-and-commiting-but-status-8
+Height: 374px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but commit -m "liked tweets changes" liked-tweets
+Hash changed: branching-and-commiting-but-commit-9 → branching-and-commiting-but-commit-9
+Height: 110px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-10 → branching-and-commiting-but-status-10
+Height: 374px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status -f
+Hash changed: branching-and-commiting-but-status-11 → branching-and-commiting-but-status-11
+Height: 550px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-13 → branching-and-commiting-but-status-13
+Height: 374px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but commit -m "liked tweets changes" liked-tweets-stacked
+Hash changed: branching-and-commiting-but-commit-14 → branching-and-commiting-but-commit-14
+Height: 110px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-15 → branching-and-commiting-but-status-15
+Height: 352px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-16 → branching-and-commiting-but-status-16
+Height: 440px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but st
+Hash changed: branching-and-commiting-but-st-18 → branching-and-commiting-but-st-18
+Height: 484px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-20 → branching-and-commiting-but-status-20
+Height: 528px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but commit -o -m "liked tweets view" bo
+Hash changed: branching-and-commiting-but-commit-21 → branching-and-commiting-but-commit-21
+Height: 110px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but st
+Hash changed: branching-and-commiting-but-st-22 → branching-and-commiting-but-st-22
+Height: 440px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but commit -m 'bookmarks stuff' ch
+Hash changed: branching-and-commiting-but-commit-23 → branching-and-commiting-but-commit-23
+Height: 110px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-24 → branching-and-commiting-but-status-24
+Height: 374px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-25 → branching-and-commiting-but-status-25
+Height: 484px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/branching-and-commiting.mdx
+Command: but status
+Hash changed: branching-and-commiting-but-status-27 → branching-and-commiting-but-status-27
+Height: 528px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/inspecting.mdx
+Command: but status --files
+Hash changed: inspecting-but-status-1 → inspecting-but-status-1
+Height: 396px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/inspecting.mdx
+Command: but branch
+Hash changed: inspecting-but-branch-3 → inspecting-but-branch-3
+Height: 660px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-1 → rubbing-but-status-1
+Height: 528px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-2 → rubbing-but-status-2
+Height: 528px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status --files
+Hash changed: rubbing-but-status-5 → rubbing-but-status-5
+Height: 770px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-6 → rubbing-but-status-6
+Height: 330px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-8 → rubbing-but-status-8
+Height: 308px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-9 → rubbing-but-status-9
+Height: 330px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-11 → rubbing-but-status-11
+Height: 418px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-12 → rubbing-but-status-12
+Height: 396px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-14 → rubbing-but-status-14
+Height: 396px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status -f
+Hash changed: rubbing-but-status-15 → rubbing-but-status-15
+Height: 638px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status -f
+Hash changed: rubbing-but-status-17 → rubbing-but-status-17
+Height: 638px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status
+Hash changed: rubbing-but-status-18 → rubbing-but-status-18
+Height: 308px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/rubbing.mdx
+Command: but status -f
+Hash changed: rubbing-but-status-20 → rubbing-but-status-20
+Height: 440px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/editing-commits.mdx
+Command: but status
+Hash changed: editing-commits-but-status-1 → editing-commits-but-status-1
+Height: 330px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/editing-commits.mdx
+Command: but status
+Hash changed: editing-commits-but-status-3 → editing-commits-but-status-3
+Height: 330px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/operations-log.mdx
+Command: but oplog
+Hash changed: operations-log-but-oplog-1 → operations-log-but-oplog-1
+Height: 550px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/operations-log.mdx
+Command: but undo
+Hash changed: operations-log-but-undo-2 → operations-log-but-undo-2
+Height: 154px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/operations-log.mdx
+Command: but oplog snapshot
+Hash changed: operations-log-but-oplog-4 → operations-log-but-oplog-4
+Height: 154px
+Height was updated automatically
+---
+File: content/docs/cli-guides/cli-tutorial/updating-the-base.mdx
+Command: but status -u
+Hash changed: updating-the-base-but-status-3 → updating-the-base-but-status-3
+Height: 396px
+Height was updated automatically
+---
+
+=== CLEANING UP OBSOLETED CACHE FILES ===
+CLI output update process completed.

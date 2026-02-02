@@ -1,18 +1,29 @@
 ---
-title: Updating the Base
-description: Learn how to manage and update your base branch in GitButler.
+title: Updating your Base
+description: Learn how to manage and update your target branch and base commit in GitButler.
 ---
 
-The base branch is the foundation that your feature branches build upon. Keeping it updated and managing it properly is crucial for a smooth workflow.
+The target branch is the foundation that your feature branches build upon. Keeping it updated and managing it properly is crucial for a smooth workflow.
 
-## Understanding the Base Branch
+## Understanding the Target Branch
 
-The base branch is typically your main development branch that acts as the basis
-for all your local branches.
+The target branch is typically your main production branch that acts as the basis for all your local branches.
 
-In practice, this is actually the branch on whatever server you're using to collaborate and merge changes into, so generally it's actually `origin/main` or `origin/master`.
+In practice, this is generally not actually a local branch, it's usually the branch on whatever server you're using to collaborate and merge changes into, so generally it's something like `origin/main` or `origin/master`.
 
 When GitButler is first initialized in a project, you are asked to choose a branch to target, as everything in your working directory that doesn't exactly match the tip of this branch is technically a fork of what is considered production. Whatever that target branch looks like when you choose it is set as your 'base'.
+
+You can always check your target branch setting with `but config`:
+
+```cli [updating-the-base-but-config-1, 484px]
+but config
+```
+
+Or get more information with `but config target`:
+
+```cli [updating-the-base-but-config-2, 330px]
+but config target
+```
 
 When you start working, everything that is different from that base goes into a branch based off of it.
 
@@ -26,9 +37,9 @@ When you start working, everything that is different from that base goes into a 
 
 ## Understanding Upstream
 
-When you first set your base branch (ie, `origin/main`), we record the state of the branch at that time.
+When you first set your target branch (ie, `origin/main`), we record the state of the branch at that time.
 
-However, if someone else merges work into that branch while you're working, the base branch moves forward, but the work you're doing is still based off of where it was. We call this 'upstream' work.
+However, if someone else merges work into that branch while you're working, the target branch moves forward, but the work you're doing is still based off of where it was. We call this 'upstream' work, and the commit that the target _was_ pointing at and your branches were based off of is your "base".
 
 <ImageSection
   className="mx-auto"
@@ -42,30 +53,34 @@ The problem is that now the stuff we're working on is out of date. It may confli
 
 ## Viewing Upstream
 
-You can see what is upstream and if you're out of date by running `but base check`. This will essentially fetch `origin/main` (or whatever your targeted base branch is) and see if there is anything there that is newer than your base.
+When you run `but status`, we will by default show you a summary of upstream work if there is any. You can see a more detailed list of what is upstream by `but status --upstream` (or `-u`).
 
-{/* restore [64dcebb] */}
+{/* restore [cc9d20b8099c] */}
 {/* run git push -f origin 32a2175758f7f649ed7a030a17fd21213a5e400f:refs/heads/main */}
 
 Let's take a look at what this looks like. Let's say that our project is at this state:
 
-```cli [f53ff654c67d268e, 462px]
-but status
+```cli [updating-the-base-but-status-1, 440px]
+but status -u
 ```
 
-Let's see if we're up to date with `but base check`:
+We can see that there are two commits upstream (ie, merged into `origin/main` since we started our branch).
 
-```cli [1df4a75e976dd98d, 462px]
-but base check
+Technically, there could be more reachable commits, but we only show the first parents, so merges of long branches show up as just the merge commits, to simplify things a bit.
+
+Now let's say that we would like to pull in the upstream work and rebase our branches on top of the new upstream to update them. We can check what all would happen with `but pull --check`.
+
+```cli [updating-the-base-but-pull-1, 330px]
+but pull --check
 ```
 
-This will also check that upstream work against your currently applied branches to see if anything has been integrated (and thus we can remove), anything conflicts with upstream work, or a merge/rebase should work cleanly.
+This will fetch the very latest work, then check that upstream work against your currently applied branches to see if anything has been integrated (and thus we can remove), anything conflicts with upstream work, or a merge/rebase should work cleanly.
 
-In this example, we can see that `feature-bookmarks` has been integrated (merged) upstream already, `sc-branch-26` is conflicted with upstream work and `gemfile-fixes` can be cleanly rebased or merged.
+In this example, we can see that our `user-bookmarks` branch would be cleanly rebased if we did a pull, and that there are two things that have been merged since we started our branches.
 
 ## Updating the Base
 
-When you feel like you want to get your active branches up to date, you can run `but base update`. This will rebase your branches on top of the new base commit.
+When you feel like you want to get your active branches up to date, you can run `but pull`. This will fetch the very latest work, then rebase your active branches on top of the new target commit to be your new base.
 
 <ImageSection
   className="mx-auto"
@@ -77,11 +92,11 @@ When you feel like you want to get your active branches up to date, you can run 
 
 Let's run it in our example.
 
-```cli [9184aa27f8f241fd, 88px]
-but base update
+```cli [updating-the-base-but-pull-2, 418px]
+but pull
 ```
 
-```cli [8ee36a00318dadf8, 396px]
+```cli [updating-the-base-but-status-2, 352px]
 but status
 ```
 

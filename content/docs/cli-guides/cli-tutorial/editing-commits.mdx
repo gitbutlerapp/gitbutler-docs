@@ -12,11 +12,11 @@ You can edit commit messages with the `but describe` command. So if we have this
 
 {/* restore [d69fffa7c6eb] */}
 
-```cli [8e0965d4ad557bc8, 242px]
+```cli [editing-commits-but-status-1, 374px]
 but status
 ```
 
-Then you can edit the message of any commit by running `but describe <sha>`, which will open up your editor of choice with the existing commit message and when you exit the editor, replace that message in the commit and rebase everything above it.
+Then you can edit the message of any commit by running `but reword <sha>`, which will open up your editor of choice with the existing commit message and when you exit the editor, replace that message in the commit and rebase everything above it.
 
 The editor would look something like this:
 
@@ -37,5 +37,19 @@ add user changes
 ```
 
 Pretty simple.
+
+## Changing Branch Names
+
+Just like changing commit messages, you can also use `but reword` to change the name of a branch. So, in the above example, if we wanted to change the branch name from `user-bookmarks` to `feature-awesome-thing`, we can do this:
+
+```cli [editing-commits-but-reword-1, 110px]
+but reword -m feature-awesome-thing us
+```
+
+Et voila.
+
+```cli [editing-commits-but-status-2, 374px]
+but status
+```
 
 {/* TODO: Edit Mode */}

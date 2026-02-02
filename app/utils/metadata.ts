@@ -89,11 +89,12 @@ export async function generatePageMetadata(page: Page) {
   }
   
   // Build the metadata
+  const title = page.data.title.replace(/`/g, '')
   const metadata = {
-    title: page.data.title,
+    title,
     description,
     openGraph: {
-      title: page.data.title,
+      title,
       description,
       images: [image],
       type: 'article' as const,
@@ -102,7 +103,7 @@ export async function generatePageMetadata(page: Page) {
     },
     twitter: {
       card: 'summary_large_image' as const,
-      title: page.data.title,
+      title,
       description,
       images: [image],
       creator: '@gitbutler'

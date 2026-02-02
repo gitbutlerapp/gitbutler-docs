@@ -11,8 +11,9 @@ class CliOutputUpdater {
     this.config = null;
     this.hasChanges = false;
     this.changedFiles = [];
-    this.obsoletedHashes = new Set();
-    this.usedHashes = new Set();
+    this.obsoletedCacheFiles = new Set();
+    this.usedCacheFiles = new Set();
+    this.commandCountsPerPage = {}; // Track command occurrences per page
   }
 
   async loadConfig() {
@@ -34,14 +35,14 @@ class CliOutputUpdater {
   }
 
   async cleanupObsoletedCacheFiles() {
-    // Remove hashes that are still being used from the obsoleted set
-    for (const usedHash of this.usedHashes) {
-      this.obsoletedHashes.delete(usedHash);
+    // Remove cache files that are still being used from the obsoleted set
+    for (const usedFilename of this.usedCacheFiles) {
+      this.obsoletedCacheFiles.delete(usedFilename);
     }
 
     // Delete remaining obsoleted cache files
-    for (const obsoletedHash of this.obsoletedHashes) {
-      const cacheFile = path.join(this.config.config.cacheDir, `${obsoletedHash}.html`);
+    for (const obsoletedFilename of this.obsoletedCacheFiles) {
+      const cacheFile = path.join(this.config.config.cacheDir, `${obsoletedFilename}.html`);
       try {
         await fs.unlink(cacheFile);
         console.log(`Removed obsoleted cache file: ${cacheFile}`);
@@ -51,8 +52,8 @@ class CliOutputUpdater {
       }
     }
 
-    if (this.obsoletedHashes.size > 0) {
-      console.log(`Cleaned up ${this.obsoletedHashes.size} obsoleted cache files`);
+    if (this.obsoletedCacheFiles.size > 0) {
+      console.log(`Cleaned up ${this.obsoletedCacheFiles.size} obsoleted cache files`);
     }
   }
 
@@ -64,6 +65,24 @@ class CliOutputUpdater {
 
     console.log(`Changing to example project: ${exampleProjectPath}`);
     process.chdir(exampleProjectPath);
+
+    // Check for and execute setup script in docs directory
+    const setupScriptPath = path.join(docsDirectory, 'scripts', 'pre-update-cli.sh');
+    try {
+      await fs.access(setupScriptPath);
+      console.log(`Found setup script: ${setupScriptPath}`);
+      console.log('Executing setup script...');
+      execSync(`bash "${setupScriptPath}"`, {
+        stdio: 'inherit',
+        cwd: exampleProjectPath
+      });
+      console.log('Setup script completed');
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        console.warn(`Warning: Failed to execute setup script: ${error.message}`);
+      }
+      // If file doesn't exist (ENOENT), silently continue
+    }
 
     console.log(`Restoring to starting hash: ${startingHash}`);
     try {
@@ -80,6 +99,31 @@ class CliOutputUpdater {
 
   hashContent(content) {
     return crypto.createHash('sha256').update(content).digest('hex').substring(0, 16);
+  }
+
+  generateCacheFilename(pageName, command, ordinal) {
+    // Extract just the command name (first word after 'but' or first word)
+    const commandParts = command.trim().split(/\s+/);
+    let commandName = commandParts[0];
+
+    // If it's a 'but' command, include the first argument
+    if (commandName === 'but' && commandParts.length > 1) {
+      commandName = `but-${commandParts[1]}`;
+    } else if (commandName.includes('/')) {
+      // Handle full path to but command (e.g., /path/to/gitbutler-tauri)
+      commandName = commandParts.length > 1 ? `but-${commandParts[1]}` : 'but';
+    }
+
+    // Sanitize the filename components
+    const sanitize = (str) => str.replace(/[^a-z0-9-]/gi, '-').replace(/-+/g, '-').toLowerCase();
+
+    return `${sanitize(pageName)}-${sanitize(commandName)}-${ordinal}`;
+  }
+
+  getPageNameFromPath(filePath) {
+    // Extract page name from file path (e.g., 'content/cli/inspecting.mdx' -> 'inspecting')
+    const baseName = path.basename(filePath, '.mdx');
+    return baseName;
   }
 
   replaceButCommand(command) {
@@ -112,7 +156,9 @@ class CliOutputUpdater {
         stdio: ['inherit', 'pipe', 'pipe'],
         env: {
           ...process.env,
-          COLOR_OVERRIDE: 'true'
+          COLOR_OVERRIDE: 'true',
+          GIT_AUTHOR_DATE: '2020-09-09 09:06:03 +0800',
+          GIT_COMMITTER_DATE: '2020-10-09 09:06:03 +0800'
         }
       });
 
@@ -129,7 +175,7 @@ class CliOutputUpdater {
     // Use ansi-senor CLI to convert ANSI output to HTML
     // ansi-senor runs the command itself and captures output
     const ansiSenorPath = this.config.ansi_senor_path || 'ansi-senor';
-    const fullCommand = `"${ansiSenorPath}" -o "${outputPath}" -t light ${command}`;
+    const fullCommand = `"${ansiSenorPath}" -o "${outputPath}" -t light '${command}'`;
 
     console.log(`Running ansi-senor command: ${fullCommand}`);
     console.log(`Working directory: ${workingDir}`);
@@ -142,13 +188,15 @@ class CliOutputUpdater {
         env: {
           ...process.env,
           CLICOLOR_FORCE: '1',
+          GIT_AUTHOR_DATE: '2020-09-09 09:06:03 +0800',
+          GIT_COMMITTER_DATE: '2020-10-09 09:06:03 +0800'
         }
       });
 
       console.log(`ansi-senor output: ${result}`);
       // HTML file is written by ansi-senor
     } catch (error) {
-      console.error(`ansi-senor command: "${ansiSenorPath}" -o "${outputPath}" -t light ${command}`);
+      console.error(`ansi-senor command: "${ansiSenorPath}" -o "${outputPath}" -t light '${command}'`);
       console.error(`ansi-senor stderr: ${error.stderr}`);
       console.error(`ansi-senor stdout: ${error.stdout}`);
       console.warn(`Failed to run ansi-senor: ${error.message}`);
@@ -194,6 +242,12 @@ class CliOutputUpdater {
     const lines = content.split('\n');
     let modified = false;
     let currentRestore = null;
+
+    // Initialize command count for this page
+    const pageName = this.getPageNameFromPath(filePath);
+    if (!this.commandCountsPerPage[pageName]) {
+      this.commandCountsPerPage[pageName] = {};
+    }
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -267,6 +321,21 @@ class CliOutputUpdater {
         // Execute the command via ansi-senor (replace but path if needed)
         const actualCommand = this.replaceButCommand(command);
 
+        // Generate semantic cache filename first to get the base name
+        const cacheFilenameBase = this.generateCacheFilename(pageName, actualCommand, 0);
+
+        // Track command occurrence for this page using the full cache filename base as the key
+        // This ensures each unique command has its own counter
+        if (!this.commandCountsPerPage[pageName][cacheFilenameBase]) {
+          this.commandCountsPerPage[pageName][cacheFilenameBase] = 0;
+        }
+        this.commandCountsPerPage[pageName][cacheFilenameBase]++;
+        const ordinal = this.commandCountsPerPage[pageName][cacheFilenameBase];
+
+        // Generate final cache filename with the correct ordinal
+        const cacheFilename = this.generateCacheFilename(pageName, actualCommand, ordinal);
+        console.log(`Cache filename for command "${command}": ${cacheFilename}`);
+
         // Generate HTML to a temporary file first
         const tmpHash = crypto.randomBytes(8).toString('hex');
         // Use absolute path so ansi-senor writes to the correct location
@@ -284,8 +353,7 @@ class CliOutputUpdater {
 
           // Read the generated HTML and hash it
           const htmlContent = await fs.readFile(tmpHtmlPath, 'utf8');
-          const hash = this.hashContent(htmlContent);
-          console.log(`Generated hash for command "${command}" in ${filePath}: ${hash}`);
+          const contentHash = this.hashContent(htmlContent);
 
           // Calculate height based on line count in the body content (22px per line)
           const bodyMatch = htmlContent.match(/<body[^>]*>([\s\S]*)<\/body>/i);
@@ -294,44 +362,63 @@ class CliOutputUpdater {
           const calculatedHeight = `${lineCount * 22}px`;
           console.log(`Calculated height: ${calculatedHeight} (${lineCount} lines)`);
 
-          // Track all hashes being used in this run
-          this.usedHashes.add(hash);
+          // Track all cache filenames being used in this run
+          this.usedCacheFiles.add(cacheFilename);
 
-          // Check if hash or height changed
-          const hashChanged = existingHash && existingHash !== hash;
+          // Check if filename or height changed
+          const filenameChanged = existingHash && existingHash !== cacheFilename;
           const heightChanged = existingHeight !== calculatedHeight;
           const isNewBlock = !existingHash;
 
-          if (hashChanged) {
-            console.log(`Hash changed for command "${command}" in ${filePath}`);
-            console.log(`  Old hash: ${existingHash}`);
-            console.log(`  New hash: ${hash}`);
+          // Check if content actually changed by comparing with existing file
+          let contentChanged = false;
+          if (existingHash && !filenameChanged) {
+            const existingPath = path.resolve(this.config.config.cacheDir, `${existingHash}.html`);
+            try {
+              const existingContent = await fs.readFile(existingPath, 'utf8');
+              const existingContentHash = this.hashContent(existingContent);
+              contentChanged = existingContentHash !== contentHash;
+            } catch {
+              // File doesn't exist, treat as changed
+              contentChanged = true;
+            }
+          }
 
-            // Mark old hash as obsoleted instead of immediately deleting
-            this.obsoletedHashes.add(existingHash);
+          if (filenameChanged) {
+            console.log(`Filename changed for command "${command}" in ${filePath}`);
+            console.log(`  Old filename: ${existingHash}`);
+            console.log(`  New filename: ${cacheFilename}`);
+
+            // Mark old filename as obsoleted
+            this.obsoletedCacheFiles.add(existingHash);
 
             this.hasChanges = true;
             this.changedFiles.push({
               file: filePath,
               command,
               oldHash: existingHash,
-              newHash: hash,
+              newHash: cacheFilename,
               height: calculatedHeight,
               heightChanged
             });
-          } else if (heightChanged && existingHash) {
-            console.log(`Height changed for command "${command}" in ${filePath}`);
-            console.log(`  Old height: ${existingHeight || 'none'}`);
-            console.log(`  New height: ${calculatedHeight}`);
+          } else if ((heightChanged || contentChanged) && existingHash) {
+            console.log(`Content or height changed for command "${command}" in ${filePath}`);
+            if (heightChanged) {
+              console.log(`  Old height: ${existingHeight || 'none'}`);
+              console.log(`  New height: ${calculatedHeight}`);
+            }
+            if (contentChanged) {
+              console.log(`  Content hash changed`);
+            }
 
             this.hasChanges = true;
             this.changedFiles.push({
               file: filePath,
               command,
               oldHash: existingHash,
-              newHash: hash,
+              newHash: cacheFilename,
               height: calculatedHeight,
-              heightChanged: true
+              heightChanged: heightChanged || contentChanged
             });
           } else if (isNewBlock) {
             console.log(`New CLI block found: ${command}`);
@@ -340,18 +427,18 @@ class CliOutputUpdater {
               file: filePath,
               command,
               oldHash: null,
-              newHash: hash,
+              newHash: cacheFilename,
               height: calculatedHeight
             });
           }
 
-          // Rename the temporary file to the final hash-based name
-          const htmlPath = path.resolve(this.config.config.cacheDir, `${hash}.html`);
+          // Rename the temporary file to the final semantic name
+          const htmlPath = path.resolve(this.config.config.cacheDir, `${cacheFilename}.html`);
           await fs.rename(tmpHtmlPath, htmlPath);
 
-          // Update the MDX file line with hash and height
-          if (hashChanged || heightChanged || isNewBlock) {
-            lines[i] = `\`\`\`cli [${hash}, ${calculatedHeight}]`;
+          // Update the MDX file line with cache filename and height
+          if (filenameChanged || heightChanged || contentChanged || isNewBlock) {
+            lines[i] = `\`\`\`cli [${cacheFilename}, ${calculatedHeight}]`;
             modified = true;
           }
         } catch (error) {
@@ -374,7 +461,43 @@ class CliOutputUpdater {
   }
 
   async findMdxFiles() {
-    return await glob('content/**/*.mdx');
+    // Find all meta.json files
+    const metaFiles = await glob('content/**/meta.json');
+    const orderedFiles = [];
+    const processedFiles = new Set();
+
+    // Process files in the order specified in meta.json files
+    for (const metaFile of metaFiles.sort()) {
+      const metaContent = await fs.readFile(metaFile, 'utf8');
+      const meta = JSON.parse(metaContent);
+
+      if (meta.pages && Array.isArray(meta.pages)) {
+        const metaDir = path.dirname(metaFile);
+
+        for (const page of meta.pages) {
+          const mdxFile = path.join(metaDir, `${page}.mdx`);
+
+          // Check if file exists
+          try {
+            await fs.access(mdxFile);
+            orderedFiles.push(mdxFile);
+            processedFiles.add(mdxFile);
+          } catch {
+            // File doesn't exist, skip it
+          }
+        }
+      }
+    }
+
+    // Add any remaining MDX files not listed in meta.json (in alphabetical order)
+    const allMdxFiles = await glob('content/**/*.mdx');
+    for (const file of allMdxFiles.sort()) {
+      if (!processedFiles.has(file)) {
+        orderedFiles.push(file);
+      }
+    }
+
+    return orderedFiles;
   }
 
   async run() {
