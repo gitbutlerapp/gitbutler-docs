@@ -241,6 +241,30 @@ but commit -m 'bookmarks stuff' ch
 but status
 ```
 
+### Committing Specific Files or Hunks
+
+Instead of staging files first and then committing with `-o`, you can also directly specify which files or hunks to include in a commit using the `-F` or `--files` option. This lets you commit only specific changes without having to assign them to a branch first.
+
+For example, if you have multiple unassigned files and only want to commit some of them:
+
+```bash
+but commit -F h0,i0 -m "only these two files" user-bookmarks
+```
+
+You can specify files in several ways:
+- **By CLI ID**: Use the short identifier shown in `but status` (e.g., `h0`, `i0`)
+- **Space-separated**: `--files h0 i0 k0`
+- **Comma-separated**: `-F h0,i0,k0`
+- **By path**: `-F app/models/bookmark.rb`
+
+This also works with hunk IDs. When a file has multiple hunks (shown in `but status -f` or `but diff`), you can commit individual hunks rather than the entire file. This is useful when you have changes in the same file that belong to different logical commits.
+
+<Callout type="info">
+
+If you don't specify `-F`, all uncommitted changes (or changes staged to the target branch) are committed. Use `-F` when you need fine-grained control over what goes into a commit.
+
+</Callout>
+
 ### Assigning Ranges
 
 If you happen to have a large number of changes, you can also use ranges or lists for rubbing assignment. So for example, if we go back to this status:
