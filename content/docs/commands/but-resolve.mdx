@@ -7,16 +7,18 @@ description: "Resolve conflicts in a commit."
 
 Resolve conflicts in a commit.
 
-When a commit is in a conflicted state (marked with conflicts during rebase), use this command to enter resolution mode, resolve the conflicts, and finalize.
+When a commit is in a conflicted state (marked with conflicts during rebase),
+use this command to enter resolution mode, resolve the conflicts, and finalize.
 
-Workflow
+## Workflow
 
-1. Enter resolution mode: but resolve `<commit-id>`
+1. Enter resolution mode: `but resolve <commit-id>`
 2. Resolve conflicts in your editor (remove conflict markers)
-3. Check remaining conflicts: but resolve status
-4. Finalize resolution: but resolve finish Or cancel: but resolve cancel
+3. Check remaining conflicts: `but resolve status`
+4. Finalize resolution: `but resolve finish`
+   Or cancel: `but resolve cancel`
 
-When in resolution mode, but status will also show that you're resolving conflicts.
+When in resolution mode, `but status` will also show that you're resolving conflicts.
 
 **Usage:** `but resolve <COMMAND> [COMMIT]`
 

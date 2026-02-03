@@ -19,9 +19,12 @@ By default without a subcommand, it will list the branches.
 
 Creates a new branch in the workspace
 
-If no branch name is provided, a new parallel branch with a generated name will be created.
+If no branch name is provided, a new parallel branch with a generated
+name will be created.
 
-You can also specify an anchor point using the --anchor option, which can be either a commit ID or an existing branch name to create the new branch from. This allows you to create stacked branches.
+You can also specify an anchor point using the `--anchor` option,
+which can be either a commit ID or an existing branch name to create
+the new branch from. This allows you to create stacked branches.
 
 **Usage:** `but branch new [BRANCH_NAME] [OPTIONS]`
 
@@ -37,7 +40,9 @@ You can also specify an anchor point using the --anchor option, which can be eit
 
 Deletes a branch from the workspace
 
-This will remove the branch and all its commits from the workspace. If the branch has unpushed commits, you will be prompted for confirmation unless the --force flag is used.
+This will remove the branch and all its commits from the workspace.
+If the branch has unpushed commits, you will be prompted for confirmation
+unless the `--force` flag is used.
 
 **Usage:** `but branch delete <BRANCH_NAME> [OPTIONS]`
 
@@ -55,15 +60,23 @@ List the branches in the repository
 
 By default, shows the active branch and the 20 most recently updated branches.
 
-You can use the --all flag to show all branches, --local to show only local branches, or --remote to show only remote branches.
+You can use the `--all` flag to show all branches, `--local` to show only
+local branches, or `--remote` to show only remote branches.
 
-You can also filter branch names by specifying a substring, such as but branch list feature to show only branches with "feature" in the name.
+You can also filter branch names by specifying a substring, such as
+`but branch list feature` to show only branches with "feature" in the name.
 
-If you want to check for review status, you can add --review to fetch and display pull request or merge request information for each branch. This will make the command slower as it needs to query the forge.
+If you want to check for review status, you can add `--review` to fetch
+and display pull request or merge request information for each branch.
+This will make the command slower as it needs to query the forge.
 
-By default, the command checks if each branch merges cleanly into the upstream base target branch (not your workspace). You can disable this check with --no-check to make the command faster.
+By default, the command checks if each branch merges cleanly into
+the *upstream base target branch* (not your workspace).
+You can disable this check with `--no-check` to make the command faster.
 
-By default it also calculates the number of commits each branch is ahead of the base branch. You can disable this with --no-ahead to make the command faster.
+By default it also calculates the number of commits each branch is ahead
+of the base branch. You can disable this with `--no-ahead` to
+make the command faster.
 
 **Usage:** `but branch list [FILTER] [OPTIONS]`
 
@@ -100,4 +113,42 @@ You can also choose to fetch and display review information, show files modified
 * `-f`, `--files` — Show files modified in each commit with line counts
 * `--ai` — Generate AI summary of the branch changes
 * `--check` — Check if the branch merges cleanly into upstream and identify conflicting commits
+
+### `but branch apply`
+
+Apply a branch to the workspace
+
+If you want to apply an unapplied branch to your workspace so you
+can work on it, you can run `but branch apply <branch-name>`.`
+
+This will apply the changes in that branch into your working directory
+as a parallel applied branch.
+
+**Usage:** `but branch apply <BRANCH_NAME>`
+
+**Arguments:**
+
+* `<BRANCH_NAME>` — Name of the branch to apply (required)
+
+### `but branch unapply`
+
+Unapply a branch from the workspace
+
+If you want to unapply an applied branch from your workspace
+(effectively stashing it) so you can work on other branches,
+you can run `but branch unapply <branch-name>`.
+
+This will remove the changes in that branch from your working
+directory and you can re-apply it later when needed. You will then
+see the branch as unapplied in `but branch list`.
+
+**Usage:** `but branch unapply <BRANCH_NAME> [OPTIONS]`
+
+**Arguments:**
+
+* `<BRANCH_NAME>` — Name of the branch to unapply (required)
+
+**Options:**
+
+* `-f`, `--force` — Force unapply without confirmation
 
