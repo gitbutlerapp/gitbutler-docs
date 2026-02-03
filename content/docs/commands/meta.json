@@ -30,6 +30,7 @@
     "but-uncommit",
     "but-amend",
     "but-squash",
+    "but-move",
     "---Operations Log---",
     "but-oplog",
     "but-undo",
@@ -38,6 +39,7 @@
     "but-gui",
     "but-update",
     "but-alias",
-    "but-config"
+    "but-config",
+    "but-skill"
   ]
 }
