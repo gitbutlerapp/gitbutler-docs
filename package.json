@@ -9,7 +9,8 @@
     "dev": "next dev",
     "start": "next start",
     "update-cli": "node scripts/update-cli-outputs.js",
-    "update-manpages": "bash scripts/update-manpages.sh"
+    "update-manpages": "bash scripts/update-manpages.sh",
+    "generate-cheat-pdfs": "node scripts/generate-cheat-pdfs.js"
   },
   "dependencies": {
     "@fumadocs/mdx-remote": "^0.2.3",
@@ -18,14 +19,16 @@
     "@shikijs/transformers": "^1.22.2",
     "ansi2": "^0.3.0",
     "cmdk": "^1.0.4",
-    "glob": "^10.3.10",
     "fumadocs-core": "14.7.7",
     "fumadocs-mdx": "11.5.7",
     "fumadocs-openapi": "^5.7.5",
     "fumadocs-twoslash": "^2.0.1",
     "fumadocs-ui": "14.7.7",
+    "glob": "^10.3.10",
     "next": "15.0.5",
+    "pdfkit": "^0.17.2",
     "prettier": "^3.3.3",
+    "puppeteer": "^24.36.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "shiki": "^1.22.2",
