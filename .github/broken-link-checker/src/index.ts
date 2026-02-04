@@ -222,9 +222,9 @@ async function brokenLinkChecker(): Promise<void> {
     },
     end: async () => {
       if (output.links.length) {
-        // Skip links that returned 308
+        // Skip links that returned 308 (redirects) or 429 (rate limiting)
         const brokenLinksForAttention = output.links.filter(
-          (link) => link.broken && !["HTTP_308"].includes(link.brokenReason)
+          (link) => link.broken && !["HTTP_308", "HTTP_429"].includes(link.brokenReason)
         )
 
         const outputMd = generateOutputMd({
