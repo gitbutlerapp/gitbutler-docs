@@ -31,28 +31,38 @@ but skill install --global
 
 Install the GitButler CLI skill files for Coding agents
 
-By default, installs the skill into the current repository. The command will prompt you to select a skill folder format (Claude Code, OpenCode, Codex, GitHub Copilot, Cursor, Windsurf) unless you specify a custom path with --path.
+By default, installs the skill into the current repository. The command
+will prompt you to select a skill folder format (Claude Code, OpenCode, Codex, GitHub Copilot,
+Cursor, Windsurf) unless you specify a custom path with --path.
 
-Use --global to install the skill in a global location instead of the current repository.
+Use --global to install the skill in a global location instead of the
+current repository.
 
-Examples
+## Examples
 
 Install in current repository (prompts for format):
 
-  but skill install
+```text
+but skill install
+```
 
 Install globally (prompts for format):
 
-  but skill install --global
+```text
+but skill install --global
+```
 
 Install to a custom path:
 
-  but skill install --path .claude/skills/gitbutler
+```text
+but skill install --path .claude/skills/gitbutler
+```
 
 Auto-detect installation location (update existing installation):
 
-  but skill install --detect
-
+```text
+but skill install --detect
+```
 
 **Usage:** `but skill install [OPTIONS]`
 
@@ -66,22 +76,28 @@ Auto-detect installation location (update existing installation):
 
 Check if installed GitButler skills are up to date with the CLI version
 
-Scans for installed skill files and compares their version with the current CLI version. By default, checks both local (repository) and global installations.
+Scans for installed skill files and compares their version with the current
+CLI version. By default, checks both local (repository) and global installations.
 
-Examples
+## Examples
 
 Check all installed skills:
 
-  but skill check
+```text
+but skill check
+```
 
 Check and automatically update outdated skills:
 
-  but skill check --update
+```text
+but skill check --update
+```
 
 Check only global installations:
 
-  but skill check --global
-
+```text
+but skill check --global
+```
 
 **Usage:** `but skill check [OPTIONS]`
 
