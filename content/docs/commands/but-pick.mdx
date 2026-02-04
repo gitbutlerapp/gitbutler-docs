@@ -7,16 +7,15 @@ description: "Cherry-pick a commit from an unapplied branch into an applied virt
 
 Cherry-pick a commit from an unapplied branch into an applied virtual branch.
 
-This command allows you to pick individual commits from unapplied branches and apply them to your current workspace branches.
+This command allows you to pick individual commits from unapplied branches
+and apply them to your current workspace branches.
 
 The source can be:
-
 - A commit SHA (full or short)
 - A CLI ID (e.g., "c5" from `but status`)
 - An unapplied branch name (shows interactive commit selection)
 
 If no target branch is specified:
-
 - In interactive mode: prompts you to select a target branch
 - If only one branch exists: automatically uses that branch
 - In non-interactive mode: fails with an error
@@ -25,29 +24,26 @@ If no target branch is specified:
 
 Pick a specific commit into a branch:
 
-```bash
+```text
 but pick abc1234 my-feature
 ```
 
 Pick using a CLI ID:
 
-```bash
+```text
 but pick c5 my-feature
 ```
 
 Interactively select commits from an unapplied branch:
 
-```bash
+```text
 but pick feature-branch
 ```
 
-**Usage:** `but pick [OPTIONS] <SOURCE> [TARGET_BRANCH]`
+**Usage:** `but pick <SOURCE> [TARGET_BRANCH]`
 
 ## Arguments
 
-* `<SOURCE>` — The commit SHA, CLI ID, or unapplied branch name to cherry-pick from
-* `[TARGET_BRANCH]` — The target virtual branch to apply the commit(s) to
+* `<SOURCE>` — The commit SHA, CLI ID, or unapplied branch name to cherry-pick from (required)
+* `<TARGET_BRANCH>` — The target virtual branch to apply the commit(s) to
 
-## Options
-
-* `-j`, `--json` — Whether to use JSON output format

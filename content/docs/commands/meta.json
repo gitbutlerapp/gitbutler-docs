@@ -32,6 +32,7 @@
     "but-amend",
     "but-squash",
     "but-move",
+    "but-pick",
     "---Operations Log---",
     "but-oplog",
     "but-undo",
