@@ -15,7 +15,13 @@ export function CheatSheetContent({ cheatSheet, initialLevel = 'basic' }: CheatS
   const [level, setLevel] = useState<'basic' | 'all'>(initialLevel);
 
   const filteredSections = level === 'basic'
-    ? cheatSheet.sections.filter(section => section.level === 'basic')
+    ? cheatSheet.sections
+        .filter(section => section.level === 'basic')
+        .map(section => ({
+          ...section,
+          items: section.items.filter(item => (item.level || 'basic') === 'basic')
+        }))
+        .filter(section => section.items.length > 0)
     : cheatSheet.sections;
 
   return (

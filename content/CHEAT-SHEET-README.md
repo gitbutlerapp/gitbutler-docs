@@ -34,16 +34,48 @@ The `content/cheat.json` file follows this structure:
     {
       "title": "string",       // Section title
       "description": "string", // Section description
+      "level": "basic" | "advanced",  // Section level (required)
       "diagram": {             // Optional diagram
         "type": "ascii" | "mermaid",
         "content": "string"
       },
       "items": [               // Array of commands
         {
-          "command": "string",      // Command text
-          "description": "string"   // Command description
+          "command": "string",         // Command text
+          "description": "string",     // Command description
+          "level": "basic" | "advanced" // Optional item level (defaults to "basic")
         }
       ]
+    }
+  ]
+}
+```
+
+## Level Filtering
+
+You can control visibility at two levels:
+
+1. **Section level** (required): Mark entire sections as `"basic"` or `"advanced"`
+2. **Item level** (optional): Mark individual commands within a section
+   - If not specified, items default to `"basic"`
+   - Use `"level": "advanced"` on items to hide them in basic mode
+
+**Example:**
+```json
+{
+  "title": "Branch Management",
+  "level": "basic",
+  "items": [
+    {
+      "command": "but branch",
+      "description": "List branches"
+      // Defaults to "basic"
+    },
+    {
+      "command": "but branch --advanced-flag",
+      "description": "Advanced operation",
+      "level": "advanced"
+      // Hidden in basic mode
     }
   ]
 }

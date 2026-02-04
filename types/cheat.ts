@@ -6,6 +6,7 @@ export interface CheatSheetDiagram {
 export interface CheatSheetItem {
   command: string;
   description: string;
+  level?: 'basic' | 'advanced';
 }
 
 export interface CheatSheetSection {

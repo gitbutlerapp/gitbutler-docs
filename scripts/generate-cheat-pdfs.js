@@ -182,8 +182,15 @@ async function main() {
     // Load cheat sheet data
     const cheatSheet = loadCheatSheet();
 
-    // Generate basic version
-    const basicSections = cheatSheet.sections.filter(s => s.level === 'basic');
+    // Generate basic version - filter sections and items
+    const basicSections = cheatSheet.sections
+      .filter(s => s.level === 'basic')
+      .map(section => ({
+        ...section,
+        items: section.items.filter(item => (item.level || 'basic') === 'basic')
+      }))
+      .filter(section => section.items.length > 0);
+
     await createPDF('gitbutler-cheat-sheet-basic.pdf', basicSections);
 
     // Generate all version

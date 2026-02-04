@@ -4,136 +4,263 @@
   "description": "GitButler is a Git client that allows you to work on multiple branches simultaneously. This cheat sheet features the most important and commonly used GitButler CLI commands for easy reference.",
   "sections": [
     {
-      "title": "Setup & Installation",
-      "description": "Getting started with GitButler CLI and configuring your environment",
+      "title": "Setup and Teardown",
+      "description": "Switching to and from GitButler branch management",
       "level": "basic",
       "items": [
         {
           "command": "but setup",
-          "description": "Initialize GitButler in your current repository"
+          "description": "Switch to GitButler in the current repository"
         },
         {
           "command": "but teardown",
-          "description": "Remove GitButler from the current repository"
-        },
-        {
-          "command": "but config",
-          "description": "Check or update your important config settings"
+          "description": "Go back to vanilla git branch management"
         }
       ]
     },
     {
-      "title": "Virtual Branches",
-      "description": "Creating and managing virtual branches for parallel development",
-      "level": "basic",
-      "diagram": {
-        "type": "mermaid",
-        "content": "graph LR\n    A[Main Branch] --> B[Virtual Branch 1]\n    A --> C[Virtual Branch 2]\n    A --> D[Virtual Branch 3]\n    B --> E[Applied]\n    C --> F[Applied]\n    D --> G[Unapplied]\n    style E fill:#22B2B1\n    style F fill:#22B2B1\n    style G fill:#ccc"
-      },
-      "items": [
-        {
-          "command": "but branch",
-          "description": "List all virtual branches"
-        },
-        {
-          "command": "but branch create [name]",
-          "description": "Create a new virtual branch"
-        },
-        {
-          "command": "but branch apply [branch]",
-          "description": "Apply (enable) a virtual branch to your working directory"
-        },
-        {
-          "command": "but branch unapply [branch]",
-          "description": "Unapply (disable) a virtual branch from your working directory"
-        },
-        {
-          "command": "but branch delete [branch]",
-          "description": "Delete a virtual branch"
-        }
-      ]
-    },
-    {
-      "title": "Working with Changes",
-      "description": "Managing file changes across virtual branches",
+      "title": "Inspection",
+      "description": "View your workspace state and changes",
       "level": "basic",
       "items": [
         {
           "command": "but status",
-          "description": "Show the status of all virtual branches and uncommitted changes"
+          "description": "Show workspace state, applied branches, staged files, and commits"
         },
         {
-          "command": "but move [file] [branch]",
-          "description": "Move a file's changes to a different virtual branch"
+          "command": "but status -f -v",
+          "description": "Show status with committed files listed and more verbose output"
+        },
+        {
+          "command": "but status -u",
+          "description": "Show detailed list of unintegrated upstream commits",
+          "level": "advanced"
         },
         {
           "command": "but diff",
-          "description": "Show changes in the current working directory"
+          "description": "Show changes in working directory compared to last commit"
         },
         {
-          "command": "but commit -m \"[message]\"",
-          "description": "Commit changes in a virtual branch"
+          "command": "but diff [branch]",
+          "description": "Show changes specific to a branch",
+          "level": "advanced"
+        },
+        {
+          "command": "but show [commit|branch]",
+          "description": "Show details of a specific commit or branch"
         }
       ]
     },
     {
-      "title": "Integration",
-      "description": "Pushing changes and creating pull requests",
+      "title": "Branch Management",
+      "description": "Create and manage parallel and stacked branches",
       "level": "basic",
       "items": [
         {
+          "command": "but branch",
+          "description": "List all branches available"
+        },
+        {
+          "command": "but branch new [name]",
+          "description": "Create a new parallel branch"
+        },
+        {
+          "command": "but branch new --anchor [branch]",
+          "description": "Create a new stacked branch from an existing branch"
+        },
+        {
+          "command": "but reword [branch]",
+          "description": "Rename a branch",
+          "level": "advanced"
+        },
+        {
+          "command": "but branch apply [branch]",
+          "description": "Apply (enable) a branch to your working directory"
+        },
+        {
+          "command": "but branch unapply [branch]",
+          "description": "Unapply (disable) a branch from your working directory"
+        },
+        {
+          "command": "but branch list [search]",
+          "description": "List all branches whose names match the search term",
+          "level": "advanced"
+        },
+        {
+          "command": "but branch delete [branch]",
+          "description": "Delete a branch from the workspace",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "title": "Committing Changes",
+      "description": "Create commits on your branches",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but commit -m \"[message]\"",
+          "description": "Commit all changes to current branch with a message"
+        },
+        {
+          "command": "but commit [branch] -m \"[message]\"",
+          "description": "Commit changes to a branch if there is more than one applied",
+          "level": "advanced"
+        },
+        {
+          "command": "but stage [file] [branch]",
+          "description": "Stage specific file(s) for the next commit"
+        },
+        {
+          "command": "but commit --only [branch]",
+          "description": "Commit only changes already staged to the branch"
+        },
+        {
+          "command": "but commit -c [branch]",
+          "description": "Create a new branch and commit to it",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "title": "Remote Operations",
+      "description": "Push changes and interact with forges",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but push",
+          "description": "Push all branches with unpushed commits"
+        },
+        {
           "command": "but push [branch]",
-          "description": "Push a virtual branch to the remote repository"
+          "description": "Push a specific branch to remote",
+          "level": "advanced"
         },
         {
-          "command": "but pr create [branch]",
-          "description": "Create a pull request for a virtual branch"
+          "command": "but pull",
+          "description": "Pull latest upstream and integrate all active branches"
         },
         {
-          "command": "but pr list",
-          "description": "List all pull requests associated with virtual branches"
+          "command": "but pull --check",
+          "description": "See what a pull would do without making changes",
+          "level": "advanced"
+        },
+        {
+          "command": "but pr",
+          "description": "Create/update pull requests for active branches"
+        },
+        {
+          "command": "but config forge",
+          "description": "View and modify forge authentications"
         }
       ]
     },
     {
-      "title": "Workspace Management",
-      "description": "Managing your GitButler workspace and state",
+      "title": "Commit Editing",
+      "description": "Modify existing commits",
       "level": "advanced",
-      "diagram": {
-        "type": "ascii",
-        "content": "    Workspace\n       |\n   +---+---+\n   |   |   |\nBranch1 Branch2 Branch3\n   |   |   |\n  File Changes"
-      },
       "items": [
         {
-          "command": "but workspace",
-          "description": "Show current workspace information and active branches"
+          "command": "but reword [commit]",
+          "description": "Edit the commit message of a specified commit"
         },
         {
-          "command": "but workspace reset",
-          "description": "Reset workspace to a clean state"
+          "command": "but commit new --before [commit]",
+          "description": "Insert a blank commit before the specified commit",
+          "level": "advanced"
+        },
+        {
+          "command": "but pick [commit]",
+          "description": "Cherry-pick a commit into an applied branch"
+        },
+        {
+          "command": "but rub [target] [source]",
+          "description": "Combine two commits or branches together",
+          "level": "advanced"
         }
       ]
     },
     {
-      "title": "Advanced Operations",
-      "description": "Advanced commands for power users",
+      "title": "Operations Log",
+      "description": "View and restore workspace history",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but undo",
+          "description": "Undo the last operation"
+        },
+        {
+          "command": "but oplog",
+          "description": "Show operation history of workspace"
+        },
+        {
+          "command": "but oplog restore [snapshot-id]",
+          "description": "Restore workspace to a specific snapshot"
+        },
+        {
+          "command": "but oplog snapshot -m \"[message]\"",
+          "description": "Create an on-demand snapshot with message",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "title": "Conflict Management",
+      "description": "Resolve conflicts and manage merges",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but resolve",
+          "description": "Go into resolution mode"
+        },
+        {
+          "command": "but merge [branch]",
+          "description": "Merge an active branch into your upstream branch (local mode only)",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "title": "Helper Commands",
+      "description": "Other miscellaneous commands including automatic file assignment or committing",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but gui",
+          "description": "Open the GUI to the current project"
+        },
+        {
+          "command": "but alias",
+          "description": "Create and manage aliases for commonly used commands"
+        },
+        {
+          "command": "but config",
+          "description": "View and modify GitButler configuration settings"
+        },
+        {
+          "command": "but update",
+          "description": "Check for and install updates to GitButler",
+          "level": "advanced"
+        },
+        {
+          "command": "but skill",
+          "description": "Get tips and tricks for using GitButler effectively",
+          "level": "advanced"
+        }
+      ]
+    },
+    {
+      "title": "Auto-Assignment",
+      "description": "Configure automatic file assignment or committing",
       "level": "advanced",
       "items": [
         {
-          "command": "but integrate [branch]",
-          "description": "Integrate a remote branch into your workspace"
+          "command": "but mark [branch|commit]",
+          "description": "Auto-assign changes to branch or auto-commit to commit"
         },
         {
-          "command": "but snapshot create",
-          "description": "Create a snapshot of your current workspace state"
-        },
-        {
-          "command": "but snapshot restore [id]",
-          "description": "Restore a previous workspace snapshot"
-        },
-        {
-          "command": "but log",
-          "description": "Show the history of all virtual branch operations"
+          "command": "but unmark",
+          "description": "Remove all marks from workspace"
         }
       ]
     }
