@@ -70,7 +70,7 @@ but status
 
 ### Commit to a Branch
 
-Now we can commit our unassigned changes to that branch. You can simply assign your changes to the branch first to commit later (we'll cover that later in [Rubbing](../rubbing)), but for now let's keep it simple and just commit them directly using the `but commit` command.
+Now we can commit our unassigned changes to that branch. You can simply assign your changes to the branch first to commit later (we'll cover that later in [Rubbing](./rubbing)), but for now let's keep it simple and just commit them directly using the `but commit` command.
 
 ```cli [branching-and-commiting-but-commit-1, 110px]
 but commit -m 'all the user bookmarks'
@@ -252,6 +252,7 @@ but commit -F h0,i0 -m "only these two files" user-bookmarks
 ```
 
 You can specify files in several ways:
+
 - **By CLI ID**: Use the short identifier shown in `but status` (e.g., `h0`, `i0`)
 - **Space-separated**: `--files h0 i0 k0`
 - **Comma-separated**: `-F h0,i0,k0`
