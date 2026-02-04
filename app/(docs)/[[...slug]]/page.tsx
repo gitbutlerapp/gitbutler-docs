@@ -9,6 +9,7 @@ import { TypeTable } from "fumadocs-ui/components/type-table"
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion"
 import ImageSection from "@/app/components/ImageSection"
 import CliBlock from "@/app/components/CliBlock"
+import { getCommandPageComponents } from "@/app/components/CommandPageComponents"
 import type { ComponentProps, FC } from "react"
 
 interface Param {
@@ -75,6 +76,10 @@ export default async function Page(props: { params: Promise<Param> }): Promise<R
     </>
   )
 
+  // Detect if this is a command page
+  const isCommandPage = page.file.path.includes('commands/')
+  const commandComponents = getCommandPageComponents(isCommandPage)
+
   return (
     <DocsPage
       toc={page.data.toc}
@@ -89,12 +94,20 @@ export default async function Page(props: { params: Promise<Param> }): Promise<R
         footer
       }}
     >
-      <DocsTitle>{page.data.title.replace(/`/g, '')}</DocsTitle>
+      {isCommandPage ? (
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-emerald-500 dark:text-emerald-400 font-mono text-4xl font-bold select-none">&gt;_</span>
+          <DocsTitle className="font-mono">{page.data.title.replace(/`/g, '')}</DocsTitle>
+        </div>
+      ) : (
+        <DocsTitle>{page.data.title.replace(/`/g, '')}</DocsTitle>
+      )}
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <page.data.body
           components={{
             ...defaultComponents,
+            ...commandComponents,
             Popup,
             PopupContent,
             PopupTrigger,
