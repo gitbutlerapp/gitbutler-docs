@@ -3,15 +3,14 @@ title: "`but mark`"
 description: "Mark a commit or branch for auto-stage or auto-commit."
 ---
 
-# Mark a commit or branch for auto-stage or auto-commit.
+Creates or removes a rule for auto-staging or auto-committing changes
+to the specified target entity.
 
-Mark a commit or branch for auto-stage or auto-commit.
+If you mark a branch, new unstaged changes that GitButler sees when
+you run any command will be automatically staged to that branch.
 
-Creates or removes a rule for auto-staging or auto-committing changes to the specified target entity.
-
-If you mark a branch, new unstaged changes that GitButler sees when you run any command will be automatically staged to that branch.
-
-If you mark a commit, new uncommitted changes will automatically be amended into the marked commit.
+If you mark a commit, new uncommitted changes will automatically be
+amended into the marked commit.
 
 **Usage:** `but mark <TARGET> [OPTIONS]`
 

@@ -3,22 +3,24 @@ title: "`but status`"
 description: "Overview of the project workspace state."
 ---
 
-# Overview of the project workspace state.
+This shows unstaged files, files staged to stacks, all applied
+branches (stacked or parallel), commits on each of those branches,
+upstream commits that are unintegrated, commit status (pushed or local),
+and base branch information.
 
-Overview of the project workspace state.
-
-This shows unstaged files, files staged to stacks, all applied branches (stacked or parallel), commits on each of those branches, upstream commits that are unintegrated, commit status (pushed or local), and base branch information.
-
-Examples
+## Examples
 
 Normal usage:
 
-  but status
+```text
+but status
+```
 
 Shorthand with listing files modified
 
-  but status -f
-
+```text
+but status -f
+```
 
 **Usage:** `but status [OPTIONS]`
 

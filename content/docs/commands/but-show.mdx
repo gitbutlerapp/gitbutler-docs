@@ -3,32 +3,37 @@ title: "`but show`"
 description: "Shows detailed information about a commit or branch."
 ---
 
-# Shows detailed information about a commit or branch.
+When given a commit ID, displays the full commit message, author information,
+committer information (if different from author), and the list of files modified.
 
-Shows detailed information about a commit or branch.
+When given a branch name, displays the branch name and a list of all commits
+on that branch. Use --verbose to show full commit messages and files changed.
 
-When given a commit ID, displays the full commit message, author information, committer information (if different from author), and the list of files modified.
-
-When given a branch name, displays the branch name and a list of all commits on that branch. Use --verbose to show full commit messages and files changed.
-
-Examples
+## Examples
 
 Show commit details by short commit ID:
 
-  but show a1b2c3d
+```text
+but show a1b2c3d
+```
 
 Show commit details by CLI ID:
 
-  but show c5
+```text
+but show c5
+```
 
 Show branch commits by branch name:
 
-  but show my-feature-branch
+```text
+but show my-feature-branch
+```
 
 Show branch with full commit details:
 
-  but show my-feature-branch --verbose
-
+```text
+but show my-feature-branch --verbose
+```
 
 **Usage:** `but show <COMMIT> [OPTIONS]`
 

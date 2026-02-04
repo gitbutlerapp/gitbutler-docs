@@ -3,10 +3,6 @@ title: "`but absorb`"
 description: "Amends changes into the appropriate commits where they belong."
 ---
 
-# Amends changes into the appropriate commits where they belong.
-
-Amends changes into the appropriate commits where they belong.
-
 The semantic for finding "the appropriate commit" is as follows:
 
 - If a change has a dependency to a particular commit, it will be amended into that particular commit
@@ -20,9 +16,11 @@ Optionally an identifier to an Uncommitted File or a Branch (stack) may be provi
 - If a Branch (stack) id is provided, absorb will be performed for all changes staged to that stack
 - If no source is provided, absorb is performed for all uncommitted changes
 
-If --dry-run is specified, no changes will be made; instead, the absorption plan (what changes would be absorbed by which commits) will be shown.
+If `--dry-run` is specified, no changes will be made; instead, the absorption plan
+(what changes would be absorbed by which commits) will be shown.
 
-If --new is specified, new commits will be created for absorbed changes instead of amending existing commits.
+If `--new` is specified, new commits will be created for absorbed changes
+instead of amending existing commits.
 
 **Usage:** `but absorb [SOURCE] [OPTIONS]`
 

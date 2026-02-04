@@ -3,25 +3,22 @@ title: "`but teardown`"
 description: "Exit GitButler mode and return to normal Git workflow."
 ---
 
-# Exit GitButler mode and return to normal Git workflow.
-
-Exit GitButler mode and return to normal Git workflow.
-
 This command:
-
 - Creates an oplog snapshot of the current state
 - Finds the first active branch and checks it out
 - Cherry-picks any dangling commits from gitbutler/workspace
 - Provides instructions on how to return to GitButler mode
 
-This is useful when you want to temporarily or permanently leave GitButler management and work with standard Git commands.
+This is useful when you want to temporarily or permanently leave GitButler
+management and work with standard Git commands.
 
-Examples
+## Examples
 
 Exit GitButler mode:
 
-  but teardown
-
+```text
+but teardown
+```
 
 **Usage:** `but teardown`
 
