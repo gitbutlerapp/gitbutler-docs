@@ -2,6 +2,7 @@
   "title": "Commands",
   "defaultOpen": false,
   "pages": [
+    "commands-overview",
     "---Basics---",
     "but-setup",
     "but-teardown",
@@ -34,12 +35,12 @@
     "---Operations Log---",
     "but-oplog",
     "but-undo",
-    "but-restore",
     "---Helper Commands---",
     "but-gui",
     "but-update",
     "but-alias",
     "but-config",
+    "---Miscellaneous---",
     "but-skill"
   ]
 }

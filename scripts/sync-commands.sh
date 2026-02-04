@@ -105,6 +105,11 @@ const unassignedCommands = files.filter(f => !assignedCommands.has(f)).sort();
 // Build pages array
 const pages = [];
 
+// Add commands-overview first if it exists
+if (files.includes('commands-overview')) {
+    pages.push('commands-overview');
+}
+
 // Add grouped commands
 Object.entries(groups).forEach(([groupName, commands]) => {
     // Only add groups that have commands present in the files
@@ -116,9 +121,11 @@ Object.entries(groups).forEach(([groupName, commands]) => {
 });
 
 // Add miscellaneous section if there are unassigned commands
-if (unassignedCommands.length > 0) {
+// Filter out commands-overview since we already added it at the top
+const miscCommands = unassignedCommands.filter(cmd => cmd !== 'commands-overview');
+if (miscCommands.length > 0) {
     pages.push('---Miscellaneous---');
-    unassignedCommands.forEach(cmd => pages.push(cmd));
+    miscCommands.forEach(cmd => pages.push(cmd));
 }
 
 // Create meta.json structure

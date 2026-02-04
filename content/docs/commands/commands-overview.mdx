@@ -5,38 +5,49 @@ description: Your fast index to all of the available commands
 
 ## Command Reference
 
+### Basics
+
+- [setup](./but-setup): Setup a Git repository to be managed by GitButler
+- [teardown](./but-teardown): Go back to vanilla Git branch management
+
 ### Inspection
 
 - [status](./but-status): Overview of the uncommitted changes in the repository
+- [diff](./but-diff): Show a diff of what's changed
+- [show](./but-show): Show information about a branch or commit
 
-### Committing
+### Branching and Committing
 
-- [base](./but-base): Commands for managing the base branch
+- [commit](./but-commit): Create commits on your branches
+- [stage](./but-stage): Stage changes to a branch
 - [branch](./but-branch): Commands for managing branches
-- [rub](./but-rub): Combine two entities together to perform an operation
-- [commit](./but-commit): Commit changes to a stack
+- [discard](./but-discard): Remove changes
+- [resolve](./but-resolve): Resolve commit conflicts
+- [merge](./but-merge): Local branch merging
+
+### Rules
+
 - [mark](./but-mark): Create or remove a rule for auto-assigning or auto-committing
 - [unmark](./but-unmark): Remove all marks from the workspace
 
-### Editing
-
-- [describe](./but-describe): Edit the commit message of a specified commit
-- [new](./but-new): Insert a blank commit before a specified commit or at the top of a stack
-- [pick](./but-pick): Cherry-pick a commit from an unapplied branch into an applied virtual branch
-
-### Forge Stuff
+### Server Interactions
 
 - [push](./but-push): Push a branch/stack to remote
-- [publish](./but-publish): Publish review requests for active branches in your workspace
-- [forge](./but-forge): Commands for interacting with forges like GitHub, GitLab, etc.
+- [pull](./but-pull): Pull upstream changes and update your branches
+- [pr](./but-pr): Commands for interacting with forges like GitHub, GitLab, etc.
+
+### Editing Commits
+
+- [rub](./but-rub): Combine two entities together to perform an operation
+- [absorb](./but-absorb): Absorb changes into existing commits
+- [reword](./but-reword): Edit the commit message of a specified commit
+- [uncommit](./but-uncommit): Uncommit an existing commit
+- [amend](./but-amend): Amend an existing commit with new changes
+- [squash](./but-squash): Combine two commits into a single new commit
+- [move](./but-move): Reorder commits or move a commit from one branch to another
+- [pick](./but-pick): Cherry-pick a commit from an unapplied branch into an applied virtual branch
 
 ### Operations Log
 
 - [oplog](./but-oplog): Show operation history
 - [undo](./but-undo): Undo the last operation by reverting to the previous snapshot
-- [restore](./but-restore): Restore to a specific oplog snapshot
-- [snapshot](./but-snapshot): Create an on-demand snapshot with optional message
-
-### AI Tools
-
-- [mcp](./but-mcp): Start up the MCP server
