@@ -29,6 +29,10 @@ View/set target branch:
 
   but config target
 
+View/set metrics:
+
+  but config metrics
+
 
 **Usage:** `but config <COMMAND>`
 
@@ -110,4 +114,33 @@ Set target branch:
 **Arguments:**
 
 * `<BRANCH>` — New target branch to set (e.g., "origin/main")
+
+### `but config metrics`
+
+View or set metrics collection.
+
+GitButler uses metrics to help us know what is useful and improve it. Privacy policy: https://gitbutler.com/privacy
+
+Without arguments, displays the current setting.
+
+Examples
+
+View metrics configuration:
+
+  but config metrics
+
+Enable metrics:
+
+  but config metrics enable
+
+Disable metrics:
+
+  but config metrics disable
+
+
+**Usage:** `but config metrics [STATUS]`
+
+**Arguments:**
+
+* `<STATUS>` — Whether metrics are enabled
 
