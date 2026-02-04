@@ -1,0 +1,141 @@
+{
+  "title": "GitButler CLI Cheat Sheet",
+  "subtitle": "Essential commands for working with GitButler",
+  "description": "GitButler is a Git client that allows you to work on multiple branches simultaneously. This cheat sheet features the most important and commonly used GitButler CLI commands for easy reference.",
+  "sections": [
+    {
+      "title": "Setup & Installation",
+      "description": "Getting started with GitButler CLI and configuring your environment",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but setup",
+          "description": "Initialize GitButler in your current repository"
+        },
+        {
+          "command": "but teardown",
+          "description": "Remove GitButler from the current repository"
+        },
+        {
+          "command": "but config",
+          "description": "Check or update your important config settings"
+        }
+      ]
+    },
+    {
+      "title": "Virtual Branches",
+      "description": "Creating and managing virtual branches for parallel development",
+      "level": "basic",
+      "diagram": {
+        "type": "mermaid",
+        "content": "graph LR\n    A[Main Branch] --> B[Virtual Branch 1]\n    A --> C[Virtual Branch 2]\n    A --> D[Virtual Branch 3]\n    B --> E[Applied]\n    C --> F[Applied]\n    D --> G[Unapplied]\n    style E fill:#22B2B1\n    style F fill:#22B2B1\n    style G fill:#ccc"
+      },
+      "items": [
+        {
+          "command": "but branch",
+          "description": "List all virtual branches"
+        },
+        {
+          "command": "but branch create [name]",
+          "description": "Create a new virtual branch"
+        },
+        {
+          "command": "but branch apply [branch]",
+          "description": "Apply (enable) a virtual branch to your working directory"
+        },
+        {
+          "command": "but branch unapply [branch]",
+          "description": "Unapply (disable) a virtual branch from your working directory"
+        },
+        {
+          "command": "but branch delete [branch]",
+          "description": "Delete a virtual branch"
+        }
+      ]
+    },
+    {
+      "title": "Working with Changes",
+      "description": "Managing file changes across virtual branches",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but status",
+          "description": "Show the status of all virtual branches and uncommitted changes"
+        },
+        {
+          "command": "but move [file] [branch]",
+          "description": "Move a file's changes to a different virtual branch"
+        },
+        {
+          "command": "but diff",
+          "description": "Show changes in the current working directory"
+        },
+        {
+          "command": "but commit -m \"[message]\"",
+          "description": "Commit changes in a virtual branch"
+        }
+      ]
+    },
+    {
+      "title": "Integration",
+      "description": "Pushing changes and creating pull requests",
+      "level": "basic",
+      "items": [
+        {
+          "command": "but push [branch]",
+          "description": "Push a virtual branch to the remote repository"
+        },
+        {
+          "command": "but pr create [branch]",
+          "description": "Create a pull request for a virtual branch"
+        },
+        {
+          "command": "but pr list",
+          "description": "List all pull requests associated with virtual branches"
+        }
+      ]
+    },
+    {
+      "title": "Workspace Management",
+      "description": "Managing your GitButler workspace and state",
+      "level": "advanced",
+      "diagram": {
+        "type": "ascii",
+        "content": "    Workspace\n       |\n   +---+---+\n   |   |   |\nBranch1 Branch2 Branch3\n   |   |   |\n  File Changes"
+      },
+      "items": [
+        {
+          "command": "but workspace",
+          "description": "Show current workspace information and active branches"
+        },
+        {
+          "command": "but workspace reset",
+          "description": "Reset workspace to a clean state"
+        }
+      ]
+    },
+    {
+      "title": "Advanced Operations",
+      "description": "Advanced commands for power users",
+      "level": "advanced",
+      "items": [
+        {
+          "command": "but integrate [branch]",
+          "description": "Integrate a remote branch into your workspace"
+        },
+        {
+          "command": "but snapshot create",
+          "description": "Create a snapshot of your current workspace state"
+        },
+        {
+          "command": "but snapshot restore [id]",
+          "description": "Restore a previous workspace snapshot"
+        },
+        {
+          "command": "but log",
+          "description": "Show the history of all virtual branch operations"
+        }
+      ]
+    }
+  ]
+}
