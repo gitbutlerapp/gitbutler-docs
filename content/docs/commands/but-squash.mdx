@@ -1,22 +1,29 @@
 ---
 title: "`but squash`"
-description: "Squash two commits together."
+description: "Squash commits together."
 ---
 
-# Squash two commits together.
+# Squash commits together.
 
-Squash two commits together.
+Squash commits together.
 
-Wrapper for but rub `<commit1>` `<commit2>`.
+Can be invoked in three ways:
+1. Using commit identifiers: `but squash <commit1> <commit2>` or `but squash <commit1> <commit2> <commit3>...`
+   - Squashes all commits except the last into the last commit
+2. Using a commit range: `but squash <commit1>..<commit4>`
+   - Squashes all commits in the range into the last commit in the range
+3. Using a branch name: `but squash <branch>`
+   - Squashes all commits in the branch into the bottom-most commit
 
-**Usage:** `but squash <COMMIT1> <COMMIT2> [OPTIONS]`
+**Usage:** `but squash [COMMITS] [OPTIONS]`
 
 ## Arguments
 
-* `<COMMIT1>` — First commit ID (will be squashed into the second) (required)
-* `<COMMIT2>` — Second commit ID (target commit) (required)
+* `<COMMITS>` — Commit identifiers, a range (commit1..commit2), or a branch name
 
 ## Options
 
-* `-d`, `--drop-message` — Drop the first commit's message and keep only the second commit's message
+* `-d`, `--drop-message` — Drop source commit messages and keep only the target commit's message
+* `-m`, `--message` `<MESSAGE>` — Provide a new commit message for the resulting commit
+* `-i`, `--ai` `<AI>` — Generate commit message using AI with optional user summary or instructions
 

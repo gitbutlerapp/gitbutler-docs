@@ -7,13 +7,15 @@ description: "Commands for viewing and managing operation history."
 
 Commands for viewing and managing operation history.
 
-Displays a list of past operations performed in the repository, including their timestamps and descriptions.
+Displays a list of past operations performed in the repository,
+including their timestamps and descriptions.
 
-This allows you to restore to any previous point in the history of the project. All state is preserved in operations, including uncommitted changes.
+This allows you to restore to any previous point in the history of the
+project. All state is preserved in operations, including uncommitted changes.
 
-You can use but restore `<oplog-sha>` to restore to a specific state.
+You can use `but oplog restore <oplog-sha>` to restore to a specific state.
 
-By default, shows the last 20 oplog entries (same as but oplog list).
+By default, shows the last 20 oplog entries (same as `but oplog list`).
 
 **Usage:** `but oplog <COMMAND>`
 
@@ -23,11 +25,13 @@ By default, shows the last 20 oplog entries (same as but oplog list).
 
 List operation history.
 
-Displays a list of past operations performed in the repository, including their timestamps and descriptions.
+Displays a list of past operations performed in the repository,
+including their timestamps and descriptions.
 
-This allows you to restore to any previous point in the history of the project. All state is preserved in operations, including uncommitted changes.
+This allows you to restore to any previous point in the history of the
+project. All state is preserved in operations, including uncommitted changes.
 
-You can use but restore `<oplog-sha>` to restore to a specific state.
+You can use `but oplog restore <oplog-sha>` to restore to a specific state.
 
 **Usage:** `but oplog list [OPTIONS]`
 
@@ -49,4 +53,24 @@ You can provide an optional message to describe the snapshot.
 **Options:**
 
 * `-m`, `--message` `<MESSAGE>` — Message to include with the snapshot
+
+### `but oplog restore`
+
+Restore to a specific oplog snapshot.
+
+This command allows you to revert the repository to a previous state
+captured in an oplog snapshot.
+
+You need to provide the SHA of the oplog entry you want to restore to,
+which you can find by running `but oplog` or `but oplog list`.
+
+**Usage:** `but oplog restore <OPLOG_SHA> [OPTIONS]`
+
+**Arguments:**
+
+* `<OPLOG_SHA>` — Oplog SHA to restore to (required)
+
+**Options:**
+
+* `-f`, `--force` — Skip confirmation prompt
 

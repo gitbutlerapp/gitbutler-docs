@@ -8,7 +8,8 @@
     "build": "pnpm build:llmstxt && next build",
     "dev": "next dev",
     "start": "next start",
-    "update-cli": "node scripts/update-cli-outputs.js"
+    "update-cli": "node scripts/update-cli-outputs.js",
+    "update-manpages": "bash scripts/update-manpages.sh"
   },
   "dependencies": {
     "@fumadocs/mdx-remote": "^0.2.3",
