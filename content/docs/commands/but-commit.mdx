@@ -81,10 +81,10 @@ If a target is provided without --before or --after, defaults to --before behavi
 ## Options
 
 * `-m`, `--message` `<MESSAGE>` — Commit message
-* `-f`, `--file` `<FILE>` — Read commit message from file
+* `--message-file` `<FILE>` — Read commit message from file
 * `-c`, `--create` — Whether to create a new branch for this commit. If the branch name given matches an existing branch, that branch will be used instead. If no branch name is given, a new branch with a generated name will be created
 * `-o`, `--only` — Only commit staged files, not unstaged files
 * `-n`, `--no-hooks` — Bypass pre-commit hooks
-* `-i`, `--ai` `<AI>` — Generate commit message using AI with optional user summary
-* `-F`, `--files` `<FILES>` — Uncommitted file or hunk CLI IDs to include in the commit. Can be specified multiple times or as comma-separated values. If not specified, all uncommitted changes (or changes staged to the target branch) are committed
+* `-i`, `--ai` `<AI>` — Generate commit message using AI with optional user summary. Use --ai by itself or --ai="your instructions" (equals sign required for value)
+* `-p`, `--changes` `<CHANGES>` — Uncommitted file or hunk CLI IDs to include in the commit. Can be specified multiple times or as comma-separated values. If not specified, all uncommitted changes (or changes staged to the target branch) are committed
 

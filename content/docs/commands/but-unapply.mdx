@@ -1,0 +1,44 @@
+---
+title: "`but unapply`"
+description: "Unapply a branch from the workspace."
+---
+
+If you want to unapply an applied branch from your workspace
+(effectively stashing it) so you can work on other branches,
+you can run `but unapply <branch-name>`.
+
+This will remove the changes in that branch from your working
+directory and you can re-apply it later when needed. You will then
+see the branch as unapplied in `but branch list`.
+
+The identifier can be:
+- A CLI ID pointing to a stack or branch (e.g., "bu" from `but status`)
+- A branch name
+
+If a branch name (or an identifier pointing to a branch) is provided,
+the entire stack containing that branch will be unapplied.
+
+## Examples
+
+Unapply by branch name:
+
+```text
+but unapply my-feature-branch
+```
+
+Unapply by CLI ID:
+
+```text
+but unapply bu
+```
+
+**Usage:** `but unapply <IDENTIFIER> [OPTIONS]`
+
+## Arguments
+
+* `<IDENTIFIER>` — CLI ID or name of the branch/stack to unapply (required)
+
+## Options
+
+* `-f`, `--force` — Force unapply without confirmation
+
