@@ -3,10 +3,11 @@ title: "`but branch`"
 description: "Commands for managing branches."
 ---
 
-This includes creating, deleting, listing, showing details about, and
-applying and unapplying branches.
+This includes creating, deleting, listing, and showing details about branches.
 
 By default without a subcommand, it will list the branches.
+
+To apply or unapply branches, use `but apply` and `but unapply`.
 
 **Usage:** `but branch <COMMAND>`
 
@@ -110,42 +111,4 @@ You can also choose to fetch and display review information, show files modified
 * `-f`, `--files` — Show files modified in each commit with line counts
 * `--ai` — Generate AI summary of the branch changes
 * `--check` — Check if the branch merges cleanly into upstream and identify conflicting commits
-
-### `but branch apply`
-
-Apply a branch to the workspace
-
-If you want to apply an unapplied branch to your workspace so you
-can work on it, you can run `but branch apply <branch-name>`.
-
-This will apply the changes in that branch into your working directory
-as a parallel applied branch.
-
-**Usage:** `but branch apply <BRANCH_NAME>`
-
-**Arguments:**
-
-* `<BRANCH_NAME>` — Name of the branch to apply (required)
-
-### `but branch unapply`
-
-Unapply a branch from the workspace
-
-If you want to unapply an applied branch from your workspace
-(effectively stashing it) so you can work on other branches,
-you can run `but branch unapply <branch-name>`.
-
-This will remove the changes in that branch from your working
-directory and you can re-apply it later when needed. You will then
-see the branch as unapplied in `but branch list`.
-
-**Usage:** `but branch unapply <BRANCH_NAME> [OPTIONS]`
-
-**Arguments:**
-
-* `<BRANCH_NAME>` — Name of the branch to unapply (required)
-
-**Options:**
-
-* `-f`, `--force` — Force unapply without confirmation
 

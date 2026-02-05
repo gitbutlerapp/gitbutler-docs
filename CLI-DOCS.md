@@ -173,7 +173,11 @@ pnpm update-cli
 
 The command "man pages" are copied from `../gitbutler/cli-docs` so that changes to the commands docs can be included in changes with the code.
 
-To update the command man-pages, you can run ./scripts/sync-commands.sh
+To update the command man-pages, you can run:
+
+```bash
+pnpm update-manpages
+```
 
 ## Manual Runs
 
