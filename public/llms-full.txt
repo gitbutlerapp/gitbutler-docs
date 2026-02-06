@@ -4972,9 +4972,13 @@ If you have the desktop client installed, you can go into your global settings a
   subtitle="How to install the GitButler CLI"
 />
 
-### Homebrew
+### Curl install
 
-If you're running on a Mac and use Homebrew, you can install GitButler via `brew install gitbutler` and it will install the CLI for you automatically.
+You can install the CLI by running the following command in your terminal:
+
+```bash
+curl -fsSL https://gitbutler.com/install.sh | sh
+```
 
 ## Setup
 
