@@ -37,7 +37,7 @@ export default async function CliBlock({ hash, height, lang = 'cli', children }:
 
     return (
       <div className="rounded-lg border bg-muted overflow-hidden mb-4">
-        <div className="bg-gray-50 px-4 py-2 border-b">
+        <div className="bg-gray-50 dark:bg-gray-800 px-4 py-2 border-b">
           <div className="font-mono text-base text-muted-foreground">$ {children}</div>
         </div>
         <div className="p-4 cli-output-container">
