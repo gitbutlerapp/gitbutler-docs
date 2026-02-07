@@ -58,7 +58,7 @@ To do this, you can use the `but branch new <branch-name>` command.
 
 {/* run git branch -D user-bookmarks */}
 
-```cli [branching-and-commiting-but-branch-1, 110px]
+```cli [branching-and-commiting-but-branch-1, 88px]
 but branch new user-bookmarks
 ```
 
@@ -72,7 +72,7 @@ but status
 
 Now we can commit our unassigned changes to that branch. You can simply assign your changes to the branch first to commit later (we'll cover that later in [Rubbing](./rubbing)), but for now let's keep it simple and just commit them directly using the `but commit` command.
 
-```cli [branching-and-commiting-but-commit-1, 110px]
+```cli [branching-and-commiting-but-commit-1, 88px]
 but commit -m 'all the user bookmarks'
 ```
 
@@ -109,7 +109,7 @@ To create a parallel branch, you simply create a new branch the same way we did 
 {/* run echo 'test' > app/controllers/likes_controller.rb */}
 {/* run echo 'test' > app/models/like.rb */}
 
-```cli [branching-and-commiting-but-branch-2, 110px]
+```cli [branching-and-commiting-but-branch-2, 88px]
 but branch new liked-tweets
 ```
 
@@ -121,7 +121,7 @@ but status
 
 We can see our previous branch and the commit we made, our new empty branch and a couple of modified files. Now we can commit the unassigned changes to that branch with `but commit -m "liked tweets changes" liked-tweets`
 
-```cli [branching-and-commiting-but-commit-2, 110px]
+```cli [branching-and-commiting-but-commit-2, 88px]
 but commit -m "liked tweets changes" liked-tweets
 ```
 
@@ -150,7 +150,7 @@ To create a new stacked branch in GitButler, you can run `but branch new` with a
 {/* run git branch -D liked-tweets-stacked */}
 {/* restore [e32713a1f41c] */}
 
-```cli [branching-and-commiting-but-branch-3, 110px]
+```cli [branching-and-commiting-but-branch-3, 88px]
 but branch new -a user-bookmarks liked-tweets-stacked
 ```
 
@@ -160,7 +160,7 @@ but status
 
 Now we can commit to our stacked branch.
 
-```cli [branching-and-commiting-but-commit-3, 110px]
+```cli [branching-and-commiting-but-commit-3, 88px]
 but commit -m "liked tweets changes" liked-tweets-stacked
 ```
 
@@ -221,7 +221,7 @@ Now, if we want to create a commit in the `user-bookmarks` branch, we can either
 
 Or, we can make a commit with _only_ the assigned files in `user-bookmarks` by using the `-o` option to `but commit`.
 
-```cli [branching-and-commiting-but-commit-4, 110px]
+```cli [branching-and-commiting-but-commit-4, 88px]
 but commit -o -m "liked tweets view" bo
 ```
 
@@ -233,7 +233,7 @@ but st
 
 Now let's commit all the rest of the changes (assigned and unassigned) to our other branch:
 
-```cli [branching-and-commiting-but-commit-5, 110px]
+```cli [branching-and-commiting-but-commit-5, 88px]
 but commit -m 'bookmarks stuff' ch
 ```
 
