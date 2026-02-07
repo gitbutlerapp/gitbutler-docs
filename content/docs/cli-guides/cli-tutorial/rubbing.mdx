@@ -42,11 +42,11 @@ but status
 
 If we want to update the first commit (`da42d06`) with the `README-es.md` changes and the last commit (`fdbd753`) with the `app/views/bookmarks/index.html.erb` changes, we can run the following two `rub` commands:
 
-```cli [rubbing-but-rub-1, 110px]
+```cli [rubbing-but-rub-1, 88px]
 but rub h0 da42d06
 ```
 
-```cli [rubbing-but-rub-2, 110px]
+```cli [rubbing-but-rub-2, 88px]
 but rub app/views/bookmarks/index.html.erb fdbd753
 ```
 
@@ -72,7 +72,7 @@ but status
 
 We can absorb the top commit into the bottom one by running `but rub <commit-squash> <commit-target>`:
 
-```cli [rubbing-but-rub-3, 110px]
+```cli [rubbing-but-rub-3, 88px]
 but rub 0f 08
 ```
 
@@ -98,7 +98,7 @@ but status
 
 And we want to un-commit the first commit (`0fa2965`) as though we had never made it, you can rub to `zz`:
 
-```cli [rubbing-but-rub-4, 110px]
+```cli [rubbing-but-rub-4, 88px]
 but rub 0f zz
 ```
 
@@ -122,7 +122,7 @@ but status
 
 We can move the “second commit” commit to the `move-second-commit` branch with `but rub`:
 
-```cli [rubbing-but-rub-5, 110px]
+```cli [rubbing-but-rub-5, 88px]
 but rub 0f mo
 ```
 
@@ -186,7 +186,7 @@ but commit empty --after 6a
 
 Now we have a blank commit:
 
-```cli [rubbing-but-status-13, 440px]
+```cli [rubbing-but-status-13, 462px]
 but status -f
 ```
 

@@ -57,7 +57,7 @@ This output is actually _better_ than the default Git output for this, because I
 
 The `but branch` command, however, is built specifically to help you identify the branches you're looking for and give you some useful information about them. Let's give it a try:
 
-```cli [inspecting-but-branch-1, 660px]
+```cli [inspecting-but-branch-1, 638px]
 but branch
 ```
 
@@ -77,7 +77,7 @@ The point of this listing is to help you easily see what work you have available
 
 Running `but branch` defaults to running `but branch list`, which has a bunch of other options (filtering to only local or remote branches, not calculating mergability for speed, etc). The most useful option might be the filtering, for example, you can type a partial match string and it will filter the output:
 
-```cli [inspecting-but-branch-2, 242px]
+```cli [inspecting-but-branch-2, 220px]
 but branch list book
 ```
 
@@ -93,7 +93,7 @@ git log origin/main..feature-awesome-thing
 
 Now let's look at `but branch show`
 
-```cli [inspecting-but-branch-3, 286px]
+```cli [inspecting-but-branch-3, 264px]
 but branch show feature-awesome-thing
 ```
 
@@ -105,7 +105,7 @@ The real fun one is adding `--ai`, which will take a look at the changes and sum
 
 Let's run all of them at the same time:
 
-```cli [inspecting-but-branch-4, 704px]
+```cli [inspecting-but-branch-4, 682px]
 but branch show sc-branch-28 --ai -r -f
 ```
 
@@ -113,7 +113,7 @@ but branch show sc-branch-28 --ai -r -f
 
 If you want to look at a specific commit in any of these circumstances, you can use the `but show` command with the commit hash.
 
-```cli [inspecting-but-show-1, 286px]
+```cli [inspecting-but-show-1, 264px]
 but show a42580b96ed7b432
 ```
 
