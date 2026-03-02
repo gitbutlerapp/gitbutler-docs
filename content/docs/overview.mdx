@@ -1,6 +1,6 @@
 ---
 title: Desktop Overview
-description: Learn how GitButler enables working on multiple branches simultaneously with virtual branches, target branches, and conflict resolution.
+description: Learn how GitButler enables working on multiple branches simultaneously with parallel branches, target branches, and conflict resolution.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout"
@@ -38,7 +38,7 @@ The reason is stock Git can only handle one branch at a time, it does not have t
 
 ## Target Branch
 
-With virtual branches, you are not working off local main or master branches. Everything that you do is on a virtual branch, automatically.
+With parallel branches, you are not working off local main or master branches. Everything that you do is on a virtual branch, automatically.
 
 Similar to GitHub, where you specify a default branch to use to merge your Pull Requests into by default, GitButler requires a "Target Branch". This is understood to be whatever your concept of "production" is. Typically what represents deployed, production code that cannot or should not be rolled back. Generally this would be something like `origin/master` or `origin/main`.
 
@@ -46,9 +46,9 @@ Once a target branch is specified, everything in your working directory that dif
 
 This means you don't need to create a new branch when you want to start working, you simply start working and then change the branch name later. There is no local "main" or "master" because it doesn't make sense. Everything is a branch, with work that is meant to eventually be integrated into your target branch.
 
-## Virtual Branches
+## Parallel Branches
 
-You can easily work in a single branch at a time, but GitButler can handle several virtual branches at the same time. If you have 3 different changes in one file, you can drag each of the changes to a different virtual branch lane and commit and push them independently.
+You can easily work in a single branch at a time, but GitButler can handle several parallel branches at the same time. If you have 3 different changes in one file, you can drag each of the changes to a different virtual branch lane and commit and push them independently.
 
 Each virtual branch is kept in a vertical lane, similar to a kanban board, and every file and difference is similar to a card that you can drag between the lanes until they are committed there.
 
@@ -69,7 +69,7 @@ Since there isn't just a single branch you can be on, you don't "switch" branche
 
 ## Merging Upstream
 
-Eventually, you will have work merged into the branch you chose as your target branch, which will need to be reconciled with all your virtual branches to keep them up to date with where they will eventually need to merge to.
+Eventually, you will have work merged into the branch you chose as your target branch, which will need to be reconciled with all your parallel branches to keep them up to date with where they will eventually need to merge to.
 
 <ImageSection
   className="mx-auto"
@@ -81,7 +81,7 @@ Eventually, you will have work merged into the branch you chose as your target b
 
 Upstream work will automatically be shown on the top of your window as "X upstream commits". When you click there, you will see the incoming work and you will be directed on how to update your active branches on top of it.
 
-For each virtual branch you have, we will show you if the incoming upstream work has conflicts with each branch. If there are conflicts, you can choose to stash the branch or go ahead and rebase with conflicts, which you can fix later.
+For each parallel branch you have, we will show you if the incoming upstream work has conflicts with each branch. If there are conflicts, you can choose to stash the branch or go ahead and rebase with conflicts, which you can fix later.
 
 If a virtual branch is entirely integrated into upstream, it will be removed and deleted when those changes are integrated. So you can keep a virtual branch applied locally until it is integrated and it will go away automatically.
 

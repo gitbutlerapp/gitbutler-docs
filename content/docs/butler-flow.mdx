@@ -1,6 +1,6 @@
 ---
 title: Butler Flow
-description: Discover Butler Flow, a lightweight branch-based development workflow that improves upon GitHub Flow with GitButler's virtual branches.
+description: Discover Butler Flow, a lightweight branch-based development workflow that improves upon GitHub Flow with GitButler's parallel branches.
 ---
 
 Butler Flow is a lightweight, branch-based workflow enabled by GitButler's virtual branch functionality.
@@ -26,9 +26,9 @@ In a nutshell, the basic development cycle is very simple.
 
 In stock, vanilla Git tooling, there is nothing specified as the production branch, no special "trunk". It is only by convention that this is enforced.
 
-In GitButler, virtual branches will not work without the specification of a special "target branch". Everything exists in relation to this special branch, everything that differs from it must be accounted for by being owned by some other branch, until those changes are integrated.
+In GitButler,  branches will not work without the specification of a special "target branch". Everything exists in relation to this special branch, everything that differs from it must be accounted for by being owned by some other branch, until those changes are integrated.
 
-### Virtual Branches
+### Parallel Branches
 
 Once you choose a target branch, everything that is in your working directory and not ignored by the Git Ignore specification must be owned by a virtual branch. If you don't have one active, GitButler will automatically create one for you.
 
@@ -36,11 +36,11 @@ All subsequent changes to your working directory, either by applying other branc
 
 Branches are meant to be small, independent and rapidly integrated. However, longer lived branches can be continuously re-integrated, keeping them clean and mergeable for long periods of time if needed, while still being shareable and reviewable with your team.
 
-Virtual branches can be started and ended entirely independently of each other. Developers can work on longer branches, while starting, reviewing, finishing, merging, and deleting small ones without ever changing branch context.
+Parallel branches can be started and ended entirely independently of each other. Developers can work on longer branches, while starting, reviewing, finishing, merging, and deleting small ones without ever changing branch context.
 
 ### Collaboration
 
-All your team's work, whether created and managed by GitButler or not, exists on the central server as normal Git branches. These will automatically be pulled down and kept up to date by GitButler and can be converted into virtual branches and applied to your working directory in addition to your branches.
+All your team's work, whether created and managed by GitButler or not, exists on the central server as normal Git branches. These will automatically be pulled down and kept up to date by GitButler and can be converted into parallel branches and applied to your working directory in addition to your branches.
 
 This allows you to integrate work from the rest of your team continuously and early, while still keeping non-dependent changes separated and independently reviewable and mergable. It allows you to review code without needing to entirely switch contexts, and to do so early and often in an executable environment.
 
@@ -48,4 +48,4 @@ Merge conflicts are known almost as soon as they occur and can be communicated a
 
 ### Maintenance
 
-Virtual branches can remain applied locally until they are merged into your upstream target branch. Once integrated by any fashion (squash merge, rebase, merge), the virtual branch is automatically disposed of, keeping cruft and overhead low.
+Parallel branches can remain applied locally until they are merged into your upstream target branch. Once integrated by any fashion (squash merge, rebase, merge), the virtual branch is automatically disposed of, keeping cruft and overhead low.

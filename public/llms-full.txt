@@ -113,9 +113,9 @@ In a nutshell, the basic development cycle is very simple.
 
 In stock, vanilla Git tooling, there is nothing specified as the production branch, no special "trunk". It is only by convention that this is enforced.
 
-In GitButler, virtual branches will not work without the specification of a special "target branch". Everything exists in relation to this special branch, everything that differs from it must be accounted for by being owned by some other branch, until those changes are integrated.
+In GitButler, parallel branches will not work without the specification of a special "target branch". Everything exists in relation to this special branch, everything that differs from it must be accounted for by being owned by some other branch, until those changes are integrated.
 
-### Virtual Branches
+### Parallel Branches
 
 Once you choose a target branch, everything that is in your working directory and not ignored by the Git Ignore specification must be owned by a virtual branch. If you don't have one active, GitButler will automatically create one for you.
 
@@ -123,11 +123,11 @@ All subsequent changes to your working directory, either by applying other branc
 
 Branches are meant to be small, independent and rapidly integrated. However, longer lived branches can be continuously re-integrated, keeping them clean and mergeable for long periods of time if needed, while still being shareable and reviewable with your team.
 
-Virtual branches can be started and ended entirely independently of each other. Developers can work on longer branches, while starting, reviewing, finishing, merging, and deleting small ones without ever changing branch context.
+Parallel branches can be started and ended entirely independently of each other. Developers can work on longer branches, while starting, reviewing, finishing, merging, and deleting small ones without ever changing branch context.
 
 ### Collaboration
 
-All your team's work, whether created and managed by GitButler or not, exists on the central server as normal Git branches. These will automatically be pulled down and kept up to date by GitButler and can be converted into virtual branches and applied to your working directory in addition to your branches.
+All your team's work, whether created and managed by GitButler or not, exists on the central server as normal Git branches. These will automatically be pulled down and kept up to date by GitButler and can be converted into parallel branches and applied to your working directory in addition to your branches.
 
 This allows you to integrate work from the rest of your team continuously and early, while still keeping non-dependent changes separated and independently reviewable and mergable. It allows you to review code without needing to entirely switch contexts, and to do so early and often in an executable environment.
 
@@ -135,7 +135,7 @@ Merge conflicts are known almost as soon as they occur and can be communicated a
 
 ### Maintenance
 
-Virtual branches can remain applied locally until they are merged into your upstream target branch. Once integrated by any fashion (squash merge, rebase, merge), the virtual branch is automatically disposed of, keeping cruft and overhead low.
+Parallel branches can remain applied locally until they are merged into your upstream target branch. Once integrated by any fashion (squash merge, rebase, merge), the virtual branch is automatically disposed of, keeping cruft and overhead low.
 
 
 # cli-overview.mdx
@@ -210,7 +210,7 @@ Read about it over [Why GitButler](/why-gitbutler) Section.
 
 The GitButler client is a powerful Git client. You can manage your branches, work on multiple things at once, push and fetch from your Git server, easily rebase and modify commits and more. We have a unique approach to merge conflicts that helps split up any conflicting work. It also keeps a timeline so that you can easily undo any operation.
 
-- [Virtual Branches](/features/branch-management/virtual-branches)
+- [Parallel Branches](/features/branch-management/virtual-branches)
 - [First Class Conflicts](/features/branch-management/merging)
 - [Project History](/features/timeline)
 
@@ -494,7 +494,7 @@ Date:   Wed Sep 9 09:06:03 2020 +0800
 
     GitButler Workspace Commit
 
-    This is is a merge commit of the virtual branches in your workspace.
+    This is is a merge commit of the parallel branches in your workspace.
 
     For GitButler to manage multiple parallel branches, we maintain
     this commit automatically so other tooling works properly.
@@ -522,11 +522,11 @@ That first commit is a merge commit that we rebuild as you modify branches in Gi
 
 ## Status, Diff and Log
 
-To keep Git command output for things that look at the index and HEAD (such as status or diff) somewhat sane, we modify your index to look like the union of all the committed states of all your applied virtual branches. This makes git diff and git status behave more or less like you would expect.
+To keep Git command output for things that look at the index and HEAD (such as status or diff) somewhat sane, we modify your index to look like the union of all the committed states of all your applied parallel branches. This makes git diff and git status behave more or less like you would expect.
 
 For instance, if you have two files on Branch A and two files on Branch B, then git status will simply list four files as modified.
 
-If you run git log, the first commit should be our custom commit message and the tree of that commit is the union of all the committed work on all your applied virtual branches, as though they were all merged together into one (something stock Git can understand).
+If you run git log, the first commit should be our custom commit message and the tree of that commit is the union of all the committed work on all your applied parallel branches, as though they were all merged together into one (something stock Git can understand).
 
 ## Committing, Branching, Checking Out
 
@@ -648,7 +648,7 @@ A negative value (e.g. -1) disables auto fetching. Note that if `fetch` is the o
 GitButler can be configured to use several different git authentication methods. You can switch between them in your project settings. You can try multiple different options and see if any of them are appropriate for your setup. Note that if you are on Windows, the only applicable method is the "Git executable", therefore the application will now show this as a configuration option. 
 
 <ImageSection
-  alt="Virtual Branches Example"
+  alt="Parallel Branches Example"
   src="/issues-01.png"
 />
 
@@ -687,7 +687,7 @@ In some cases, the git remote may be setup on a port number other than 22. If th
 
 As a workaround you may set your remote in the [SSH format](https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols) (eg. `ssh://git@example.com:3022/foo/bar.git`)
 
-Updating virtual branches when the respective remote has new commits
+Updating parallel branches when the respective remote has new commits
 If you have added a remote branch to your active workspace in GitButler, or pushed a virtual branch to the remote, and new commits are added to the remote branch, there is currently no way to sync those new commits into the existing virtual branch in GitButler. This is being tracked in the GitHub issue [#2649](https://github.com/gitbutlerapp/gitbutler/issues/2649).
 
 The current workaround is to undo any local commits and then stash your local changes manually using [git stash](https://git-scm.com/docs/git-stash) and then delete the virtual branch that has upstream changes. Then you can update the trunk by clicking the update button next to the word "Trunk" in the sidebar on the left to make sure all new upstream changes are synced, then select the remote branch that has the new changes and click the "Apply +" button above the list of commits for the branch. Once the updated branch is applied to your working directory, you can manually `git stash pop` your stashed changes and then resolve any merge conflicts.
@@ -1163,11 +1163,11 @@ After a while, your context in a single branch can get long. If you no longer ne
 
 How to dig around our internal data to find (nearly) anything
 
-GitButler saves data in a few different ways. As we're still in beta, sometimes things might break and it may look like you've lost work, but you almost certainly haven't. We're pretty good about saving stuff a lot. Here's how to recover almost anything you had in your working directory or virtual branches.
+GitButler saves data in a few different ways. As we're still in beta, sometimes things might break and it may look like you've lost work, but you almost certainly haven't. We're pretty good about saving stuff a lot. Here's how to recover almost anything you had in your working directory or parallel branches.
 
 ## GitButler References
 
-If everything crashes or the UI isn't working at all, you may be surprised to know that even though your virtual branches don't show up in a normal git branch output, we do actually constantly write them out as Git references (just not in refs/heads).
+If everything crashes or the UI isn't working at all, you may be surprised to know that even though your parallel branches don't show up in a normal git branch output, we do actually constantly write them out as Git references (just not in refs/heads).
 
 
 ```bash title="Terminal"
@@ -1185,10 +1185,10 @@ You will have one for each virtual branch (applied or unapplied) that you've cre
 
 If you've committed everything on a virtual branch, the reference will just point to the latest commit. If you have work in progress on the branch, it will point to a WIP commit that includes those changes.
 
-So for example, if I have the following two virtual branches, one fully committed and one with work pending:
+So for example, if I have the following two parallel branches, one fully committed and one with work pending:
 
 <ImageSection
-  alt="Virtual Branches Example"
+  alt="Parallel Branches Example"
   src="/recovering-01.webp"
 />
 
@@ -1229,10 +1229,10 @@ Date:   Fri Feb 23 10:30:18 2024 +0100
 
     GitButler Integration Commit
 
-    This is an integration commit for the virtual branches that GitButler is tracking.
+    This is an integration commit for the parallel branches that GitButler is tracking.
 
-    Due to GitButler managing multiple virtual branches, you cannot switch back and
-    forth between git branches and virtual branches easily.
+    Due to GitButler managing multiple parallel branches, you cannot switch back and
+    forth between git branches and parallel branches easily.
 
     If you switch to another branch, GitButler will need to be reinitialized.
     If you commit on this branch, GitButler will throw it away.
@@ -1344,7 +1344,7 @@ Let's look at the tree of one of these commits:
 040000 tree a0821552c0e7d5defe369d577af5e3a87b442469    virtual_branches
 ```
 
-The virtual branches toml file has the interesting metadata:
+The parallel branches toml file has the interesting metadata:
 
 ```bash title="Terminal"
 ❯ git cat-file -p 16e47cb1d091ca9dd44^{tree}:virtual_branches.toml
@@ -1742,7 +1742,7 @@ Generates comprehensive PR descriptions when creating pull requests.
 # branch-lanes.mdx
 
 
-All of your branches - remote, local, and virtual / applied or not - are managed in the Branch Tab. This is where you can see all of your branches, apply them to your workspace, and manage your virtual branches.
+All of your branches - remote, local, and virtual / applied or not - are managed in the Branch Tab. This is where you can see all of your branches, apply them to your workspace, and manage your parallel branches.
 
 You can access the Branches tab by clicking on the "Branches" icon in the sidebar.
 
@@ -1758,9 +1758,9 @@ The interface looks something like this:
 
 ## Branch List
 
-The first pane on the left shows you the virtual branches and stacks that you have as well as the other branches that you have available (legacy git branches, remote branches and PRs).
+The first pane on the left shows you the parallel branches and stacks that you have as well as the other branches that you have available (legacy git branches, remote branches and PRs).
 
-All of these branches can be converted into virtual branches by clicking them and then clicking the "Apply to workspace" button on the top of the branch view (middle pane).
+All of these branches can be converted into parallel branches by clicking them and then clicking the "Apply to workspace" button on the top of the branch view (middle pane).
 
 Local branches can also be fully deleted here.
 
@@ -1934,7 +1934,7 @@ This is useful for things like getting feedback on a series and being able to go
 # merging.mdx
 
 
-By default, GitButler rebases the work on your virtual branches when you update your target branch (upstream) work.
+By default, GitButler rebases the work on your parallel branches when you update your target branch (upstream) work.
 
 Often this works just fine and the commits are simply rebased. Occasionally, you will have conflicts with upstream work.
 
@@ -1960,7 +1960,7 @@ In this case, when you perform the rebase, that branch will then contain "confli
   subtitle="When your commits have conflicts"
 />
 
-When you click that, GitButler will remove the other virtual branches and other work from your working directory and check out just this commit with its conflict markers. It will show you a special "edit mode" screen, where you are directly editing this commit.
+When you click that, GitButler will remove the other parallel branches and other work from your working directory and check out just this commit with its conflict markers. It will show you a special "edit mode" screen, where you are directly editing this commit.
 
 <ImageSection
   className="mx-auto"
@@ -2064,7 +2064,7 @@ If you're using GitHub integration and the branch has an associated pull request
 
 - [Stacked Branches](/features/branch-management/stacked-branches) - Learn about working with stacked branches
 - [Branch Lanes](/features/branch-management/branch-lanes) - Understand the branch lane interface
-- [Virtual Branches](/features/branch-management/virtual-branches) - Core concepts of GitButler's virtual branch system
+- [Parallel Branches](/features/branch-management/virtual-branches) - Core concepts of GitButler's virtual branch system
 
 
 # pushing-and-fetching.mdx
@@ -2388,7 +2388,7 @@ Rules respect hunk dependencies (locks). If a change depends on a commit in a sp
 
 ## Related Features
 
-- [Virtual Branches](/features/branch-management/virtual-branches): Understanding the branch system that rules work with
+- [Parallel Branches](/features/branch-management/virtual-branches): Understanding the branch system that rules work with
 - [Branch Lanes](/features/branch-management/branch-lanes): How lanes are organized and how rules interact with lane positioning
 - [AI Assistance](/features/branch-management/ai-assistance): How AI can create and manage rules automatically
 
@@ -2557,16 +2557,16 @@ approve and merge a subset of commits from the PR.
 Utilizing stacked pull requests, means that the sub-tasks of a larger change are in their own PRs.
 This way it is possible to approve and merge the initial part of a stack (e.g. a refactor) while still iterating on the remaining sub-tasks.
 
-## Comparison to Virtual Branches
+## Comparison to Parallel Branches
 
-Stacking and Virtual Branches are similar in that they allow you to separate code changes / commits into different branches. In both cases,
+Stacking and Parallel Branches are similar in that they allow you to separate code changes / commits into different branches. In both cases,
 the changes are available in your working directory.
 
-The main difference is that Virtual Branches are **independent** from one another, while stacked branches **depend** on the ones that come before it.
+The main difference is that Parallel Branches are **independent** from one another, while stacked branches **depend** on the ones that come before it.
 Because of this, the two features are not mutually exclusive but rather complementary. For example a bugfix change that is unrelated to a feature
 can be put in a separate virtual branch. On the other hand, a change that depends on a previous change can be put in a stacked branch above the one it depends on.
 
-In fact GitButler implements stacked branches as Virtual Branches that are split into multiple dependent branches.
+In fact GitButler implements stacked branches as Parallel Branches that are split into multiple dependent branches.
 
 <ImageSection
   className="mx-auto"
@@ -2578,7 +2578,7 @@ In fact GitButler implements stacked branches as Virtual Branches that are split
 
 ## Workflow
 
-By default, virtual branches in the app are simply stacks of one.
+By default, parallel branches in the app are simply stacks of one.
 With version `0.14.0` or newer you can create a new dependent branch within a lane by clicking the `+` button above the branch name.
 
 > The workflow below assumes a GitHub remote. If you are using a different forge, you can still use this functionality but will need to manually create/update the Pull/Merge Requests
@@ -2687,13 +2687,13 @@ In order to recover from this situation you can simply force push the branches a
 # virtual-branches.mdx
 
 
-Virtual branches are a powerful feature of GitButler that allow you to work on multiple branches at the same time, committing to them independently and simultaneously. This is a key part of the GitButler experience, allowing you to manage your work in a flexible and efficient way that is not possible with traditional Git tooling.
+Parallel branches are a powerful feature of GitButler that allow you to work on multiple branches at the same time, committing to them independently and simultaneously. This is a key part of the GitButler experience, allowing you to manage your work in a flexible and efficient way that is not possible with traditional Git tooling.
 
 ## Overview
 
 With normal Git branching, you can only work on one branch at a time. There is one `HEAD` reference and one index.
 
-With virtual branches, you can have multiple branches applied to your working directory at the same time. Each branch is represented as a vertical lane, and you can drag changes between these lanes to commit them independently.
+With parallel branches, you can have multiple branches applied to your working directory at the same time. Each branch is represented as a vertical lane, and you can drag changes between these lanes to commit them independently.
 
 Each lane also has its own staging area, so you can stage changes for each branch before deciding to commit them.
 
@@ -3005,7 +3005,7 @@ In the near future, we will also be able to do more interesting things like auto
 
 # cursor-hooks.mdx
 
-GitButler integrates seamlessly with Cursor through hooks that automatically manage your commits and branches while you're using AI coding features. This allows you to automatically maintain clean git history and organized virtual branches.
+GitButler integrates seamlessly with Cursor through hooks that automatically manage your commits and branches while you're using AI coding features. This allows you to automatically maintain clean git history and organized parallel branches.
 
 Here's a short video showing how GitButler works with Cursor hooks:
 

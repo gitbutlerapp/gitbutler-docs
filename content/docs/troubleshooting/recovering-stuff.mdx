@@ -8,11 +8,11 @@ import { File, Folder, Files } from 'fumadocs-ui/components/files';
 
 How to dig around our internal data to find (nearly) anything
 
-GitButler saves data in a few different ways. As we're still in beta, sometimes things might break and it may look like you've lost work, but you almost certainly haven't. We're pretty good about saving stuff a lot. Here's how to recover almost anything you had in your working directory or virtual branches.
+GitButler saves data in a few different ways. As we're still in beta, sometimes things might break and it may look like you've lost work, but you almost certainly haven't. We're pretty good about saving stuff a lot. Here's how to recover almost anything you had in your working directory or parallel branches.
 
 ## GitButler References
 
-If everything crashes or the UI isn't working at all, you may be surprised to know that even though your virtual branches don't show up in a normal git branch output, we do actually constantly write them out as Git references (just not in refs/heads).
+If everything crashes or the UI isn't working at all, you may be surprised to know that even though your parallel branches don't show up in a normal git branch output, we do actually constantly write them out as Git references (just not in refs/heads).
 
 
 ```bash title="Terminal"
@@ -30,10 +30,10 @@ You will have one for each virtual branch (applied or unapplied) that you've cre
 
 If you've committed everything on a virtual branch, the reference will just point to the latest commit. If you have work in progress on the branch, it will point to a WIP commit that includes those changes.
 
-So for example, if I have the following two virtual branches, one fully committed and one with work pending:
+So for example, if I have the following two parallel branches, one fully committed and one with work pending:
 
 <ImageSection
-  alt="Virtual Branches Example"
+  alt="Parallel Branches Example"
   src="/recovering-01.webp"
 />
 
@@ -74,10 +74,10 @@ Date:   Fri Feb 23 10:30:18 2024 +0100
 
     GitButler Integration Commit
 
-    This is an integration commit for the virtual branches that GitButler is tracking.
+    This is an integration commit for the parallel branches that GitButler is tracking.
 
-    Due to GitButler managing multiple virtual branches, you cannot switch back and
-    forth between git branches and virtual branches easily.
+    Due to GitButler managing multiple parallel branches, you cannot switch back and
+    forth between git branches and parallel branches easily.
 
     If you switch to another branch, GitButler will need to be reinitialized.
     If you commit on this branch, GitButler will throw it away.
@@ -189,7 +189,7 @@ Let's look at the tree of one of these commits:
 040000 tree a0821552c0e7d5defe369d577af5e3a87b442469    virtual_branches
 ```
 
-The virtual branches toml file has the interesting metadata:
+The parallel branches toml file has the interesting metadata:
 
 ```bash title="Terminal"
 ❯ git cat-file -p 16e47cb1d091ca9dd44^{tree}:virtual_branches.toml
