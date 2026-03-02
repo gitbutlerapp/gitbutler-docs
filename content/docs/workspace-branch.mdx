@@ -16,7 +16,7 @@ Date:   Wed Sep 9 09:06:03 2020 +0800
 
     GitButler Workspace Commit
 
-    This is is a merge commit of the virtual branches in your workspace.
+    This is is a merge commit of the parallel branches in your workspace.
 
     For GitButler to manage multiple parallel branches, we maintain
     this commit automatically so other tooling works properly.
@@ -44,11 +44,11 @@ That first commit is a merge commit that we rebuild as you modify branches in Gi
 
 ## Status, Diff and Log
 
-To keep Git command output for things that look at the index and HEAD (such as status or diff) somewhat sane, we modify your index to look like the union of all the committed states of all your applied virtual branches. This makes git diff and git status behave more or less like you would expect.
+To keep Git command output for things that look at the index and HEAD (such as status or diff) somewhat sane, we modify your index to look like the union of all the committed states of all your applied parallel branches. This makes git diff and git status behave more or less like you would expect.
 
 For instance, if you have two files on Branch A and two files on Branch B, then git status will simply list four files as modified.
 
-If you run git log, the first commit should be our custom commit message and the tree of that commit is the union of all the committed work on all your applied virtual branches, as though they were all merged together into one (something stock Git can understand).
+If you run git log, the first commit should be our custom commit message and the tree of that commit is the union of all the committed work on all your applied parallel branches, as though they were all merged together into one (something stock Git can understand).
 
 ## Committing, Branching, Checking Out
 

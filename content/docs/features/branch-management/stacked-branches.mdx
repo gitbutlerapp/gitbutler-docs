@@ -42,16 +42,16 @@ approve and merge a subset of commits from the PR.
 Utilizing stacked pull requests, means that the sub-tasks of a larger change are in their own PRs.
 This way it is possible to approve and merge the initial part of a stack (e.g. a refactor) while still iterating on the remaining sub-tasks.
 
-## Comparison to Virtual Branches
+## Comparison to Parallel Branches
 
-Stacking and Virtual Branches are similar in that they allow you to separate code changes / commits into different branches. In both cases,
+Stacking and Parallel Branches are similar in that they allow you to separate code changes / commits into different branches. In both cases,
 the changes are available in your working directory.
 
-The main difference is that Virtual Branches are **independent** from one another, while stacked branches **depend** on the ones that come before it.
+The main difference is that Parallel Branches are **independent** from one another, while stacked branches **depend** on the ones that come before it.
 Because of this, the two features are not mutually exclusive but rather complementary. For example a bugfix change that is unrelated to a feature
 can be put in a separate virtual branch. On the other hand, a change that depends on a previous change can be put in a stacked branch above the one it depends on.
 
-In fact GitButler implements stacked branches as Virtual Branches that are split into multiple dependent branches.
+In fact GitButler implements stacked branches as Parallel Branches that are split into multiple dependent branches.
 
 <ImageSection
   className="mx-auto"
@@ -63,7 +63,7 @@ In fact GitButler implements stacked branches as Virtual Branches that are split
 
 ## Workflow
 
-By default, virtual branches in the app are simply stacks of one.
+By default, parallel branches in the app are simply stacks of one.
 With version `0.14.0` or newer you can create a new dependent branch within a lane by clicking the `+` button above the branch name.
 
 > The workflow below assumes a GitHub remote. If you are using a different forge, you can still use this functionality but will need to manually create/update the Pull/Merge Requests
