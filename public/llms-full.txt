@@ -1,7 +1,7 @@
 
 # GitButler Documentation
 
-## Table of Contents 
+## Table of Contents
 
 - [butler-flow](#butler-flow.mdx)
 - [cli-overview](#cli-overview.mdx)
@@ -227,14 +227,14 @@ Here is a quick overview of how to get started with GitButler. In this guide, we
 
 ## Importing a Local Repository
 
-After [downloading](https://app.gitbutler.com/downloads) and installing GitButler, you will be greeted with the welcome screen. From here you can 
+After [downloading](https://app.gitbutler.com/downloads) and installing GitButler, you will be greeted with the welcome screen. From here you can
 <ImageSection
   alt="Import screen"
   src="/started/welcome-screen.png"
   subtitle="First thing you see when you launch GitButler"
 />
 
-Let's start by importing an existing Git project on your machine. If you click "Add local project" and then choose the directory of the existing Git initialized project, then we will start the 
+Let's start by importing an existing Git project on your machine. If you click "Add local project" and then choose the directory of the existing Git initialized project, then we will start the
 ## Choosing a Target Branch
 
 <ImageSection
@@ -570,7 +570,7 @@ In those cases you are likely to observe an error message that looks something l
 Refused to connect to https://<YOURDOMAIN>.<TLD>/api/v4/projects/9/merge_requests because it does not appear in the connect-src directive of the Content Security Policy.
 ```
 
-You can resolve this issue by adding your host to the CSP. 
+You can resolve this issue by adding your host to the CSP.
 
 ## Adding a Custom CSP
 
@@ -645,7 +645,7 @@ A negative value (e.g. -1) disables auto fetching. Note that if `fetch` is the o
 
 ## Available authentication methods
 
-GitButler can be configured to use several different git authentication methods. You can switch between them in your project settings. You can try multiple different options and see if any of them are appropriate for your setup. Note that if you are on Windows, the only applicable method is the "Git executable", therefore the application will now show this as a configuration option. 
+GitButler can be configured to use several different git authentication methods. You can switch between them in your project settings. You can try multiple different options and see if any of them are appropriate for your setup. Note that if you are on Windows, the only applicable method is the "Git executable", therefore the application will now show this as a configuration option.
 
 <ImageSection
   alt="Parallel Branches Example"
@@ -2299,7 +2299,7 @@ Matches the content of changed lines using a regular expression pattern. This fi
 - Match changes with specific function calls: `console\.log`
 - Match changes with certain patterns: `@deprecated`
 
-<video 
+<video
    src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/rule-text-match.mp4"
    controls
    muted
@@ -2319,7 +2319,7 @@ Matches changes that originated from a specific Claude Code session. This filter
 
 **Note**: Rules with Claude Code Session ID filters have lower priority than manually created rules. If a change matches both an AI-generated rule and a manual rule, the manual rule takes precedence.
 
-<video 
+<video
    src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/rule-ai.mp4"
    controls
    muted
@@ -3328,7 +3328,7 @@ You need to have a GitButler account to support us. If you don't have one, sign 
 <Cards>
   <Card
     icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><ellipse cx="96" cy="84" rx="80" ry="36" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M16,84v40c0,19.88,35.82,36,80,36s80-16.12,80-36V84" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><line x1="64" y1="117" x2="64" y2="157" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M176,96.72c36.52,3.34,64,17.86,64,35.28,0,19.88-35.82,36-80,36-19.6,0-37.56-3.17-51.47-8.44" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M80,159.28V172c0,19.88,35.82,36,80,36s80-16.12,80-36V132" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><line x1="192" y1="165" x2="192" y2="205" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><line x1="128" y1="117" x2="128" y2="205" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/></svg>}
-    href="https://app.gitbutler.com/supporter"
+    href="https://gitbutler.com/profile"
     title="GitButler"
     description="Support GitButler with a monthly contribution"
   />

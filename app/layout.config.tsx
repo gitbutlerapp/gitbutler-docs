@@ -31,7 +31,7 @@ export const baseOptions: HomeLayoutProps = {
     {
       icon: <GitButler />,
       text: "GitButler Cloud",
-      url: "https://app.gitbutler.com/"
+      url: "https://gitbutler.com/"
     }
   ]
 }
