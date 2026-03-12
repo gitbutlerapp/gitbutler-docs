@@ -74,11 +74,11 @@
           "level": "advanced"
         },
         {
-          "command": "but branch apply [branch]",
+          "command": "but apply [branch]",
           "description": "Apply (enable) a branch to your working directory"
         },
         {
-          "command": "but branch unapply [branch]",
+          "command": "but unapply [branch]",
           "description": "Unapply (disable) a branch from your working directory"
         },
         {
