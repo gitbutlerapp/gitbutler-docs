@@ -55,7 +55,7 @@
     "lint-staged": "^15.2.10",
     "mermaid": "^11.10.0",
     "open-props": "^1.7.7",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.10",
     "postcss-nesting": "^13.0.1",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "reading-time": "^1.5.0",
