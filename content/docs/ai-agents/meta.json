@@ -1,0 +1,12 @@
+{
+  "title": "AI Agents",
+  "defaultOpen": false,
+  "pages": [
+    "overview",
+    "getting-started",
+    "useful-requests",
+    "parallel-agents",
+    "review-agent-work",
+    "tuning-agent-behavior"
+  ]
+}

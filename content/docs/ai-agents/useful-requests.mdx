@@ -1,0 +1,123 @@
+---
+title: Useful requests
+description: Ask coding agents to commit, reshape history, split work, and create stacked pull requests with GitButler.
+---
+
+Once the GitButler skill is installed and your baseline version-control
+instructions are in place, ask for the branch, commit, or pull request outcome
+you want. You do not need to know the `but` commands or CLI IDs; the agent uses
+those to build the structure you describe.
+
+Use these examples as one-off requests you can mix with normal coding prompts.
+They are intentionally short; add whatever constraints matter in your repo. For
+standing rules that always apply, see
+[Tuning agent behavior](/ai-agents/tuning-agent-behavior).
+
+## Commit changes
+
+With the baseline instructions from
+[Getting started](/ai-agents/getting-started#add-optional-agent-instructions),
+the agent commits on the dedicated GitButler branch for its session. It commits
+that session's changes there, not unrelated user or agent work.
+
+You can tell your agent:
+
+```text
+Commit your changes.
+```
+
+Relevant command: [`but commit`](/commands/but-commit).
+
+## Clean up history
+
+GitButler gives the agent direct tools for moving commits, squashing commits,
+rewording commits, and moving changes between commits. Describe the end result
+you want instead of writing out an interactive rebase plan.
+
+Keep history cleanup to unpublished local work unless you explicitly authorize
+rewriting pushed or shared branches.
+
+```text
+Clean up the history. Squash WIP commits, split unrelated work, and reword
+messages based on intent. Show me the plan before changing history or pushing.
+```
+
+Relevant commands: [`but move`](/commands/but-move),
+[`but squash`](/commands/but-squash), [`but reword`](/commands/but-reword),
+and [`but rub`](/commands/but-rub).
+
+## Split a large commit into smaller commits
+
+Use this when a commit is too large to review as one unit. Say how you want the
+work grouped; the agent can create the intermediate commits and move the right
+changes into them.
+
+This prompt is an example; replace the grouping rules with whatever matters for
+your project.
+
+```text
+Split this into smaller commits by concern. Keep tests with the behavior they
+verify.
+```
+
+## Put uncommitted fixes into existing commits
+
+Use this after review feedback, test fixes, or a small follow-up edit that
+belongs with an earlier local commit.
+
+```text
+Amend your follow-up fixes into the appropriate local commits.
+```
+
+Relevant commands: [`but absorb`](/commands/but-absorb) and
+[`but amend`](/commands/but-amend).
+
+## Take changes out of a commit
+
+Use this when something was committed by mistake, or when one commit contains a
+change that belongs somewhere else.
+
+```text
+Take the debug logging out of the commit and leave it uncommitted.
+```
+
+```text
+Move the docs changes out of the feature commit and into a separate docs commit.
+```
+
+Relevant commands: [`but uncommit`](/commands/but-uncommit) and
+[`but rub`](/commands/but-rub).
+
+## Create stacked pull requests
+
+Stacked pull requests help when one change depends on another, but reviewers can
+still review the lower branch first. Creating draft PRs still pushes branches,
+so use this only when the agent is allowed to publish.
+
+```text
+Make the API work the base branch and stack the UI work on top. Create draft
+PRs.
+```
+
+The agent can also stack or restack existing branches when the dependency
+structure changes. If branches have already been pushed or reviewed, ask the
+agent to show which PRs will change before restacking. If something in a stack
+turns out to be independent, ask the agent to move it out into a separate
+branch.
+
+For more background, see
+[Stacked branches](/features/branch-management/stacked-branches),
+[`but move`](/commands/but-move), and [`but pr`](/commands/but-pr).
+
+## Work in parallel
+
+Use parallel branches when the work does not depend on another branch.
+GitButler lets multiple branches be active in the same workspace, so different
+agents can work on their own branches without creating and managing separate
+worktrees.
+
+This works best when the tasks do not depend on each other and are not editing
+the same files.
+
+Stack branches only when one branch depends on another. For the fuller
+multi-agent workflow, see [Parallel agents](/ai-agents/parallel-agents).

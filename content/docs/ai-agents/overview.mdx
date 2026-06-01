@@ -1,0 +1,56 @@
+---
+title: Overview
+description: Use GitButler to keep coding-agent changes organized into branches and commits you can inspect and review.
+---
+
+Use GitButler with coding agents when you want messy local changes to become
+reviewable branches and commits without moving every task into a separate
+worktree.
+
+GitButler keeps one working directory while organizing changes into separate
+branches and commits. Agents can do that through the [`but` CLI](/cli-overview),
+and you can inspect the same state in the [Desktop Client](/overview). For when
+to use GitButler instead of separate worktrees, see
+[Parallel agents](/ai-agents/parallel-agents#how-this-differs-from-worktrees).
+
+You decide how far the agent goes. You can tell it to stop after local commits,
+or you can allow it to push and open pull requests. GitButler gives the agent
+version-control commands; your instructions decide when it stops.
+
+## What agents can do with GitButler
+
+- **Parallel branches in one workspace.** An agent can create separate branches
+  for independent work while staying in the same working directory. That gives
+  you separate review branches without creating a new worktree, directory, and
+  setup for each task.
+- **Selected files and hunks.** The agent can assign selected files or hunks to
+  a branch, then commit that branch. You can inspect the split before the work
+  is pushed.
+- **Stacked branches for dependent work.** If one change depends on another, the
+  agent can put the dependent branch on top of the branch it needs.
+- **History edits without an interactive rebase.** The agent can move a change
+  from one commit to another, reorder commits, reword commits, absorb fixes, or
+  split a commit with `but` commands.
+- **Review and recovery before publishing.** You can inspect the same branches
+  and commits in the CLI or Desktop Client, then use [`but oplog`](/commands/but-oplog)
+  to restore an earlier local GitButler state if the branch layout needs to be
+  rolled back.
+
+## History edits as direct commands
+
+History edits are where agent workflows often get brittle. Moving one file's
+changes from one commit to another with Git can involve patch restore/reset
+steps, fixup commits, autosquash, or an interactive rebase with one or more
+`edit` stops.
+
+With GitButler, that kind of edit becomes a direct operation: move this file's
+changes into that commit. The operation can still rewrite commits and can still
+conflict. The difference is control flow: the agent gets targeted tools for the
+edit instead of driving a multi-step rebase session.
+
+For more detail, see the [`but rub` command reference](/commands/but-rub) and
+the [CLI guide to moving changes between commits](/cli-guides/cli-tutorial/rubbing#moving-files-between-commits).
+
+GitButler does not currently focus on a direct "push to main" workflow. Today,
+it is best used to get from agent changes to clean local branches, commits, and
+PRs or MRs quickly.
