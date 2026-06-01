@@ -1,0 +1,103 @@
+---
+title: Getting started
+description: Install `but`, install the GitButler agent skill, and add a baseline version-control policy for coding agents.
+---
+
+This page is for coding agents that can read local instruction files and run
+commands in your repository. The GitButler skill does not give the agent new
+permissions. It tells the agent how to use `but` instead of driving Git through
+checkout, stash, add, commit, and rebase commands.
+
+## Install the `but` CLI
+
+If you already have GitButler Desktop installed, you can install the CLI from
+the Desktop Client settings. For terminal-only setup, run:
+
+```sh
+curl -fsSL https://gitbutler.com/install.sh | sh
+```
+
+See [Installation and setup](/cli-guides/installation) for the full CLI install
+options.
+
+## Install the GitButler skill
+
+Run the installer from the same repository:
+
+```sh
+but skill install
+```
+
+The installer prompts for scope first: current repository or global home
+directory. It then prompts for the skill format. Current formats include Agent
+Skills (`.agents/skills`), Claude Code, OpenCode, Codex, GitHub Copilot, Cursor,
+and Windsurf.
+
+For custom paths, global installs, non-interactive updates, and skill checks,
+see [`but skill`](/commands/but-skill).
+
+## Set up the repository
+
+GitButler currently needs the repository in workspace mode for its multi-branch
+model: multiple GitButler branches in one working directory.
+
+From the repository where the agent will work, run:
+
+```sh
+but setup
+```
+
+You can also skip this step and let the agent run `but setup` when it first
+needs GitButler. For the full list of setup changes, see
+[`but setup`](/commands/but-setup).
+
+GitButler is working toward a plain Git mode that switches into a workspace only
+when multiple concurrent branches are needed. Follow
+[gitbutlerapp/gitbutler#11866](https://github.com/gitbutlerapp/gitbutler/issues/11866)
+for that work.
+
+## Add optional agent instructions
+
+The GitButler skill tells the agent how to use `but`. Your own instructions
+tell the agent what behavior you want.
+
+Put project defaults in a repository instruction file such as `AGENTS.md` or
+`CLAUDE.md`. Put personal defaults in a global instruction file such as
+`~/.codex/AGENTS.md`, `~/.claude/CLAUDE.md`, Cursor rules, Copilot custom
+instructions, or the equivalent for your tool.
+
+These files steer agent behavior; they are not access controls. Use your usual
+repository permissions and branch protection for hard limits.
+
+Use this baseline to keep agent work isolated:
+
+```md
+## Version control
+
+- Use GitButler (`but`) for version-control write operations, including
+  branching, committing, pushing, and history edits.
+- Assume multiple agents may be working in this repository. Do not move, amend,
+  squash, discard, commit, push, or otherwise modify another agent's work unless
+  the user asks.
+- Use a dedicated GitButler branch for each agent session, unless the user asks
+  for a different branch structure. Commit only changes that belong to that
+  session.
+- Do not push or open pull requests unless the user asks.
+- Keep commit messages and pull request descriptions succinct: explain what
+  changed, why it changed, and any important decision.
+```
+
+You can also tune the agent to:
+
+- amend local fixes into existing commits;
+- create checkpoint commits and tidy them before review;
+- create stacked pull requests for dependent work;
+- follow your branch and commit naming conventions;
+- publish, update from main, or create recovery points only when your policy
+  allows it.
+
+For copyable snippets, see
+[Tuning agent behavior](/ai-agents/tuning-agent-behavior).
+
+For prompt examples that ask for specific branch and commit outcomes, see
+[Useful requests](/ai-agents/useful-requests).

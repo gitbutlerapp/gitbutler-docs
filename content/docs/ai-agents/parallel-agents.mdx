@@ -1,0 +1,96 @@
+---
+title: Parallel agents
+description: Run multiple coding agents in one GitButler workspace without creating separate worktrees.
+---
+
+Parallel agents do not require separate worktrees or pre-created branches. Once
+agents use GitButler for version-control writes, you can start another coding
+session in the same repository and prompt it like any other task:
+
+```text
+Work on checkout validation.
+```
+
+When either session is ready, ask it to commit:
+
+```text
+Commit your changes.
+```
+
+The agent uses GitButler to commit the changes for its task to its GitButler
+branch. The branch routing is the agent's job; your prompt can stay small.
+
+If two sessions touch the same file or generated output, have the agents call
+out the overlap before committing.
+
+You can also ask an agent to split independent work out of the current session.
+For example, if a feature session also finds a small bug fix, the agent can
+move the relevant changes or commits to a new branch and prepare a separate PR
+instead of stacking the fix on the feature.
+
+For more background on the branch model, see
+[Parallel branches](/features/branch-management/virtual-branches).
+
+The baseline `Version control` instructions from
+[Getting started](/ai-agents/getting-started#add-optional-agent-instructions)
+are useful if you want to steer commit behavior, but they are not a separate
+parallel-agent setup step.
+
+## How this differs from worktrees
+
+Git has one checked-out branch per worktree. If you want two agents to work on
+two branches at the same time, the usual Git answer is multiple worktrees.
+
+GitButler gives you a different option: multiple active branches in one
+worktree, with each agent's commits organized onto the branch for its session.
+
+| | Multiple worktrees | GitButler parallel branches |
+| --- | --- | --- |
+| Workspace | One directory per agent | One shared working directory |
+| Branches | One checked-out branch per worktree | Multiple active branches in one worktree |
+| Isolation | Separate checkout | Shared filesystem and runtime state |
+| Setup cost | Usually more directories, dependency installs, build outputs, and dev servers | Reuse one install and dev server when tasks can share runtime state |
+| Version-control shape | Branches stay separate because work happens in separate directories | GitButler can commit the right subset of changes to each branch |
+| Best fit | Competing attempts, incompatible checkout states, isolated runtimes | Unrelated features or fixes that can share one workspace |
+
+Use multiple worktrees when agents need incompatible checkout states, separate
+runtime state, or competing attempts at the same task. Use GitButler parallel
+branches when the tasks are independent enough to share one workspace and you
+want less local overhead.
+
+## Handle dependencies explicitly
+
+Parallel agents work best when sessions start independent. If one session
+starts depending on another, make that relationship explicit by stacking the
+branches:
+
+```text
+The notification settings work now depends on checkout validation. Stack your
+branch on top of the checkout validation branch.
+```
+
+If an unrelated fix shows up inside a feature session, tell the agent to extract
+it instead:
+
+```text
+The cache invalidation fix is independent. Move it to a separate GitButler
+branch and prepare a separate PR for it.
+```
+
+If the feature depends on the fix, put the fix on the lower branch and stack the
+feature above it instead. For stacked PR policy, see
+[Create stacked pull requests](/ai-agents/tuning-agent-behavior#create-stacked-pull-requests).
+
+## Know what is shared
+
+Parallel GitButler branches are not runtime isolation. The agents share one
+filesystem, dependency install, generated files, and app state. That can surface
+overlap and broken builds earlier, but it can also hide accidental
+dependencies.
+
+Before shipping a branch independently, check whether it depends on another
+active branch. If two agents start editing the same files or generated output,
+decide whether to keep the work parallel, stack one branch on the other, or use
+separate worktrees.
+
+For more request examples, see [Useful requests](/ai-agents/useful-requests).

@@ -1,0 +1,171 @@
+---
+title: Tuning agent behavior
+description: Add optional instruction snippets that steer how coding agents amend, checkpoint, stack, publish, and recover work with GitButler.
+---
+
+Add these optional bullets under the same `## Version control` section as the
+baseline from
+[Getting started](/ai-agents/getting-started#add-optional-agent-instructions).
+Use this page as a menu: copy only the policies you want for the repository and
+agent you are using.
+
+## Amend local fixes into the right commits
+
+Use this when you want the agent to fold follow-up fixes into unpublished local
+commits when the new change clearly belongs with that commit's intent. With
+GitButler, the agent can move the relevant change into the commit where it
+belongs.
+
+```md
+- For small cleanup or follow-up fixes, amend an unpublished local commit when
+  the change clearly belongs with that commit's intent.
+- Do not create tiny fixup commits unless I ask.
+- Use GitButler to move the relevant changes into the commit where they belong.
+- Ask before rewriting pushed, reviewed, shared, or ambiguous history.
+```
+
+You do not need to tell the agent which command to use. The GitButler skill
+gives it the relevant operations. For background, see
+[`but absorb`](/commands/but-absorb) and [`but amend`](/commands/but-amend).
+
+## Commit checkpoints after each completed turn
+
+Use this when you want local savepoints while the agent works. The checkpoints
+do not need to be the final review history. Before review, you can ask the
+agent to tidy unpublished local history.
+
+```md
+- Commit after a working checkpoint, when the requested change is complete and
+  relevant checks have passed or been reported.
+- Treat checkpoint commits as local savepoints, not final review history.
+- When I ask you to tidy the history, use GitButler to squash commits, reword
+  commits, and move changes between commits where appropriate.
+- Only tidy unpublished local history unless I explicitly authorize changing
+  pushed or shared history.
+```
+
+## Create stacked pull requests
+
+Use this when you want dependent work reviewed as stacked pull requests. This is
+useful when one agent session depends on another session's branch, or when an
+agent is working on a branch that sits at the bottom of a stack.
+
+```md
+- If this session depends on another in-flight branch, stack its branch on top
+  of that dependency instead of mixing the changes.
+- If this session is working in a stack, put commits on the branch where they
+  belong.
+- Ask before moving commits onto lower, pushed, reviewed, or shared branches.
+- Use `but move` for branch stacking and restacking. Do not recreate branches
+  to simulate stacking.
+- For stacked branches, create pull requests with `but pr`, not `gh`, so
+  GitButler keeps the right PR base branches and stack metadata.
+```
+
+For background, see [Stacked branches](/features/branch-management/stacked-branches),
+[`but move`](/commands/but-move), and [`but pr`](/commands/but-pr).
+
+## Customize branch names
+
+Use this when your team has a naming convention for branches the agent creates.
+This is only an example; replace the prefix and shape with your convention.
+
+```md
+- When creating a GitButler branch for an agent session, use
+  `feature/<ticket-id>-<short-description>` when a ticket ID is available.
+```
+
+## Customize commit messages
+
+Use this when your team has a commit-message convention. This is only an
+example; replace it with your preferred style.
+
+```md
+- Use Conventional Commits, such as `feat: add branch naming policy` or
+  `fix: handle empty branch names`.
+```
+
+## Publish when you say "ship it"
+
+Use this when you want a short phrase to authorize the agent to finish the
+version-control work for its session. This commits, pushes, and creates or
+updates a pull request, so use it only when the agent is allowed to publish.
+
+```md
+- When I say "ship it", commit this session's changes on its dedicated
+  GitButler branch, creating one if needed.
+- Push the branch and open or update its pull request with GitButler.
+- Reuse the existing branch or pull request for this session when one already
+  exists.
+```
+
+For background, see [`but push`](/commands/but-push) and
+[`but pr`](/commands/but-pr).
+
+## Update from main automatically
+
+Use this when your project moves quickly and you want the agent to keep its
+workspace current with the target branch, usually `main` or `master`. The
+GitButler command for this is `but pull`, which fetches the target branch and
+rebases applied branches onto the new target commit. This is a preference: in
+some repositories, you may want the agent to ask before updating.
+
+Add the last bullet only if you want the agent to handle update conflicts.
+
+```md
+- When GitButler status shows new changes on the target branch, run
+  `but pull --check`.
+- If the check is clean and the update affects only this session's branches,
+  update the workspace with `but pull`.
+- If the check reports conflicts or the update would affect another agent's
+  branch, ask before updating.
+- If I ask you to handle update conflicts, use GitButler's conflict tools. Ask
+  before resolving semantic conflicts, dependency updates, generated files, or
+  conflicts involving another person's work.
+```
+
+You do not need to tell the agent which command to use. For background, see
+[`but pull`](/commands/but-pull) and [`but resolve`](/commands/but-resolve).
+
+## Open draft pull requests by default
+
+Use this when the agent is allowed to publish work, but you still want review to
+start in draft. Creating a draft pull request still publishes the branch.
+
+```md
+- When I ask you to open a pull request, create it as a draft with GitButler
+  unless I say it is ready for review.
+```
+
+## Create a recovery point before large history edits
+
+Use this when you want the agent to be more cautious before reorganizing several
+commits or branches.
+
+```md
+- Before squashing, splitting, moving commits between branches, or reorganizing
+  multiple branches, run `but oplog snapshot -m "<reason>"`.
+- Use GitButler history-edit commands such as `but move`, `but squash`,
+  `but reword`, `but absorb`, and `but amend` instead of raw Git rebases.
+- If an operation makes the branch or history layout worse, stop and inspect the
+  operation log before attempting another fix.
+- Prefer `but undo` or `but oplog restore` over trying to repair a bad state
+  with more history edits.
+```
+
+For command details, see [`but oplog`](/commands/but-oplog) and
+[`but undo`](/commands/but-undo).
+
+## Split unrelated hunks
+
+Use this when agents tend to commit whole files even when one file contains
+separate changes.
+
+```md
+- If one file contains unrelated changes, split them by hunk instead of
+  committing the whole file.
+- Keep tests with the behavior they verify.
+- Split generated output, docs-only edits, or mechanical cleanup into separate
+  commits when each commit remains coherent on its own.
+- If the split is ambiguous, summarize the options before committing.
+```
