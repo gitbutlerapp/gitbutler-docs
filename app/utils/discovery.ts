@@ -33,9 +33,9 @@ export function getDiscoveryLinks(): DiscoveryLink[] {
       type: "application/openapi+json"
     },
     {
-      href: absoluteUrl("/features/ai-integration/mcp-server"),
+      href: absoluteUrl("/ai-agents/overview"),
       rel: "service-doc",
-      title: "GitButler MCP Server Docs",
+      title: "GitButler AI Agents Docs",
       type: "text/html"
     },
     {

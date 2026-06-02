@@ -1,10 +1,10 @@
 ---
 title: "`but skill`"
-description: "Manage Claude AI skills for GitButler."
+description: "Manage GitButler skills for coding agents."
 ---
 
-Skills provide enhanced AI capabilities for working with GitButler through
-Claude Code and other AI assistants.
+Skills give coding agents instructions for working with GitButler through the
+`but` CLI.
 
 Use `but skill install` to install the GitButler skill files into your
 repository or globally.
@@ -29,14 +29,14 @@ but skill install --global
 
 ### `but skill install`
 
-Install the GitButler CLI skill files for Coding agents
+Install the GitButler CLI skill files for coding agents.
 
-By default, installs the skill into the current repository. The command
-will prompt you to select a skill folder format (Claude Code, OpenCode, Codex, GitHub Copilot,
-Cursor, Windsurf) unless you specify a custom path with --path.
+By default, installs the skill into the current repository. The command prompts
+you to select a skill folder format: Claude Code, OpenCode, Codex, GitHub
+Copilot, Cursor, or Windsurf.
 
-Use --global to install the skill in a global location instead of the
-current repository.
+Use `--path` to choose a custom location. Use `--global` to install the skill
+in a global location instead of the current repository.
 
 ## Examples
 
@@ -74,7 +74,7 @@ but skill install --detect
 
 ### `but skill check`
 
-Check if installed GitButler skills are up to date with the CLI version
+Check if installed GitButler skills are up to date with the CLI version.
 
 Scans for installed skill files and compares their version with the current
 CLI version. By default, checks both local (repository) and global installations.
@@ -106,4 +106,3 @@ but skill check --global
 * `-g`, `--global` — Only check global installations (in home directory)
 * `-l`, `--local` — Only check local installations (in current repository)
 * `-u`, `--update` — Automatically update any outdated skills found
-

@@ -37,26 +37,26 @@ Use this skill when you need to explain the first-run GitButler workflow to a us
 `
   },
   {
-    id: "gitbutler-mcp-setup",
-    name: "GitButler MCP Setup",
-    description: "Configure a coding agent to use GitButler's MCP server from the CLI.",
+    id: "gitbutler-ai-agent-setup",
+    name: "GitButler AI Agent Setup",
+    description: "Configure a coding agent to use GitButler's `but` CLI and agent skill.",
     type: "documentation",
-    content: `# GitButler MCP Setup
+    content: `# GitButler AI Agent Setup
 
-Use this skill when an agent needs to help a developer connect GitButler to Cursor, VS Code, or Claude Code.
+Use this skill when an agent needs to help a developer organize coding-agent changes with GitButler.
 
 ## Recommended flow
 
-1. Read the MCP setup guide at ${absoluteUrl("/features/ai-integration/mcp-server")} as markdown.
-2. Confirm that the \`but\` CLI is installed before configuring the MCP server.
-3. Use the documented \`but mcp\` stdio transport for agent integrations.
-4. Suggest an automation rule that calls the GitButler MCP tool after file edits.
+1. Read /ai-agents/getting-started as markdown.
+2. Confirm that the \`but\` CLI is installed.
+3. Install or update the GitButler agent skill with \`but skill install\`.
+4. Add baseline version-control instructions so the agent uses GitButler for branching, committing, pushing, and history edits.
 
 ## Key references
 
-- MCP server guide: ${absoluteUrl("/features/ai-integration/mcp-server")}
-- AI overview: ${absoluteUrl("/features/ai-integration/ai-overview")}
-- Claude Code hooks: ${absoluteUrl("/features/ai-integration/claude-code-hooks")}
+- AI agents overview: ${absoluteUrl("/ai-agents/overview")}
+- Getting started: ${absoluteUrl("/ai-agents/getting-started")}
+- Tuning agent behavior: ${absoluteUrl("/ai-agents/tuning-agent-behavior")}
 `
   },
   {

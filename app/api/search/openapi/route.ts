@@ -49,7 +49,7 @@ export function GET(): Response {
                         content: { type: "string" },
                         url: {
                           type: "string",
-                          examples: [absoluteUrl("/features/ai-integration/mcp-server")]
+                          examples: [absoluteUrl("/ai-agents/overview")]
                         }
                       },
                       required: ["id", "type", "content", "url"]
