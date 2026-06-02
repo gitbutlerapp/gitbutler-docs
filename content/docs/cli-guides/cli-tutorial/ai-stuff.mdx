@@ -1,33 +1,39 @@
 ---
 title: Working with AI
-description: How to use the GitButler CLI with AI and agents
+description: Use AI-backed CLI options and install the GitButler skill for coding agents.
 ---
 
-There are a couple of different ways that the GitButler CLI can use or interact with AI tools. Some are via `--ai` options to commands to use AI to help with tasks, others are ways that coding agents can more easily use the CLI to accomplish tasks.
+Use `--ai` when you want the CLI to generate text for a single command. Use
+`but skill install` when you want a coding agent to use GitButler's
+version-control workflow.
 
-## Dash Dash AI
+## `--ai` options
 
-There are a few commands that will take a `--ai` option to use a configured AI provider to generate something.
+Supported commands can take `--ai` to generate text from your current changes.
 
 ### `but commit --ai`
 
-Probably the most commonly used would be `but commit --ai`, which will take a look at the changes in the files you're committing and generate an example commit message for you. If you're not feeling like writing anything more than "did some stuff", this could be a nice option for you.
+Use `but commit --ai` to generate a commit message from the changes you are
+committing.
 
-This will automatically commit the work specified with the generated message, but you can also easily edit it with `but reword <commit>` if you wish.
+This commits the selected work with the generated message. You can edit the
+message afterward with `but reword <commit>`.
 
 ### `but squash --ai`
 
-If you squash two commits together, by default it will simply concatenate the commit messages together, which is rarely what you probably want. You can easily edit the message afterwards, but if you want to let AI try to combine the messages for you, you can give `but squash --ai` a try.
+Use `but squash --ai` to generate a combined commit message when squashing
+commits.
 
 <Callout type="info">
 
-We're working on integrating AI features into many more of our commands, so keep an eye out.
+More commands will gain `--ai` support over time.
 
 </Callout>
 
-## Skills
+## `but skill install`
 
-If you're using an AI coding agent that can read skills, you can have GitButler automatically install a GitButler specific skill for various agents with `but skill install`.
+If your coding agent can read skills, install the GitButler skill with
+`but skill install`.
 
 ```git
 ❯ but skill install
@@ -42,8 +48,16 @@ Select a skill folder format:
   GitHub Copilot - GitHub Copilot global skill format (./.copilot/skills/gitbutler)
 ```
 
-We keep these templates up to date, so if you update GitButler, you may want to update the skills too.
+We keep these templates up to date, so if you update GitButler, you may want to
+update the skill too.
 
-## Hooks and MCP
+## Agent workflow docs
 
-You can also install explicit hooks or an MCP server if you prefer. You can read more about those options [over here](/features/ai-integration/ai-overview)
+`but skill install` is only the install step. For the full workflow:
+
+- Start with [AI agents overview](/ai-agents/overview).
+- Install and configure the skill with
+  [Getting started with AI agents](/ai-agents/getting-started).
+- Use [Useful requests](/ai-agents/useful-requests) for prompt examples.
+- Use [Tuning agent behavior](/ai-agents/tuning-agent-behavior) for standing
+  instructions.

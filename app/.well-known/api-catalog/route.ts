@@ -13,10 +13,10 @@ export function GET(): Response {
             title: "Getting Started Guide"
           },
           {
-            href: absoluteUrl("/features/ai-integration/mcp-server"),
+            href: absoluteUrl("/ai-agents/overview"),
             rel: "service-doc",
             type: "text/html",
-            title: "GitButler MCP Server"
+            title: "GitButler AI Agents"
           },
           {
             href: absoluteUrl("/api/search/openapi"),

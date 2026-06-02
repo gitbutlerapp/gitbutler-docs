@@ -3,8 +3,6 @@ title: Rules
 description: Automate change assignment with rules that match file patterns and automatically route changes to the right branch.
 ---
 
-import ImageSection from "@/components/ImageSection";
-
 Rules are a powerful automation feature in GitButler that automatically assign file changes to specific branches based on conditions you define. Instead of manually dragging changes between lanes, you can set up rules that automatically route changes where they belong.
 
 ## Overview
@@ -53,7 +51,7 @@ If you don't add any filters, the rule will match all changes.
 
 ## Filter Types
 
-Rules support several types of filters to match changes:
+Rules support filters that match file paths or changed line content.
 
 ### Path Matches Regex
 
@@ -89,33 +87,13 @@ Matches the content of changed lines using a regular expression pattern. This fi
    Creating a rule that assigns changes containing "fix" to a specific branch
 </p>
 
-### Claude Code Session ID
-
-Matches changes that originated from a specific Claude Code session. This filter is automatically used when GitButler's AI features create branches and rules for you.
-
-**Note**: Rules with Claude Code Session ID filters have lower priority than manually created rules. If a change matches both an AI-generated rule and a manual rule, the manual rule takes precedence.
-
-<video 
-   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/rule-ai.mp4"
-   controls
-   muted
-   autoPlay
-   loop
-   className="rounded-lg border border-gray-200 dark:border-gray-800"
->
-   Your browser does not support the video tag.
-</video>
-<p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
-   AI-generated rules based on Claude Code sessions
-</p>
-
 ## Managing Rules
 
 ### Editing Rules
 
 To edit an existing rule:
 
-1. Double-click the rule or click the elepsis menu (...) and select "Edit rule"
+1. Double-click the rule or click the ellipsis menu (...) and select "Edit rule"
 2. Modify the branch assignment or filters
 3. Click **Save rule**
 
@@ -123,11 +101,9 @@ To edit an existing rule:
 
 To delete a rule:
 
-1. Click the elepsis menu (...) on the rule
+1. Click the ellipsis menu (...) on the rule
 2. Select "Delete rule"
 3. Confirm the deletion
-
-**Note**: AI-generated rules and implicit rules cannot be edited.
 
 ## Understanding Rule Evaluation
 
@@ -159,11 +135,9 @@ Rules respect hunk dependencies (locks). If a change depends on a commit in a sp
 ## Limitations
 
 - Rules can only assign changes to branches that exist in your workspace (applied branches)
-- Implicit (AI-determined) rules cannot be edited through the UI
 - Rules currently only support the `assign` action for filesystem changes
 
 ## Related Features
 
 - [Parallel Branches](/features/branch-management/virtual-branches): Understanding the branch system that rules work with
 - [Branch Lanes](/features/branch-management/branch-lanes): How lanes are organized and how rules interact with lane positioning
-- [AI Assistance](/features/branch-management/ai-assistance): How AI can create and manage rules automatically

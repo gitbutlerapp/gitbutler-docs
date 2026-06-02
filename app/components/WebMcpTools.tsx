@@ -75,7 +75,7 @@ export default function WebMcpTools(): null {
           properties: {
             path: {
               type: "string",
-              description: "Docs path like /guide or /features/ai-integration/mcp-server."
+              description: "Docs path like /guide or /ai-agents/getting-started."
             }
           },
           required: ["path"]
