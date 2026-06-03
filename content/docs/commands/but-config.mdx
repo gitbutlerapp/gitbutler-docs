@@ -150,3 +150,58 @@ Disable metrics:
 
 * `<STATUS>` — Whether metrics are enabled
 
+### `but config ui`
+
+View and configure UI preferences.
+
+Without arguments, displays current UI settings. Use subcommands to set or unset configuration values.
+
+Examples
+
+View UI configuration:
+
+  but config ui
+
+Enable TUI mode for diff by default:
+
+  but config ui set tui true
+
+Disable TUI mode:
+
+  but config ui set tui false
+
+
+**Usage:** `but config ui`
+
+### `but config ai`
+
+View and configure AI provider settings.
+
+Without subcommands, this starts an interactive setup flow. Use provider subcommands for non-interactive configuration.
+
+Examples
+
+Interactive setup:
+
+  but config ai
+
+View current AI configuration:
+
+  but config ai show
+
+Configure OpenAI non-interactively:
+
+  but config ai openai --key-option bring-your-own --api-key-env OPENAI_API_KEY --model gpt-5.4-nano
+
+Configure Ollama locally:
+
+  but config ai --local ollama --endpoint localhost:11434 --model llama3.1
+
+
+**Usage:** `but config ai [OPTIONS]`
+
+**Options:**
+
+* `--local` — Configure local repository git config instead of global user config
+* `--global` — Configure global user git config
+

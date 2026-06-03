@@ -14,7 +14,11 @@
     "but-branch",
     "but-merge",
     "but-discard",
-    "but-resolve"
+    "but-resolve",
+    "but-unapply",
+    "but-apply",
+    "but-clean",
+    "but-pick"
   ],
   "Rules": [
     "but-mark",
@@ -31,17 +35,20 @@
     "but-reword",
     "but-uncommit",
     "but-amend",
-    "but-squash"
+    "but-squash",
+    "but-move"
   ],
   "Operations Log": [
     "but-oplog",
     "but-undo",
-    "but-restore"
+    "but-redo"
   ],
   "Helper Commands": [
     "but-gui",
+    "but-tui",
     "but-update",
     "but-alias",
-    "but-config"
+    "but-config",
+    "but-skill"
   ]
 }

@@ -35,21 +35,22 @@ More commands will gain `--ai` support over time.
 If your coding agent can read skills, install the GitButler skill with
 `but skill install`.
 
-```git
-❯ but skill install
-
-Select a skill folder format:
-
-? Which format would you like to use?:
-> Claude Code - Claude Code CLI skill format (./.claude/skills/gitbutler)
-  OpenCode - OpenCode AI skill format (./.opencode/skills/gitbutler)
-  Codex - Codex skill format (./.codex/skills/gitbutler)
-  GitHub Copilot - GitHub Copilot local (repo) skill format (./.github/skills/gitbutler)
-  GitHub Copilot - GitHub Copilot global skill format (./.copilot/skills/gitbutler)
+```bash
+but skill install
 ```
 
-We keep these templates up to date, so if you update GitButler, you may want to
-update the skill too.
+The command prompts for install scope and skill format. It can install local or
+global skills for Agent Skills (`.agents`), Claude Code, OpenCode, Codex, GitHub
+Copilot, Cursor, and Windsurf.
+
+To update an existing install without going through the prompts, run:
+
+```bash
+but skill install --detect
+```
+
+We keep these templates up to date, so update the skill after updating
+GitButler.
 
 ## Agent workflow docs
 

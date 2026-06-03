@@ -1,12 +1,17 @@
 ---
 title: "`but move`"
-description: "Move a commit to a different location in the stack."
+description: "Move a commit or branch to a different location."
 ---
 
-By default, commits are moved to be before (below) the target.
-Use `--after` to move the commit after (above) the target instead.
+Commit moves:
+- By default, commits are moved to be before (below) the target.
+- Use `--after` to move the commit after (above) the target instead.
 
-When moving to a branch, the commit is placed at the top of that branch's stack.
+- When moving to a branch, the commit is placed at the top of that branch's stack.
+
+Branch moves:
+- Move one branch on top of another to stack them.
+- Move a branch to `zz` to tear it off (unstack it).
 
 ## Examples
 
@@ -28,14 +33,26 @@ Move a commit to a different branch (places at top):
 but move abc123 my-feature-branch
 ```
 
-**Usage:** `but move <SOURCE_COMMIT> <TARGET> [OPTIONS]`
+Stack one branch on top of another:
+
+```text
+but move feature/frontend feature/backend
+```
+
+Tear off (unstack) a branch:
+
+```text
+but move feature/frontend zz
+```
+
+**Usage:** `but move <SOURCE> <TARGET> [OPTIONS]`
 
 ## Arguments
 
-* `<SOURCE_COMMIT>` — Commit ID to move (required)
-* `<TARGET>` — Target commit ID or branch name (required)
+* `<SOURCE>` — Commit/branch identifier to move (required)
+* `<TARGET>` — Target commit/branch identifier, or zz to unstack a branch (required)
 
 ## Options
 
-* `-a`, `--after` — Move the commit after (above) the target instead of before (below)
+* `-a`, `--after` — Move the commit after (above) the target instead of before (below). Only valid for commit-to-commit moves
 

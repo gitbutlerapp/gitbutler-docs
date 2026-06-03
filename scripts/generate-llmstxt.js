@@ -39,4 +39,9 @@ await Promise.all(
   })
 )
 
+fileContent = fileContent
+  .split("\n")
+  .map((line) => line.replace(/[ \t]+$/, ""))
+  .join("\n")
+
 await writeFile("./public/llms-full.txt", fileContent)
