@@ -11,9 +11,14 @@ Optionally, a CLI ID argument can be provided, which chan show the diff specific
 - a commit
 - a file change within a commit
 
-**Usage:** `but diff [TARGET]`
+**Usage:** `but diff [TARGET] [OPTIONS]`
 
 ## Arguments
 
 * `<TARGET>` — The CLI ID of the entity to show the diff for
+
+## Options
+
+* `--tui` — Open an interactive TUI diff viewer
+* `--no-tui` — Disable the interactive TUI diff viewer (overrides but.ui.tui config)
 

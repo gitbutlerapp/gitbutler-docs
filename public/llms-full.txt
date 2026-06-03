@@ -39,6 +39,7 @@
 - [but-amend](#but-amend.mdx)
 - [but-apply](#but-apply.mdx)
 - [but-branch](#but-branch.mdx)
+- [but-clean](#but-clean.mdx)
 - [but-commit](#but-commit.mdx)
 - [but-config](#but-config.mdx)
 - [but-diff](#but-diff.mdx)
@@ -52,6 +53,7 @@
 - [but-pr](#but-pr.mdx)
 - [but-pull](#but-pull.mdx)
 - [but-push](#but-push.mdx)
+- [but-redo](#but-redo.mdx)
 - [but-resolve](#but-resolve.mdx)
 - [but-reword](#but-reword.mdx)
 - [but-rub](#but-rub.mdx)
@@ -62,6 +64,7 @@
 - [but-stage](#but-stage.mdx)
 - [but-status](#but-status.mdx)
 - [but-teardown](#but-teardown.mdx)
+- [but-tui](#but-tui.mdx)
 - [but-unapply](#but-unapply.mdx)
 - [but-uncommit](#but-uncommit.mdx)
 - [but-undo](#but-undo.mdx)
@@ -88,6 +91,34 @@
 - [review-agent-work](#review-agent-work.mdx)
 - [tuning-agent-behavior](#tuning-agent-behavior.mdx)
 - [useful-requests](#useful-requests.mdx)
+
+
+# cli-overview.mdx
+
+In addition to the Desktop graphical client, GitButler ships with a command line interface that allows you to do all of the same powerful things that the GUI does, but from the terminal or via scripts or agents.
+
+https://www.youtube.com/watch?v=Jg8L3SbgZ3o
+
+This includes tooling for:
+
+- [managing stacked and parallel branches](cli-guides/cli-tutorial/branching-and-commiting)
+- [inspecting and diffing](cli-guides/cli-tutorial/inspecting)
+- [an operations log and restoration of older states](cli-guides/cli-tutorial/operations-log)
+- [powerful commit editing](cli-guides/cli-tutorial/rubbing)
+- [upstream management](cli-guides/cli-tutorial/updating-the-base)
+- [conflict resolution](cli-guides/cli-tutorial/conflict-resolution)
+- [working with forges](cli-guides/cli-tutorial/forges)
+- [aliases and configuration](cli-guides/cli-tutorial/configuration)
+
+All with a simple command line tool.
+
+## Quick Reference
+
+For a quick reference of the most commonly used commands, check out our [**GitButler CLI Cheat Sheet**](/cli/cheat) - available as a web page or downloadable PDF.
+
+## Getting Started
+
+Feel free to get started with our [Tutorial](cli-guides/installation) or just dig into the available commands.
 
 
 # butler-flow.mdx
@@ -138,34 +169,6 @@ Merge conflicts are known almost as soon as they occur and can be communicated a
 ### Maintenance
 
 Parallel branches can remain applied locally until they are merged into your upstream target branch. Once integrated by any fashion (squash merge, rebase, merge), the virtual branch is automatically disposed of, keeping cruft and overhead low.
-
-
-# cli-overview.mdx
-
-In addition to the Desktop graphical client, GitButler ships with a command line interface that allows you to do all of the same powerful things that the GUI does, but from the terminal or via scripts or agents.
-
-https://www.youtube.com/watch?v=Jg8L3SbgZ3o
-
-This includes tooling for:
-
-- [managing stacked and parallel branches](cli-guides/cli-tutorial/branching-and-commiting)
-- [inspecting and diffing](cli-guides/cli-tutorial/inspecting)
-- [an operations log and restoration of older states](cli-guides/cli-tutorial/operations-log)
-- [powerful commit editing](cli-guides/cli-tutorial/rubbing)
-- [upstream management](cli-guides/cli-tutorial/updating-the-base)
-- [conflict resolution](cli-guides/cli-tutorial/conflict-resolution)
-- [working with forges](cli-guides/cli-tutorial/forges)
-- [aliases and configuration](cli-guides/cli-tutorial/configuration)
-
-All with a simple command line tool.
-
-## Quick Reference
-
-For a quick reference of the most commonly used commands, check out our [**GitButler CLI Cheat Sheet**](/cli/cheat) - available as a web page or downloadable PDF.
-
-## Getting Started
-
-Feel free to get started with our [Tutorial](cli-guides/installation) or just dig into the available commands.
 
 
 # overview.mdx
@@ -221,6 +224,51 @@ the [CLI guide to moving changes between commits](/cli-guides/cli-tutorial/rubbi
 GitButler does not currently focus on a direct "push to main" workflow. Today,
 it is best used to get from agent changes to clean local branches, commits, and
 PRs or MRs quickly.
+
+
+# releases.mdx
+
+
+GitButler is released on a regular basis in two separate tracks. Their version numbers are incremented independently.
+
+1. **Release** - stable releases
+2. **Nightly** - development releases built at minimum 1x per day via GitHub Actions.
+
+
+<Callout type="info">
+You can find the download links and changelogs for the latest releases on our [GitHub Releases](https://github.com/gitbutlerapp/gitbutler/releases).
+</Callout>
+
+## Platforms
+
+We bundle and ship GitButler for Mac OS, Windows, and Linux.
+
+### Windows
+
+| Arch | Format | In-app updater |
+| --- | --- | --- |
+| `x86_64` | `msi` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
+
+### Mac OS
+
+| Arch | Format | In-app updater |
+| --- | --- | --- |
+| `x86_64` | `dmg` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
+| `arm64` | `dmg` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
+
+### Linux
+
+| Arch | Format | In-app updater |
+| --- | --- | --- |
+| `x86_64` | `deb` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
+| `x86_64` | `rpm` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
+| `x86_64` | `AppImage` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="160" y1="96" x2="96" y2="160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="96" y1="96" x2="160" y2="160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
+
+> Support for the Linux releases are complicated a bit through a core dependency of our framework, `libwebkit2gtk`, which is used to provide the web view on Linux. Tauri v1 required `libwebkit2gtk-4.0` which is not available in Ubuntu 24.04 or Debian 13 and newer.
+>
+> We've recently upgraded to Tauri v2 (as of Nightly `0.5.845` and Release `0.13.9`), and it now requires `libwebkit2gtk-4.1`. This version of the package is not available in the repositories for Ubuntu 20.04 and older as well as Debian 11 and older.
+>
+> For more information, check out the [pinned issue](https://github.com/tauri-apps/tauri/issues/9662) in the Tauri repository.
 
 
 # guide.mdx
@@ -442,51 +490,6 @@ To do this, click the "Operations History" button in the sidebar, find the actio
 />
 
 
-# releases.mdx
-
-
-GitButler is released on a regular basis in two separate tracks. Their version numbers are incremented independently.
-
-1. **Release** - stable releases
-2. **Nightly** - development releases built at minimum 1x per day via GitHub Actions.
-
-
-<Callout type="info">
-You can find the download links and changelogs for the latest releases on our [GitHub Releases](https://github.com/gitbutlerapp/gitbutler/releases).
-</Callout>
-
-## Platforms
-
-We bundle and ship GitButler for Mac OS, Windows, and Linux.
-
-### Windows
-
-| Arch | Format | In-app updater |
-| --- | --- | --- |
-| `x86_64` | `msi` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
-
-### Mac OS
-
-| Arch | Format | In-app updater |
-| --- | --- | --- |
-| `x86_64` | `dmg` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
-| `arm64` | `dmg` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
-
-### Linux
-
-| Arch | Format | In-app updater |
-| --- | --- | --- |
-| `x86_64` | `deb` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
-| `x86_64` | `rpm` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
-| `x86_64` | `AppImage` | <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="160" y1="96" x2="96" y2="160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="96" y1="96" x2="160" y2="160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg> |
-
-> Support for the Linux releases are complicated a bit through a core dependency of our framework, `libwebkit2gtk`, which is used to provide the web view on Linux. Tauri v1 required `libwebkit2gtk-4.0` which is not available in Ubuntu 24.04 or Debian 13 and newer.
->
-> We've recently upgraded to Tauri v2 (as of Nightly `0.5.845` and Release `0.13.9`), and it now requires `libwebkit2gtk-4.1`. This version of the package is not available in the repositories for Ubuntu 20.04 and older as well as Debian 11 and older.
->
-> For more information, check out the [pinned issue](https://github.com/tauri-apps/tauri/issues/9662) in the Tauri repository.
-
-
 # index.mdx
 
 ## Overview
@@ -534,35 +537,6 @@ The GitButler client is a powerful Git client. You can manage your branches, wor
 - [Parallel Branches](/features/branch-management/virtual-branches)
 - [First Class Conflicts](/features/branch-management/merging)
 - [Project History](/features/timeline)
-
-
-# why-gitbutler.mdx
-
-The GitButler manifesto, as it were.
-
-Everyone loves a good manifesto. So, why is there a need for a new Git client in the world? Don't we have enough? Isn't the command line just fine?
-
-Having cofounded GitHub, trained dozens of corporate teams on distributed version control tools and literally written the book on Git, we have spent a lot of time and energy over the last decade thinking about the source code management tools that software developers use every day.
-
-GitHub has changed the way that millions of developers across the world collaborate and work with their source code, but as sophisticated and user friendly as that tool is in our daily coding lives, using GitHub or GitLab or Bitbucket still requires all of those developers to work with a command line tool that is confusing, difficult to use, error prone and not originally designed or built for the workflows and processes that most developers today use. That tool is Git.
-
-Sure, some small minority will use a GUI of some sort, but even those tools are mostly wrappers around the core concepts of Git itself, never reimagining what source code management could be or if Git itself is actually good at helping them with the tasks they face on a daily basis. I've never personally used one because they do little that Git itself doesn't and honestly it's generally easier to just do those tasks on the command line, where it's quick and efficient and I don't have to take my hands off the keyboard.
-
-But what if we broke down everything that you try to accomplish with Git, with source code management tools in general, reduce them down to first principles and imagine a tool that does all of those things better? Are you using Git because it's the best way you can imagine accomplishing those tasks, or are you using it because it's what is there, it's what works with GitHub, it's the only real option?
-
-The reality is that source code management tools have changed very little on a fundamental level in the last 40 years. If you look at the tools and commands and interface that RCS had in the 80s, or Subversion had in the 90s, is it really massively different than how you use Git today on a daily basis?
-
-Yes, Git has easy branching, acceptable merging, a nice network transport method to move your code around, but you're still making manual checkins, you're still trying to remember obscure arguments, you're still losing work when things get complicated.
-
-GitButler is rethinking everything between when you write code in your editor of choice and when you push that code to GitHub for review. Why are you making 'wip' commits when your SCM should be recording everything for you? Why are everyone's commit messages close to useless? Why is `git blame` the best way to get context on the code your team has written? Why can't you seamlessly transition work between computers?
-
-We are creating not only a new kind of Git client, but an entirely new way of thinking about managing the code that you work on. A tool that helps you at every step of the software development process. A code concierge, hard at work for you to ensure that you'll never lose a moment of work again. That you'll have all the context and support you'll need around every line of code you work on.
-
-Managing your source code can be different, smarter, leaps ahead of the 40 year old concepts that we're using today.
-
-Our goal is to make sure that nobody ever has to read Scott's book again. That you don't have to learn how to manage your source code management tool.
-
-<img src="/img/markus-chill.svg" className="mx-auto" />
 
 
 # workspace-branch.mdx
@@ -701,6 +675,73 @@ Note that if `extraCsp` is the only entry in the JSON file, you may want to encl
 ```
 
 The changes will take effect the next time you start GitButler.
+
+# gerrit-mode.mdx
+
+Not _everyone_ uses GitHub or GitLab to review code and collaborate. If you use the [Gerrit](https://www.gerritcodereview.com/) code review tool, GitButler has a mode for you! In fact, GitButler is the best Gerrit client there is.
+
+## What is Gerrit
+
+If you've never heard of Gerrit, it's used by large teams like the Android or Chrome projects to manage huge numbers of changes and users across large numbers of interdependent repositories.
+
+Here is an example of incoming changesets on the [Android project](https://android-review.googlesource.com/q/status:open+-is:wip,50):
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.03.44%402x.png"
+  width="800"
+  height="600"
+  subtitle="The Android project's Gerrit code review"
+/>
+
+## How is Gerrit different than Pull/Merge Requests?
+
+Good question. With GitHub or GitLab, when you send a pull/merge request, the review process is branch based. If you add more commits on top of your branch, the changes are squashed into one big unified diff for review. Most teams tend to avoid rebasing anything that was already shared.
+
+Gerrit is a commit based review system. Every review is based on exactly one commit. It's very common to edit shared commits and submit new versions of them to address feedback.
+
+This model works _very well_ with GitButler's easy [commit editing](/features/branch-management/commits) features. With any other Git client, interactive rebasing and amending tends to be quite painful and error prone, making it fairly difficult to work with Gerrit's model. With GitButler, it's ideal. Just drag and drop changes and update your changesets easily.
+
+## How to turn on Gerrit Mode
+
+If you have a Gerrit remote, GitButler will automatically enable Gerrit Mode when the project is being added to GitButler. You can also enable it manually.
+To manually turn on Gerrit Mode in GitButler, you just have to set a Git config option called `gitbutler.gerritMode` in the project you want to act in a Gerrit compatible fashion:
+
+```
+❯ cd my_project
+❯ git config gitbutler.gerritMode 1
+```
+
+## What is Gerrit Mode
+
+Now GitButler will change its behavior in the following ways:
+
+- When you commit, we will automatically inject a `Change-Id` trailer into the commit in the format that Gerrit expects. You do not need to [setup a `commit-msg` hook](https://gerrit-review.googlesource.com/Documentation/cmd-hook-commit-msg.html) like you do with other Git clients.
+- When you push, it will not push to a matching branch name on the remote. Instead it will push to `refs/for/main` (or whatever the name of the target branch is set to be).
+- After a push, we record the change url and show you the link and number for each commit automatically.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.21.06%402x.png"
+  width="800"
+  height="600"
+  subtitle="Gerrit Change numbers and URLs are shown and linked to"
+/>
+
+We can also set some extra push options when we push, including:
+
+- [Topics](https://gerrit-review.googlesource.com/Documentation/cross-repository-changes.html)
+- [Hashtags](https://gerrit-review.googlesource.com/Documentation/intro-user.html#hashtags)
+- [WIP status](https://gerrit-review.googlesource.com/Documentation/intro-user.html#wip)
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.50.07%402x.png"
+  width="800"
+  height="600"
+  subtitle="Set a topic, hashtag or wip status on push"
+/>
+
 
 # fixing-conflicts-outside-gitbutler.mdx
 
@@ -908,406 +949,6 @@ Once you have finished bringing all of your commits into your reconstruction
 branch, you can then push it to your remote via `git push`.
 
 
-# fetch-push.mdx
-
-
-If you are having trouble pushing or fetching from a remote, this is likely related to git authentication. Here are a few configuration options you can try out, found in the project settings.
-
-## Configuring the auto-fetch frequency
-
-GitButler will periodically fetch from your configured remotes in order to display new branches etc. By default, this happens every every 15 minutes.
-
-You can configure the interval or completely disable this behavior by editing the application's `settings.json` file:
-
-<Tabs groupId="platform" items={["macOS", "Windows", "Linux"]} persist>
-  <Tab value="macOS">```bash ~/Library/Application\ Support/gitbutler/settings.json ```</Tab>
-  <Tab value="Windows">```bash C:\Users\[username]\AppData\Roaming\gitbutler\settings.json ```</Tab>
-  <Tab value="Linux">```bash ~/.config/gitbutler/settings.json ```</Tab>
-</Tabs>
-
-The file is in JSONC format and follows the [following schema](https://github.com/gitbutlerapp/gitbutler/blob/master/crates/but-settings/assets/defaults.jsonc)
-
-```json
-  "fetch": {
-    "autoFetchIntervalMinutes": 15
-  }
-```
-
-A negative value (e.g. -1) disables auto fetching. Note that if `fetch` is the only entry in the JSON file, you may want to enclose it in a top-level object.
-
-## Available authentication methods
-
-GitButler can be configured to use several different git authentication methods. You can switch between them in your project settings. You can try multiple different options and see if any of them are appropriate for your setup. Note that if you are on Windows, the only applicable method is the "Git executable", therefore the application will now show this as a configuration option.
-
-<ImageSection
-  alt="Parallel Branches Example"
-  src="/issues-01.png"
-/>
-
-### Use a Git executable (default)
-
-The default way to push and fetch is for GitButler to use an existing system Git executable. This should use whatever authentication mechanism that Git uses for the remote that you're trying to push to or fetch from.
-
-### Use an existing SSH key
-
-If already have an SSH key set up (eg. `~/.ssh/id_rsa`), you can instruct GitButler to use it. In case the key is password protected, you can also provide the password to it (which will be stored locally).
-
-### Use locally generated SSH key
-
-This option generates a new SSH key which will be stored locally in the application [data dir](https://docs.gitbutler.com/development/debugging#data-files). For this to work you will need to add the new public key to your Git remote provider.
-
-### Use a git credential helper
-
-If your system is set up with a credential helper, GitButler can use that. For more info on git credential helpers, see this [article](https://git-scm.com/doc/credential-helpers).
-
-### FIDO security keys (YubiKey, etc.)
-
-If you're using a FIDO key, check out this issue to see how people have set it up with the Git executable method: [#2661](https://github.com/gitbutlerapp/gitbutler/issues/2661)
-
-### Keys managed by 1Password
-
-Keys stored in 1Password should properly use it as an SSH agent for authentication and signing commits if you use the Git executable option. (Previously tracked in [#2779](https://github.com/gitbutlerapp/gitbutler/issues/2779))
-
-### Host certificate checks
-
-There is an option to ignore host certificate checks when authenticating with ssh. This may be a helpful option to enable in some cases.
-
-## Other known issues
-
-### Git remote servers with a non-standard SSH port
-In some cases, the git remote may be setup on a port number other than 22. If the port is set in your `~/.ssh/config` file, GitButler will not be able to recognize that - tracked in GitHub issue [#2700](https://github.com/gitbutlerapp/gitbutler/issues/2700).
-
-As a workaround you may set your remote in the [SSH format](https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols) (eg. `ssh://git@example.com:3022/foo/bar.git`)
-
-Updating parallel branches when the respective remote has new commits
-If you have added a remote branch to your active workspace in GitButler, or pushed a virtual branch to the remote, and new commits are added to the remote branch, there is currently no way to sync those new commits into the existing virtual branch in GitButler. This is being tracked in the GitHub issue [#2649](https://github.com/gitbutlerapp/gitbutler/issues/2649).
-
-The current workaround is to undo any local commits and then stash your local changes manually using [git stash](https://git-scm.com/docs/git-stash) and then delete the virtual branch that has upstream changes. Then you can update the trunk by clicking the update button next to the word "Trunk" in the sidebar on the left to make sure all new upstream changes are synced, then select the remote branch that has the new changes and click the "Apply +" button above the list of commits for the branch. Once the updated branch is applied to your working directory, you can manually `git stash pop` your stashed changes and then resolve any merge conflicts.
-
-### OAuth app access restrictions on your GitHub organization
-
-If you're submitting code and PRs to a repository under an organization on GitHub, you may receive an error that, despite having correct authorization credentials, your organization has enabled OAuth app access restrictions. These restrictions are an organization-level security feature designed to prevent unauthorized third-party applications from accessing organization resources.
-
-To solve this, go to Applications. Select the "Authorized OAuth Apps" tab, and look for "GitButler Client". If you don't find "GitButler Client", it's possible you haven't yet set GitButler up for personal use. If so, try creating a test commit on a test branch for a personal repository using GitButler, which you can delete after, then check the same tab as before.
-
-If you see "GitButler Client", click on it and, under "Organization Access", across from the organization you wish to enable GitButler for, click either the "Request" or "Grant" button, depending on whether you are a contributor or owner, respectively. If you're a contributor clicking "Request", note that you'll need to wait for an organization owner to approve your access request before you can proceed.
-
-Note for organization owners: To streamline this process for your team members, you can pre-approve GitButler for all organization members. This eliminates the need for individual access requests and approvals. This can be managed through your organization's OAuth app access settings.
-
-### Help on Discord
-If none of the available options helps, feel free to hop on our [Discord](https://discord.gg/MmFkmaJ42D) and we will be happy to help you out.
-
-
-
-# recovering-stuff.mdx
-
-
-How to dig around our internal data to find (nearly) anything
-
-GitButler saves data in a few different ways. As we're still in beta, sometimes things might break and it may look like you've lost work, but you almost certainly haven't. We're pretty good about saving stuff a lot. Here's how to recover almost anything you had in your working directory or parallel branches.
-
-## GitButler References
-
-If everything crashes or the UI isn't working at all, you may be surprised to know that even though your parallel branches don't show up in a normal git branch output, we do actually constantly write them out as Git references (just not in refs/heads).
-
-
-```bash title="Terminal"
-❯ git for-each-ref | grep gitbutler
-e63b3bac82835dc17083a785d25db8b4b46744b9 commit	refs/gitbutler/add-can-create-method-to-notebook
-98ef3cd6eea14ee4159a600e448271c0d777efe2 commit	refs/gitbutler/add-conditional-blocks-for-image-and-video
-c7e27b9f99f25160a4d5f07d5972c217bdd44319 commit	refs/gitbutler/add-database-schema-conversion-script
-4afdfed6c14b57491a9d295c31613fd79b92f63a commit	refs/gitbutler/add-gems-for-test-group
-```
-
-
-These references are just like git branches - they point to a commit that has the latest version of your branch. You can create other git branches off of them, you can push them to GitHub, etc.
-
-You will have one for each virtual branch (applied or unapplied) that you've created (that you haven't deleted).
-
-If you've committed everything on a virtual branch, the reference will just point to the latest commit. If you have work in progress on the branch, it will point to a WIP commit that includes those changes.
-
-So for example, if I have the following two parallel branches, one fully committed and one with work pending:
-
-<ImageSection
-  alt="Parallel Branches Example"
-  src="/recovering-01.webp"
-/>
-
-
-I can view the git branches like this:
-
-```bash title="Terminal"
-❯ git show gitbutler/Convert-tables-to-utf8mb4
-commit 841e4db701ca41206c03f1f4fe345f7e27d05eab
-Author: Scott Chacon <schacon@gmail.com>
-Date:   Fri Feb 23 10:30:17 2024 +0100
-
-    my latest commit
-
-❯ git show gitbutler/Add-database-schema-conversion-script
-commit d95e7f4da1611ea6bb8a80da06e66ca923fbff55
-Author: GitButler <gitbutler@gitbutler.com>
-Date:   Fri Feb 23 10:30:18 2024 +0100
-
-    GitButler WIP Commit
-
-    This is a WIP commit for the virtual branch 'Add database schema conversion script'
-
-    This commit is used to store the state of the virtual branch
-    while you are working on it. It is not meant to be used for
-    anything else.
-```
-
-See how the `Add-database-schema-conversion-script` reference points to a "WIP commit"? The tree of that commit has all those changed files in it as though we had committed them.
-
-If you don't want to search through all your refs with `for-each-refs`, you can also just run a normal `git log` command and we'll show you what references we've written and which modified files are in each one:
-
-```bash title="Terminal"
-❯ git log
-commit 2d8afe0ea811b5f24b9a6f84f6d024bb323a2db5 (HEAD -> gitbutler/workspace)
-Author: GitButler <gitbutler@gitbutler.com>
-Date:   Fri Feb 23 10:30:18 2024 +0100
-
-    GitButler Integration Commit
-
-    This is an integration commit for the parallel branches that GitButler is tracking.
-
-    Due to GitButler managing multiple parallel branches, you cannot switch back and
-    forth between git branches and parallel branches easily.
-
-    If you switch to another branch, GitButler will need to be reinitialized.
-    If you commit on this branch, GitButler will throw it away.
-
-    Here are the branches that are currently applied:
-     - Add database schema conversion script (refs/gitbutler/Add-database-schema-conversion-script)
-       - butler/Gemfile
-       - butler/README.md
-       - butler/db/schema.rb
-       - butler/db/migrate/20240209144600_change_mysql_charset.rb
-       - .pscale.yml
-     - Convert tables to utf8mb4 (refs/gitbutler/Convert-tables-to-utf8mb4)
-       branch head: 841e4db701ca41206c03f1f4fe345f7e27d05eab
-       - butler/create_column_conversions.rb
-
-    Your previous branch was: refs/heads/sc-branch-comments
-
-    The sha for that commit was: 5e16e99667db9d26f78110df807853a896120ff3
-
-    For more information about what we're doing here, check out our docs:
-    https://docs.gitbutler.com/features/branch-management/integration-branch
-```
-
-You can see the two `gitbutler` refs under the "Here are the branches that are currently applied" section.
-
-Again, these are real git refs, just not under `refs/heads` so that we don't pollute your `git branch` output. But if GitButler crashes at some point, you can still push them to GitHub or whatever you want. Here is an example pushing my virtual branch to a GitHub branch called `convert-tables`:
-
-```bash title="Terminal"
-❯ git push origin refs/gitbutler/Convert-tables-to-utf8mb4:refs/heads/convert-tables
-Enumerating objects: 6, done.
-Counting objects: 100% (6/6), done.
-Delta compression using up to 10 threads
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (4/4), 474 bytes | 474.00 KiB/s, done.
-Total 4 (delta 2), reused 1 (delta 0), pack-reused 0
-remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-remote:
-remote: Create a pull request for 'convert-tables' on GitHub by visiting:
-remote:      https://github.com/gitbutlerapp/web/pull/new/convert-tables
-remote:
-To github.com:gitbutlerapp/web.git
- * [new branch]        refs/gitbutler/Convert-tables-to-utf8mb4 -> convert-tables
-```
-
-## GitButler Operations Log
-
-Ok, let's say that your work was not in one of those refs for some reason. Maybe you hit some weird bug and it completely changed everything in a way where now you're sitting on the couch in the dark with a glass of whisky, slowly mumbling the word "GitButler..." and plotting your revenge.
-
-Most of the time, we'll have whatever you're looking for in our operations log.
-
-The easiest way to access this is to use the built in Project History UI: [Project History](/features/timeline)
-
-However, let's dig into how this works, just in case you want to check it out yourself.
-
-Every time that GitButler does some possibly data-changing operation, we store a snapshot of your project state in our operations log before the operation happens so you can undo it if you want to. This is stored as a Git commit history that is parallel to your projects (ie, no common parents).
-
-You can inspect this by looking at the `.git/gitbutler/operations-log.toml` file.
-
-```bash title="Terminal"
-❯ tree .git/gitbutler
-.git/gitbutler
-├── operations-log.toml
-└── virtual_branches.toml
-
-1 directory, 2 files
-
-❯ cat .git/gitbutler/operations-log.toml
-head_sha = "16e47cb1d091ca9dd44327fef2f5305b09403a95"
-
-[modified_at]
-secs_since_epoch = 1717663406
-nanos_since_epoch = 560458000
-```
-
-If we look at this commit, we can see the history of all of the project history snapshots that GitButler is keeping:
-
-```bash title="Terminal"
-❯ git log 16e47cb1d091ca9dd44327fef2f5305b09403a9 -2
-commit 16e47cb1d091ca9dd44327fef2f5305b09403a95
-Author: GitButler <gitbutler@gitbutler.com>
-Date:   Thu Jun 6 10:43:26 2024 +0200
-
-    CreateBranch
-
-    Version: 1
-    Operation: CreateBranch
-    name: Virtual branch
-
-commit 2c95aa06d76b3230f1a51d9f89a211770d93ae51
-Author: GitButler <gitbutler@gitbutler.com>
-Date:   Thu Jun 6 10:28:30 2024 +0200
-
-    UpdateWorkspaceBase
-
-    Version: 1
-    Operation: UpdateWorkspaceBase
-```
-
-You can see that before creating a branch or updating our workspace with upstream work, we're recording the state of our project so we have an undo point. So what data are we keeping here in addition to this trailer information?
-
-Let's look at the tree of one of these commits:
-
-```bash title="Terminal"
-❯ git cat-file -p 16e47cb1d091ca9dd44327fef2f5305b09403a95^{tree}
-040000 tree 4b825dc642cb6eb9a060e54bf8d69288fbee4904    conflicts
-040000 tree b283f22f5abf4ed9c612c1b5b3b9a98ec25474b0    index
-040000 tree b283f22f5abf4ed9c612c1b5b3b9a98ec25474b0    target_tree
-100644 blob d839dca7e14f5833ad737b4adbf337bd20489927    virtual_branches.toml
-040000 tree a0821552c0e7d5defe369d577af5e3a87b442469    virtual_branches
-```
-
-The parallel branches toml file has the interesting metadata:
-
-```bash title="Terminal"
-❯ git cat-file -p 16e47cb1d091ca9dd44^{tree}:virtual_branches.toml
-[default_target]
-branchName = "master"
-remoteName = "origin"
-remoteUrl = "git@github.com:gitbutlerapp/gitbutler.git"
-sha = "e00e54af7f903ef84600079a45490a7f07e4702e"
-pushRemoteName = "origin"
-
-[branch_targets]
-
-[branches.09ef54c4-1081-4a52-8182-a5ec725016b6]
-id = "09ef54c4-1081-4a52-8182-a5ec725016b6"
-name = "commit signing settings"
-notes = ""
-applied = false
-upstream = "refs/remotes/origin/commit-signing-settings"
-upstream_head = "b60a66452dfecef74103346af6a3291ad677d246"
-created_timestamp_ms = "1717489406268"
-updated_timestamp_ms = "1717489406268"
-tree = "b28e7eefdd7b6f36456516b696146a2ea7638ca4"
-head = "b60a66452dfecef74103346af6a3291ad677d246"
-ownership = ""
-order = 4
-selected_for_changes = 1717489406268
-```
-
-The virtual_branches tree has the actual contents of those computed branches in case we need to recreate them:
-
-<Files>
-  <Folder name="virtual_branches" defaultOpen>
-    <Folder name="[branch-id]" defaultOpen>
-      <Folder name="commits" defaultOpen>
-        <Folder name="[commit-id1]" defaultOpen>
-            <File name="commit" />
-            <File name="tree" />
-        </Folder>
-        <File name="[commit-id2]" />
-      </Folder>
-      <File name="tree" />
-    </Folder>
-    <Folder name="[branch-id]" defaultOpen>
-      <Folder name="commits">
-        <File name="[commit-id3]" />
-        <File name="[commit-id4]" />
-      </Folder>
-      <File name="tree" />
-    </Folder>
-  </Folder>
-</Files>
-
-This allows you to get contents of any file in any of your virtual branch states as well.
-
-
-# gerrit-mode.mdx
-
-Not _everyone_ uses GitHub or GitLab to review code and collaborate. If you use the [Gerrit](https://www.gerritcodereview.com/) code review tool, GitButler has a mode for you! In fact, GitButler is the best Gerrit client there is.
-
-## What is Gerrit
-
-If you've never heard of Gerrit, it's used by large teams like the Android or Chrome projects to manage huge numbers of changes and users across large numbers of interdependent repositories.
-
-Here is an example of incoming changesets on the [Android project](https://android-review.googlesource.com/q/status:open+-is:wip,50):
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.03.44%402x.png"
-  width="800"
-  height="600"
-  subtitle="The Android project's Gerrit code review"
-/>
-
-## How is Gerrit different than Pull/Merge Requests?
-
-Good question. With GitHub or GitLab, when you send a pull/merge request, the review process is branch based. If you add more commits on top of your branch, the changes are squashed into one big unified diff for review. Most teams tend to avoid rebasing anything that was already shared.
-
-Gerrit is a commit based review system. Every review is based on exactly one commit. It's very common to edit shared commits and submit new versions of them to address feedback.
-
-This model works _very well_ with GitButler's easy [commit editing](/features/branch-management/commits) features. With any other Git client, interactive rebasing and amending tends to be quite painful and error prone, making it fairly difficult to work with Gerrit's model. With GitButler, it's ideal. Just drag and drop changes and update your changesets easily.
-
-## How to turn on Gerrit Mode
-
-If you have a Gerrit remote, GitButler will automatically enable Gerrit Mode when the project is being added to GitButler. You can also enable it manually.
-To manually turn on Gerrit Mode in GitButler, you just have to set a Git config option called `gitbutler.gerritMode` in the project you want to act in a Gerrit compatible fashion:
-
-```
-❯ cd my_project
-❯ git config gitbutler.gerritMode 1
-```
-
-## What is Gerrit Mode
-
-Now GitButler will change its behavior in the following ways:
-
-- When you commit, we will automatically inject a `Change-Id` trailer into the commit in the format that Gerrit expects. You do not need to [setup a `commit-msg` hook](https://gerrit-review.googlesource.com/Documentation/cmd-hook-commit-msg.html) like you do with other Git clients.
-- When you push, it will not push to a matching branch name on the remote. Instead it will push to `refs/for/main` (or whatever the name of the target branch is set to be).
-- After a push, we record the change url and show you the link and number for each commit automatically.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.21.06%402x.png"
-  width="800"
-  height="600"
-  subtitle="Gerrit Change numbers and URLs are shown and linked to"
-/>
-
-We can also set some extra push options when we push, including:
-
-- [Topics](https://gerrit-review.googlesource.com/Documentation/cross-repository-changes.html)
-- [Hashtags](https://gerrit-review.googlesource.com/Documentation/intro-user.html#hashtags)
-- [WIP status](https://gerrit-review.googlesource.com/Documentation/intro-user.html#wip)
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/CleanShot%202025-10-17%20at%2016.50.07%402x.png"
-  width="800"
-  height="600"
-  subtitle="Set a topic, hashtag or wip status on push"
-/>
-
-
 # timeline.mdx
 
 
@@ -1473,6 +1114,92 @@ Once you have set up GitHub integration, you can open your pull requests directl
 When you create a new branch or commit changes, GitButler will automatically check if there are any associated pull requests on GitHub. You can view these pull requests in the "Pull Requests" tab in the sidebar of the Branches page.
 
 
+# gitlab-integration.mdx
+
+
+Create your GitLab Merge requests without leaving GitButler.
+
+## Setting up the GitLab Integration
+
+In order to set up the GitLab integration, you will need two things. Firstly, a GitLab Personal Token and the Project ID for your project.
+
+### Creating a GitLab Personal Token
+
+To create a GitLab Personal Token, navigate to your GitLab preferences, and then click on the "Access tokens" tab. You will then see an "Add new token" button. Pressing this button will provide you with a form (as captured below) where you can specify the token name, expiration date, and scopes. We currently require the `api` scope. In this example, I've chosen to set the expiration date for the token to a year from now.
+
+<ImageSection className="mx-auto" src="/gitlab/pat-create.png" />
+
+On completion, you will be showen the following screen which contains your GitLab Personal token.
+
+<ImageSection className="mx-auto" src="/gitlab/pat-created.png" />
+
+### Finding your GitLab Project ID
+
+Navigate to the main page of the repository you want to configure the integration for. On the top left next to the "Fork" button, you will see three dots. Click on those three dots, and click on "Copy project ID". This will copy the GitLab Project ID to your clipboard.
+
+<ImageSection className="mx-auto" src="/gitlab/copy-project-id.png" />
+
+### Configuring GitButler
+
+Inside GitButler, navigate to the project settings by clicking on the small cog icon in the bottom left. Scroll down to the bottom of the "Project" tab where you will see a form for entering your GitLab details. The provided GitLab Personal Token will be stored securly in your operating system's keychain.
+
+<ImageSection className="mx-auto" src="/gitlab/configure-gitbutler.png" />
+
+### Custom GitLab Instances
+
+You may also provide a different Instance URL if you are using a self-hosted GitLab instance.
+
+Note that if you use a custom GitLab instance, you will likely need to configure a custom CSP (Content Security Policy) to allow GitButler to connect to it. You can find more information on how to do that in the [Custom Content Security Policy (CSP)](/troubleshooting/custom-csp) section of the documentation.
+
+## Usage
+
+You will now have a "Submit for Review" button on each branch which you can use to create a Merge Request.
+
+<ImageSection className="mx-auto" src="/gitlab/submit-for-review.png" />
+
+Once the Merge Request is created you will be able to see the status of it from within the client. Please note that we do not yet integrate with CI status.
+
+<ImageSection className="mx-auto" src="/gitlab/review-card.png" />
+
+
+# branch-lanes.mdx
+
+
+All of your branches - remote, local, and virtual / applied or not - are managed in the Branch Tab. This is where you can see all of your branches, apply them to your workspace, and manage your parallel branches.
+
+You can access the Branches tab by clicking on the "Branches" icon in the sidebar.
+
+The interface looks something like this:
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/branch-tab.png"
+  width="800"
+  height="600"
+  subtitle="The branch tab"
+/>
+
+## Branch List
+
+The first pane on the left shows you the parallel branches and stacks that you have as well as the other branches that you have available (legacy git branches, remote branches and PRs).
+
+All of these branches can be converted into parallel branches by clicking them and then clicking the "Apply to workspace" button on the top of the branch view (middle pane).
+
+Local branches can also be fully deleted here.
+
+### Current Workspace Target
+
+The "Current workspace target" is the view of the target branch that you've set. It will show you essentially a `git log` of `origin/master` or whatever you set as your target branch, and it will show you if there are any commits upstream that you have not integrated locally yet. We will automatically check for new upstream changes every few minutes, but you can also click the update button to check immediately.
+
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/workspace-target.png"
+  width="800"
+  height="600"
+  subtitle="workspace-target.png"
+/>
+
+
 # ai-assistance.mdx
 
 ## Getting Started
@@ -1597,92 +1324,6 @@ Generates comprehensive PR descriptions when creating pull requests.
 - Make meaningful code changes with clear patterns
 - Use descriptive variable names and comments in your code
 - Review [troubleshooting guide](https://docs.gitbutler.com/troubleshooting/custom-csp) for advanced configurations
-
-
-# gitlab-integration.mdx
-
-
-Create your GitLab Merge requests without leaving GitButler.
-
-## Setting up the GitLab Integration
-
-In order to set up the GitLab integration, you will need two things. Firstly, a GitLab Personal Token and the Project ID for your project.
-
-### Creating a GitLab Personal Token
-
-To create a GitLab Personal Token, navigate to your GitLab preferences, and then click on the "Access tokens" tab. You will then see an "Add new token" button. Pressing this button will provide you with a form (as captured below) where you can specify the token name, expiration date, and scopes. We currently require the `api` scope. In this example, I've chosen to set the expiration date for the token to a year from now.
-
-<ImageSection className="mx-auto" src="/gitlab/pat-create.png" />
-
-On completion, you will be showen the following screen which contains your GitLab Personal token.
-
-<ImageSection className="mx-auto" src="/gitlab/pat-created.png" />
-
-### Finding your GitLab Project ID
-
-Navigate to the main page of the repository you want to configure the integration for. On the top left next to the "Fork" button, you will see three dots. Click on those three dots, and click on "Copy project ID". This will copy the GitLab Project ID to your clipboard.
-
-<ImageSection className="mx-auto" src="/gitlab/copy-project-id.png" />
-
-### Configuring GitButler
-
-Inside GitButler, navigate to the project settings by clicking on the small cog icon in the bottom left. Scroll down to the bottom of the "Project" tab where you will see a form for entering your GitLab details. The provided GitLab Personal Token will be stored securly in your operating system's keychain.
-
-<ImageSection className="mx-auto" src="/gitlab/configure-gitbutler.png" />
-
-### Custom GitLab Instances
-
-You may also provide a different Instance URL if you are using a self-hosted GitLab instance.
-
-Note that if you use a custom GitLab instance, you will likely need to configure a custom CSP (Content Security Policy) to allow GitButler to connect to it. You can find more information on how to do that in the [Custom Content Security Policy (CSP)](/troubleshooting/custom-csp) section of the documentation.
-
-## Usage
-
-You will now have a "Submit for Review" button on each branch which you can use to create a Merge Request.
-
-<ImageSection className="mx-auto" src="/gitlab/submit-for-review.png" />
-
-Once the Merge Request is created you will be able to see the status of it from within the client. Please note that we do not yet integrate with CI status.
-
-<ImageSection className="mx-auto" src="/gitlab/review-card.png" />
-
-
-# branch-lanes.mdx
-
-
-All of your branches - remote, local, and virtual / applied or not - are managed in the Branch Tab. This is where you can see all of your branches, apply them to your workspace, and manage your parallel branches.
-
-You can access the Branches tab by clicking on the "Branches" icon in the sidebar.
-
-The interface looks something like this:
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/branch-tab.png"
-  width="800"
-  height="600"
-  subtitle="The branch tab"
-/>
-
-## Branch List
-
-The first pane on the left shows you the parallel branches and stacks that you have as well as the other branches that you have available (legacy git branches, remote branches and PRs).
-
-All of these branches can be converted into parallel branches by clicking them and then clicking the "Apply to workspace" button on the top of the branch view (middle pane).
-
-Local branches can also be fully deleted here.
-
-### Current Workspace Target
-
-The "Current workspace target" is the view of the target branch that you've set. It will show you essentially a `git log` of `origin/master` or whatever you set as your target branch, and it will show you if there are any commits upstream that you have not integrated locally yet. We will automatically check for new upstream changes every few minutes, but you can also click the update button to check immediately.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/workspace-target.png"
-  width="800"
-  height="600"
-  subtitle="workspace-target.png"
-/>
 
 
 # commits.mdx
@@ -1889,6 +1530,35 @@ If you want to cancel this conflict resolution, you can just hit 'Cancel' and it
 />
 
 
+# why-gitbutler.mdx
+
+The GitButler manifesto, as it were.
+
+Everyone loves a good manifesto. So, why is there a need for a new Git client in the world? Don't we have enough? Isn't the command line just fine?
+
+Having cofounded GitHub, trained dozens of corporate teams on distributed version control tools and literally written the book on Git, we have spent a lot of time and energy over the last decade thinking about the source code management tools that software developers use every day.
+
+GitHub has changed the way that millions of developers across the world collaborate and work with their source code, but as sophisticated and user friendly as that tool is in our daily coding lives, using GitHub or GitLab or Bitbucket still requires all of those developers to work with a command line tool that is confusing, difficult to use, error prone and not originally designed or built for the workflows and processes that most developers today use. That tool is Git.
+
+Sure, some small minority will use a GUI of some sort, but even those tools are mostly wrappers around the core concepts of Git itself, never reimagining what source code management could be or if Git itself is actually good at helping them with the tasks they face on a daily basis. I've never personally used one because they do little that Git itself doesn't and honestly it's generally easier to just do those tasks on the command line, where it's quick and efficient and I don't have to take my hands off the keyboard.
+
+But what if we broke down everything that you try to accomplish with Git, with source code management tools in general, reduce them down to first principles and imagine a tool that does all of those things better? Are you using Git because it's the best way you can imagine accomplishing those tasks, or are you using it because it's what is there, it's what works with GitHub, it's the only real option?
+
+The reality is that source code management tools have changed very little on a fundamental level in the last 40 years. If you look at the tools and commands and interface that RCS had in the 80s, or Subversion had in the 90s, is it really massively different than how you use Git today on a daily basis?
+
+Yes, Git has easy branching, acceptable merging, a nice network transport method to move your code around, but you're still making manual checkins, you're still trying to remember obscure arguments, you're still losing work when things get complicated.
+
+GitButler is rethinking everything between when you write code in your editor of choice and when you push that code to GitHub for review. Why are you making 'wip' commits when your SCM should be recording everything for you? Why are everyone's commit messages close to useless? Why is `git blame` the best way to get context on the code your team has written? Why can't you seamlessly transition work between computers?
+
+We are creating not only a new kind of Git client, but an entirely new way of thinking about managing the code that you work on. A tool that helps you at every step of the software development process. A code concierge, hard at work for you to ensure that you'll never lose a moment of work again. That you'll have all the context and support you'll need around every line of code you work on.
+
+Managing your source code can be different, smarter, leaps ahead of the 40 year old concepts that we're using today.
+
+Our goal is to make sure that nobody ever has to read Scott's book again. That you don't have to learn how to manage your source code management tool.
+
+<img src="/img/markus-chill.svg" className="mx-auto" />
+
+
 # moving-branches.mdx
 
 ## Overview
@@ -1973,6 +1643,23 @@ If you're using GitHub integration and the branch has an associated pull request
 - [Stacked Branches](/features/branch-management/stacked-branches) - Learn about working with stacked branches
 - [Branch Lanes](/features/branch-management/branch-lanes) - Understand the branch lane interface
 - [Parallel Branches](/features/branch-management/virtual-branches) - Core concepts of GitButler's virtual branch system
+
+
+# pushing-and-fetching.mdx
+
+
+GitButler can authenticate with an upstream Git server in several different ways.
+
+ You can just tell us to use the system Git executable, which you can setup however you want. You can use our built in SSH protocol with your own SSH key (this does not require you to have Git installed), or you can use the default [Git credentials helper](https://git-scm.com/doc/credential-helpers).
+
+You can set your preference (and test if it works) in your project's "Git authentication" section:
+
+<ImageSection
+  alt="Git Authentication Settings"
+  src="/pushing.png"
+/>
+
+Once that's done, GitButler will be able to automatically fetch upstream work and push new branches to your upstream server.
 
 
 # rules.mdx
@@ -2115,147 +1802,6 @@ Rules respect hunk dependencies (locks). If a change depends on a commit in a sp
 
 - [Parallel Branches](/features/branch-management/virtual-branches): Understanding the branch system that rules work with
 - [Branch Lanes](/features/branch-management/branch-lanes): How lanes are organized and how rules interact with lane positioning
-
-
-# pushing-and-fetching.mdx
-
-
-GitButler can authenticate with an upstream Git server in several different ways.
-
- You can just tell us to use the system Git executable, which you can setup however you want. You can use our built in SSH protocol with your own SSH key (this does not require you to have Git installed), or you can use the default [Git credentials helper](https://git-scm.com/doc/credential-helpers).
-
-You can set your preference (and test if it works) in your project's "Git authentication" section:
-
-<ImageSection
-  alt="Git Authentication Settings"
-  src="/pushing.png"
-/>
-
-Once that's done, GitButler will be able to automatically fetch upstream work and push new branches to your upstream server.
-
-
-# signing-commits.mdx
-
-
-GitHub and GitLab provide a mechanism to verify signed commits using an uploaded public SSH or GPG key. GitButler can be configured automatically sign all your commits.
-
-Git provides a mechanism to sign your commits with a GPG key or SSH key. This enables other developers to make sure that you were actually the person who committed it, rather than someone else just setting their email to yours and committing it as if they were you.
-
-To make this work, a signature is added to the commit header and then that signature is checked against public key stored somewhere, generally for most people the most useful way to verify these signatures is through GitHub or GitLab.
-
-This is what a verified commit looks like on both systems:
-
-<ImageSection
-  alt="Viewing Remote Branches"
-  src="/signing-01.png"
-  subtitle="A verified commit on GitLab."
-/>
-
-<ImageSection
-  alt="Viewing Remote Branches"
-  src="/signing-02.png"
-  subtitle="Verified and non-verified commits on GitHub."
-/>
-
-This means that the server has a public key that you used to sign the commits that is associated to your account and has verified that this user actually signed this commit.
-
-In order for this to work, you need to:
-
-1. Tell GitButler to sign your commits
-2. Upload your key as a "signing key" to GitHub or GitLab (or elsewhere)
-
-## Telling GitButler to Sign
-
-For GitButler to sign commits, you need to setup Git to sign commits, as we do roughly the same thing that Git itself tries to do, and we read and respect most of the same Git config settings.
-
-The main difference is that instead of only the `commit.gpgSign` as the flag that tells Git to automatically sign commits, we look for `gitbutler.signCommits` first. Thus, if Git would sign, GitButler will attempt to sign your commits with the normal Git settings as well.
-But if something goes wrong, `gitbutler.signCommits` will be set to `false` in the repository-local settings to prevent commits from
-failing generally.
-Set `gitbutler.signCommits` to `true` in your user-level `~/.gitconfig`, to prevent GitButler from automatically disabling commit signing for that repository.
-
-We look to see if we have a signing key in `user.signingkey`. If we have a key, we look for 'ssh' in `gpg.format`, otherwise we use GPG. We will respect `gpg.ssh.program` for ssh if there is a different binary path, and `gpg.program` for GPG. We also identify literal SSH keys in the `user.signingkey` field.
-
-The only major thing we don't support yet is `gpg.ssh.defaultKeyCommand` for other ways to get a key other than the `user.signingkey` field. We also don't support the X.509 smime stuff.
-
-Here is an example, if you have a public key here `.ssh/id_ed25519.pub` then you can setup signing with something like this:
-
-```bash title="Terminal"
-$ git config --global user.signingkey "/Users/schacon/.ssh/id_ed25519.pub"
-$ git config --global gpg.format ssh
-$ git config --global gitbutler.signCommits true
-```
-
-You can also set this up in your project settings, perhaps a little more easily:
-
-<ImageSection
-  alt="Viewing Remote Branches"
-  src="/signing-03.png"
-/>
-
-The nice thing here is that you can also test the settings easily by hitting the "Test Signing" button.
-
-There are lots of other ways to set up GPG or SSH commit signing:
-
-- 1Password is a very easy way to [SSH sign commits](https://blog.1password.com/git-commit-signing/).
-- GitHub has a [good guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key) on how to setup GPG or SSH keysigning.
-- Here is a nice simple gist for [GPG signing on Windows](https://gist.github.com/BoGnY/f9b1be6393234537c3e247f33e74094a).
-
-<Callout title="Using GitButler's Generated SSH Key">
-Earlier versions of GitButler would only sign with its generated SSH key. Although we've removed that functionality, you can easily set it back up by pointing the signingKey at the generated SSH Key. The key is located in the following locations:
-
-<Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
-  <Tab value="macOS">
-  ```bash
-  /Users/[username]/Library/Application Support/com.gitbutler.app/keys/ed25519.pub
-  ```
-  </Tab>
-  <Tab value="Windows">
-  ```bash
-  C:\Users\[username]\AppData\Roaming\com.gitbutler.app\keys\ed25519.pub
-  ```
-  </Tab>
-  <Tab value="Linux">
-  ```bash
-  ~/.local/share/gitbutler-tauri/keys/ed25519.pub
-  ```
-  </Tab>
-</Tabs>
-
-</Callout>
-
-## Upload Your Signing Key
-
-For GitHub or GitLab to verify your signatures, you need to say that the SSH or GPG public key we are using is a valid signing key for your user.
-
-### Adding to GitHub
-
-You can click on the "Add key to GitHub" link in the settings page right about the signing toggle, or you can go here (https://github.com/settings/ssh/new) to paste that public key in.
-
-<ImageSection
-  alt="Adding a key to GitHub"
-  src="/signing-04.png"
-  subtitle="Be sure to change the type to 'Signing Key'"
-/>
-
-Now your signed commits should show up as "Verified".
-
-### Adding to GitLab
-
-For GitLab you need to go to "SSH Keys" in your profile: https://gitlab.com/-/profile/keys and click the "Add new key" button.
-
-<ImageSection
-  alt="Adding a key to GitHub"
-  src="/signing-05.png"
-  subtitle="Add new key here."
-/>
-
-Now paste in the public SSH key you copied from GitButler, name it and make sure the "Usage Type" is either "Signing" or "Authentication and Signing".
-
-<ImageSection
-  alt="Adding a key to GitHub"
-  src="/signing-06.png"
-  subtitle="Now all your GitButler generated commits will be verified on that platform!"
-/>
 
 
 # stacked-branches.mdx
@@ -2508,6 +2054,139 @@ Let's say that you make changes to two different files and `git status` would li
 One of the nice things with this approach is that since you're starting from changes in a single working directory, you can be sure that all branches that you create from it will merge cleanly, as you're essentially starting from the merge product and extracting branches of work from it.
 
 
+# open-source.mdx
+
+GitButler is a [Fair Source software project](https://blog.gitbutler.com/gitbutler-is-now-fair-source/), built on a vast foundation of open source software. We're committed to giving back to the community and supporting the projects that we rely on.
+
+As part of our commitment to open source, we are an early member of the [Open Source Pledge](https://osspledge.com/). We have pledged to give back to the open source community by donating $2000 per year per full time software developer that we employ to the OSS projects and maintainers that we depend on.
+
+You can read more about our reasoning to join the Open Source Pledge in our announcement blog post and 2024 report: [GitButler Joins the Open Source Pledge](https://blog.gitbutler.com/open-source-pledge-2024).
+
+
+# signing-commits.mdx
+
+
+GitHub and GitLab provide a mechanism to verify signed commits using an uploaded public SSH or GPG key. GitButler can be configured automatically sign all your commits.
+
+Git provides a mechanism to sign your commits with a GPG key or SSH key. This enables other developers to make sure that you were actually the person who committed it, rather than someone else just setting their email to yours and committing it as if they were you.
+
+To make this work, a signature is added to the commit header and then that signature is checked against public key stored somewhere, generally for most people the most useful way to verify these signatures is through GitHub or GitLab.
+
+This is what a verified commit looks like on both systems:
+
+<ImageSection
+  alt="Viewing Remote Branches"
+  src="/signing-01.png"
+  subtitle="A verified commit on GitLab."
+/>
+
+<ImageSection
+  alt="Viewing Remote Branches"
+  src="/signing-02.png"
+  subtitle="Verified and non-verified commits on GitHub."
+/>
+
+This means that the server has a public key that you used to sign the commits that is associated to your account and has verified that this user actually signed this commit.
+
+In order for this to work, you need to:
+
+1. Tell GitButler to sign your commits
+2. Upload your key as a "signing key" to GitHub or GitLab (or elsewhere)
+
+## Telling GitButler to Sign
+
+For GitButler to sign commits, you need to setup Git to sign commits, as we do roughly the same thing that Git itself tries to do, and we read and respect most of the same Git config settings.
+
+The main difference is that instead of only the `commit.gpgSign` as the flag that tells Git to automatically sign commits, we look for `gitbutler.signCommits` first. Thus, if Git would sign, GitButler will attempt to sign your commits with the normal Git settings as well.
+But if something goes wrong, `gitbutler.signCommits` will be set to `false` in the repository-local settings to prevent commits from
+failing generally.
+Set `gitbutler.signCommits` to `true` in your user-level `~/.gitconfig`, to prevent GitButler from automatically disabling commit signing for that repository.
+
+We look to see if we have a signing key in `user.signingkey`. If we have a key, we look for 'ssh' in `gpg.format`, otherwise we use GPG. We will respect `gpg.ssh.program` for ssh if there is a different binary path, and `gpg.program` for GPG. We also identify literal SSH keys in the `user.signingkey` field.
+
+The only major thing we don't support yet is `gpg.ssh.defaultKeyCommand` for other ways to get a key other than the `user.signingkey` field. We also don't support the X.509 smime stuff.
+
+Here is an example, if you have a public key here `.ssh/id_ed25519.pub` then you can setup signing with something like this:
+
+```bash title="Terminal"
+$ git config --global user.signingkey "/Users/schacon/.ssh/id_ed25519.pub"
+$ git config --global gpg.format ssh
+$ git config --global gitbutler.signCommits true
+```
+
+You can also set this up in your project settings, perhaps a little more easily:
+
+<ImageSection
+  alt="Viewing Remote Branches"
+  src="/signing-03.png"
+/>
+
+The nice thing here is that you can also test the settings easily by hitting the "Test Signing" button.
+
+There are lots of other ways to set up GPG or SSH commit signing:
+
+- 1Password is a very easy way to [SSH sign commits](https://blog.1password.com/git-commit-signing/).
+- GitHub has a [good guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key) on how to setup GPG or SSH keysigning.
+- Here is a nice simple gist for [GPG signing on Windows](https://gist.github.com/BoGnY/f9b1be6393234537c3e247f33e74094a).
+
+<Callout title="Using GitButler's Generated SSH Key">
+Earlier versions of GitButler would only sign with its generated SSH key. Although we've removed that functionality, you can easily set it back up by pointing the signingKey at the generated SSH Key. The key is located in the following locations:
+
+<Tabs groupId="platform" items={['macOS', 'Windows', 'Linux']} persist>
+  <Tab value="macOS">
+  ```bash
+  /Users/[username]/Library/Application Support/com.gitbutler.app/keys/ed25519.pub
+  ```
+  </Tab>
+  <Tab value="Windows">
+  ```bash
+  C:\Users\[username]\AppData\Roaming\com.gitbutler.app\keys\ed25519.pub
+  ```
+  </Tab>
+  <Tab value="Linux">
+  ```bash
+  ~/.local/share/gitbutler-tauri/keys/ed25519.pub
+  ```
+  </Tab>
+</Tabs>
+
+</Callout>
+
+## Upload Your Signing Key
+
+For GitHub or GitLab to verify your signatures, you need to say that the SSH or GPG public key we are using is a valid signing key for your user.
+
+### Adding to GitHub
+
+You can click on the "Add key to GitHub" link in the settings page right about the signing toggle, or you can go here (https://github.com/settings/ssh/new) to paste that public key in.
+
+<ImageSection
+  alt="Adding a key to GitHub"
+  src="/signing-04.png"
+  subtitle="Be sure to change the type to 'Signing Key'"
+/>
+
+Now your signed commits should show up as "Verified".
+
+### Adding to GitLab
+
+For GitLab you need to go to "SSH Keys" in your profile: https://gitlab.com/-/profile/keys and click the "Add new key" button.
+
+<ImageSection
+  alt="Adding a key to GitHub"
+  src="/signing-05.png"
+  subtitle="Add new key here."
+/>
+
+Now paste in the public SSH key you copied from GitButler, name it and make sure the "Usage Type" is either "Signing" or "Authentication and Signing".
+
+<ImageSection
+  alt="Adding a key to GitHub"
+  src="/signing-06.png"
+  subtitle="Now all your GitButler generated commits will be verified on that platform!"
+/>
+
+
 # supporters.mdx
 
 
@@ -2543,6 +2222,424 @@ You need to have a GitButler account to support us. If you don't have one, sign 
 Thanks, from the GitButler Crew!
 
 <img src="/img/pixel-bowtie.svg" className="" />
+
+
+
+# but-absorb.mdx
+
+The semantic for finding "the appropriate commit" is as follows:
+
+- If a change has a dependency to a particular commit, it will be amended into that particular commit
+- If a change is staged to a particular lane (branch), it will be amended into a commit there
+- If there are no commits in this branch, a new commit is created
+- Changes are amended into the topmost commit of the leftmost (first) lane (branch)
+
+Optionally an identifier to an Uncommitted File or a Branch (stack) may be provided.
+
+- If an Uncommitted File id is provided, absorb will be performed for just that file
+- If a Branch (stack) id is provided, absorb will be performed for all changes staged to that stack
+- If no source is provided, absorb is performed for all uncommitted changes
+
+If `--dry-run` is specified, no changes will be made; instead, the absorption plan
+(what changes would be absorbed by which commits) will be shown.
+
+**Usage:** `but absorb [SOURCE] [OPTIONS]`
+
+## Arguments
+
+* `<SOURCE>` — If the Source is an uncommitted change - the change will be absorbed. If the Source is a stack - anything staged to the stack will be absorbed accordingly. If not provided, everything that is uncommitted will be absorbed
+
+## Options
+
+* `--dry-run` — Show the absorption plan without making any changes
+
+
+
+# contact-us.mdx
+
+
+There are a few ways to get in touch with us for feedback, bug reports, feature requests, etc.
+
+<Cards>
+  <Card
+    icon={<svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="108" y1="148" x2="160" y2="96" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M223.69,42.18a8,8,0,0,0-9.87-9.87l-192,58.22a8,8,0,0,0-1.25,14.93L108,148l42.54,87.42a8,8,0,0,0,14.93-1.25Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/></svg>}
+    href="mailto:hello@gitbutler.com"
+    title="Email"
+    description="The simplest way to get in touch with us is to email us"
+  />
+  <Card
+    icon={<svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle fill="currentColor" cx="92" cy="140" r="12"/><circle fill="currentColor" cx="164" cy="140" r="12"/><path d="M153.44,73.69l5-19.63a8.1,8.1,0,0,1,9.21-6L203.69,54A8.08,8.08,0,0,1,210.23,60l29.53,116.37a8,8,0,0,1-4.55,9.24l-67,29.7a8.15,8.15,0,0,1-11-4.56L147,183.06" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M102.56,73.69l-5-19.63a8.1,8.1,0,0,0-9.21-6L52.31,54A8.08,8.08,0,0,0,45.77,60L16.24,176.35a8,8,0,0,0,4.55,9.24l67,29.7a8.15,8.15,0,0,0,11-4.56L109,183.06" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M80,78.31A178.94,178.94,0,0,1,128,72a178.94,178.94,0,0,1,48,6.31" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M176,177.69A178.94,178.94,0,0,1,128,184a178.94,178.94,0,0,1-48-6.31" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/></svg>}
+    href="https://discord.com/invite/MmFkmaJ42D"
+    title="Discord"
+    description="We are also available to chat on our Discord server"
+  />
+</Cards>
+
+
+# but-apply.mdx
+
+If you want to apply an unapplied branch to your workspace so you
+can work on it, you can run `but apply <branch-name>`.
+
+This will apply the changes in that branch into your working directory
+as a parallel applied branch.
+
+## Examples
+
+Apply by branch name:
+
+```text
+but apply my-feature-branch
+```
+
+**Usage:** `but apply <BRANCH_NAME>`
+
+## Arguments
+
+* `<BRANCH_NAME>` — Name of the branch to apply (required)
+
+
+
+# but-alias.mdx
+
+Aliases allow you to create shortcuts for commonly used commands.
+They are stored in git config under the `but.alias.*` namespace.
+
+## Examples
+
+List all configured aliases:
+
+```text
+but alias
+```
+
+Create a new alias:
+
+```text
+but alias add st status
+but alias add stv "status --verbose"
+```
+
+Remove an alias:
+
+```text
+but alias remove st
+```
+
+**Usage:** `but alias <COMMAND>`
+
+## Subcommands
+
+### `but alias list`
+
+List all configured aliases (default)
+
+**Usage:** `but alias list`
+
+### `but alias add`
+
+Add a new alias
+
+Creates a new alias that expands to the given command.
+
+Examples
+
+  but alias add st status
+  but alias add stv "status --verbose"
+  but alias add co "commit --only"
+
+
+**Usage:** `but alias add <NAME> <VALUE> [OPTIONS]`
+
+**Arguments:**
+
+* `<NAME>` — The name of the alias to create (required)
+* `<VALUE>` — The command and arguments that the alias should expand to
+
+If the value contains spaces or special characters, quote it: "status --verbose" (required)
+
+**Options:**
+
+* `-g`, `--global` — Store the alias globally (in ~/.gitconfig) instead of locally
+
+### `but alias remove`
+
+Remove an existing alias
+
+Examples
+
+  but alias remove st
+  but alias remove co --global
+
+
+**Usage:** `but alias remove <NAME> [OPTIONS]`
+
+**Arguments:**
+
+* `<NAME>` — The name of the alias to remove (required)
+
+**Options:**
+
+* `-g`, `--global` — Remove from global config (in ~/.gitconfig) instead of local
+
+
+
+# but-amend.mdx
+
+Wrapper for `but rub <file> <commit>`.
+
+**Usage:** `but amend <FILE> <COMMIT>`
+
+## Arguments
+
+* `<FILE>` — File ID to amend (required)
+* `<COMMIT>` — Commit ID to amend into (required)
+
+
+
+# but-branch.mdx
+
+This includes creating, deleting, listing, and showing details about branches.
+
+By default without a subcommand, it will list the branches.
+
+To apply or unapply branches, use `but apply` and `but unapply`.
+
+**Usage:** `but branch <COMMAND>`
+
+## Subcommands
+
+### `but branch new`
+
+Creates a new branch in the workspace
+
+If no branch name is provided, a new parallel branch with a generated
+name will be created.
+
+You can also specify an anchor point using the `--anchor` option,
+which can be either a commit ID or an existing branch name to create
+the new branch from. This allows you to create stacked branches.
+
+**Usage:** `but branch new [BRANCH_NAME] [OPTIONS]`
+
+**Arguments:**
+
+* `<BRANCH_NAME>` — Name of the new branch
+
+**Options:**
+
+* `-a`, `--anchor` `<ANCHOR>` — Anchor point - either a commit ID or branch name to create the new branch from
+
+### `but branch delete`
+
+Deletes a branch from the workspace
+
+This will remove the branch and all its commits from the workspace.
+If the branch has unpushed commits, you will be prompted for confirmation.
+
+**Usage:** `but branch delete <BRANCH_NAME>`
+
+**Arguments:**
+
+* `<BRANCH_NAME>` — Name of the branch to delete (required)
+
+### `but branch list`
+
+List the branches in the repository
+
+By default, shows the active branch and the 20 most recently updated branches.
+
+You can use the `--all` flag to show all branches, `--local` to show only
+local branches, or `--remote` to show only remote branches.
+
+You can also filter branch names by specifying a substring, such as
+`but branch list feature` to show only branches with "feature" in the name.
+
+If you want to check for review status, you can add `--review` to fetch
+and display pull request or merge request information for each branch.
+This will make the command slower as it needs to query the forge.
+
+By default, the command checks if each branch merges cleanly into
+the *upstream base target branch* (not your workspace).
+You can disable this check with `--no-check` to make the command faster.
+
+By default it also calculates the number of commits each branch is ahead
+of the base branch. You can disable this with `--no-ahead` to
+make the command faster.
+
+**Usage:** `but branch list [FILTER] [OPTIONS]`
+
+**Arguments:**
+
+* `<FILTER>` — Filter branches by name (case-insensitive substring match)
+
+**Options:**
+
+* `-l`, `--local` — Show only local branches
+* `-r`, `--remote` — Show only remote branches
+* `-a`, `--all` — Show all branches (not just active + 20 most recent)
+* `--no-ahead` — Don't calculate and show number of commits ahead of base (faster)
+* `--review` — Fetch and display review information (PRs, MRs, etc.)
+* `--no-check` — Don't check if each branch merges cleanly into upstream
+* `--empty` — Include branches with no commits on them (hidden by default)
+
+### `but branch show`
+
+Show commits ahead of base for a specific branch
+
+This shows the list of commits that are on the specified branch but not yet integrated into the base target branch.
+
+You can also choose to fetch and display review information, show files modified in each commit with line counts, generate an AI summary of the branch changes, and check if the branch merges cleanly into upstream.
+
+**Usage:** `but branch show <BRANCH> [OPTIONS]`
+
+**Arguments:**
+
+* `<BRANCH>` — CLI ID or name of the branch to show (required)
+
+**Options:**
+
+* `-r`, `--review` — Fetch and display review information
+* `-f`, `--files` — Show files modified in each commit with line counts
+* `--ai` — Generate AI summary of the branch changes
+* `--check` — Check if the branch merges cleanly into upstream and identify conflicting commits
+
+
+# but-clean.mdx
+
+A branch is considered empty if it has no local commits, no assigned
+changes, and (by default) no upstream-only commits.
+
+The entire operation is recorded as a single oplog entry, so it can
+be undone with `but undo`.
+
+## Examples
+
+Remove all empty branches:
+
+```text
+but clean
+```
+
+Preview which branches would be removed:
+
+```text
+but clean --dry-run
+```
+
+Pull latest changes first, then clean:
+
+```text
+but clean --pull
+```
+
+Also remove branches that only have upstream commits:
+
+```text
+but clean --include-upstream
+```
+
+**Usage:** `but clean [OPTIONS]`
+
+## Options
+
+* `--dry-run` — Preview which branches would be removed without actually deleting them
+* `--pull` — Pull latest changes from the remote before cleaning
+* `--include-upstream` — Also remove branches that have upstream-only commits but no local commits or changes
+
+
+
+# but-commit.mdx
+
+The `but commit` command allows you to create a new commit
+on a specified branch (stack) with the current uncommitted changes.
+
+If there is only one branch applied, it will commit to that branch by default.
+
+If there are multiple branches applied, you must specify which branch to
+commit to, or if in interactive mode, you will be prompted to select one.
+
+By default, all uncommitted changes and all changes already staged to that
+branch will be included in the commit. If you only want to commit the changes
+that are already staged to that branch, you can use the `--only` flag.
+
+It will not commit changes staged to other branches.
+
+Use `but commit empty --before <target>` or `but commit empty --after <target>`
+to insert a blank commit. This is useful for creating a placeholder
+commit that you can amend changes into later using `but mark`, `but rub` or `but absorb`.
+
+**Usage:** `but commit <COMMAND> [BRANCH] [OPTIONS]`
+
+## Subcommands
+
+### `but commit empty`
+
+Insert a blank commit before or after the specified commit.
+
+This is useful for creating a placeholder commit that you can
+then amend changes into later using `but mark`, `but rub` or `but absorb`.
+
+You can modify the empty commit message at any time using `but reword`.
+
+This allows for a more Jujutsu style workflow where you create commits
+first and then fill them in as you work. Create an empty commit, mark it
+for auto-commit, and then just work on your changes. Write the commit
+message whenever you prefer.
+
+## Examples
+
+Insert at the top of the first branch (no arguments):
+
+```text
+but commit empty
+```
+
+Insert before a commit:
+
+```text
+but commit empty ab
+```
+
+Explicitly insert before a commit:
+
+```text
+but commit empty --before ab
+```
+
+Insert after a commit (at the top of the stack if target is a branch):
+
+```text
+but commit empty --after ab
+```
+
+**Usage:** `but commit empty [TARGET] [OPTIONS]`
+
+**Arguments:**
+
+* `<TARGET>` — The target commit or branch to insert relative to.
+
+If a target is provided without --before or --after, defaults to --before behavior. If no arguments are provided at all, inserts at the top of the first branch.
+
+**Options:**
+
+* `--before` `<BEFORE>` — Insert the blank commit before this commit or branch
+* `--after` `<AFTER>` — Insert the blank commit after this commit or branch
+
+## Options
+
+* `-m`, `--message` `<MESSAGE>` — Commit message
+* `--message-file` `<FILE>` — Read commit message from file
+* `-c`, `--create` — Whether to create a new branch for this commit. If the branch name given matches an existing branch, that branch will be used instead. If no branch name is given, a new branch with a generated name will be created
+* `-o`, `--only` — Only commit staged files, not unstaged files
+* `-a`, `--all` — No-op compatibility flag for git commit -a
+* `-n`, `--no-hooks` — Bypass pre-commit hooks
+* `-i`, `--ai` `<AI>` — Generate commit message using AI with optional user summary. Use --ai by itself or --ai="your instructions" (equals sign required for value)
+* `-p`, `--changes` `<CHANGES>` — Uncommitted file or hunk CLI IDs to include in the commit. Can be specified multiple times or as comma-separated values. If not specified, all uncommitted changes (or changes staged to the target branch) are committed
+* `--diff` — Always show diff inside the editor.
+
+By default the diff will be shown unless it's large. The diff will always be shown if --diff is passed, regardless of the size of the diff. (default: `false`)
+* `--no-diff` — Never show the diff inside the editor (default: `false`)
 
 
 
@@ -2713,304 +2810,6 @@ If you start GitButler from the command line and see a bunch of these or similar
 This issue most likely stems from an incompatibility between your version of OpenGL (`mesa`) and `libwebkit2gtk-4.1`.
 
 
-# contact-us.mdx
-
-
-There are a few ways to get in touch with us for feedback, bug reports, feature requests, etc.
-
-<Cards>
-  <Card
-    icon={<svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="108" y1="148" x2="160" y2="96" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M223.69,42.18a8,8,0,0,0-9.87-9.87l-192,58.22a8,8,0,0,0-1.25,14.93L108,148l42.54,87.42a8,8,0,0,0,14.93-1.25Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/></svg>}
-    href="mailto:hello@gitbutler.com"
-    title="Email"
-    description="The simplest way to get in touch with us is to email us"
-  />
-  <Card
-    icon={<svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle fill="currentColor" cx="92" cy="140" r="12"/><circle fill="currentColor" cx="164" cy="140" r="12"/><path d="M153.44,73.69l5-19.63a8.1,8.1,0,0,1,9.21-6L203.69,54A8.08,8.08,0,0,1,210.23,60l29.53,116.37a8,8,0,0,1-4.55,9.24l-67,29.7a8.15,8.15,0,0,1-11-4.56L147,183.06" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M102.56,73.69l-5-19.63a8.1,8.1,0,0,0-9.21-6L52.31,54A8.08,8.08,0,0,0,45.77,60L16.24,176.35a8,8,0,0,0,4.55,9.24l67,29.7a8.15,8.15,0,0,0,11-4.56L109,183.06" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M80,78.31A178.94,178.94,0,0,1,128,72a178.94,178.94,0,0,1,48,6.31" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/><path d="M176,177.69A178.94,178.94,0,0,1,128,184a178.94,178.94,0,0,1-48-6.31" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/></svg>}
-    href="https://discord.com/invite/MmFkmaJ42D"
-    title="Discord"
-    description="We are also available to chat on our Discord server"
-  />
-</Cards>
-
-
-# open-source.mdx
-
-GitButler is a [Fair Source software project](https://blog.gitbutler.com/gitbutler-is-now-fair-source/), built on a vast foundation of open source software. We're committed to giving back to the community and supporting the projects that we rely on.
-
-As part of our commitment to open source, we are an early member of the [Open Source Pledge](https://osspledge.com/). We have pledged to give back to the open source community by donating $2000 per year per full time software developer that we employ to the OSS projects and maintainers that we depend on.
-
-You can read more about our reasoning to join the Open Source Pledge in our announcement blog post and 2024 report: [GitButler Joins the Open Source Pledge](https://blog.gitbutler.com/open-source-pledge-2024).
-
-
-# but-absorb.mdx
-
-The semantic for finding "the appropriate commit" is as follows:
-
-- If a change has a dependency to a particular commit, it will be amended into that particular commit
-- If a change is staged to a particular lane (branch), it will be amended into a commit there
-- If there are no commits in this branch, a new commit is created
-- Changes are amended into the topmost commit of the leftmost (first) lane (branch)
-
-Optionally an identifier to an Uncommitted File or a Branch (stack) may be provided.
-
-- If an Uncommitted File id is provided, absorb will be performed for just that file
-- If a Branch (stack) id is provided, absorb will be performed for all changes staged to that stack
-- If no source is provided, absorb is performed for all uncommitted changes
-
-If `--dry-run` is specified, no changes will be made; instead, the absorption plan
-(what changes would be absorbed by which commits) will be shown.
-
-If `--new` is specified, new commits will be created for absorbed changes
-instead of amending existing commits.
-
-**Usage:** `but absorb [SOURCE] [OPTIONS]`
-
-## Arguments
-
-* `<SOURCE>` — If the Source is an uncommitted change - the change will be absorbed. If the Source is a stack - anything staged to the stack will be absorbed accordingly. If not provided, everything that is uncommitted will be absorbed
-
-## Options
-
-* `--dry-run` — Show the absorption plan without making any changes
-* `-n`, `--new` — Create new commits, instead of amending existing ones. This is useful when you want to preserve existing commits and add new ones for the absorbed changes
-
-
-
-# but-alias.mdx
-
-Aliases allow you to create shortcuts for commonly used commands.
-They are stored in git config under the `but.alias.*` namespace.
-
-## Examples
-
-List all configured aliases:
-
-```text
-but alias
-```
-
-Create a new alias:
-
-```text
-but alias add st status
-but alias add stv "status --verbose"
-```
-
-Remove an alias:
-
-```text
-but alias remove st
-```
-
-**Usage:** `but alias <COMMAND>`
-
-## Subcommands
-
-### `but alias list`
-
-List all configured aliases (default)
-
-**Usage:** `but alias list`
-
-### `but alias add`
-
-Add a new alias
-
-Creates a new alias that expands to the given command.
-
-Examples
-
-  but alias add st status
-  but alias add stv "status --verbose"
-  but alias add co "commit --only"
-
-
-**Usage:** `but alias add <NAME> <VALUE> [OPTIONS]`
-
-**Arguments:**
-
-* `<NAME>` — The name of the alias to create (required)
-* `<VALUE>` — The command and arguments that the alias should expand to
-
-If the value contains spaces or special characters, quote it: "status --verbose" (required)
-
-**Options:**
-
-* `-g`, `--global` — Store the alias globally (in ~/.gitconfig) instead of locally
-
-### `but alias remove`
-
-Remove an existing alias
-
-Examples
-
-  but alias remove st
-  but alias remove co --global
-
-
-**Usage:** `but alias remove <NAME> [OPTIONS]`
-
-**Arguments:**
-
-* `<NAME>` — The name of the alias to remove (required)
-
-**Options:**
-
-* `-g`, `--global` — Remove from global config (in ~/.gitconfig) instead of local
-
-
-
-# but-branch.mdx
-
-This includes creating, deleting, listing, and showing details about branches.
-
-By default without a subcommand, it will list the branches.
-
-To apply or unapply branches, use `but apply` and `but unapply`.
-
-**Usage:** `but branch <COMMAND>`
-
-## Subcommands
-
-### `but branch new`
-
-Creates a new branch in the workspace
-
-If no branch name is provided, a new parallel branch with a generated
-name will be created.
-
-You can also specify an anchor point using the `--anchor` option,
-which can be either a commit ID or an existing branch name to create
-the new branch from. This allows you to create stacked branches.
-
-**Usage:** `but branch new [BRANCH_NAME] [OPTIONS]`
-
-**Arguments:**
-
-* `<BRANCH_NAME>` — Name of the new branch
-
-**Options:**
-
-* `-a`, `--anchor` `<ANCHOR>` — Anchor point - either a commit ID or branch name to create the new branch from
-
-### `but branch delete`
-
-Deletes a branch from the workspace
-
-This will remove the branch and all its commits from the workspace.
-If the branch has unpushed commits, you will be prompted for confirmation
-unless the `--force` flag is used.
-
-**Usage:** `but branch delete <BRANCH_NAME> [OPTIONS]`
-
-**Arguments:**
-
-* `<BRANCH_NAME>` — Name of the branch to delete (required)
-
-**Options:**
-
-* `-f`, `--force` — Force deletion without confirmation
-
-### `but branch list`
-
-List the branches in the repository
-
-By default, shows the active branch and the 20 most recently updated branches.
-
-You can use the `--all` flag to show all branches, `--local` to show only
-local branches, or `--remote` to show only remote branches.
-
-You can also filter branch names by specifying a substring, such as
-`but branch list feature` to show only branches with "feature" in the name.
-
-If you want to check for review status, you can add `--review` to fetch
-and display pull request or merge request information for each branch.
-This will make the command slower as it needs to query the forge.
-
-By default, the command checks if each branch merges cleanly into
-the *upstream base target branch* (not your workspace).
-You can disable this check with `--no-check` to make the command faster.
-
-By default it also calculates the number of commits each branch is ahead
-of the base branch. You can disable this with `--no-ahead` to
-make the command faster.
-
-**Usage:** `but branch list [FILTER] [OPTIONS]`
-
-**Arguments:**
-
-* `<FILTER>` — Filter branches by name (case-insensitive substring match)
-
-**Options:**
-
-* `-l`, `--local` — Show only local branches
-* `-r`, `--remote` — Show only remote branches
-* `-a`, `--all` — Show all branches (not just active + 20 most recent)
-* `--no-ahead` — Don't calculate and show number of commits ahead of base (faster)
-* `--review` — Fetch and display review information (PRs, MRs, etc.)
-* `--no-check` — Don't check if each branch merges cleanly into upstream
-
-### `but branch show`
-
-Show commits ahead of base for a specific branch
-
-This shows the list of commits that are on the specified branch but not yet integrated into the base target branch.
-
-You can also choose to fetch and display review information, show files modified in each commit with line counts, generate an AI summary of the branch changes, and check if the branch merges cleanly into upstream.
-
-**Usage:** `but branch show <BRANCH_ID> [OPTIONS]`
-
-**Arguments:**
-
-* `<BRANCH_ID>` — CLI ID or name of the branch to show (required)
-
-**Options:**
-
-* `-r`, `--review` — Fetch and display review information
-* `-f`, `--files` — Show files modified in each commit with line counts
-* `--ai` — Generate AI summary of the branch changes
-* `--check` — Check if the branch merges cleanly into upstream and identify conflicting commits
-
-
-
-# but-amend.mdx
-
-Wrapper for `but rub <file> <commit>`.
-
-**Usage:** `but amend <FILE> <COMMIT>`
-
-## Arguments
-
-* `<FILE>` — File ID to amend (required)
-* `<COMMIT>` — Commit ID to amend into (required)
-
-
-
-# but-apply.mdx
-
-If you want to apply an unapplied branch to your workspace so you
-can work on it, you can run `but apply <branch-name>`.
-
-This will apply the changes in that branch into your working directory
-as a parallel applied branch.
-
-## Examples
-
-Apply by branch name:
-
-```text
-but apply my-feature-branch
-```
-
-**Usage:** `but apply <BRANCH_NAME>`
-
-## Arguments
-
-* `<BRANCH_NAME>` — Name of the branch to apply (required)
-
-
-
 # but-config.mdx
 
 Without a subcommand, displays an overview of important settings including
@@ -3160,94 +2959,60 @@ Disable metrics:
 
 * `<STATUS>` — Whether metrics are enabled
 
+### `but config ui`
+
+View and configure UI preferences.
+
+Without arguments, displays current UI settings. Use subcommands to set or unset configuration values.
+
+Examples
+
+View UI configuration:
+
+  but config ui
+
+Enable TUI mode for diff by default:
+
+  but config ui set tui true
+
+Disable TUI mode:
+
+  but config ui set tui false
 
 
-# but-commit.mdx
+**Usage:** `but config ui`
 
-The `but commit` command allows you to create a new commit
-on a specified branch (stack) with the current uncommitted changes.
+### `but config ai`
 
-If there is only one branch applied, it will commit to that branch by default.
+View and configure AI provider settings.
 
-If there are multiple branches applied, you must specify which branch to
-commit to, or if in interactive mode, you will be prompted to select one.
+Without subcommands, this starts an interactive setup flow. Use provider subcommands for non-interactive configuration.
 
-By default, all uncommitted changes and all changes already staged to that
-branch will be included in the commit. If you only want to commit the changes
-that are already staged to that branch, you can use the `--only` flag.
+Examples
 
-It will not commit changes staged to other branches.
+Interactive setup:
 
-Use `but commit empty --before <target>` or `but commit empty --after <target>`
-to insert a blank commit. This is useful for creating a placeholder
-commit that you can amend changes into later using `but mark`, `but rub` or `but absorb`.
+  but config ai
 
-**Usage:** `but commit <COMMAND> [BRANCH] [OPTIONS]`
+View current AI configuration:
 
-## Subcommands
+  but config ai show
 
-### `but commit empty`
+Configure OpenAI non-interactively:
 
-Insert a blank commit before or after the specified commit.
+  but config ai openai --key-option bring-your-own --api-key-env OPENAI_API_KEY --model gpt-5.4-nano
 
-This is useful for creating a placeholder commit that you can
-then amend changes into later using `but mark`, `but rub` or `but absorb`.
+Configure Ollama locally:
 
-You can modify the empty commit message at any time using `but reword`.
+  but config ai --local ollama --endpoint localhost:11434 --model llama3.1
 
-This allows for a more Jujutsu style workflow where you create commits
-first and then fill them in as you work. Create an empty commit, mark it
-for auto-commit, and then just work on your changes. Write the commit
-message whenever you prefer.
 
-## Examples
-
-Insert at the top of the first branch (no arguments):
-
-```text
-but commit empty
-```
-
-Insert before a commit:
-
-```text
-but commit empty ab
-```
-
-Explicitly insert before a commit:
-
-```text
-but commit empty --before ab
-```
-
-Insert after a commit (at the top of the stack if target is a branch):
-
-```text
-but commit empty --after ab
-```
-
-**Usage:** `but commit empty [TARGET] [OPTIONS]`
-
-**Arguments:**
-
-* `<TARGET>` — The target commit or branch to insert relative to.
-
-If a target is provided without --before or --after, defaults to --before behavior. If no arguments are provided at all, inserts at the top of the first branch.
+**Usage:** `but config ai [OPTIONS]`
 
 **Options:**
 
-* `--before` `<BEFORE>` — Insert the blank commit before this commit or branch
-* `--after` `<AFTER>` — Insert the blank commit after this commit or branch
-
-## Options
-
-* `-m`, `--message` `<MESSAGE>` — Commit message
-* `--message-file` `<FILE>` — Read commit message from file
-* `-c`, `--create` — Whether to create a new branch for this commit. If the branch name given matches an existing branch, that branch will be used instead. If no branch name is given, a new branch with a generated name will be created
-* `-o`, `--only` — Only commit staged files, not unstaged files
-* `-n`, `--no-hooks` — Bypass pre-commit hooks
-* `-i`, `--ai` `<AI>` — Generate commit message using AI with optional user summary. Use --ai by itself or --ai="your instructions" (equals sign required for value)
-* `-p`, `--changes` `<CHANGES>` — Uncommitted file or hunk CLI IDs to include in the commit. Can be specified multiple times or as comma-separated values. If not specified, all uncommitted changes (or changes staged to the target branch) are committed
+* `--local` — Configure local repository git config instead of global user config
+* `--global` — Configure global user git config
 
 
 
@@ -3261,25 +3026,16 @@ Optionally, a CLI ID argument can be provided, which chan show the diff specific
 - a commit
 - a file change within a commit
 
-**Usage:** `but diff [TARGET]`
+**Usage:** `but diff [TARGET] [OPTIONS]`
 
 ## Arguments
 
 * `<TARGET>` — The CLI ID of the entity to show the diff for
 
+## Options
 
-
-# but-gui.mdx
-
-Running `but gui` will launch the GitButler graphical user interface
-in the current directory's GitButler project.
-
-This provides a visual way to manage branches, commits, and uncommitted
-changes, complementing the command-line interface.
-
-You can also just run `but .` as a shorthand to open the GUI.
-
-**Usage:** `but gui`
+* `--tui` — Open an interactive TUI diff viewer
+* `--no-tui` — Disable the interactive TUI diff viewer (overrides but.ui.tui config)
 
 
 
@@ -3330,6 +3086,28 @@ amended into the marked commit.
 
 
 
+# but-gui.mdx
+
+Running `but gui` will launch the GitButler graphical user interface
+in the current directory's GitButler project.
+
+This provides a visual way to manage branches, commits, and uncommitted
+changes, complementing the command-line interface.
+
+You can also just run `but .` as a shorthand to open the GUI.
+
+**Usage:** `but gui [PATH] [OPTIONS]`
+
+## Arguments
+
+* `<PATH>` — Path to the directory to open as a GitButler project. Defaults to the current directory
+
+## Options
+
+* `-n`, `--new-window` — Open the project in a new application window (default: `false`)
+
+
+
 # but-merge.mdx
 
 If the target branch is local (`gb-local`), finds the local branch that the target
@@ -3356,46 +3134,6 @@ but merge my-feature-branch
 ## Arguments
 
 * `<BRANCH>` — Branch ID or name to merge (required)
-
-
-
-# but-move.mdx
-
-By default, commits are moved to be before (below) the target.
-Use `--after` to move the commit after (above) the target instead.
-
-When moving to a branch, the commit is placed at the top of that branch's stack.
-
-## Examples
-
-Move a commit before another commit:
-
-```text
-but move abc123 def456
-```
-
-Move a commit after another commit:
-
-```text
-but move abc123 def456 --after
-```
-
-Move a commit to a different branch (places at top):
-
-```text
-but move abc123 my-feature-branch
-```
-
-**Usage:** `but move <SOURCE_COMMIT> <TARGET> [OPTIONS]`
-
-## Arguments
-
-* `<SOURCE_COMMIT>` — Commit ID to move (required)
-* `<TARGET>` — Target commit ID or branch name (required)
-
-## Options
-
-* `-a`, `--after` — Move the commit after (above) the target instead of before (below)
 
 
 
@@ -3458,15 +3196,68 @@ captured in an oplog snapshot.
 You need to provide the SHA of the oplog entry you want to restore to,
 which you can find by running `but oplog` or `but oplog list`.
 
-**Usage:** `but oplog restore <OPLOG_SHA> [OPTIONS]`
+**Usage:** `but oplog restore <OPLOG_SHA>`
 
 **Arguments:**
 
 * `<OPLOG_SHA>` — Oplog SHA to restore to (required)
 
-**Options:**
 
-* `-f`, `--force` — Skip confirmation prompt
+
+# but-move.mdx
+
+Commit moves:
+- By default, commits are moved to be before (below) the target.
+- Use `--after` to move the commit after (above) the target instead.
+
+- When moving to a branch, the commit is placed at the top of that branch's stack.
+
+Branch moves:
+- Move one branch on top of another to stack them.
+- Move a branch to `zz` to tear it off (unstack it).
+
+## Examples
+
+Move a commit before another commit:
+
+```text
+but move abc123 def456
+```
+
+Move a commit after another commit:
+
+```text
+but move abc123 def456 --after
+```
+
+Move a commit to a different branch (places at top):
+
+```text
+but move abc123 my-feature-branch
+```
+
+Stack one branch on top of another:
+
+```text
+but move feature/frontend feature/backend
+```
+
+Tear off (unstack) a branch:
+
+```text
+but move feature/frontend zz
+```
+
+**Usage:** `but move <SOURCE> <TARGET> [OPTIONS]`
+
+## Arguments
+
+* `<SOURCE>` — Commit/branch identifier to move (required)
+* `<TARGET>` — Target commit/branch identifier, or zz to unstack a branch (required)
+
+## Options
+
+* `-a`, `--after` — Move the commit after (above) the target instead of before (below). Only valid for commit-to-commit moves
 
 
 
@@ -3535,42 +3326,96 @@ merged into the target branch before running the update.
 
 # but-pr.mdx
 
-If you are authenticated with a forge using but config forge auth, you can use the but pr commands to create pull requests (or merge requests) on the remote repository for your branches.
+If you are authenticated with a forge using but config forge auth, you can use the but pr or but mr commands to create pull requests (or merge requests) on the remote repository for your branches.
 
 Running but pr without a subcommand defaults to but pr new, which will prompt you to select a branch to create a PR for.
 
-**Usage:** `but pr <COMMAND>`
+**Usage:** `but pr <COMMAND> [OPTIONS]`
 
 ## Subcommands
 
 ### `but pr new`
 
-Create a new pull request for a branch. If no branch is specified, you will be prompted to select one. If there is only one branch without a PR, you will be asked to confirm
+Create a new review for a branch. If no branch is specified, you will be prompted to select one. If there is only one branch without a review, you will be asked to confirm
 
 **Usage:** `but pr new [BRANCH] [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH>` — The branch to create a PR for
+* `<BRANCH>` — The branch to create a review for
 
 **Options:**
 
-* `-m`, `--message` `<MESSAGE>` — PR title and description. The first line is the title, the rest is the description
-* `-F`, `--file` `<FILE>` — Read PR title and description from file. The first line is the title, the rest is the description
+* `-m`, `--message` `<MESSAGE>` — review title and description. The first line is the title, the rest is the description
+* `-F`, `--file` `<FILE>` — Read review title and description from file. The first line is the title, the rest is the description
 * `-f`, `--with-force` — Force push even if it's not fast-forward (defaults to true) (default: `true`)
 * `-s`, `--skip-force-push-protection` — Skip force push protection checks
-* `-r`, `--run-hooks` — Run pre-push hooks (defaults to true) (default: `true`)
-* `-t`, `--default` — Use the default content for the PR title and description, skipping any prompts. If the branch contains only a single commit, the commit message will be used (default: `false`)
+* `--no-hooks` — Bypass pre-push hooks
+* `-t`, `--default` — Use the default content for the review title and description, skipping any prompts. If the branch contains only a single commit, the commit message will be used (default: `false`)
+* `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
+
+### `but pr auto-merge`
+
+Enable or disable the automatic merging of a review or reviews. If no reviews are specified, you will be prompted to select one or multiple of the review associated with branches in your workspace
+
+**Usage:** `but pr auto-merge [SELECTOR] [OPTIONS]`
+
+**Arguments:**
+
+* `<SELECTOR>` — The target of this operation. This can be one or multiple (comma-separated):
+
+- Branch names,
+- Branch IDs,
+- Stack IDs (in which case, all the reviews associated with the stacked branches are selected),
+- Associated review IDs (i.e. PR numeric IDs or MR numeric IDs, without the symbol).
+
+**Options:**
+
+* `-d`, `--off` — Whether to disable the automatic merging of the review(s) (default: `false`)
+
+### `but pr set-draft`
+
+Set an existing review (or set of reviews) as draft. If no reviews are specified, you will be prompted to select one or multiple of the review associated with branches in your workspace
+
+**Usage:** `but pr set-draft [SELECTOR]`
+
+**Arguments:**
+
+* `<SELECTOR>` — The target of this operation. This can be one or multiple (comma-separated):
+
+- Branch names,
+- Branch IDs,
+- Stack IDs (in which case, all the reviews associated with the stacked branches are selected),
+- Associated review IDs (i.e. PR numeric IDs or MR numeric IDs, without the symbol).
+
+### `but pr set-ready`
+
+Set an existing review (or set of reviews) as ready-to-review. If no reviews are specified, you will be prompted to select one or multiple of the review associated with branches in your workspace
+
+**Usage:** `but pr set-ready [SELECTOR]`
+
+**Arguments:**
+
+* `<SELECTOR>` — The target of this operation. This can be one or multiple (comma-separated):
+
+- Branch names,
+- Branch IDs,
+- Stack IDs (in which case, all the reviews associated with the stacked branches are selected),
+- Associated review IDs (i.e. PR numeric IDs or MR numeric IDs, without the symbol).
 
 ### `but pr template`
 
-Configure the template to use for PR descriptions. This will list all available templates found in the repository and allow you to select one
+Configure the template to use for review descriptions. This will list all available templates found in the repository and allow you to select one
 
 **Usage:** `but pr template [TEMPLATE_PATH]`
 
 **Arguments:**
 
-* `<TEMPLATE_PATH>` — Path to the PR template file within the repository
+* `<TEMPLATE_PATH>` — Path to the review template file within the repository
+
+## Options
+
+* `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
 
 
 
@@ -3597,8 +3442,14 @@ With a branch ID:
 
 * `-f`, `--with-force` — Force push even if it's not fast-forward (default: `true`)
 * `-s`, `--skip-force-push-protection` — Skip force push protection checks
-* `-r`, `--run-hooks` — Run pre-push hooks (default: `true`)
+* `--no-hooks` — Bypass pre-push hooks
 * `-d`, `--dry-run` — Show what would be pushed without actually pushing
+
+
+
+# but-redo.mdx
+
+**Usage:** `but redo`
 
 
 
@@ -3608,7 +3459,7 @@ You can easily change the commit message of any of your commits by
 running `but reword <commit-id>` and providing a new message in the
 editor.
 
-This will rewrite the commit with the new message and then rebase any
+This will recreate the commit with the new message and then rebase any
 dependent commits on top of it.
 
 You can also use `but reword <branch-id>` to rename the branch.
@@ -3623,6 +3474,57 @@ You can also use `but reword <branch-id>` to rename the branch.
 
 * `-m`, `--message` `<MESSAGE>` — The new commit message or branch name. If not provided, opens an editor
 * `-f`, `--format` — Format the existing commit message to 72-char line wrapping without opening an editor
+* `--diff` — Always show diff inside the editor.
+
+By default the diff will be shown unless it's large. The diff will always be shown if --diff is passed, regardless of the size of the diff. (default: `false`)
+* `--no-diff` — Never show the diff inside the editor (default: `false`)
+
+
+
+# but-resolve.mdx
+
+When a commit is in a conflicted state (marked with conflicts during rebase),
+use this command to enter resolution mode, resolve the conflicts, and finalize.
+
+## Workflow
+
+1. Enter resolution mode: `but resolve <commit-id>`
+2. Resolve conflicts in your editor (remove conflict markers)
+3. Check remaining conflicts: `but resolve status`
+4. Finalize resolution: `but resolve finish`
+   Or cancel: `but resolve cancel`
+
+When in resolution mode, `but status` will also show that you're resolving conflicts.
+
+**Usage:** `but resolve <COMMAND> [COMMIT]`
+
+## Subcommands
+
+### `but resolve status`
+
+Show the status of conflict resolution, listing remaining conflicted files
+
+**Usage:** `but resolve status`
+
+### `but resolve finish`
+
+Finalize conflict resolution and return to workspace mode.
+
+This commits the resolved changes, rebases any commits on top of the resolved commit, and returns to the normal workspace.
+
+**Usage:** `but resolve finish`
+
+### `but resolve cancel`
+
+Cancel conflict resolution and return to workspace mode.
+
+This discards all changes made during resolution and restores the workspace to its pre-resolution state.
+
+**Usage:** `but resolve cancel [OPTIONS]`
+
+**Options:**
+
+* `-f`, `--force` — Forcibly remove any changes made
 
 
 
@@ -3685,49 +3587,6 @@ but rub 3868155 feature-branch
 
 
 
-# but-resolve.mdx
-
-When a commit is in a conflicted state (marked with conflicts during rebase),
-use this command to enter resolution mode, resolve the conflicts, and finalize.
-
-## Workflow
-
-1. Enter resolution mode: `but resolve <commit-id>`
-2. Resolve conflicts in your editor (remove conflict markers)
-3. Check remaining conflicts: `but resolve status`
-4. Finalize resolution: `but resolve finish`
-   Or cancel: `but resolve cancel`
-
-When in resolution mode, `but status` will also show that you're resolving conflicts.
-
-**Usage:** `but resolve <COMMAND> [COMMIT]`
-
-## Subcommands
-
-### `but resolve status`
-
-Show the status of conflict resolution, listing remaining conflicted files
-
-**Usage:** `but resolve status`
-
-### `but resolve finish`
-
-Finalize conflict resolution and return to workspace mode.
-
-This commits the resolved changes, rebases any commits on top of the resolved commit, and returns to the normal workspace.
-
-**Usage:** `but resolve finish`
-
-### `but resolve cancel`
-
-Cancel conflict resolution and return to workspace mode.
-
-This discards all changes made during resolution and restores the workspace to its pre-resolution state.
-
-**Usage:** `but resolve cancel`
-
-
-
 # but-setup.mdx
 
 This command will:
@@ -3757,113 +3616,6 @@ but setup --init
 This is useful when running in non-interactive environments (like CI/CD)
 where you want to ensure a git repository exists before setting up GitButler.
 
-
-
-# but-skill.mdx
-
-Skills give coding agents instructions for working with GitButler through the
-`but` CLI.
-
-Use `but skill install` to install the GitButler skill files into your
-repository or globally.
-
-## Examples
-
-Install the skill in the current repository:
-
-```text
-but skill install
-```
-
-Install the skill globally:
-
-```text
-but skill install --global
-```
-
-**Usage:** `but skill <COMMAND>`
-
-## Subcommands
-
-### `but skill install`
-
-Install the GitButler CLI skill files for coding agents.
-
-By default, installs the skill into the current repository. The command prompts
-you to select a skill folder format: Claude Code, OpenCode, Codex, GitHub
-Copilot, Cursor, or Windsurf.
-
-Use `--path` to choose a custom location. Use `--global` to install the skill
-in a global location instead of the current repository.
-
-## Examples
-
-Install in current repository (prompts for format):
-
-```text
-but skill install
-```
-
-Install globally (prompts for format):
-
-```text
-but skill install --global
-```
-
-Install to a custom path:
-
-```text
-but skill install --path .claude/skills/gitbutler
-```
-
-Auto-detect installation location (update existing installation):
-
-```text
-but skill install --detect
-```
-
-**Usage:** `but skill install [OPTIONS]`
-
-**Options:**
-
-* `-g`, `--global` — Install the skill globally instead of in the current repository
-* `-p`, `--path` `<PATH>` — Custom path where to install the skill (relative to repository root or absolute)
-* `-d`, `--detect` — Automatically detect where to install by finding existing installation
-
-### `but skill check`
-
-Check if installed GitButler skills are up to date with the CLI version.
-
-Scans for installed skill files and compares their version with the current
-CLI version. By default, checks both local (repository) and global installations.
-
-## Examples
-
-Check all installed skills:
-
-```text
-but skill check
-```
-
-Check and automatically update outdated skills:
-
-```text
-but skill check --update
-```
-
-Check only global installations:
-
-```text
-but skill check --global
-```
-
-**Usage:** `but skill check [OPTIONS]`
-
-**Options:**
-
-* `-g`, `--global` — Only check global installations (in home directory)
-* `-l`, `--local` — Only check local installations (in current repository)
-* `-u`, `--update` — Automatically update any outdated skills found
 
 
 # but-show.mdx
@@ -3912,16 +3664,385 @@ but show my-feature-branch --verbose
 
 
 
+# but-skill.mdx
+
+Skills provide enhanced AI capabilities for working with GitButler through
+Claude Code, Codex, and other AI assistants.
+
+Use `but skill install` to install the GitButler skill files. By default,
+it prompts for scope (repository or global home directory) and then format.
+When run outside a git repository, local scope is unavailable and the
+default install location is global (home directory). You can still
+install to a custom location with `--path` using an absolute or `~` path.
+
+## Examples
+
+Install interactively (prompts for scope and format):
+
+```text
+but skill install
+```
+
+Install the skill globally:
+
+```text
+but skill install --global
+```
+
+**Usage:** `but skill <COMMAND>`
+
+## Subcommands
+
+### `but skill install`
+
+Install the GitButler CLI skill files for Coding agents
+
+By default, the command prompts you to choose installation scope first
+(current repository or global home directory), then prompts you to
+select a skill folder format (Agent Skills / .agents, Claude Code,
+OpenCode, Codex, GitHub Copilot, Cursor, Windsurf) unless you specify a
+custom path with --path.
+When run outside a git repository, local scope is unavailable and the
+default install location is global (home directory). You can still
+install to a custom location with `--path` using an absolute or `~` path.
+
+Use --global to install the skill in a global location instead of the
+current repository.
+
+In non-interactive mode, specify --path or --detect.
+
+## Examples
+
+Install interactively (prompts for scope and format):
+
+```text
+but skill install
+```
+
+Install globally (prompts for format):
+
+```text
+but skill install --global
+```
+
+Install to a custom path:
+
+```text
+but skill install --path .agents/skills/gitbutler
+```
+
+Auto-detect installation location (update existing installation):
+
+```text
+but skill install --detect
+```
+
+**Usage:** `but skill install [OPTIONS]`
+
+**Options:**
+
+* `-g`, `--global` — Install the skill globally instead of in the current repository
+* `-p`, `--path` `<PATH>` — Custom path where to install the skill (relative to repository root or absolute). Outside a repository, relative paths require --global
+* `-d`, `--detect` — Automatically detect where to install by finding existing installation
+
+### `but skill check`
+
+Check if installed GitButler skills are up to date with the CLI version
+
+Scans for installed skill files and compares their version with the current
+CLI version. By default, checks both local (repository) and global installations.
+
+## Examples
+
+Check all installed skills:
+
+```text
+but skill check
+```
+
+Check and automatically update outdated skills:
+
+```text
+but skill check --update
+```
+
+Check only global installations:
+
+```text
+but skill check --global
+```
+
+**Usage:** `but skill check [OPTIONS]`
+
+**Options:**
+
+* `-g`, `--global` — Only check global installations (in home directory)
+* `-l`, `--local` — Only check local installations (in current repository)
+* `-u`, `--update` — Automatically update any outdated skills found
+
+
+# recovering-stuff.mdx
+
+
+How to dig around our internal data to find (nearly) anything
+
+GitButler saves data in a few different ways. As we're still in beta, sometimes things might break and it may look like you've lost work, but you almost certainly haven't. We're pretty good about saving stuff a lot. Here's how to recover almost anything you had in your working directory or parallel branches.
+
+## GitButler References
+
+If everything crashes or the UI isn't working at all, you may be surprised to know that even though your parallel branches don't show up in a normal git branch output, we do actually constantly write them out as Git references (just not in refs/heads).
+
+
+```bash title="Terminal"
+❯ git for-each-ref | grep gitbutler
+e63b3bac82835dc17083a785d25db8b4b46744b9 commit	refs/gitbutler/add-can-create-method-to-notebook
+98ef3cd6eea14ee4159a600e448271c0d777efe2 commit	refs/gitbutler/add-conditional-blocks-for-image-and-video
+c7e27b9f99f25160a4d5f07d5972c217bdd44319 commit	refs/gitbutler/add-database-schema-conversion-script
+4afdfed6c14b57491a9d295c31613fd79b92f63a commit	refs/gitbutler/add-gems-for-test-group
+```
+
+
+These references are just like git branches - they point to a commit that has the latest version of your branch. You can create other git branches off of them, you can push them to GitHub, etc.
+
+You will have one for each virtual branch (applied or unapplied) that you've created (that you haven't deleted).
+
+If you've committed everything on a virtual branch, the reference will just point to the latest commit. If you have work in progress on the branch, it will point to a WIP commit that includes those changes.
+
+So for example, if I have the following two parallel branches, one fully committed and one with work pending:
+
+<ImageSection
+  alt="Parallel Branches Example"
+  src="/recovering-01.webp"
+/>
+
+
+I can view the git branches like this:
+
+```bash title="Terminal"
+❯ git show gitbutler/Convert-tables-to-utf8mb4
+commit 841e4db701ca41206c03f1f4fe345f7e27d05eab
+Author: Scott Chacon <schacon@gmail.com>
+Date:   Fri Feb 23 10:30:17 2024 +0100
+
+    my latest commit
+
+❯ git show gitbutler/Add-database-schema-conversion-script
+commit d95e7f4da1611ea6bb8a80da06e66ca923fbff55
+Author: GitButler <gitbutler@gitbutler.com>
+Date:   Fri Feb 23 10:30:18 2024 +0100
+
+    GitButler WIP Commit
+
+    This is a WIP commit for the virtual branch 'Add database schema conversion script'
+
+    This commit is used to store the state of the virtual branch
+    while you are working on it. It is not meant to be used for
+    anything else.
+```
+
+See how the `Add-database-schema-conversion-script` reference points to a "WIP commit"? The tree of that commit has all those changed files in it as though we had committed them.
+
+If you don't want to search through all your refs with `for-each-refs`, you can also just run a normal `git log` command and we'll show you what references we've written and which modified files are in each one:
+
+```bash title="Terminal"
+❯ git log
+commit 2d8afe0ea811b5f24b9a6f84f6d024bb323a2db5 (HEAD -> gitbutler/workspace)
+Author: GitButler <gitbutler@gitbutler.com>
+Date:   Fri Feb 23 10:30:18 2024 +0100
+
+    GitButler Integration Commit
+
+    This is an integration commit for the parallel branches that GitButler is tracking.
+
+    Due to GitButler managing multiple parallel branches, you cannot switch back and
+    forth between git branches and parallel branches easily.
+
+    If you switch to another branch, GitButler will need to be reinitialized.
+    If you commit on this branch, GitButler will throw it away.
+
+    Here are the branches that are currently applied:
+     - Add database schema conversion script (refs/gitbutler/Add-database-schema-conversion-script)
+       - butler/Gemfile
+       - butler/README.md
+       - butler/db/schema.rb
+       - butler/db/migrate/20240209144600_change_mysql_charset.rb
+       - .pscale.yml
+     - Convert tables to utf8mb4 (refs/gitbutler/Convert-tables-to-utf8mb4)
+       branch head: 841e4db701ca41206c03f1f4fe345f7e27d05eab
+       - butler/create_column_conversions.rb
+
+    Your previous branch was: refs/heads/sc-branch-comments
+
+    The sha for that commit was: 5e16e99667db9d26f78110df807853a896120ff3
+
+    For more information about what we're doing here, check out our docs:
+    https://docs.gitbutler.com/features/branch-management/integration-branch
+```
+
+You can see the two `gitbutler` refs under the "Here are the branches that are currently applied" section.
+
+Again, these are real git refs, just not under `refs/heads` so that we don't pollute your `git branch` output. But if GitButler crashes at some point, you can still push them to GitHub or whatever you want. Here is an example pushing my virtual branch to a GitHub branch called `convert-tables`:
+
+```bash title="Terminal"
+❯ git push origin refs/gitbutler/Convert-tables-to-utf8mb4:refs/heads/convert-tables
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 10 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 474 bytes | 474.00 KiB/s, done.
+Total 4 (delta 2), reused 1 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote:
+remote: Create a pull request for 'convert-tables' on GitHub by visiting:
+remote:      https://github.com/gitbutlerapp/web/pull/new/convert-tables
+remote:
+To github.com:gitbutlerapp/web.git
+ * [new branch]        refs/gitbutler/Convert-tables-to-utf8mb4 -> convert-tables
+```
+
+## GitButler Operations Log
+
+Ok, let's say that your work was not in one of those refs for some reason. Maybe you hit some weird bug and it completely changed everything in a way where now you're sitting on the couch in the dark with a glass of whisky, slowly mumbling the word "GitButler..." and plotting your revenge.
+
+Most of the time, we'll have whatever you're looking for in our operations log.
+
+The easiest way to access this is to use the built in Project History UI: [Project History](/features/timeline)
+
+However, let's dig into how this works, just in case you want to check it out yourself.
+
+Every time that GitButler does some possibly data-changing operation, we store a snapshot of your project state in our operations log before the operation happens so you can undo it if you want to. This is stored as a Git commit history that is parallel to your projects (ie, no common parents).
+
+You can inspect this by looking at the `.git/gitbutler/operations-log.toml` file.
+
+```bash title="Terminal"
+❯ tree .git/gitbutler
+.git/gitbutler
+├── operations-log.toml
+└── virtual_branches.toml
+
+1 directory, 2 files
+
+❯ cat .git/gitbutler/operations-log.toml
+head_sha = "16e47cb1d091ca9dd44327fef2f5305b09403a95"
+
+[modified_at]
+secs_since_epoch = 1717663406
+nanos_since_epoch = 560458000
+```
+
+If we look at this commit, we can see the history of all of the project history snapshots that GitButler is keeping:
+
+```bash title="Terminal"
+❯ git log 16e47cb1d091ca9dd44327fef2f5305b09403a9 -2
+commit 16e47cb1d091ca9dd44327fef2f5305b09403a95
+Author: GitButler <gitbutler@gitbutler.com>
+Date:   Thu Jun 6 10:43:26 2024 +0200
+
+    CreateBranch
+
+    Version: 1
+    Operation: CreateBranch
+    name: Virtual branch
+
+commit 2c95aa06d76b3230f1a51d9f89a211770d93ae51
+Author: GitButler <gitbutler@gitbutler.com>
+Date:   Thu Jun 6 10:28:30 2024 +0200
+
+    UpdateWorkspaceBase
+
+    Version: 1
+    Operation: UpdateWorkspaceBase
+```
+
+You can see that before creating a branch or updating our workspace with upstream work, we're recording the state of our project so we have an undo point. So what data are we keeping here in addition to this trailer information?
+
+Let's look at the tree of one of these commits:
+
+```bash title="Terminal"
+❯ git cat-file -p 16e47cb1d091ca9dd44327fef2f5305b09403a95^{tree}
+040000 tree 4b825dc642cb6eb9a060e54bf8d69288fbee4904    conflicts
+040000 tree b283f22f5abf4ed9c612c1b5b3b9a98ec25474b0    index
+040000 tree b283f22f5abf4ed9c612c1b5b3b9a98ec25474b0    target_tree
+100644 blob d839dca7e14f5833ad737b4adbf337bd20489927    virtual_branches.toml
+040000 tree a0821552c0e7d5defe369d577af5e3a87b442469    virtual_branches
+```
+
+The parallel branches toml file has the interesting metadata:
+
+```bash title="Terminal"
+❯ git cat-file -p 16e47cb1d091ca9dd44^{tree}:virtual_branches.toml
+[default_target]
+branchName = "master"
+remoteName = "origin"
+remoteUrl = "git@github.com:gitbutlerapp/gitbutler.git"
+sha = "e00e54af7f903ef84600079a45490a7f07e4702e"
+pushRemoteName = "origin"
+
+[branch_targets]
+
+[branches.09ef54c4-1081-4a52-8182-a5ec725016b6]
+id = "09ef54c4-1081-4a52-8182-a5ec725016b6"
+name = "commit signing settings"
+notes = ""
+applied = false
+upstream = "refs/remotes/origin/commit-signing-settings"
+upstream_head = "b60a66452dfecef74103346af6a3291ad677d246"
+created_timestamp_ms = "1717489406268"
+updated_timestamp_ms = "1717489406268"
+tree = "b28e7eefdd7b6f36456516b696146a2ea7638ca4"
+head = "b60a66452dfecef74103346af6a3291ad677d246"
+ownership = ""
+order = 4
+selected_for_changes = 1717489406268
+```
+
+The virtual_branches tree has the actual contents of those computed branches in case we need to recreate them:
+
+<Files>
+  <Folder name="virtual_branches" defaultOpen>
+    <Folder name="[branch-id]" defaultOpen>
+      <Folder name="commits" defaultOpen>
+        <Folder name="[commit-id1]" defaultOpen>
+            <File name="commit" />
+            <File name="tree" />
+        </Folder>
+        <File name="[commit-id2]" />
+      </Folder>
+      <File name="tree" />
+    </Folder>
+    <Folder name="[branch-id]" defaultOpen>
+      <Folder name="commits">
+        <File name="[commit-id3]" />
+        <File name="[commit-id4]" />
+      </Folder>
+      <File name="tree" />
+    </Folder>
+  </Folder>
+</Files>
+
+This allows you to get contents of any file in any of your virtual branch states as well.
+
+
 # but-stage.mdx
 
-Wrapper for `but rub <file-or-hunk> <branch>`.
+Without arguments, opens an interactive TUI for selecting files and hunks to stage.
+With arguments, stages the specified file or hunk to the given branch.
 
-**Usage:** `but stage <FILE_OR_HUNK> <BRANCH>`
+Usage:
+  `but stage`                             (interactive TUI selector)
+  `but stage --branch <branch>`           (interactive, specific branch)
+  `but stage <file-or-hunk> <branch>`     (direct staging)
+
+**Usage:** `but stage [FILE_OR_HUNK] [BRANCH_POS] [OPTIONS]`
 
 ## Arguments
 
-* `<FILE_OR_HUNK>` — File or hunk ID to stage (required)
-* `<BRANCH>` — Branch ID to stage to (required)
+* `<FILE_OR_HUNK>` — File or hunk ID to stage
+* `<BRANCH_POS>` — Branch to stage to (positional)
+
+## Options
+
+* `-b`, `--branch` `<BRANCH>` — Branch to stage to (for interactive mode)
 
 
 
@@ -3987,6 +4108,7 @@ but status -f
 This command:
 - Creates an oplog snapshot of the current state
 - Finds the first active branch and checks it out
+    - Alternatively, use `--checkout-to <branch>` to override this default
 - Cherry-picks any dangling commits from gitbutler/workspace
 - Provides instructions on how to return to GitButler mode
 
@@ -4001,7 +4123,112 @@ Exit GitButler mode:
 but teardown
 ```
 
-**Usage:** `but teardown`
+```text
+but teardown --checkout-to my-feature-branch
+```
+
+**Usage:** `but teardown [OPTIONS]`
+
+## Options
+
+* `-c`, `--checkout-to` `<LOCAL_BRANCH>` — Explicit override for which local branch to checkout to
+
+
+
+# but-tui.mdx
+
+**Usage:** `but tui`
+
+
+
+# fetch-push.mdx
+
+
+If you are having trouble pushing or fetching from a remote, this is likely related to git authentication. Here are a few configuration options you can try out, found in the project settings.
+
+## Configuring the auto-fetch frequency
+
+GitButler will periodically fetch from your configured remotes in order to display new branches etc. By default, this happens every every 15 minutes.
+
+You can configure the interval or completely disable this behavior by editing the application's `settings.json` file:
+
+<Tabs groupId="platform" items={["macOS", "Windows", "Linux"]} persist>
+  <Tab value="macOS">```bash ~/Library/Application\ Support/gitbutler/settings.json ```</Tab>
+  <Tab value="Windows">```bash C:\Users\[username]\AppData\Roaming\gitbutler\settings.json ```</Tab>
+  <Tab value="Linux">```bash ~/.config/gitbutler/settings.json ```</Tab>
+</Tabs>
+
+The file is in JSONC format and follows the [following schema](https://github.com/gitbutlerapp/gitbutler/blob/master/crates/but-settings/assets/defaults.jsonc)
+
+```json
+  "fetch": {
+    "autoFetchIntervalMinutes": 15
+  }
+```
+
+A negative value (e.g. -1) disables auto fetching. Note that if `fetch` is the only entry in the JSON file, you may want to enclose it in a top-level object.
+
+## Available authentication methods
+
+GitButler can be configured to use several different git authentication methods. You can switch between them in your project settings. You can try multiple different options and see if any of them are appropriate for your setup. Note that if you are on Windows, the only applicable method is the "Git executable", therefore the application will now show this as a configuration option.
+
+<ImageSection
+  alt="Parallel Branches Example"
+  src="/issues-01.png"
+/>
+
+### Use a Git executable (default)
+
+The default way to push and fetch is for GitButler to use an existing system Git executable. This should use whatever authentication mechanism that Git uses for the remote that you're trying to push to or fetch from.
+
+### Use an existing SSH key
+
+If already have an SSH key set up (eg. `~/.ssh/id_rsa`), you can instruct GitButler to use it. In case the key is password protected, you can also provide the password to it (which will be stored locally).
+
+### Use locally generated SSH key
+
+This option generates a new SSH key which will be stored locally in the application [data dir](https://docs.gitbutler.com/development/debugging#data-files). For this to work you will need to add the new public key to your Git remote provider.
+
+### Use a git credential helper
+
+If your system is set up with a credential helper, GitButler can use that. For more info on git credential helpers, see this [article](https://git-scm.com/doc/credential-helpers).
+
+### FIDO security keys (YubiKey, etc.)
+
+If you're using a FIDO key, check out this issue to see how people have set it up with the Git executable method: [#2661](https://github.com/gitbutlerapp/gitbutler/issues/2661)
+
+### Keys managed by 1Password
+
+Keys stored in 1Password should properly use it as an SSH agent for authentication and signing commits if you use the Git executable option. (Previously tracked in [#2779](https://github.com/gitbutlerapp/gitbutler/issues/2779))
+
+### Host certificate checks
+
+There is an option to ignore host certificate checks when authenticating with ssh. This may be a helpful option to enable in some cases.
+
+## Other known issues
+
+### Git remote servers with a non-standard SSH port
+In some cases, the git remote may be setup on a port number other than 22. If the port is set in your `~/.ssh/config` file, GitButler will not be able to recognize that - tracked in GitHub issue [#2700](https://github.com/gitbutlerapp/gitbutler/issues/2700).
+
+As a workaround you may set your remote in the [SSH format](https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols) (eg. `ssh://git@example.com:3022/foo/bar.git`)
+
+Updating parallel branches when the respective remote has new commits
+If you have added a remote branch to your active workspace in GitButler, or pushed a virtual branch to the remote, and new commits are added to the remote branch, there is currently no way to sync those new commits into the existing virtual branch in GitButler. This is being tracked in the GitHub issue [#2649](https://github.com/gitbutlerapp/gitbutler/issues/2649).
+
+The current workaround is to undo any local commits and then stash your local changes manually using [git stash](https://git-scm.com/docs/git-stash) and then delete the virtual branch that has upstream changes. Then you can update the trunk by clicking the update button next to the word "Trunk" in the sidebar on the left to make sure all new upstream changes are synced, then select the remote branch that has the new changes and click the "Apply +" button above the list of commits for the branch. Once the updated branch is applied to your working directory, you can manually `git stash pop` your stashed changes and then resolve any merge conflicts.
+
+### OAuth app access restrictions on your GitHub organization
+
+If you're submitting code and PRs to a repository under an organization on GitHub, you may receive an error that, despite having correct authorization credentials, your organization has enabled OAuth app access restrictions. These restrictions are an organization-level security feature designed to prevent unauthorized third-party applications from accessing organization resources.
+
+To solve this, go to Applications. Select the "Authorized OAuth Apps" tab, and look for "GitButler Client". If you don't find "GitButler Client", it's possible you haven't yet set GitButler up for personal use. If so, try creating a test commit on a test branch for a personal repository using GitButler, which you can delete after, then check the same tab as before.
+
+If you see "GitButler Client", click on it and, under "Organization Access", across from the organization you wish to enable GitButler for, click either the "Request" or "Grant" button, depending on whether you are a contributor or owner, respectively. If you're a contributor clicking "Request", note that you'll need to wait for an organization owner to approve your access request before you can proceed.
+
+Note for organization owners: To streamline this process for your team members, you can pre-approve GitButler for all organization members. This eliminates the need for individual access requests and approvals. This can be managed through your organization's OAuth app access settings.
+
+### Help on Discord
+If none of the available options helps, feel free to hop on our [Discord](https://discord.gg/MmFkmaJ42D) and we will be happy to help you out.
 
 
 
@@ -4036,44 +4263,29 @@ Unapply by CLI ID:
 but unapply bu
 ```
 
-**Usage:** `but unapply <IDENTIFIER> [OPTIONS]`
+**Usage:** `but unapply <IDENTIFIER>`
 
 ## Arguments
 
 * `<IDENTIFIER>` — CLI ID or name of the branch/stack to unapply (required)
 
-## Options
-
-* `-f`, `--force` — Force unapply without confirmation
-
 
 
 # but-uncommit.mdx
 
+Use `--discard` to remove the selected committed changes entirely instead.
+
 Wrapper for `but rub <source> zz`.
 
-**Usage:** `but uncommit <SOURCE>`
+**Usage:** `but uncommit <SOURCE> [OPTIONS]`
 
 ## Arguments
 
 * `<SOURCE>` — Commit ID or file-in-commit ID to uncommit (required)
 
+## Options
 
-
-# but-undo.mdx
-
-This is a shorthand for restoring to the last oplog entry before the
-current one. It allows you to quickly undo the most recent operation.
-
-**Usage:** `but undo`
-
-
-
-# but-unmark.mdx
-
-This will unmark anything that has been marked by the `but mark` command.
-
-**Usage:** `but unmark`
+* `-d`, `--discard` — Discard the selected committed changes instead of moving them to unassigned
 
 
 
@@ -4105,13 +4317,15 @@ Hide update notifications for the specified number of days (1-30). Useful when y
 
 ### `but update install`
 
-Install or update the GitButler desktop application (macOS only)
-
-Downloads and installs the GitButler desktop app. The CLI (but) is included with the app and will also be updated.
+Install or update the GitButler desktop application.
 
 By default, auto-detects your current channel (release/nightly) and installs the latest version for that channel.
 
-Note: Currently only supported on macOS. For other platforms, download from https://gitbutler.com/downloads
+macOS: Installs the full GitButler desktop application. The CLI (but) is included with the app and will also be updated.
+
+Linux: Installs and updates only the CLI itself.
+
+Note: For other platforms and install forms, see https://gitbutler.com/downloads
 
 **Usage:** `but update install [TARGET]`
 
@@ -4123,93 +4337,83 @@ Examples: but update install           Auto-detect channel and install latest bu
 
 
 
+# but-undo.mdx
+
+**Usage:** `but undo`
+
+
+
+# but-unmark.mdx
+
+This will unmark anything that has been marked by the `but mark` command.
+
+**Usage:** `but unmark`
+
+
+
 # commands-overview.mdx
 
-## Command Reference
+## Command reference
 
 ### Basics
 
-- [setup](./but-setup): Setup a Git repository to be managed by GitButler
-- [teardown](./but-teardown): Go back to vanilla Git branch management
+- [setup](./but-setup): Set up a Git repository to be managed by GitButler
+- [teardown](./but-teardown): Exit GitButler mode and return to normal Git
 
 ### Inspection
 
-- [status](./but-status): Overview of the uncommitted changes in the repository
-- [diff](./but-diff): Show a diff of what's changed
-- [show](./but-show): Show information about a branch or commit
+- [status](./but-status): Show the project workspace state
+- [diff](./but-diff): Show a diff for the workspace or a CLI ID
+- [show](./but-show): Show information about a commit or branch
 
-### Branching and Committing
+### Branching and committing
 
-- [commit](./but-commit): Create commits on your branches
+- [commit](./but-commit): Commit changes to a stack
 - [stage](./but-stage): Stage changes to a branch
 - [branch](./but-branch): Commands for managing branches
-- [discard](./but-discard): Remove changes
-- [resolve](./but-resolve): Resolve commit conflicts
 - [merge](./but-merge): Local branch merging
+- [discard](./but-discard): Discard uncommitted changes
+- [resolve](./but-resolve): Resolve conflicts in a commit
+- [unapply](./but-unapply): Unapply a branch from the workspace
+- [apply](./but-apply): Apply a branch to the workspace
+- [clean](./but-clean): Remove empty branches from the workspace
+- [pick](./but-pick): Cherry-pick a commit from an unapplied branch
 
 ### Rules
 
 - [mark](./but-mark): Create or remove a rule for auto-assigning or auto-committing
 - [unmark](./but-unmark): Remove all marks from the workspace
 
-### Server Interactions
+### Server interactions
 
-- [push](./but-push): Push a branch/stack to remote
+- [push](./but-push): Push changes in a branch to remote
 - [pull](./but-pull): Pull upstream changes and update your branches
-- [pr](./but-pr): Commands for interacting with forges like GitHub, GitLab, etc.
+- [pr](./but-pr): Create and manage reviews on GitHub, GitLab, and other forges
 
-### Editing Commits
+### Editing commits
 
-- [rub](./but-rub): Combine two entities together to perform an operation
-- [absorb](./but-absorb): Absorb changes into existing commits
-- [reword](./but-reword): Edit the commit message of a specified commit
-- [uncommit](./but-uncommit): Uncommit an existing commit
-- [amend](./but-amend): Amend an existing commit with new changes
-- [squash](./but-squash): Combine two commits into a single new commit
-- [move](./but-move): Reorder commits or move a commit from one branch to another
-- [pick](./but-pick): Cherry-pick a commit from an unapplied branch into an applied virtual branch
+- [rub](./but-rub): Combine two entities to amend, squash, move, or unassign work
+- [absorb](./but-absorb): Amend changes into the commits where they belong
+- [reword](./but-reword): Edit a commit message or branch name
+- [uncommit](./but-uncommit): Move commit changes back to unassigned work
+- [amend](./but-amend): Amend a file change into a commit
+- [squash](./but-squash): Squash commits together
+- [move](./but-move): Move a commit or branch to a different location
 
-### Operations Log
+### Operations log
 
-- [oplog](./but-oplog): Show operation history
-- [undo](./but-undo): Undo the last operation by reverting to the previous snapshot
+- [oplog](./but-oplog): View and manage operation history
+- [undo](./but-undo): Undo the last operation
+- [redo](./but-redo): Redo the last undo
 
+### Helper commands
 
-# installation.mdx
-
-How to install and setup the GitButler CLI.
-
-## Installing the `but` CLI
-
-Ok, first thing is first, let's get our `but` CLI installed. Currently there are two ways to do this.
-
-### Via the Desktop Client
-
-If you have the desktop client installed, you can go into your global settings and click on the "Install CLI" button in the "general" section.
-
-<ImageSection
-  className="mx-auto"
-  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/install-but.png"
-  width="800"
-  height="600"
-  subtitle="How to install the GitButler CLI"
-/>
-
-### Curl install
-
-You can install the CLI by running the following command in your terminal:
-
-```bash
-curl -fsSL https://gitbutler.com/install.sh | sh
-```
-
-## Setup
-
-If you go into any existing Git repository and run `but setup`, it will make some neccesary changes to your setup in order for GitButler to manage your data.
-
-If you run almost any `but` command in an existing Git repository in an interactive terminal, it will ask you if you want to set it up and then run the command you were trying to run. So basically just run `but` anywhere to get started.
-
-At any time after this, you can run `but teardown` to undo the GitButler changes and go back to being a boring old Git project. It will not remove GitButler metadata, so feel free to go back and forth if you need to.
+- [gui](./but-gui): Open the GitButler GUI for the current project
+- [tui](./but-tui): Show an interactive TUI
+- [update](./but-update): Manage GitButler CLI and app updates
+- [alias](./but-alias): Manage command aliases
+- [config](./but-config): View and manage GitButler configuration
+- [skill](./but-skill): Manage AI agent skills for GitButler
 
 
 # ai-stuff.mdx
@@ -4246,21 +4450,22 @@ More commands will gain `--ai` support over time.
 If your coding agent can read skills, install the GitButler skill with
 `but skill install`.
 
-```git
-❯ but skill install
-
-Select a skill folder format:
-
-? Which format would you like to use?:
-> Claude Code - Claude Code CLI skill format (./.claude/skills/gitbutler)
-  OpenCode - OpenCode AI skill format (./.opencode/skills/gitbutler)
-  Codex - Codex skill format (./.codex/skills/gitbutler)
-  GitHub Copilot - GitHub Copilot local (repo) skill format (./.github/skills/gitbutler)
-  GitHub Copilot - GitHub Copilot global skill format (./.copilot/skills/gitbutler)
+```bash
+but skill install
 ```
 
-We keep these templates up to date, so if you update GitButler, you may want to
-update the skill too.
+The command prompts for install scope and skill format. It can install local or
+global skills for Agent Skills (`.agents`), Claude Code, OpenCode, Codex, GitHub
+Copilot, Cursor, and Windsurf.
+
+To update an existing install without going through the prompts, run:
+
+```bash
+but skill install --detect
+```
+
+We keep these templates up to date, so update the skill after updating
+GitButler.
 
 ## Agent workflow docs
 
@@ -4561,36 +4766,41 @@ but status
 ```
 
 
-# conclusion.mdx
+# installation.mdx
 
-Ok, that's a short guide to GitButler's command line interface.
+How to install and setup the GitButler CLI.
 
-Join us in [Discord](https://discord.com/invite/MmFkmaJ42D) if you have any other questions or suggestions for how we can improve the tool.
+## Installing the `but` CLI
 
-Thanks!
+Ok, first thing is first, let's get our `but` CLI installed. Currently there are two ways to do this.
 
+### Via the Desktop Client
 
-# configuration.mdx
+If you have the desktop client installed, you can go into your global settings and click on the "Install CLI" button in the "general" section.
 
-We've already covered `but config` a bit in dealing with forges and target branches.
+<ImageSection
+  className="mx-auto"
+  src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/install-but.png"
+  width="800"
+  height="600"
+  subtitle="How to install the GitButler CLI"
+/>
 
-You can also use it for some basic user configuration, such as setting your name and email address for commits and your default editor.
+### Curl install
 
-```cli [configuration-but-config-1, 286px]
-but config user
+You can install the CLI by running the following command in your terminal:
+
+```bash
+curl -fsSL https://gitbutler.com/install.sh | sh
 ```
 
-## Aliases
+## Setup
 
-GitButler also has a built in aliasing system in case you want to provide some shorthands.
+If you go into any existing Git repository and run `but setup`, it will make some neccesary changes to your setup in order for GitButler to manage your data.
 
-```cli [configuration-but-alias-1, 286px]
-but alias
-```
+If you run almost any `but` command in an existing Git repository in an interactive terminal, it will ask you if you want to set it up and then run the command you were trying to run. So basically just run `but` anywhere to get started.
 
-To add a new alias, you can run `but alias add <alias> <expansion>`, which you can also provide a `-g` or `--global` if you want it to be a global alias. This will put this data in your local or global Git config file.
-
-You will notice that there is a `default` alias, which is what runs when you just run `but` with no arguments. If you overwrite the `default` alias, you can set up something other than `status` to run by default.
+At any time after this, you can run `but teardown` to undo the GitButler changes and go back to being a boring old Git project. It will not remove GitButler metadata, so feel free to go back and forth if you need to.
 
 
 # conflict-resolution.mdx
@@ -4735,58 +4945,36 @@ Run but status to see all conflicted commits, or but resolve <commit> to resolve
 ```
 
 
-# editing-commits.mdx
+# conclusion.mdx
 
-While you can rub changes in and out of commits, you can also edit the commit
-message of any commit in your workspace quite easily.
+Ok, that's a short guide to GitButler's command line interface.
 
-## Editing Commit Messages
+Join us in [Discord](https://discord.com/invite/MmFkmaJ42D) if you have any other questions or suggestions for how we can improve the tool.
 
-You can edit commit messages with the `but describe` command. So if we have this status:
+Thanks!
 
-{/* restore [d69fffa7c6eb] */}
 
-```cli [editing-commits-but-status-1, 330px]
-but status
+# configuration.mdx
+
+We've already covered `but config` a bit in dealing with forges and target branches.
+
+You can also use it for some basic user configuration, such as setting your name and email address for commits and your default editor.
+
+```cli [configuration-but-config-1, 286px]
+but config user
 ```
 
-Then you can edit the message of any commit by running `but reword <sha>`, which will open up your editor of choice with the existing commit message and when you exit the editor, replace that message in the commit and rebase everything above it.
+## Aliases
 
-The editor would look something like this:
+GitButler also has a built in aliasing system in case you want to provide some shorthands.
 
-```
-add user changes
-
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-#
-# Changes in this commit:
-#       modified:   app/models/user.rb
-#       modified:   config/routes.rb
-#
-~
-~
-~
-~
+```cli [configuration-but-alias-1, 286px]
+but alias
 ```
 
-Pretty simple.
+To add a new alias, you can run `but alias add <alias> <expansion>`, which you can also provide a `-g` or `--global` if you want it to be a global alias. This will put this data in your local or global Git config file.
 
-## Changing Branch Names
-
-Just like changing commit messages, you can also use `but reword` to change the name of a branch. So, in the above example, if we wanted to change the branch name from `user-bookmarks` to `feature-awesome-thing`, we can do this:
-
-```cli [editing-commits-but-reword-1, 88px]
-but reword -m feature-awesome-thing us
-```
-
-Et voila.
-
-```cli [editing-commits-but-status-2, 330px]
-but status
-```
-
-{/* TODO: Edit Mode */}
+You will notice that there is a `default` alias, which is what runs when you just run `but` with no arguments. If you overwrite the `default` alias, you can set up something other than `status` to run by default.
 
 
 # forges.mdx
@@ -4860,6 +5048,60 @@ Selecting one of the options will allow you to provide an authentication token f
 </Callout>
 
 
+# editing-commits.mdx
+
+While you can rub changes in and out of commits, you can also edit the commit
+message of any commit in your workspace quite easily.
+
+## Editing Commit Messages
+
+You can edit commit messages with the `but describe` command. So if we have this status:
+
+{/* restore [d69fffa7c6eb] */}
+
+```cli [editing-commits-but-status-1, 330px]
+but status
+```
+
+Then you can edit the message of any commit by running `but reword <sha>`, which will open up your editor of choice with the existing commit message and when you exit the editor, replace that message in the commit and rebase everything above it.
+
+The editor would look something like this:
+
+```
+add user changes
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Changes in this commit:
+#       modified:   app/models/user.rb
+#       modified:   config/routes.rb
+#
+~
+~
+~
+~
+```
+
+Pretty simple.
+
+## Changing Branch Names
+
+Just like changing commit messages, you can also use `but reword` to change the name of a branch. So, in the above example, if we wanted to change the branch name from `user-bookmarks` to `feature-awesome-thing`, we can do this:
+
+```cli [editing-commits-but-reword-1, 88px]
+but reword -m feature-awesome-thing us
+```
+
+Et voila.
+
+```cli [editing-commits-but-status-2, 330px]
+but status
+```
+
+{/* TODO: Edit Mode */}
+
+
 # initializing-a-repository.mdx
 
 If you run any `but` command in a repository that has never been seen by GitButler before, it will automatically ask you if you want to setup the repository for GitButler.
@@ -4892,6 +5134,91 @@ The mega-merge workspace commit will soon only be needed once you actually have 
 Both of these things can be quickly and easily undone by running `but teardown`, doing any Git committing stuff you need to do and then re-running `but setup` to go back to GitButler tooling.
 
 You can also simply checkout a git branch with `git checkout <branch>` and the `post-checkout` hook we installed should clean up after itself.
+
+
+# operations-log.mdx
+
+GitButler maintains a detailed log of all operations, making it easy to track what happened and undo changes when needed.
+
+## Viewing the Operations Log
+
+See all recent GitButler operations:
+
+```cli [operations-log-but-oplog-1, 550px]
+but oplog
+```
+
+## Undoing the last operation
+
+Undo the last operation:
+
+```cli [operations-log-but-undo-1, 132px]
+but undo
+```
+
+## Restoring to a previous point
+
+You can restore to any point in the operations history by running the `but oplog restore` command with the SHA from `but oplog`.
+
+```cli [operations-log-but-oplog-2, 154px]
+but oplog restore 6fdd8fb1d547
+```
+
+Restorations create a new oplog entry before running, so you can always easily undo it in the same manner.
+
+<Callout type="info">
+
+It can be a bit confusing as to what state it restores to. It will restore to what your project looked like _before_ the operation was run. So for example, if there is a `CreateCommit` operation and you restore to that SHA, it will put your state back to the moment before the commit happened.
+
+</Callout>
+
+## Creating Snapshots
+
+You can also manually create snapshots of moments that you want to be able to revert to at any point, without some other operation needing to automatically save it.
+
+```cli [operations-log-but-oplog-3, 154px]
+but oplog snapshot
+```
+
+Now you can copy that SHA and restore to that exact point at any time in the future.
+
+
+# scripting.mdx
+
+### JSON Errwhere
+
+All of the commands are designed to be very user friendly when we have an interactive terminal, but you can also very easily script everything by passing the `--json` or `-j` option to anything. For example, here is using `but show` on a commit.
+
+```cli [scripting-but-show-1, 308px]
+but show 2672465
+```
+
+Now with the `--json` option:
+
+```cli [scripting-but-show-2, 682px]
+but show --json 2672465 | jq
+```
+
+You can do this with anything - committing, status, diffing, etc. Just throw a `-j` in there and you get parseable data (or, data your agent can very easily work with).
+
+
+# tutorial-overview.mdx
+
+Using the GitButler CLI is meant to make a specific common workflow very simple, which is roughly:
+
+- Create a branch
+- Do work on that branch
+- Commit to that branch
+- Optionally, create another branch if you find unrelated work you need to do
+- Work on and commit to that branch
+- Submit a branch for review
+- Create a stacked branch if needed to continue on dependent work
+- Update your base if work has been integrated to remove merged work
+- Rinse and repeat
+
+Additionally, GitButler is very good at editing commits (amending fixup work, squashing, rewording messages, etc), it keeps a simple log of what you've done in case you need to go back in time, it makes collaborating on a branch with others easy, it has great GitHub/Lab integration and more.
+
+Let's walk through some of the things it can do and what a typical day using the GitButler CLI might look like.
 
 
 # inspecting.mdx
@@ -5013,53 +5340,6 @@ but show a42580b96ed7b432
 ## Deleting Branches
 
 As long as we're talking about branches, let's show how to get rid of them. If you've merged one, it will by default not be shown anymore with `but branch` anyhow, but if you have one with some work on it that you want to abandon, you can also easily delete it with `but branch delete` (or `-d`).
-
-
-# operations-log.mdx
-
-GitButler maintains a detailed log of all operations, making it easy to track what happened and undo changes when needed.
-
-## Viewing the Operations Log
-
-See all recent GitButler operations:
-
-```cli [operations-log-but-oplog-1, 550px]
-but oplog
-```
-
-## Undoing the last operation
-
-Undo the last operation:
-
-```cli [operations-log-but-undo-1, 132px]
-but undo
-```
-
-## Restoring to a previous point
-
-You can easily restore to any point in the operations history by running the `but oplog restore` command. If it will modify your working directory (maybe it's just changes to the commit history or staging stuff), then it will prompt you if you want to continue. If you don't want that, you can pass `-f` or `--force` to make it do it anyhow.
-
-```cli [operations-log-but-oplog-2, 154px]
-but oplog restore -f 6fdd8fb1d547
-```
-
-Restorations create a new oplog entry before running, so you can always easily undo it in the same manner.
-
-<Callout type="info">
-
-It can be a bit confusing as to what state it restores to. It will restore to what your project looked like _before_ the operation was run. So for example, if there is a `CreateCommit` operation and you restore to that SHA, it will put your state back to the moment before the commit happened.
-
-</Callout>
-
-## Creating Snapshots
-
-You can also manually create snapshots of moments that you want to be able to revert to at any point, without some other operation needing to automatically save it.
-
-```cli [operations-log-but-oplog-3, 154px]
-but oplog snapshot
-```
-
-Now you can copy that SHA and restore to that exact point at any time in the future.
 
 
 # rubbing.mdx
@@ -5252,44 +5532,6 @@ but status -f
 ```
 
 Now we can use the previous method of moving file changes from other commits into it, then edit the commit message with `but reword 54` (for more on the `reword` command, see [Editing Commits](editing-commits), coming up next).
-
-
-# scripting.mdx
-
-### JSON Errwhere
-
-All of the commands are designed to be very user friendly when we have an interactive terminal, but you can also very easily script everything by passing the `--json` or `-j` option to anything. For example, here is using `but show` on a commit.
-
-```cli [scripting-but-show-1, 308px]
-but show 2672465
-```
-
-Now with the `--json` option:
-
-```cli [scripting-but-show-2, 682px]
-but show --json 2672465 | jq
-```
-
-You can do this with anything - committing, status, diffing, etc. Just throw a `-j` in there and you get parseable data (or, data your agent can very easily work with).
-
-
-# tutorial-overview.mdx
-
-Using the GitButler CLI is meant to make a specific common workflow very simple, which is roughly:
-
-- Create a branch
-- Do work on that branch
-- Commit to that branch
-- Optionally, create another branch if you find unrelated work you need to do
-- Work on and commit to that branch
-- Submit a branch for review
-- Create a stacked branch if needed to continue on dependent work
-- Update your base if work has been integrated to remove merged work
-- Rinse and repeat
-
-Additionally, GitButler is very good at editing commits (amending fixup work, squashing, rewording messages, etc), it keeps a simple log of what you've done in case you need to go back in time, it makes collaborating on a branch with others easy, it has great GitHub/Lab integration and more.
-
-Let's walk through some of the things it can do and what a typical day using the GitButler CLI might look like.
 
 
 # updating-the-base.mdx
@@ -5496,6 +5738,69 @@ For prompt examples that ask for specific branch and commit outcomes, see
 [Useful requests](/ai-agents/useful-requests).
 
 
+# review-agent-work.mdx
+
+
+When your coding agent uses GitButler, it can do the version-control work for
+you: create branches, commit changes, move work between commits, and reshape
+local history. The agent usually does this through the GitButler CLI.
+
+You may still want to preview what it created or manually adjust the branch and
+commit history before anything is pushed or turned into a PR. GitButler gives
+you three ways to inspect and adjust that state: the TUI, the CLI, and the
+Desktop Client GUI. Use this page to pick the surface you want. The detailed
+CLI and Desktop workflows live in their own docs.
+
+## GitButler TUI
+
+Use the TUI when you want a terminal view of the workspace without switching to
+the Desktop Client. It is useful for checking branch state, looking at what is
+on a branch or still unassigned, and making small manual adjustments to branch
+assignment, commit membership, or history shape.
+
+```sh
+but tui
+```
+
+<ImageSection
+  alt="GitButler TUI showing available keyboard commands over workspace status"
+  src="/ai-agents-tui.png"
+  width="2068"
+  height="1394"
+  subtitle="GitButler TUI command view."
+/>
+
+## GitButler CLI
+
+Use the CLI when you want exact output, scriptable commands, or the same view of
+the repository state that the agent uses.
+
+For command details, start with the [CLI overview](/cli-overview).
+
+## GitButler Desktop Client
+
+Use the Desktop Client when you want a visual overview of branches, commits,
+assigned changes, unassigned changes, parallel work, and stacked work. It is
+also the visual surface for moving changes between branches and adjusting
+commit history.
+
+```sh
+but gui
+```
+
+For details, see the [Desktop Overview](/overview),
+[Branch lanes](/features/branch-management/branch-lanes), and
+[Commits](/features/branch-management/commits).
+
+## Operations history
+
+GitButler records version-control operations so you can inspect or undo local
+history edits. If a branch reorganization does not look right, inspect the
+operation history before making more changes. See
+[Timeline](/features/timeline), [`but oplog`](/commands/but-oplog), and
+[`but undo`](/commands/but-undo).
+
+
 # parallel-agents.mdx
 
 Parallel agents do not require separate worktrees or pre-created branches. Once
@@ -5589,69 +5894,6 @@ decide whether to keep the work parallel, stack one branch on the other, or use
 separate worktrees.
 
 For more request examples, see [Useful requests](/ai-agents/useful-requests).
-
-
-# review-agent-work.mdx
-
-
-When your coding agent uses GitButler, it can do the version-control work for
-you: create branches, commit changes, move work between commits, and reshape
-local history. The agent usually does this through the GitButler CLI.
-
-You may still want to preview what it created or manually adjust the branch and
-commit history before anything is pushed or turned into a PR. GitButler gives
-you three ways to inspect and adjust that state: the TUI, the CLI, and the
-Desktop Client GUI. Use this page to pick the surface you want. The detailed
-CLI and Desktop workflows live in their own docs.
-
-## GitButler TUI
-
-Use the TUI when you want a terminal view of the workspace without switching to
-the Desktop Client. It is useful for checking branch state, looking at what is
-on a branch or still unassigned, and making small manual adjustments to branch
-assignment, commit membership, or history shape.
-
-```sh
-but tui
-```
-
-<ImageSection
-  alt="GitButler TUI showing available keyboard commands over workspace status"
-  src="/ai-agents-tui.png"
-  width="2068"
-  height="1394"
-  subtitle="GitButler TUI command view."
-/>
-
-## GitButler CLI
-
-Use the CLI when you want exact output, scriptable commands, or the same view of
-the repository state that the agent uses.
-
-For command details, start with the [CLI overview](/cli-overview).
-
-## GitButler Desktop Client
-
-Use the Desktop Client when you want a visual overview of branches, commits,
-assigned changes, unassigned changes, parallel work, and stacked work. It is
-also the visual surface for moving changes between branches and adjusting
-commit history.
-
-```sh
-but gui
-```
-
-For details, see the [Desktop Overview](/overview),
-[Branch lanes](/features/branch-management/branch-lanes), and
-[Commits](/features/branch-management/commits).
-
-## Operations history
-
-GitButler records version-control operations so you can inspect or undo local
-history edits. If a branch reorganization does not look right, inspect the
-operation history before making more changes. See
-[Timeline](/features/timeline), [`but oplog`](/commands/but-oplog), and
-[`but undo`](/commands/but-undo).
 
 
 # tuning-agent-behavior.mdx
@@ -5838,10 +6080,8 @@ standing rules that always apply, see
 
 ## Commit changes
 
-With the baseline instructions from
-[Getting started](/ai-agents/getting-started#add-optional-agent-instructions),
-the agent commits on the dedicated GitButler branch for its session. It commits
-that session's changes there, not unrelated user or agent work.
+The agent commits the session's changes to its dedicated GitButler branch, not
+unrelated user or agent work.
 
 You can tell your agent:
 

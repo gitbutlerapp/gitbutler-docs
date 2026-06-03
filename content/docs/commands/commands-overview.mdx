@@ -3,51 +3,64 @@ title: Commands Overview
 description: Your fast index to all of the available commands
 ---
 
-## Command Reference
+## Command reference
 
 ### Basics
 
-- [setup](./but-setup): Setup a Git repository to be managed by GitButler
-- [teardown](./but-teardown): Go back to vanilla Git branch management
+- [setup](./but-setup): Set up a Git repository to be managed by GitButler
+- [teardown](./but-teardown): Exit GitButler mode and return to normal Git
 
 ### Inspection
 
-- [status](./but-status): Overview of the uncommitted changes in the repository
-- [diff](./but-diff): Show a diff of what's changed
-- [show](./but-show): Show information about a branch or commit
+- [status](./but-status): Show the project workspace state
+- [diff](./but-diff): Show a diff for the workspace or a CLI ID
+- [show](./but-show): Show information about a commit or branch
 
-### Branching and Committing
+### Branching and committing
 
-- [commit](./but-commit): Create commits on your branches
+- [commit](./but-commit): Commit changes to a stack
 - [stage](./but-stage): Stage changes to a branch
 - [branch](./but-branch): Commands for managing branches
-- [discard](./but-discard): Remove changes
-- [resolve](./but-resolve): Resolve commit conflicts
 - [merge](./but-merge): Local branch merging
+- [discard](./but-discard): Discard uncommitted changes
+- [resolve](./but-resolve): Resolve conflicts in a commit
+- [unapply](./but-unapply): Unapply a branch from the workspace
+- [apply](./but-apply): Apply a branch to the workspace
+- [clean](./but-clean): Remove empty branches from the workspace
+- [pick](./but-pick): Cherry-pick a commit from an unapplied branch
 
 ### Rules
 
 - [mark](./but-mark): Create or remove a rule for auto-assigning or auto-committing
 - [unmark](./but-unmark): Remove all marks from the workspace
 
-### Server Interactions
+### Server interactions
 
-- [push](./but-push): Push a branch/stack to remote
+- [push](./but-push): Push changes in a branch to remote
 - [pull](./but-pull): Pull upstream changes and update your branches
-- [pr](./but-pr): Commands for interacting with forges like GitHub, GitLab, etc.
+- [pr](./but-pr): Create and manage reviews on GitHub, GitLab, and other forges
 
-### Editing Commits
+### Editing commits
 
-- [rub](./but-rub): Combine two entities together to perform an operation
-- [absorb](./but-absorb): Absorb changes into existing commits
-- [reword](./but-reword): Edit the commit message of a specified commit
-- [uncommit](./but-uncommit): Uncommit an existing commit
-- [amend](./but-amend): Amend an existing commit with new changes
-- [squash](./but-squash): Combine two commits into a single new commit
-- [move](./but-move): Reorder commits or move a commit from one branch to another
-- [pick](./but-pick): Cherry-pick a commit from an unapplied branch into an applied virtual branch
+- [rub](./but-rub): Combine two entities to amend, squash, move, or unassign work
+- [absorb](./but-absorb): Amend changes into the commits where they belong
+- [reword](./but-reword): Edit a commit message or branch name
+- [uncommit](./but-uncommit): Move commit changes back to unassigned work
+- [amend](./but-amend): Amend a file change into a commit
+- [squash](./but-squash): Squash commits together
+- [move](./but-move): Move a commit or branch to a different location
 
-### Operations Log
+### Operations log
 
-- [oplog](./but-oplog): Show operation history
-- [undo](./but-undo): Undo the last operation by reverting to the previous snapshot
+- [oplog](./but-oplog): View and manage operation history
+- [undo](./but-undo): Undo the last operation
+- [redo](./but-redo): Redo the last undo
+
+### Helper commands
+
+- [gui](./but-gui): Open the GitButler GUI for the current project
+- [tui](./but-tui): Show an interactive TUI
+- [update](./but-update): Manage GitButler CLI and app updates
+- [alias](./but-alias): Manage command aliases
+- [config](./but-config): View and manage GitButler configuration
+- [skill](./but-skill): Manage AI agent skills for GitButler

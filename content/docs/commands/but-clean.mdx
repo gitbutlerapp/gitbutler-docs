@@ -1,0 +1,45 @@
+---
+title: "`but clean`"
+description: "Remove empty branches from the workspace."
+---
+
+A branch is considered empty if it has no local commits, no assigned
+changes, and (by default) no upstream-only commits.
+
+The entire operation is recorded as a single oplog entry, so it can
+be undone with `but undo`.
+
+## Examples
+
+Remove all empty branches:
+
+```text
+but clean
+```
+
+Preview which branches would be removed:
+
+```text
+but clean --dry-run
+```
+
+Pull latest changes first, then clean:
+
+```text
+but clean --pull
+```
+
+Also remove branches that only have upstream commits:
+
+```text
+but clean --include-upstream
+```
+
+**Usage:** `but clean [OPTIONS]`
+
+## Options
+
+* `--dry-run` — Preview which branches would be removed without actually deleting them
+* `--pull` — Pull latest changes from the remote before cleaning
+* `--include-upstream` — Also remove branches that have upstream-only commits but no local commits or changes
+

@@ -78,8 +78,13 @@
           "description": "Apply (enable) a branch to your working directory"
         },
         {
-          "command": "but unapply [branch]",
+          "command": "but unapply [branch|id]",
           "description": "Unapply (disable) a branch from your working directory"
+        },
+        {
+          "command": "but clean --dry-run",
+          "description": "Preview empty branches that can be removed",
+          "level": "advanced"
         },
         {
           "command": "but branch list [search]",
@@ -165,7 +170,7 @@
           "description": "Edit the commit message of a specified commit"
         },
         {
-          "command": "but commit new --before [commit]",
+          "command": "but commit empty --before [commit]",
           "description": "Insert a blank commit before the specified commit",
           "level": "advanced"
         },
@@ -176,6 +181,11 @@
         {
           "command": "but rub [target] [source]",
           "description": "Combine two commits or branches together",
+          "level": "advanced"
+        },
+        {
+          "command": "but move [source] [target]",
+          "description": "Move a commit or branch to a different location",
           "level": "advanced"
         }
       ]
@@ -188,6 +198,11 @@
         {
           "command": "but undo",
           "description": "Undo the last operation"
+        },
+        {
+          "command": "but redo",
+          "description": "Redo the last undo",
+          "level": "advanced"
         },
         {
           "command": "but oplog",
@@ -230,6 +245,11 @@
           "description": "Open the GUI to the current project"
         },
         {
+          "command": "but tui",
+          "description": "Open the interactive terminal UI",
+          "level": "advanced"
+        },
+        {
           "command": "but alias",
           "description": "Create and manage aliases for commonly used commands"
         },
@@ -244,7 +264,7 @@
         },
         {
           "command": "but skill",
-          "description": "Get tips and tricks for using GitButler effectively",
+          "description": "Install or check AI agent skills for GitButler",
           "level": "advanced"
         }
       ]

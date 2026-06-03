@@ -39,18 +39,13 @@ the new branch from. This allows you to create stacked branches.
 Deletes a branch from the workspace
 
 This will remove the branch and all its commits from the workspace.
-If the branch has unpushed commits, you will be prompted for confirmation
-unless the `--force` flag is used.
+If the branch has unpushed commits, you will be prompted for confirmation.
 
-**Usage:** `but branch delete <BRANCH_NAME> [OPTIONS]`
+**Usage:** `but branch delete <BRANCH_NAME>`
 
 **Arguments:**
 
 * `<BRANCH_NAME>` — Name of the branch to delete (required)
-
-**Options:**
-
-* `-f`, `--force` — Force deletion without confirmation
 
 ### `but branch list`
 
@@ -90,6 +85,7 @@ make the command faster.
 * `--no-ahead` — Don't calculate and show number of commits ahead of base (faster)
 * `--review` — Fetch and display review information (PRs, MRs, etc.)
 * `--no-check` — Don't check if each branch merges cleanly into upstream
+* `--empty` — Include branches with no commits on them (hidden by default)
 
 ### `but branch show`
 
@@ -99,11 +95,11 @@ This shows the list of commits that are on the specified branch but not yet inte
 
 You can also choose to fetch and display review information, show files modified in each commit with line counts, generate an AI summary of the branch changes, and check if the branch merges cleanly into upstream.
 
-**Usage:** `but branch show <BRANCH_ID> [OPTIONS]`
+**Usage:** `but branch show <BRANCH> [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH_ID>` — CLI ID or name of the branch to show (required)
+* `<BRANCH>` — CLI ID or name of the branch to show (required)
 
 **Options:**
 
@@ -111,4 +107,3 @@ You can also choose to fetch and display review information, show files modified
 * `-f`, `--files` — Show files modified in each commit with line counts
 * `--ai` — Generate AI summary of the branch changes
 * `--check` — Check if the branch merges cleanly into upstream and identify conflicting commits
-
