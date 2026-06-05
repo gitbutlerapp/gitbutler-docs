@@ -15,6 +15,7 @@
     "...ai-agents",
     "---GitButler CLI---",
     "cli-overview",
+    "gitbutler-tui",
     "cli-guides",
     "commands",
     "---Development---",
