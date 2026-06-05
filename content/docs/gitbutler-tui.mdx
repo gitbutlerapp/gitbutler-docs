@@ -1,0 +1,174 @@
+---
+title: GitButler TUI
+description: Inspect and edit your GitButler workspace from interactive terminal UIs.
+---
+
+import ImageSection from "@/components/ImageSection"
+
+Use `but tui` when you want a live, keyboard-first GitButler workspace in your
+terminal. It opens an interactive view of your workspace state: unassigned
+changes, active branches, commits, files, and the common base.
+
+```sh
+but tui
+```
+
+Run it from a GitButler-managed repository. If the repository has not been set
+up yet, run [`but setup`](/commands/but-setup) first.
+
+<ImageSection
+  alt="GitButler TUI showing available keyboard commands over workspace status"
+  src="/ai-agents-tui.png"
+  width="2068"
+  height="1394"
+  subtitle="GitButler TUI command view."
+/>
+
+## Pick the right terminal workflow
+
+- Use `but tui` for the full workspace view: branches, commits, assigned
+  changes, unassigned changes, diffs, and local history operations.
+- Use [`but diff --tui`](/commands/but-diff) for focused diff review without the
+  full workspace editing surface.
+- Use [`but stage`](/commands/but-stage) when you want to assign selected files
+  or hunks to a branch.
+- Use [command mode](#use-command-mode) inside `but tui` when you need a `but`
+  command without leaving the TUI.
+- Use plain CLI commands when you need repeatable output for scripts, agents, or
+  logs.
+
+## What you can do
+
+In the full workspace TUI, you can:
+
+- Inspect unassigned changes, branch lanes, commits, and file-level changes.
+- Open a details pane for the selected branch, commit, file, or hunk.
+- Create commits and empty commits.
+- Create branches.
+- Move commits or branches.
+- Rub changes into a branch or commit.
+- Mark multiple commits and act on them together.
+- Reword commits or branch names.
+- Discard local work after a confirmation prompt.
+- Undo and redo GitButler operations.
+
+For the complete shortcut list, press `?` inside the TUI. The help popup is
+generated from the current keybindings, so it is the source of truth.
+
+## Move around
+
+Most navigation uses Vim-style keys, with arrow keys where they make sense.
+
+- `j` / `k` move down and up.
+- `Shift+j` / `Shift+k` jump to the next or previous section.
+- `g` jumps to unassigned changes.
+- `Shift+g` jumps to the common merge base.
+- `t` opens the branch picker.
+- `Esc` backs out of the current mode.
+- `q` quits.
+
+The hotbar at the bottom shows the most useful keys for the current mode.
+
+## Inspect changes
+
+Select a branch, commit, file, or hunk, then press `d` to open details. The details pane shows commit metadata and diffs for the selected row.
+
+- `d` toggles the split details pane.
+- `Shift+d` toggles full-screen details.
+- `f` shows files in the selected commit.
+- `Shift+f` shows files across all commits.
+- `l` focuses the details pane.
+- `h` returns focus to the status list.
+- `+` and `-` resize the split details pane.
+- In details mode, `j` / `k` move between hunks.
+- In details mode, `Shift+j` / `Shift+k` scroll.
+- In details mode, `r` starts rubbing from the current hunk.
+- In details mode, `Shift+c` copies the current hunk.
+
+## Change local history
+
+- Press `c` to create a commit from the selected unassigned or assigned changes. Press `i` in commit mode to write the message inline, `e` to leave it empty, or `b` to commit to a new branch.
+- Press `n` to insert an empty commit.
+- Press `b` to create a branch.
+- Press `m` to move the selected commit or branch, then choose the destination and press `Enter`.
+- Press `r` to rub the selected source into another target. In rub mode, `Shift+t` keeps the target message and `Shift+s` keeps the source message.
+- Press `Space` to mark commits, then use `r` to rub marked commits together.
+- Press `Enter` on a commit or branch to reword it inline. Press `Shift+m` to reword a commit in your configured editor.
+- Press `x` to discard the selected local work. Destructive actions ask for confirmation.
+- Press `u` to undo the last operation and `Shift+u` to redo it.
+
+GitButler records these operations in the operations log, so you can also inspect and recover with [`but oplog`](/commands/but-oplog), [`but undo`](/commands/but-undo), and [`but redo`](/commands/but-redo).
+
+## Use command mode
+
+Use command mode when you want the TUI to stay open but need one command.
+
+- `:` runs a `but` command. For example, type `branch list` rather than
+  `but branch list`.
+- `!` runs an external command. It does not run through your shell, so shell
+  syntax like pipes, redirects, built-ins, and `&&` needs `sh -c '...'`.
+- `Ctrl+r` reloads the workspace state.
+
+After the command finishes, press `Enter` to return to the TUI. Successful
+commands reload the workspace state. Failed commands return with an error.
+
+## Use the diff TUI
+
+[`but diff --tui`](/commands/but-diff) opens a smaller TUI focused only on
+diffs. It has a file list on the left and a diff pane on the right.
+
+```sh
+but diff --tui
+but diff g0 --tui
+but diff my-branch --tui
+```
+
+- `j` / `k` move through files in the file list.
+- `h` / `l` / `Tab` switch panes.
+- In the diff pane, `j` / `k` scroll one line.
+- `Space` or `PageDown` scrolls down a page.
+- `PageUp` scrolls up a page.
+- `q` quits.
+
+You can make `but diff` use the TUI by default:
+
+```sh
+but config ui set tui true
+```
+
+Use `--no-tui` for a one-off plain diff:
+
+```sh
+but diff --no-tui
+```
+
+## Stage hunks interactively
+
+Run [`but stage`](/commands/but-stage) without file arguments to open the hunk
+picker. This is the most precise way to assign only part of a file to a branch.
+
+```sh
+but stage
+but stage --branch my-branch
+```
+
+If you have one active branch, GitButler uses it. If you have several active branches, GitButler asks which branch to stage to first. If you have no branches, GitButler creates one with a generated name.
+
+The stage picker starts with all hunks selected. When you confirm, selected hunks are assigned to the target branch and deselected hunks are explicitly left unassigned.
+
+- `j` / `k` move through files or hunks, depending on the active pane.
+- `h` / `l` / `Tab` switch panes.
+- `Space` toggles the selected file or hunk.
+- `a` selects all hunks.
+- `n` deselects all hunks.
+- `PageDown` / `PageUp` scroll the diff pane.
+- `s` or `Enter` stages the selected hunks.
+- `q` or `Esc` cancels.
+
+After staging, commit only the assigned changes with:
+
+```sh
+but commit --only -m "Update billing copy" my-branch
+```
+
+Without `--only`, `but commit` also includes eligible unassigned changes for that branch.

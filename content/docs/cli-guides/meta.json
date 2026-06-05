@@ -1,8 +1,5 @@
 {
   "title": "Guides",
   "defaultOpen": false,
-  "pages": [
-    "installation",
-    "cli-tutorial"
-  ]
+  "pages": ["installation", "cli-tutorial"]
 }

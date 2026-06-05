@@ -7,18 +7,22 @@ Without arguments, opens an interactive TUI for selecting files and hunks to sta
 With arguments, stages the specified file or hunk to the given branch.
 
 Usage:
-  `but stage`                             (interactive TUI selector)
-  `but stage --branch <branch>`           (interactive, specific branch)
-  `but stage <file-or-hunk> <branch>`     (direct staging)
+
+```text
+but stage                         # interactive TUI selector
+but stage --branch <branch>       # interactive, specific branch
+but stage <file-or-hunk> <branch> # direct staging
+```
 
 **Usage:** `but stage [FILE_OR_HUNK] [BRANCH_POS] [OPTIONS]`
 
 ## Arguments
 
-* `<FILE_OR_HUNK>` — File or hunk ID to stage
-* `<BRANCH_POS>` — Branch to stage to (positional)
+- `<FILE_OR_HUNK>` — File or hunk ID to stage
+- `<BRANCH_POS>` — Branch to stage to (positional)
 
 ## Options
 
-* `-b`, `--branch` `<BRANCH>` — Branch to stage to (for interactive mode)
+- `-b`, `--branch` `<BRANCH>` — Branch to stage to (for interactive mode)
 
+For the interactive hunk picker workflow, see the [TUI guide](/gitbutler-tui#stage-hunks-interactively).
