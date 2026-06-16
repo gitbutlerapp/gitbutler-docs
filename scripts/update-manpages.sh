@@ -38,7 +38,7 @@ rm -f cli-docs/*
 
 # Regenerate documentation using cargo
 echo "Regenerating CLI documentation with cargo..."
-cargo run --bin but-clap
+cargo run --bin but-clap --features raw-clap-docs
 
 echo "Documentation files regenerated successfully!"
 echo
