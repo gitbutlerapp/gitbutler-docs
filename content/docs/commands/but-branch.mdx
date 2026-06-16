@@ -39,7 +39,8 @@ the new branch from. This allows you to create stacked branches.
 Deletes a branch from the workspace
 
 This will remove the branch and all its commits from the workspace.
-If the branch has unpushed commits, you will be prompted for confirmation.
+If the branch has unpushed commits, you will be prompted for confirmation
+unless the `--force` flag is used.
 
 **Usage:** `but branch delete <BRANCH_NAME>`
 
@@ -107,3 +108,24 @@ You can also choose to fetch and display review information, show files modified
 * `-f`, `--files` — Show files modified in each commit with line counts
 * `--ai` — Generate AI summary of the branch changes
 * `--check` — Check if the branch merges cleanly into upstream and identify conflicting commits
+
+### `but branch update`
+
+Update your local branch with the content of its remote counterpart.
+
+This allows you to resolve the divergence between your local branch and its
+tracked remote in different ways.
+
+**Usage:** `but branch update <BRANCH> [OPTIONS]`
+
+**Arguments:**
+
+* `<BRANCH>` — Name of the local branch to integrate (required)
+
+**Options:**
+
+* `-s`, `--strategy` `<STRATEGY>` — Strategy to use for the integration. If no strategy is specified, we default to pull-rebase (default: `pull-rebase`)
+* `--dry-run` — Preview the resulting branch state without persisting changes
+* `-v`, `--verbose` — Show additional dry-run details like the current divergence
+* `-i`, `--interactive` — Open the generated integration script in an editor
+
