@@ -14,6 +14,11 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - run: git clone --depth=1 https://github.com/gitbutlerapp/gitbutler ../gitbutler
+      - run: ./scripts/update-manpages.sh
 
       - run: |
           git config user.name "github-actions[bot]"
@@ -21,14 +26,15 @@ jobs:
 
           branch="test-generated-docs-${{ github.run_id }}"
           git checkout -b "$branch"
-          git commit --allow-empty -m "Test"
+          git add .
+          git commit -m "Update CLI docs"
           git push origin "$branch"
 
           echo "branch=$branch" >> "$GITHUB_ENV"
 
       - run: |
           gh pr create \
-            --title "Test PR" \
+            --title "Update generated CLI documentation" \
             --body "Created by CI" \
             --base main \
             --head "$branch"
