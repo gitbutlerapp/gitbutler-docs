@@ -63,8 +63,6 @@ jobs:
 
       - name: Create pull request
         if: steps.versions.outputs.should_update == 'true'
-        env:
-          LATEST_VERSION: ${{ steps.versions.outputs.latest_version }}
         run: |
           gh pr create \
             --title "Update generated CLI documentation for version ${LATEST_VERSION}" \
@@ -73,3 +71,4 @@ jobs:
             --head "$branch"
         env:
           GH_TOKEN: ${{ secrets.GH_CREATE_PR_PAT }}
+          LATEST_VERSION: ${{ steps.versions.outputs.latest_version }}
