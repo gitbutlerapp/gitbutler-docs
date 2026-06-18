@@ -1,13 +1,15 @@
 name: "Update Generated Docs"
 
 on:
-  push:
-    branches: [GB-1405/automate-cli-docs-update]
+  workflow_dispatch:
+  schedule:
+    # every day at 2am UTC
+    - cron: "0 2 * * *"
 
 permissions: {}
 
 jobs:
-  test_create_pr:
+  update_generated_docs:
     runs-on: ubuntu-latest
     environment: Docs generation
     permissions:
@@ -23,11 +25,13 @@ jobs:
       - name: Compare versions
         id: versions
         run: |
-          CURRENT_DOCS_VERSION=$(cat .github/workflows/current_docs_version.txt)
+          CURRENT_DOCS_VERSION=$(cat .scripts/current_docs_version.txt)
           LATEST_VERSION=$(git -C ../gitbutler tag --list 'nightly/*' --sort=-version:refname | head -n 1)
 
           echo "Current: $CURRENT_DOCS_VERSION"
           echo "Latest: $LATEST_VERSION"
+
+          test -n "$LATEST_VERSION"
 
           echo "latest_version=$LATEST_VERSION" >> "$GITHUB_OUTPUT"
 
@@ -47,7 +51,7 @@ jobs:
 
           git -C ../gitbutler checkout "$LATEST_VERSION"
           ./scripts/update-manpages.sh
-          echo "$LATEST_VERSION" > .github/workflows/current_docs_version.txt
+          echo "$LATEST_VERSION" > .scripts/current_docs_version.txt
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -65,7 +69,7 @@ jobs:
         run: |
           gh pr create \
             --title "Update generated CLI documentation for version ${LATEST_VERSION}" \
-            --body "Automatic docs update for ${LATEST_VERSION} @slarse" \
+            --body "Automatic docs update for ${LATEST_VERSION} @slarse @krlvi" \
             --base main \
             --head "$branch"
         env:
