@@ -16,8 +16,8 @@ jobs:
       CURRENT_DOCS_VERSION: release/0.20.0
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
+#        with:
+#          ref: main
 
       - run: |
           git clone https://github.com/gitbutlerapp/gitbutler ../gitbutler
