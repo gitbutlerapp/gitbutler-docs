@@ -1,0 +1,33 @@
+name: "Update Generated Docs"
+
+on:
+  push:
+    branches: [GB-1405/automate-cli-docs-update]
+
+permissions: {}
+
+jobs:
+  test_create_pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          branch="test-generated-docs-${{ github.run_id }}"
+          git checkout -b "$branch"
+          git commit --allow-empty -m "Test"
+          git push origin "$branch"
+
+          gh pr create \
+            --title "Test PR" \
+            --body "Created by CI" \
+            --base main \
+            --head "$branch"
+        env:
+          GH_TOKEN: ${{ github.token }}
