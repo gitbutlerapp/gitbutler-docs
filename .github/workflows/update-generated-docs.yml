@@ -1,0 +1,79 @@
+name: "Update Generated Docs"
+
+on:
+  workflow_dispatch:
+  schedule:
+    # every day at 2am UTC
+    - cron: "0 2 * * *"
+
+permissions: {}
+
+jobs:
+  update_generated_docs:
+    runs-on: ubuntu-latest
+    environment: Docs generation
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - run: |
+          git clone https://github.com/gitbutlerapp/gitbutler ../gitbutler
+
+      - name: Compare versions
+        id: versions
+        run: |
+          CURRENT_DOCS_VERSION=$(cat scripts/current_docs_version.txt)
+          LATEST_VERSION=$(git -C ../gitbutler tag --list 'nightly/*' --sort=-version:refname | head -n 1)
+
+          echo "Current: $CURRENT_DOCS_VERSION"
+          echo "Latest: $LATEST_VERSION"
+
+          test -n "$LATEST_VERSION"
+
+          echo "latest_version=$LATEST_VERSION" >> "$GITHUB_OUTPUT"
+
+          if [ "$LATEST_VERSION" != "$CURRENT_DOCS_VERSION" ]; then
+            echo "should_update=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update generated docs
+        if: steps.versions.outputs.should_update == 'true'
+        env:
+          LATEST_VERSION: ${{ steps.versions.outputs.latest_version }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libdbus-1-dev libglib2.0-dev pkg-config
+
+          git -C ../gitbutler checkout "$LATEST_VERSION"
+          ./scripts/update-manpages.sh
+
+          echo "Updating scripts/current_docs_version.txt to $LATEST_VERSION"
+          echo "$LATEST_VERSION" > scripts/current_docs_version.txt
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          branch="update-generated-docs-$LATEST_VERSION"
+          git checkout -b "$branch"
+          git add .
+          git commit -m "Update CLI docs"
+          git push origin "$branch"
+
+          echo "branch=$branch" >> "$GITHUB_ENV"
+
+      - name: Create pull request
+        if: steps.versions.outputs.should_update == 'true'
+        run: |
+          gh pr create \
+            --title "Update generated CLI documentation for version ${LATEST_VERSION}" \
+            --body "Automatic docs update for ${LATEST_VERSION} @slarse @krlvi" \
+            --base main \
+            --head "$branch"
+        env:
+          GH_TOKEN: ${{ secrets.GH_CREATE_PR_PAT }}
+          LATEST_VERSION: ${{ steps.versions.outputs.latest_version }}
