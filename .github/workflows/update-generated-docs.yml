@@ -19,7 +19,7 @@ jobs:
 
       - run: |
          sudo apt-get update
-         sudo apt-get install -y libdbus-1-dev
+         sudo apt-get install -y libdbus-1-dev pkg-config
 
       - run: git clone --depth=1 https://github.com/gitbutlerapp/gitbutler ../gitbutler
       - run: ./scripts/update-manpages.sh
