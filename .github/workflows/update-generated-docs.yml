@@ -13,11 +13,11 @@ jobs:
     permissions:
       contents: write
     env:
-      CURRENT_DOCS_VERSION: release/0.20.0
+      CURRENT_DOCS_VERSION: nightly/0.5.2077
     steps:
       - uses: actions/checkout@v4
-#        with:
-#          ref: main
+        with:
+          ref: main
 
       - run: |
           git clone https://github.com/gitbutlerapp/gitbutler ../gitbutler
@@ -25,7 +25,7 @@ jobs:
       - name: Compare versions
         id: versions
         run: |
-          LATEST_RELEASE=$(git -C ../gitbutler tag --sort=-version:refname | grep '^release/' | head -n 1)
+          LATEST_RELEASE=$(git -C ../gitbutler tag --sort=-version:refname | grep '^nightly/' | head -n 1)
 
           echo "latest_release=$LATEST_RELEASE" >> "$GITHUB_OUTPUT"
 
