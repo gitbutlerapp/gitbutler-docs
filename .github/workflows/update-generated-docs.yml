@@ -24,7 +24,10 @@ jobs:
         id: versions
         run: |
           CURRENT_DOCS_VERSION=$(cat .github/workflows/current_docs_version.txt)
-          LATEST_VERSION=$(git -C ../gitbutler tag --sort=-version:refname | grep '^nightly/' | head -n 1)
+          LATEST_VERSION=$(git -C ../gitbutler tag --list 'nightly/*' --sort=-version:refname | head -n 1)
+
+          echo "Current: $CURRENT_DOCS_VERSION"
+          echo "Latest: $LATEST_VERSION"
 
           echo "latest_version=$LATEST_VERSION" >> "$GITHUB_OUTPUT"
 
