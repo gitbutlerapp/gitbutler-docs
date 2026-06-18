@@ -63,10 +63,12 @@ jobs:
 
       - name: Create pull request
         if: steps.versions.outputs.should_update == 'true'
+        env:
+          LATEST_VERSION: ${{ steps.versions.outputs.latest_version }}
         run: |
           gh pr create \
-            --title "Update generated CLI documentation" \
-            --body "Created by CI" \
+            --title "Update generated CLI documentation for version ${LATEST_VERSION}" \
+            --body "Automatic docs update for ${LATEST_VERSION} @slarse" \
             --base main \
             --head "$branch"
         env:
