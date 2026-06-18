@@ -37,7 +37,7 @@ jobs:
       - name: Update generated docs
         if: steps.versions.outputs.should_update == 'true'
         env:
-          LATEST_VERSION=${{ steps.versions.outputs.latest_version }}
+          LATEST_VERSION: ${{ steps.versions.outputs.latest_version }}
         run: |
           sudo apt-get update
           sudo apt-get install -y libdbus-1-dev libglib2.0-dev pkg-config
