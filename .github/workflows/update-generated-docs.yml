@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: master
+          ref: main
 
       - run: git clone --depth=1 https://github.com/gitbutlerapp/gitbutler ../gitbutler
       - run: ./scripts/update-manpages.sh
