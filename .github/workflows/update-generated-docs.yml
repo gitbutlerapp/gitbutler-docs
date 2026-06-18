@@ -22,7 +22,8 @@ jobs:
       - run: |
           git clone https://github.com/gitbutlerapp/gitbutler ../gitbutler
 
-      - id: versions
+      - name: Compare versions
+        id: versions
         run: |
           LATEST_RELEASE=$(git -C ../gitbutler tag --sort=-version:refname | grep '^release/' | head -n 1)
 
@@ -34,11 +35,13 @@ jobs:
             echo "should_update=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - if: steps.versions.outputs.should_update == 'true'
+      - name: Update generated docs
+        if: steps.versions.outputs.should_update == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y libdbus-1-dev libglib2.0-dev pkg-config
 
+          git -C ../gitbutler checkout "${{ steps.versions.outputs.latest_release }}"
           ./scripts/update-manpages.sh
 
           sed -i "s|CURRENT_DOCS_VERSION: .*|CURRENT_DOCS_VERSION: ${{ steps.versions.outputs.latest_release }}|" .github/workflows/update-generated-docs.yml
@@ -54,7 +57,8 @@ jobs:
 
           echo "branch=$branch" >> "$GITHUB_ENV"
 
-      - if: steps.versions.outputs.should_update == 'true'
+      - name: Create pull request
+        if: steps.versions.outputs.should_update == 'true'
         run: |
           gh pr create \
             --title "Update generated CLI documentation" \
