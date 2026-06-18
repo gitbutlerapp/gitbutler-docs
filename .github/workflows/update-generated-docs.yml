@@ -9,9 +9,9 @@ permissions: {}
 jobs:
   test_create_pr:
     runs-on: ubuntu-latest
+    environment: Docs generation
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -24,10 +24,13 @@ jobs:
           git commit --allow-empty -m "Test"
           git push origin "$branch"
 
+          echo "branch=$branch" >> "$GITHUB_ENV"
+
+      - run: |
           gh pr create \
             --title "Test PR" \
             --body "Created by CI" \
             --base main \
             --head "$branch"
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_CREATE_PR_PAT }}
