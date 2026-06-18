@@ -47,8 +47,7 @@ jobs:
 
           git -C ../gitbutler checkout "$LATEST_VERSION"
           ./scripts/update-manpages.sh
-
-          sed -i "s|CURRENT_DOCS_VERSION: .*|CURRENT_DOCS_VERSION: $LATEST_VERSION|" .github/workflows/update-generated-docs.yml
+          echo "$LATEST_VERSION" > .github/workflows/current_docs_version.txt
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
