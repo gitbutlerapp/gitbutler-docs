@@ -51,7 +51,9 @@ jobs:
 
           git -C ../gitbutler checkout "$LATEST_VERSION"
           ./scripts/update-manpages.sh
-          echo "$LATEST_VERSION" > .scripts/current_docs_version.txt
+
+          echo "Updating scripts/current_docs_version.txt to $LATEST_VERSION"
+          echo "$LATEST_VERSION" > scripts/current_docs_version.txt
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
