@@ -14,8 +14,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
+#        with:
+#          ref: main
 
       - run: |
           git clone https://github.com/gitbutlerapp/gitbutler ../gitbutler
