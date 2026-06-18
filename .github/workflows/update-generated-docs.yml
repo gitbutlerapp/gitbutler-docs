@@ -1,6 +1,8 @@
 name: "Update Generated Docs"
 
 on:
+  push:
+    branches: [GB-1405/automate-cli-docs-update]
   workflow_dispatch:
   schedule:
     # every day at 2am UTC
