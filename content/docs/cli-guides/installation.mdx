@@ -36,3 +36,47 @@ If you go into any existing Git repository and run `but setup`, it will make som
 If you run almost any `but` command in an existing Git repository in an interactive terminal, it will ask you if you want to set it up and then run the command you were trying to run. So basically just run `but` anywhere to get started.
 
 At any time after this, you can run `but teardown` to undo the GitButler changes and go back to being a boring old Git project. It will not remove GitButler metadata, so feel free to go back and forth if you need to.
+
+## Shell completions
+
+The `but` CLI can generate completion scripts so your shell autocompletes subcommands and flags.
+
+```bash
+but completions [shell]
+```
+
+This prints a completion script to standard output. The `[shell]` argument is optional — when omitted, the shell is detected from your `$SHELL` environment variable. It supports `bash`, `zsh`, `fish`, and other shells; run `but completions --help` to see the full list.
+
+Set it up for your shell of choice:
+
+### Bash
+
+Add the following to your `~/.bashrc` to load completions in every new shell:
+
+```bash
+source <(but completions bash)
+```
+
+### Zsh
+
+Write the completion script to a directory on your `fpath`:
+
+```bash
+mkdir -p ~/.zfunc
+but completions zsh > ~/.zfunc/_but
+```
+
+Then make sure your `~/.zshrc` adds that directory to `fpath` before `compinit` runs:
+
+```bash
+fpath=(~/.zfunc $fpath)
+autoload -Uz compinit && compinit
+```
+
+### Fish
+
+```bash
+but completions fish > ~/.config/fish/completions/but.fish
+```
+
+After setting this up, restart your shell (or open a new terminal) and press `<Tab>` to complete `but` commands.
