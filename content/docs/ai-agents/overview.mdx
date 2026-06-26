@@ -17,6 +17,23 @@ You decide how far the agent goes. You can tell it to stop after local commits,
 or you can allow it to push and open pull requests. GitButler gives the agent
 version-control commands; your instructions decide when it stops.
 
+## Quick start
+
+Run this from the repository where your agent will work:
+
+```sh
+but agent setup
+```
+
+The wizard can install the GitButler skill, write GitButler version-control
+instructions for your agent, and prepare the repository with `but setup` when
+GitButler needs workspace mode. It shows the files and exact instructions before
+writing anything.
+
+For the full setup path, see [Getting started](/ai-agents/getting-started). To
+choose or adjust the policies by hand, see
+[Tuning agent behavior](/ai-agents/tuning-agent-behavior).
+
 ## What agents can do with GitButler
 
 - **Parallel branches in one workspace.** An agent can create separate branches

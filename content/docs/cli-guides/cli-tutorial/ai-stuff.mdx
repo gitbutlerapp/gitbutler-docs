@@ -1,10 +1,10 @@
 ---
 title: Working with AI
-description: Use AI-backed CLI options and install the GitButler skill for coding agents.
+description: Use AI-backed CLI options and set up GitButler for coding agents.
 ---
 
 Use `--ai` when you want the CLI to generate text for a single command. Use
-`but skill install` when you want a coding agent to use GitButler's
+`but agent setup` when you want a coding agent to use GitButler's
 version-control workflow.
 
 ## `--ai` options
@@ -30,18 +30,20 @@ More commands will gain `--ai` support over time.
 
 </Callout>
 
-## `but skill install`
+## `but agent setup`
 
-If your coding agent can read skills, install the GitButler skill with
-`but skill install`.
+Run the setup wizard from the repository where your coding agent will work:
 
 ```bash
-but skill install
+but agent setup
 ```
 
-The command prompts for install scope and skill format. It can install local or
-global skills for Agent Skills (`.agents`), Claude Code, OpenCode, Codex, GitHub
-Copilot, Cursor, and Windsurf.
+The wizard can install the GitButler skill, save workflow preferences in
+supported agent instruction files, and run `but setup` for the repository when
+GitButler needs workspace mode.
+
+Use `but skill install` when you only want to install or update the skill files
+without writing workflow instructions.
 
 To update an existing install without going through the prompts, run:
 
@@ -54,7 +56,7 @@ GitButler.
 
 ## Agent workflow docs
 
-`but skill install` is only the install step. For the full workflow:
+For the full workflow:
 
 - Start with [AI agents overview](/ai-agents/overview).
 - Install and configure the skill with

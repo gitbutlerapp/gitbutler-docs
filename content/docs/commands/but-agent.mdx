@@ -1,0 +1,47 @@
+---
+title: "`but agent`"
+description: "Set up GitButler for AI coding agents."
+---
+
+Use `but agent setup` to install GitButler agent skills and write workflow
+instructions into supported agent instruction files. To install or update the
+skill files without writing instructions, use
+[`but skill`](/commands/but-skill).
+
+Running `but agent` with no subcommand starts the same wizard.
+
+## Examples
+
+Start the interactive setup wizard:
+
+```text
+but agent setup
+```
+
+Print the default workflow instructions without modifying files:
+
+```text
+but agent setup --print
+```
+
+**Usage:** `but agent [COMMAND]`
+
+## Subcommands
+
+### `but agent setup`
+
+Configure GitButler skills and workflow instructions for coding agents.
+
+The wizard asks which agents you use, whether setup applies to this repository,
+globally, or both, and which workflow preferences to include. Before
+writing, it shows the skill install paths, instruction files, any repository
+`but setup` step, and the exact generated text.
+
+In a non-interactive terminal, use `--print`.
+
+**Usage:** `but agent setup [OPTIONS]`
+
+**Options:**
+
+* `--print` - Print the default workflow instructions without prompting or
+  modifying files
