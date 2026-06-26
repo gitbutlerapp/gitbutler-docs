@@ -46,6 +46,7 @@
     "but-update",
     "but-alias",
     "but-config",
+    "but-agent",
     "but-skill"
   ]
 }

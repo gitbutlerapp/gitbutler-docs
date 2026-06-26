@@ -6,6 +6,10 @@ description: "Manage AI agent skills for GitButler."
 Skills provide enhanced AI capabilities for working with GitButler through
 Claude Code, Codex, and other AI assistants.
 
+For most agent setup, use [`but agent setup`](/commands/but-agent). It wraps
+skill installation with workflow instructions. Use `but skill` when you only
+need to install, update, check, or place the skill files yourself.
+
 Use `but skill install` to install the GitButler skill files. By default,
 it prompts for scope (repository or global home directory) and then format.
 When run outside a git repository, local scope is unavailable and the
