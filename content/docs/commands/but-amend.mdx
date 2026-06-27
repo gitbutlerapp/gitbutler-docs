@@ -1,14 +1,21 @@
 ---
 title: "`but amend`"
-description: "Amend a file change into a specific commit and rebases any dependent commits."
+description: "Amend one or more file changes into a specific commit and rebases any dependent commits."
 ---
 
-Wrapper for `but rub <file> <commit>`.
+Use `but amend <commit> --changes <file-or-hunk>[,<file-or-hunk>...]`.
 
-**Usage:** `but amend <FILE> <COMMIT>`
+**Usage:** `but amend <TARGET_OR_SOURCE> [OPTIONS]`
 
 ## Arguments
 
-* `<FILE>` — File ID to amend (required)
-* `<COMMIT>` — Commit ID to amend into (required)
+* `<TARGET_OR_SOURCE>` — Commit ID to amend into.
+
+In the legacy two-positional form, this can be the source ID. (required)
+
+## Options
+
+* `-p`, `--changes` `<CHANGES>` — Uncommitted file or hunk CLI IDs to amend into the commit.
+
+Can be specified multiple times or as comma-separated values.
 
