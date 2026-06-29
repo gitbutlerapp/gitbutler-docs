@@ -21,9 +21,6 @@
     "but-apply",
     "but-clean",
     "but-pick",
-    "---Rules---",
-    "but-mark",
-    "but-unmark",
     "---Server Interactions---",
     "but-push",
     "but-pull",
@@ -46,7 +43,9 @@
     "but-update",
     "but-alias",
     "but-config",
+    "but-skill",
+    "---Miscellaneous---",
     "but-agent",
-    "but-skill"
+    "but-completions"
   ]
 }

@@ -19,7 +19,7 @@ It will not commit changes staged to other branches.
 
 Use `but commit empty --before <target>` or `but commit empty --after <target>`
 to insert a blank commit. This is useful for creating a placeholder
-commit that you can amend changes into later using `but mark`, `but rub` or `but absorb`.
+commit that you can amend changes into later using `but rub` or `but absorb`.
 
 **Usage:** `but commit <COMMAND> [BRANCH] [OPTIONS]`
 
@@ -30,14 +30,13 @@ commit that you can amend changes into later using `but mark`, `but rub` or `but
 Insert a blank commit before or after the specified commit.
 
 This is useful for creating a placeholder commit that you can
-then amend changes into later using `but mark`, `but rub` or `but absorb`.
+then amend changes into later using `but rub` or `but absorb`.
 
-You can modify the empty commit message at any time using `but reword`.
+You can provide a message with `-m` or modify it later using `but reword`.
 
 This allows for a more Jujutsu style workflow where you create commits
-first and then fill them in as you work. Create an empty commit, mark it
-for auto-commit, and then just work on your changes. Write the commit
-message whenever you prefer.
+first and then fill them in as you work. Create an empty commit and
+then rub or absorb changes into it whenever you prefer.
 
 ## Examples
 
@@ -77,12 +76,15 @@ If a target is provided without --before or --after, defaults to --before behavi
 
 * `--before` `<BEFORE>` — Insert the blank commit before this commit or branch
 * `--after` `<AFTER>` — Insert the blank commit after this commit or branch
+* `-m`, `--message` `<MESSAGE>` — Commit message for the inserted blank commit
 
 ## Options
 
 * `-m`, `--message` `<MESSAGE>` — Commit message
 * `--message-file` `<FILE>` — Read commit message from file
 * `-c`, `--create` — Whether to create a new branch for this commit. If the branch name given matches an existing branch, that branch will be used instead. If no branch name is given, a new branch with a generated name will be created
+* `--before` `<BEFORE>` — Insert the commit before this commit or branch
+* `--after` `<AFTER>` — Insert the commit after this commit or branch
 * `-o`, `--only` — Only commit staged files, not unstaged files
 * `-a`, `--all` — No-op compatibility flag for git commit -a
 * `-n`, `--no-hooks` — Bypass pre-commit hooks
