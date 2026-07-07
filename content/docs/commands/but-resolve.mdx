@@ -14,9 +14,12 @@ use this command to enter resolution mode, resolve the conflicts, and finalize.
 4. Finalize resolution: `but resolve finish`
    Or cancel: `but resolve cancel`
 
+Alternatively, resolve with AI in one step: `but resolve <commit-id> --ai`,
+or `but resolve --ai` to resolve all conflicted commits, oldest first.
+
 When in resolution mode, `but status` will also show that you're resolving conflicts.
 
-**Usage:** `but resolve <COMMAND> [COMMIT]`
+**Usage:** `but resolve <COMMAND> [COMMIT] [OPTIONS]`
 
 ## Subcommands
 
@@ -45,4 +48,10 @@ This discards all changes made during resolution and restores the workspace to i
 **Options:**
 
 * `-f`, `--force` — Forcibly remove any changes made
+
+## Options
+
+* `--ai` — Resolve the conflicts with the configured AI model and apply the result.
+
+With a commit ID this resolves only that commit; without one it resolves all conflicted commits in the workspace, oldest first. Undo the result with but undo.
 

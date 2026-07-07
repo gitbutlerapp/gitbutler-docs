@@ -14,7 +14,6 @@
     "but-commit",
     "but-stage",
     "but-branch",
-    "but-merge",
     "but-discard",
     "but-resolve",
     "but-unapply",
@@ -46,6 +45,7 @@
     "but-skill",
     "---Miscellaneous---",
     "but-agent",
-    "but-completions"
+    "but-completions",
+    "but-land"
   ]
 }
