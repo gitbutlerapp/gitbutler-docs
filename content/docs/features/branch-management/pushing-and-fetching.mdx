@@ -1,6 +1,6 @@
 ---
 title: Pushing and Fetching
-description: Configure Git authentication methods in GitButler for pushing and fetching from remote repositories using SSH, Git executable, or credential helpers.
+description: Configure Git authentication for pushing and fetching, and optionally land branches directly onto the target branch without pull requests.
 ---
 
 import ImageSection from "@/components/ImageSection"
@@ -17,3 +17,11 @@ You can set your preference (and test if it works) in your project's "Git authen
 />
 
 Once that's done, GitButler will be able to automatically fetch upstream work and push new branches to your upstream server.
+
+## Land branches without pull requests
+
+If your project does not review changes through pull requests, you can switch a project to the "push to main" workflow. During repository onboarding, check "Push to main / Skip pull requests mode". For an existing project, open the project settings, go to the Git section, and turn on "Land branches directly".
+
+With this on, the "Create PR" button on the bottom branch of a stack becomes a "Land" button. Landing integrates the branch straight into the target branch — fast-forwarding when possible, otherwise with a merge commit — and pushes the result. It works without a forge integration.
+
+Landing bypasses code review, CI checks, and branch protection, and a branch protected against direct pushes will reject it. The CLI equivalent is [`but land`](/commands/but-land).

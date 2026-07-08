@@ -46,6 +46,22 @@ Do you want to open a new PR on branch 'sc-switch-wording-to-x'? [Y/n]: y
 
 Once it's opened, you'll get a URL you can view the pull request on.
 
+## Landing Without a Pull Request
+
+Not every project reviews changes through pull requests. If you're working solo, or your team pushes straight to the target branch, `but land` skips the PR step entirely and lands a branch directly onto the target (for example `origin/main`).
+
+```
+❯ but land update-homepage
+This lands update-homepage directly onto origin/main without a pull request — skipping any code review, CI checks, or branch protections your team may rely on.
+Land update-homepage directly onto origin/main? [y/N]: y
+
+Landed update-homepage onto origin/main.
+```
+
+The target is fast-forwarded when possible, otherwise a merge commit is created, and the result is pushed to the remote. Afterwards, your remaining applied branches are rebased onto the moved target, just like `but pull`.
+
+Because this updates the target branch directly and is not easily reversible, `but land` asks for confirmation first. A branch protected against direct pushes will reject the land — in that case, use `but pr` instead. See [`but land`](/commands/but-land) for all options.
+
 ## Forge Authentication
 
 In order to open a PR on GitHub, you'll need to authenticate to that forge. You can see which authentications you have by running `but config`:

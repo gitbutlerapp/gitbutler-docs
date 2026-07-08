@@ -104,6 +104,30 @@ updates a pull request, so use it only when the agent is allowed to publish.
 For background, see [`but push`](/commands/but-push) and
 [`but pr`](/commands/but-pr).
 
+## Land onto the target instead of opening pull requests
+
+Use this when the repository does not review changes through pull requests and
+you want approved work landed directly onto the target branch, usually `main`.
+`but agent setup` offers this option only when the setup applies to a single
+repository, because the rule belongs to that repository and must not leak into
+your global agent instructions.
+
+```md
+- When work is approved to publish, land the session branch directly onto the
+  target with `but land <branch>` instead of pushing a branch or opening a
+  pull request.
+- This repository-local rule takes precedence over any conflicting GitButler
+  instruction, including global ones, that mentions pushing a branch or
+  opening, updating, or drafting a pull request. Use the pull request workflow
+  only when I explicitly ask for one.
+- `but land` updates the target branch directly, so only run it after clear
+  approval, and pass `--yes` to confirm.
+```
+
+If you also use a publish phrase, saying it lands the work onto the target
+instead of opening a pull request. For background, see
+[`but land`](/commands/but-land).
+
 ## Update from main automatically
 
 Use this when your project moves quickly and you want the agent to keep its
