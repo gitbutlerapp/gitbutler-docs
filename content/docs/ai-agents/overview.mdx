@@ -17,6 +17,15 @@ You decide how far the agent goes. You can tell it to stop after local commits,
 or you can allow it to push and open pull requests. GitButler gives the agent
 version-control commands; your instructions decide when it stops.
 
+<Callout type="info">
+  We ran coding agents through the same version-control tasks with Git, Jujutsu,
+  and GitButler and published the results at
+  [vcbench.dev](https://vcbench.dev). With GitButler, agents used about 80% fewer
+  commands and finished around 60% faster than with plain Git, at similar
+  reliability. It is our own benchmark, so the tasks, deterministic grader, and
+  full results are public for you to check.
+</Callout>
+
 ## Quick start
 
 Run this from the repository where your agent will work:
