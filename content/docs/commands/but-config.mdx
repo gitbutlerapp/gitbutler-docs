@@ -76,7 +76,7 @@ Unset a local value:
 
 View and manage forge configuration.
 
-Shows configured forge accounts (GitHub, GitLab, Bitbucket) and authentication status. Use subcommands to authenticate or forget accounts.
+Shows configured forge accounts (GitHub, GitLab, Bitbucket) and authentication status. Use subcommands to manage accounts or native GitHub stacked pull requests.
 
 Examples
 
@@ -96,30 +96,13 @@ Forget an account:
 
   but config forge forget username
 
-**Usage:** `but config forge`
-
-### `but config forge github-stacks`
-
-View or configure native GitHub stacked pull requests for the current
-repository.
-
-Examples
+View or configure native GitHub stacked pull requests:
 
   but config forge github-stacks
-  but config forge github-stacks auto
   but config forge github-stacks enable
-  but config forge github-stacks disable
 
-**Usage:** `but config forge github-stacks [STATUS]`
 
-**Arguments:**
-
-* `<STATUS>` — `auto` (default), `enable`, or `disable`. Stored in the
-  repository's Git config and shared with GitButler Desktop.
-
-See
-[Use native GitHub stacked pull requests](/features/forge-integration/github-integration#use-native-github-stacked-pull-requests)
-for what each mode does.
+**Usage:** `but config forge`
 
 ### `but config target`
 
@@ -282,3 +265,4 @@ Configure Ollama locally:
 
 * `--local` — Configure local repository git config instead of global user config
 * `--global` — Configure global user git config
+

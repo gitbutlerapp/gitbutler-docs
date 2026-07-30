@@ -21,7 +21,7 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-- `<SOURCES>` — The sources to squash.
+* `<SOURCES>` — The sources to squash.
 
 If --target is provided and `<SOURCES>` is omitted, the uncommitted area (zz) is used.
 
@@ -41,36 +41,32 @@ It is not possible to mix sources of different types, i.e., all sources must eit
 
 ## Options
 
-- `-m`, `--message` `<MESSAGE>` — The message to use for the new commit.
+* `-m`, `--message` `<MESSAGE>` — The message to use for the new commit.
 
 Can be supplied any number of times, each value being appended to the preceding ones with a blank line in between.
 
 This cannot be used when TARGET is the uncommitted area (zz).
-
-- `--no-message` — Creates the commit without a commit message.
+* `--no-message` — Creates the commit without a commit message.
 
 This cannot be used when TARGET is the uncommitted area (zz).
-
-- `-u`, `--use-target-message` — Use the message of the target.
+* `-u`, `--use-target-message` — Use the message of the target.
 
 The message of the source(s) will be discarded.
 
 This cannot be used when TARGET is the uncommitted area (zz).
-
-- `--use-source-message` — Use the message of the source(s).
+* `--use-source-message` — Use the message of the source(s).
 
 The message of the target will be discarded.
 
 Cannot be used if `<SOURCES>` are not committed, if TARGET is the uncommitted area (zz), or if moving committed changes between commits.
-
-- `-t`, `--target` `<TARGET>` — The target to squash into.
+* `-t`, `--target` `<TARGET>` — The target to squash into.
 
 If TARGET is a commit the sources will be added to the commit.
 
 If TARGET is a branch the sources will be added to that branch's newest commit (its tip).
 
 If TARGET is the uncommitted area (zz) the sources will be uncommitted.
-
-- `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
+

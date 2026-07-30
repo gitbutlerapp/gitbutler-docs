@@ -18,12 +18,11 @@ or you can allow it to push and open pull requests. GitButler gives the agent
 version-control commands; your instructions decide when it stops.
 
 <Callout type="info">
-  We ran coding agents through the same version-control tasks with Git, Jujutsu,
-  and GitButler and published the results at
-  [vcbench.dev](https://vcbench.dev). With GitButler, agents used about 80% fewer
-  commands and finished around 60% faster than with plain Git, at similar
-  reliability. It is our own benchmark, so the tasks, deterministic grader, and
-  full results are public for you to check.
+  We ran coding agents through the same version-control tasks with Git, Jujutsu, and GitButler and
+  published the results at [vcbench.dev](https://vcbench.dev). With GitButler, agents used about 80%
+  fewer commands and finished around 60% faster than with plain Git, at similar reliability. It is
+  our own benchmark, so the tasks, deterministic grader, and full results are public for you to
+  check.
 </Callout>
 
 ## Quick start
@@ -49,9 +48,9 @@ choose or adjust the policies by hand, see
   for independent work while staying in the same working directory. That gives
   you separate review branches without creating a new worktree, directory, and
   setup for each task.
-- **Selected files and hunks.** The agent can assign selected files or hunks to
-  a branch, then commit that branch. You can inspect the split before the work
-  is pushed.
+- **Selected files and hunks.** The agent can commit selected files or hunks by
+  passing their IDs positionally to `but commit`. Other uncommitted changes stay
+  untouched, so you can inspect the split before the work is pushed.
 - **Stacked branches for dependent work.** If one change depends on another, the
   agent can put the dependent branch on top of the branch it needs.
 - **History edits without an interactive rebase.** The agent can move a change
@@ -74,9 +73,13 @@ changes into that commit. The operation can still rewrite commits and can still
 conflict. The difference is control flow: the agent gets targeted tools for the
 edit instead of driving a multi-step rebase session.
 
-For more detail, see the [`but rub` command reference](/commands/but-rub) and
-the [CLI guide to moving changes between commits](/cli-guides/cli-tutorial/rubbing#moving-files-between-commits).
+The command depends on the task: use [`but amend`](/commands/but-amend) for
+uncommitted fixes that belong in an existing commit,
+[`but squash`](/commands/but-squash) to combine commits or move committed
+changes into another commit, and [`but uncommit`](/commands/but-uncommit) to
+move committed changes back to the uncommitted area.
 
-GitButler does not currently focus on a direct "push to main" workflow. Today,
-it is best used to get from agent changes to clean local branches, commits, and
-PRs or MRs quickly.
+For reviewed work, agents can push branches and open PRs or MRs with
+[`but pr`](/commands/but-pr). When you explicitly authorize a direct update to
+the target branch, [`but land`](/commands/but-land) can land a branch without a
+pull request.

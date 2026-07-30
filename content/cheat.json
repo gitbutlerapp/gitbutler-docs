@@ -1,7 +1,7 @@
 {
   "title": "GitButler CLI Cheat Sheet",
   "subtitle": "Essential commands for working with GitButler",
-  "description": "GitButler is a Git client that allows you to work on multiple branches simultaneously. This cheat sheet features the most important and commonly used GitButler CLI commands for easy reference.",
+  "description": "Use the GitButler CLI to inspect changes, manage parallel or stacked branches, edit commits, and publish your work.",
   "sections": [
     {
       "title": "Setup and Teardown",
@@ -25,11 +25,11 @@
       "items": [
         {
           "command": "but status",
-          "description": "Show workspace state, applied branches, staged files, and commits"
+          "description": "Show uncommitted changes, applied branches, and commits"
         },
         {
-          "command": "but status -f -v",
-          "description": "Show status with committed files listed and more verbose output"
+          "command": "but status -fv",
+          "description": "Show committed files, IDs, authors, and timestamps"
         },
         {
           "command": "but status -u",
@@ -38,16 +38,16 @@
         },
         {
           "command": "but diff",
-          "description": "Show changes in working directory compared to last commit"
+          "description": "Show uncommitted changes and their file and hunk IDs"
         },
         {
-          "command": "but diff [branch]",
-          "description": "Show changes specific to a branch",
+          "command": "but diff [id]",
+          "description": "Show changes for one file, commit, branch, or stack",
           "level": "advanced"
         },
         {
-          "command": "but show [commit|branch]",
-          "description": "Show details of a specific commit or branch"
+          "command": "but show [id]",
+          "description": "Show details for a commit or branch"
         }
       ]
     },
@@ -65,11 +65,11 @@
           "description": "Create a new parallel branch"
         },
         {
-          "command": "but branch new --anchor [branch]",
+          "command": "but branch new [name] --anchor [branch]",
           "description": "Create a new stacked branch from an existing branch"
         },
         {
-          "command": "but reword [branch]",
+          "command": "but reword [branch] -m \"[new-name]\"",
           "description": "Rename a branch",
           "level": "advanced"
         },
@@ -104,25 +104,21 @@
       "level": "basic",
       "items": [
         {
-          "command": "but commit -m \"[message]\"",
-          "description": "Commit all changes to current branch with a message"
+          "command": "but commit -b [branch] -m \"[message]\"",
+          "description": "Commit all uncommitted changes; create the branch if needed"
         },
         {
-          "command": "but commit [branch] -m \"[message]\"",
-          "description": "Commit changes to a branch if there is more than one applied",
+          "command": "but commit -b [branch] -m \"[message]\" [change-id]...",
+          "description": "Commit selected files or hunks from but diff"
+        },
+        {
+          "command": "but commit --interactive -b [branch] -m \"[message]\"",
+          "description": "Select changes for a commit in the terminal UI",
           "level": "advanced"
         },
         {
-          "command": "but stage [file] [branch]",
-          "description": "Stage specific file(s) for the next commit"
-        },
-        {
-          "command": "but commit --only [branch]",
-          "description": "Commit only changes already staged to the branch"
-        },
-        {
-          "command": "but commit -c [branch]",
-          "description": "Create a new branch and commit to it",
+          "command": "but commit --empty -b [branch] -m \"[message]\"",
+          "description": "Create an empty commit",
           "level": "advanced"
         }
       ]
@@ -133,17 +129,12 @@
       "level": "basic",
       "items": [
         {
-          "command": "but push",
-          "description": "Push all branches with unpushed commits"
-        },
-        {
           "command": "but push [branch]",
-          "description": "Push a specific branch to remote",
-          "level": "advanced"
+          "description": "Push one branch to its remote"
         },
         {
           "command": "but pull",
-          "description": "Pull latest upstream and integrate all active branches"
+          "description": "Update the target and rebase all applied branches"
         },
         {
           "command": "but pull --check",
@@ -151,12 +142,17 @@
           "level": "advanced"
         },
         {
-          "command": "but pr",
-          "description": "Create/update pull requests for active branches"
+          "command": "but pr new [branch] -t",
+          "description": "Push a branch or stack and create its reviews"
         },
         {
           "command": "but config forge",
           "description": "View and modify forge authentications"
+        },
+        {
+          "command": "but land [branch]",
+          "description": "Land a branch directly on the target without a pull request",
+          "level": "advanced"
         }
       ]
     },
@@ -166,26 +162,30 @@
       "level": "advanced",
       "items": [
         {
-          "command": "but reword [commit]",
-          "description": "Edit the commit message of a specified commit"
+          "command": "but reword [commit] -m \"[message]\"",
+          "description": "Change a commit message"
         },
         {
-          "command": "but commit empty --before [commit]",
-          "description": "Insert a blank commit before the specified commit",
-          "level": "advanced"
+          "command": "but amend -t [commit] [change-id]...",
+          "description": "Amend uncommitted files or hunks into a commit"
         },
         {
-          "command": "but pick [commit]",
+          "command": "but pick [commit] [branch]",
           "description": "Cherry-pick a commit into an applied branch"
         },
         {
-          "command": "but rub [target] [source]",
-          "description": "Combine two commits or branches together",
+          "command": "but squash [source] -t [target] -m \"[message]\"",
+          "description": "Combine commits",
           "level": "advanced"
         },
         {
-          "command": "but move [source] [target]",
-          "description": "Move a commit or branch to a different location",
+          "command": "but move [source] --above [target]",
+          "description": "Move a commit or branch above another commit or branch",
+          "level": "advanced"
+        },
+        {
+          "command": "but uncommit [commit]",
+          "description": "Move a commit back to uncommitted changes",
           "level": "advanced"
         }
       ]
@@ -209,7 +209,7 @@
           "description": "Show operation history of workspace"
         },
         {
-          "command": "but oplog restore [snapshot-id]",
+          "command": "but oplog restore [oplog-sha]",
           "description": "Restore workspace to a specific snapshot"
         },
         {
@@ -221,23 +221,23 @@
     },
     {
       "title": "Conflict Management",
-      "description": "Resolve conflicts and manage merges",
+      "description": "Resolve conflicts in commits",
       "level": "basic",
       "items": [
         {
-          "command": "but resolve",
-          "description": "Go into resolution mode"
+          "command": "but resolve [commit]",
+          "description": "Enter resolution mode for a conflicted commit"
         },
         {
-          "command": "but merge [branch]",
-          "description": "Merge an active branch into your upstream branch (local mode only)",
+          "command": "but resolve finish",
+          "description": "Finish the current conflict resolution",
           "level": "advanced"
         }
       ]
     },
     {
       "title": "Helper Commands",
-      "description": "Other miscellaneous commands including automatic file assignment or committing",
+      "description": "Open GitButler and configure terminal integrations",
       "level": "basic",
       "items": [
         {
@@ -263,24 +263,14 @@
           "level": "advanced"
         },
         {
-          "command": "but skill",
-          "description": "Install or check AI agent skills for GitButler",
+          "command": "but skill check --update",
+          "description": "Check and update installed GitButler agent skills",
           "level": "advanced"
-        }
-      ]
-    },
-    {
-      "title": "Auto-Assignment",
-      "description": "Configure automatic file assignment or committing",
-      "level": "advanced",
-      "items": [
-        {
-          "command": "but mark [branch|commit]",
-          "description": "Auto-assign changes to branch or auto-commit to commit"
         },
         {
-          "command": "but unmark",
-          "description": "Remove all marks from workspace"
+          "command": "but agent",
+          "description": "Configure GitButler for AI coding agents",
+          "level": "advanced"
         }
       ]
     }

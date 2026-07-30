@@ -5,7 +5,7 @@ description: Understanding GitButler's parallel branches that allow simultaneous
 
 import ImageSection from "@/components/ImageSection"
 
-Parllel branches are a powerful feature of GitButler that allow you to work on multiple branches at the same time, committing to them independently and simultaneously. This is a key part of the GitButler experience, allowing you to manage your work in a flexible and efficient way that is not possible with traditional Git tooling.
+Parallel branches are a powerful feature of GitButler that allow you to work on multiple branches at the same time, committing to them independently and simultaneously. This is a key part of the GitButler experience, allowing you to manage your work in a flexible and efficient way that is not possible with traditional Git tooling.
 
 ## Overview
 
@@ -20,11 +20,11 @@ Each lane also has its own staging area, so you can stage changes for each branc
   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/vbranch-ex.png"
   width="800"
   height="600"
-  subtitle="A project with three simultaneous branches, plus some staged changes in each one and some unstaged (unassigned) changes."
+  subtitle="A project with three simultaneous branches, plus staged changes in each one and some unstaged changes."
 />
 
 ## How it works
 
-Let's say that you make changes to two different files and `git status` would list two modified files. In GitButler, you can "assign" the change in each file to a different "virtual" branch, then when you commit, it will create a commit that only contains the changes in that file for that branch.
+Let's say that you make changes to two different files and `git status` would list two modified files. In GitButler, you can stage the change in each file to a different branch, then commit each branch independently.
 
 One of the nice things with this approach is that since you're starting from changes in a single working directory, you can be sure that all branches that you create from it will merge cleanly, as you're essentially starting from the merge product and extracting branches of work from it.

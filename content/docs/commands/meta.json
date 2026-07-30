@@ -10,6 +10,7 @@
     "but-status",
     "but-diff",
     "but-show",
+    "but-help-cli-ids",
     "---Branching and Committing---",
     "but-commit",
     "but-branch",
@@ -23,6 +24,7 @@
     "but-push",
     "but-pull",
     "but-pr",
+    "but-land",
     "---Editing Commits---",
     "but-absorb",
     "but-reword",
@@ -38,13 +40,10 @@
     "but-gui",
     "but-tui",
     "but-update",
+    "but-completions",
     "but-alias",
     "but-config",
-    "but-skill",
-    "---Miscellaneous---",
     "but-agent",
-    "but-completions",
-    "but-help-cli-ids",
-    "but-land"
+    "but-skill"
   ]
 }

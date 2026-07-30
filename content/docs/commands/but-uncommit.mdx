@@ -9,12 +9,13 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-- `<SOURCES>` — One or more commits or committed files to uncommit.
+* `<SOURCES>` — One or more commits or committed files to uncommit.
 
-A whole commit is uncommitted by its commit ID; a single file is uncommitted with `<commit-id>:<file-id>`. (required)
+A whole commit is uncommitted by its commit ID; a single file is uncommitted with `<commit-id>`:`<file-id>`. (required)
 
 ## Options
 
-- `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
+
