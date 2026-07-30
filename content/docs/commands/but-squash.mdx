@@ -23,19 +23,19 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 * `<SOURCES>` — The sources to squash.
 
-If --target is provided and `<SOURCES>` is omitted, the uncommitted area (zz) is used.
+If --target is provided and &lt;SOURCES&gt; is omitted, the uncommitted area (zz) is used.
 
-If `<SOURCES>` is one or more commits they will be squashed into the target.
+If &lt;SOURCES&gt; is one or more commits they will be squashed into the target.
 
-If `<SOURCES>` is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed.
+If &lt;SOURCES&gt; is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed.
 
-If TARGET is omitted and `<SOURCES>` is exactly one branch all commits on the branch will be squashed.
+If TARGET is omitted and &lt;SOURCES&gt; is exactly one branch all commits on the branch will be squashed.
 
-If `<SOURCES>` is one or more uncommitted files or hunks they will be squashed into the target.
+If &lt;SOURCES&gt; is one or more uncommitted files or hunks they will be squashed into the target.
 
-If `<SOURCES>` is the uncommitted area (zz) all uncommitted changes will be squashed into the target.
+If &lt;SOURCES&gt; is the uncommitted area (zz) all uncommitted changes will be squashed into the target.
 
-If `<SOURCES>` is a committed file those changes will be moved into the target. All changes must come from the same commit. It is not possible to move changes from multiple source commits into a single target.
+If &lt;SOURCES&gt; is a committed file those changes will be moved into the target. All changes must come from the same commit. It is not possible to move changes from multiple source commits into a single target.
 
 It is not possible to mix sources of different types, i.e., all sources must either be commits, branches, uncommitted files, zz, or committed files.
 
@@ -58,7 +58,7 @@ This cannot be used when TARGET is the uncommitted area (zz).
 
 The message of the target will be discarded.
 
-Cannot be used if `<SOURCES>` are not committed, if TARGET is the uncommitted area (zz), or if moving committed changes between commits.
+Cannot be used if &lt;SOURCES&gt; are not committed, if TARGET is the uncommitted area (zz), or if moving committed changes between commits.
 * `-t`, `--target` `<TARGET>` — The target to squash into.
 
 If TARGET is a commit the sources will be added to the commit.
