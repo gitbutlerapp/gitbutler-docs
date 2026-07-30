@@ -1,11 +1,11 @@
 ---
-title: Branching and Commiting
-description: Branch and commit and whatnot
+title: Branching and committing
+description: Create branches, commit changes, and stack dependent work with the GitButler CLI.
 ---
 
 Now that your project is setup and GitButler is installed and configured, you can start branching and committing.
 
-## The Simple Flow
+## The simple flow
 
 Let’s begin with a simple workflow, one that should be familiar to Git users. We will:
 
@@ -42,7 +42,7 @@ You can also simply run `but` to get the status. Check out [`but alias`](/comman
 
 </Callout>
 
-### Create a Branch
+### Create a branch
 
 Let’s look at a very simple case first. Let’s say we’ve just modified some files and don’t have a branch yet. Our status might look like this:
 
@@ -68,7 +68,7 @@ Now if you run `but status` you can see your new empty branch:
 but status
 ```
 
-### Commit to a Branch
+### Commit to a branch
 
 Now we can commit our unassigned changes to that branch. You can simply assign your changes to the branch first to commit later (we'll cover that later in [Rubbing](./rubbing)), but for now let's keep it simple and just commit them directly using the `but commit` command.
 
@@ -90,7 +90,7 @@ You also don't _need_ to create a branch to commit if you have none currently ap
 
 </Callout>
 
-## Stacked and Parallel Branches
+## Stacked and parallel branches
 
 Ok, that’s the simple case, pretty straightforward. However, GitButler can also do some pretty cool things that Git either cannot do or struggles with, namely:
 
@@ -99,7 +99,7 @@ Ok, that’s the simple case, pretty straightforward. However, GitButler can als
 
 That is, both multiple independent and dependent active branches. Even at the same time if you want.
 
-### Parallel Branches
+### Parallel branches
 
 Parallel branches is very simple, you can create multiple simultaneously active branches that you can assign and commit changes to in your workspace.
 
@@ -119,10 +119,10 @@ Now if we run `but status` we can see our previous branch and our new empty bran
 but status
 ```
 
-We can see our previous branch and the commit we made, our new empty branch and a couple of modified files. Now we can commit the unassigned changes to that branch with `but commit -m "liked tweets changes" liked-tweets`
+We can see our previous branch and the commit we made, our new empty branch and a couple of modified files. Now we can commit the unassigned changes to that branch with `but commit -b liked-tweets -m "liked tweets changes"`.
 
 ```cli [branching-and-commiting-but-commit-2, 88px]
-but commit -m "liked tweets changes" liked-tweets
+but commit -b liked-tweets -m "liked tweets changes"
 ```
 
 And now we have one commit in each lane.
@@ -141,9 +141,10 @@ We can also see which files were modified in each commit with the `--files` or `
 but status -f
 ```
 
-### Stacked Branches
+### Stacked branches
 
-The other way you can create new branches is to make them stacked, that is, one depends on another one and has to be merged in that order.
+The other way you can create new branches is to stack them. One branch depends
+on another, but each branch can still be reviewed independently.
 
 To create a new stacked branch in GitButler, you can run `but branch new` with a target branch ID. If we go back in time and instead stack our `liked-tweets` branch, we can make it dependent on the `user-bookmarks` branch by providing it as a stacking "anchor" with `-a` option:
 
@@ -161,20 +162,30 @@ but status
 Now we can commit to our stacked branch.
 
 ```cli [branching-and-commiting-but-commit-3, 88px]
-but commit -m "liked tweets changes" liked-tweets-stacked
+but commit -b liked-tweets-stacked -m "liked tweets changes"
 ```
 
 ```cli [branching-and-commiting-but-status-9, 352px]
 but status
 ```
 
-Now if you push to a forge, GitButler will set up the reviews (Pull Request or Merge Request) as a stacked request, where `user-bookmarks` has to be merged either before or with `liked-tweets` but they can be reviewed independently.
+Once you have connected a forge account with `but config forge auth`, publish
+the whole stack from its top branch:
 
-## Assigning and Committing Changes
+```bash
+but pr new liked-tweets-stacked -t
+```
+
+GitButler pushes both branches and opens a review for each one, with
+`liked-tweets-stacked` targeting `user-bookmarks`. See
+[Create stacked branches and pull requests](/features/branch-management/stacked-branches)
+for how GitButler keeps the stack in sync.
+
+## Assigning and committing changes
 
 The other way to commit to a branch is to explicitly assign changes to it. This is somewhat like running `git add` in Git, where you’re staging some changes for a future commit. However, unlike Git where you have to do this or override it with `-a` or something, the default in GitButler is to commit all changes by default and only leave out unassigned changes with the flag `-o` or `--only`.
 
-### Staging Changes
+### Staging changes
 
 So, how do we stage changes to a specific branch and then only commit those changes?
 
