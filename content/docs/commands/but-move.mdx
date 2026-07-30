@@ -14,13 +14,13 @@ may be created as part of the move.
 
 **A branch is created when:**
 
-* You move a commit or committed file relative to a branch
-* You unstack a commit or committed file
+- You move a commit or committed file relative to a branch
+- You unstack a commit or committed file
 
 **A commit is created when:**
 
-* You move a committed file relative to a commit or branch
-* You unstack a committed file
+- You move a committed file relative to a commit or branch
+- You unstack a committed file
 
 Note the overlap between the above conditions. For example, unstacking a committed file both
 creates a new commit for the file and a branch for the commit.
@@ -31,7 +31,7 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-* `<SOURCES>` — One or more sources to move.
+- `<SOURCES>` — One or more sources to move.
 
 You may provide one of the following kinds of sources:
 
@@ -49,33 +49,36 @@ Providing any of the sources as an argument for a target such as --above or --be
 
 ## Options
 
-* `-b`, `--branch` `<BRANCH>` — Place <SOURCES> on the branch BRANCH.
+- `-b`, `--branch` `<BRANCH>` — Place `<SOURCES>` on the branch BRANCH.
 
 If BRANCH does not exist, it is created as an unstacked branch.
 
 If BRANCH is omitted, an unstacked branch with a generated name is created. This is exactly equivalent to --unstack and is allowed for any source kind.
 
-If BRANCH is provided, <SOURCES> must be either commits or committed files.
+If BRANCH is provided, `<SOURCES>` must be either commits or committed files.
 
-Attempting to place <SOURCES> on a branch that exists but is not applied is an error.
-* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place <SOURCES> above BRANCH_OR_COMMIT, which must be an applied branch or commit.
+Attempting to place `<SOURCES>` on a branch that exists but is not applied is an error.
 
-If BRANCH_OR_COMMIT is a commit, <SOURCES> are placed on the same branch as the targeted commit.
+- `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place `<SOURCES>` above BRANCH_OR_COMMIT, which must be an applied branch or commit.
+
+If BRANCH_OR_COMMIT is a commit, `<SOURCES>` are placed on the same branch as the targeted commit.
 
 If BRANCH_OR_COMMIT is a branch, the sources are placed on a new branch above the targeted branch.
 
-This target is applicable for all kinds of <SOURCES>.
-* `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place <SOURCES> below BRANCH_OR_COMMIT, which must be an applied branch or commit.
+This target is applicable for all kinds of `<SOURCES>`.
 
-If BRANCH_OR_COMMIT is a commit, the <SOURCES> are placed on the same branch as the targeted commit.
+- `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place `<SOURCES>` below BRANCH_OR_COMMIT, which must be an applied branch or commit.
 
-If BRANCH_OR_COMMIT is a branch, <SOURCES> are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
+If BRANCH_OR_COMMIT is a commit, the `<SOURCES>` are placed on the same branch as the targeted commit.
 
-This target is only applicable for <SOURCES> that are commits or committed files.
-* `--unstack` — Unstack <SOURCES> from their current stacks.
+If BRANCH_OR_COMMIT is a branch, `<SOURCES>` are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
 
---unstack does not take an argument, so --unstack <SOURCES> and <SOURCES> --unstack are equivalent.
-* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+This target is only applicable for `<SOURCES>` that are commits or committed files.
+
+- `--unstack` — Unstack `<SOURCES>` from their current stacks.
+
+--unstack does not take an argument, so `--unstack <SOURCES>` and `<SOURCES> --unstack` are equivalent.
+
+- `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
-
