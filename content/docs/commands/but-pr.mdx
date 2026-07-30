@@ -15,7 +15,7 @@ Running but pr without a subcommand defaults to but pr new, which will prompt yo
 
 Create a new review for a branch. If no branch is specified, you will be prompted to select one. If there is only one branch without a review, you will be asked to confirm.
 
-If the branch is the top of a stack, GitButler pushes the stack and creates missing reviews from the bottom upward. It also updates the stack metadata using native GitHub stacks when enabled and supported, or review descriptions on other forges.
+If the branch is part of a stack, GitButler pushes that branch and its ancestors and creates missing reviews from the bottom upward. It also updates stack metadata using native GitHub stacks when enabled and supported, or review descriptions otherwise.
 
 **Usage:** `but pr new [BRANCH] [OPTIONS]`
 
