@@ -17,6 +17,9 @@ When NOT to use this: if your project lands changes through pull requests / code
 use `but push` and open a PR (`but pr new`) instead — `but land` deliberately bypasses that
 process. On a real remote, a branch protected against direct pushes will reject the land.
 
+Landing a segment with other segments below it is refused unless `--whole-stack` is
+passed with the stack's top segment, which lands the entire stack.
+
 ## Examples
 
 Land a branch by its CLI ID:
@@ -31,6 +34,12 @@ Land a branch by name, forcing a merge commit:
 but land my-feature-branch --no-ff
 ```
 
+Land an entire stack by naming its top segment:
+
+```text
+but land top-branch --whole-stack
+```
+
 **Usage:** `but land <BRANCH> [OPTIONS]`
 
 ## Arguments
@@ -41,4 +50,5 @@ but land my-feature-branch --no-ff
 
 * `--yes` — Skip the confirmation prompt
 * `--no-ff` — Always create a merge commit, even when the branch can be fast-forwarded
+* `--whole-stack` — Land the entire stack: BRANCH must be the top segment, and the segments below it are published to the target along with it
 

@@ -26,4 +26,7 @@ You can also use `but reword <branch-id>` to rename the branch.
 
 By default the diff will be shown unless it's large. The diff will always be shown if --diff is passed, regardless of the size of the diff. (default: `false`)
 * `--no-diff` — Never show the diff inside the editor (default: `false`)
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 

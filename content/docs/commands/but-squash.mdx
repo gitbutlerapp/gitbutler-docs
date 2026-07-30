@@ -1,25 +1,72 @@
 ---
 title: "`but squash`"
-description: "Squash commits together."
+description: "Squash commits, branches, or changes."
 ---
 
-Can be invoked in three ways:
-1. Using commit identifiers: `but squash <commit1> <commit2>` or `but squash <commit1> <commit2> <commit3>...`
-   - Squashes all commits except the last into the last commit
-2. Using a commit range: `but squash <commit1>..<commit4>`
-   - Squashes all commits in the range into the last commit in the range
-3. Using a branch name: `but squash <branch>`
-   - Squashes all commits in the branch into the bottom-most commit
+Squash is flexible in the ways it can move changes around. It can
 
-**Usage:** `but squash [COMMITS] [OPTIONS]`
+- Squash commits into other commits
+- Squash branches into commits
+- Move changes between commits
+- Amend uncommitted changes into a commit
+- Uncommit commits
+- Uncommit changes in commits
+
+If no message-related flag is passed when squashing commits or branches, an editor may be
+opened where the new message can be composed; other squashes keep the target's message.
+
+For more details about CLI IDs, see `but help cli-ids`.
+
+**Usage:** `but squash [SOURCES] [OPTIONS]`
 
 ## Arguments
 
-* `<COMMITS>` — Commit identifiers, a range (commit1..commit2), or a branch name
+* `<SOURCES>` — The sources to squash.
+
+If --target is provided and <SOURCES> is omitted, the uncommitted area (zz) is used.
+
+If <SOURCES> is one or more commits they will be squashed into the target.
+
+If <SOURCES> is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed.
+
+If TARGET is omitted and <SOURCES> is exactly one branch all commits on the branch will be squashed.
+
+If <SOURCES> is one or more uncommitted files or hunks they will be squashed into the target.
+
+If <SOURCES> is the uncommitted area (zz) all uncommitted changes will be squashed into the target.
+
+If <SOURCES> is a committed file those changes will be moved into the target. All changes must come from the same commit. It is not possible to move changes from multiple source commits into a single target.
+
+It is not possible to mix sources of different types, i.e., all sources must either be commits, branches, uncommitted files, zz, or committed files.
 
 ## Options
 
-* `-d`, `--drop-message` — Drop source commit messages and keep only the target commit's message
-* `-m`, `--message` `<MESSAGE>` — Provide a new commit message for the resulting commit
-* `-i`, `--ai` `<AI>` — Generate commit message using AI with optional user summary or instructions. Use --ai by itself or --ai="your instructions" (equals sign required for value)
+* `-m`, `--message` `<MESSAGE>` — The message to use for the new commit.
+
+Can be supplied any number of times, each value being appended to the preceding ones with a blank line in between.
+
+This cannot be used when TARGET is the uncommitted area (zz).
+* `--no-message` — Creates the commit without a commit message.
+
+This cannot be used when TARGET is the uncommitted area (zz).
+* `-u`, `--use-target-message` — Use the message of the target.
+
+The message of the source(s) will be discarded.
+
+This cannot be used when TARGET is the uncommitted area (zz).
+* `--use-source-message` — Use the message of the source(s).
+
+The message of the target will be discarded.
+
+Cannot be used if <SOURCES> are not committed, if TARGET is the uncommitted area (zz), or if moving committed changes between commits.
+* `-t`, `--target` `<TARGET>` — The target to squash into.
+
+If TARGET is a commit the sources will be added to the commit.
+
+If TARGET is a branch the sources will be added to that branch's newest commit (its tip).
+
+If TARGET is the uncommitted area (zz) the sources will be uncommitted.
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 
