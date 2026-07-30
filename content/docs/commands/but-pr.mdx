@@ -13,7 +13,9 @@ Running but pr without a subcommand defaults to but pr new, which will prompt yo
 
 ### `but pr new`
 
-Create a new review for a branch. If no branch is specified, you will be prompted to select one. If there is only one branch without a review, you will be asked to confirm
+Create a new review for a branch. If no branch is specified, you will be prompted to select one. If there is only one branch without a review, you will be asked to confirm.
+
+If the branch is the top of a stack, GitButler pushes the stack and creates missing reviews from the bottom upward. It also updates the stack metadata using native GitHub stacks when enabled and supported, or review descriptions on other forges.
 
 **Usage:** `but pr new [BRANCH] [OPTIONS]`
 
@@ -30,18 +32,6 @@ Create a new review for a branch. If no branch is specified, you will be prompte
 * `--no-hooks` — Bypass pre-push hooks
 * `-t`, `--default` — Use the default content for the review title and description, skipping any prompts. If the branch contains only a single commit, the commit message will be used (default: `false`)
 * `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
-
-When `<BRANCH>` is the top of a stack, `but pr new <BRANCH>` pushes the whole
-stack and creates missing reviews from the bottom upward. GitButler sets each
-review's base to the nearest branch below it that also has a review.
-
-Add `-t` to skip the title and description prompts. `-m` and `-F` apply only to
-`<BRANCH>`; branches below it use their default titles and descriptions.
-
-After creating the reviews, GitButler updates either GitHub's native stack
-membership or the stack information in the review descriptions. See
-[Create stacked branches and pull requests](/features/branch-management/stacked-branches)
-for the full workflow.
 
 ### `but pr auto-merge`
 
@@ -105,3 +95,4 @@ Configure the template to use for review descriptions. This will list all availa
 ## Options
 
 * `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
+

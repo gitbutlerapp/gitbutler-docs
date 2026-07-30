@@ -6,7 +6,7 @@ description: Inspect and edit your GitButler workspace from interactive terminal
 import ImageSection from "@/components/ImageSection"
 
 Use `but tui` when you want a live, keyboard-first GitButler workspace in your
-terminal. It opens an interactive view of your workspace state: unassigned
+terminal. It opens an interactive view of your workspace state: uncommitted
 changes, active branches, commits, files, and the common base.
 
 ```sh
@@ -27,11 +27,11 @@ up yet, run [`but setup`](/commands/but-setup) first.
 ## Pick the right terminal workflow
 
 - Use `but tui` for the full workspace view: branches, commits, assigned
-  changes, unassigned changes, diffs, and local history operations.
+  changes, uncommitted changes, diffs, and local history operations.
 - Use [`but diff --tui`](/commands/but-diff) for focused diff review without the
   full workspace editing surface.
-- Use [`but stage`](/commands/but-stage) when you want to assign selected files
-  or hunks to a branch.
+- Mark files or hunks inside `but tui`, then press `c` when you want to commit
+  only those changes.
 - Use [command mode](#use-command-mode) inside `but tui` when you need a `but`
   command without leaving the TUI.
 - Use plain CLI commands when you need repeatable output for scripts, agents, or
@@ -41,14 +41,17 @@ up yet, run [`but setup`](/commands/but-setup) first.
 
 In the full workspace TUI, you can:
 
-- Inspect unassigned changes, branch lanes, commits, and file-level changes.
+- Inspect uncommitted changes, branch lanes, commits, and file-level changes.
 - Open a details pane for the selected branch, commit, file, or hunk.
-- Create commits and empty commits.
+- Create commits from all or selected uncommitted changes, and insert empty
+  commits.
 - Create branches.
 - Move commits or branches.
-- Rub changes into a branch or commit.
+- Squash commits, amend changes into commits, or move committed changes back to
+  the uncommitted area.
 - Mark multiple commits and act on them together.
 - Reword commits or branch names.
+- Open selected files in another program.
 - Discard local work after a confirmation prompt.
 - Undo and redo GitButler operations.
 
@@ -61,7 +64,7 @@ Most navigation uses Vim-style keys, with arrow keys where they make sense.
 
 - `j` / `k` move down and up.
 - `Shift+j` / `Shift+k` jump to the next or previous section.
-- `g` jumps to unassigned changes.
+- `g` jumps to uncommitted changes.
 - `Shift+g` jumps to the common merge base.
 - `t` opens the branch picker.
 - `Esc` backs out of the current mode.
@@ -82,22 +85,62 @@ Select a branch, commit, file, or hunk, then press `d` to open details. The deta
 - `+` and `-` resize the split details pane.
 - In details mode, `j` / `k` move between hunks.
 - In details mode, `Shift+j` / `Shift+k` scroll.
-- In details mode, `r` starts rubbing from the current hunk.
-- In details mode, `Shift+c` copies the current hunk.
+- In details mode, `r` starts squash mode from the current uncommitted hunk.
+- In details mode, `y` copies the current hunk.
 
 ## Change local history
 
-- Press `c` to create a commit from the selected unassigned or assigned changes. Press `i` in commit mode to write the message inline, `e` to leave it empty, or `b` to commit to a new branch.
+- Press `c` to create a commit from the selected uncommitted changes. Press `i` in commit mode to write the message inline, `e` to leave it empty, or `b` to commit to a new branch.
 - Press `n` to insert an empty commit.
 - Press `b` to create a branch.
 - Press `m` to move the selected commit or branch, then choose the destination and press `Enter`.
-- Press `r` to rub the selected source into another target. In rub mode, `Shift+t` keeps the target message and `Shift+s` keeps the source message.
-- Press `Space` to mark commits, then use `r` to rub marked commits together.
+- Press `r` to enter squash mode with the selected source. Choose a target and
+  press `Enter`. The target is labeled with the operation GitButler will run:
+  `amend`, `squash`, or `uncommit`.
+- In squash mode, press `u` to keep the target commit message when combining
+  commits.
+- Press `Space` to mark multiple commits, then press `r` to squash them into
+  another commit.
 - Press `Enter` on a commit or branch to reword it inline. Press `Shift+m` to reword a commit in your configured editor.
 - Press `x` to discard the selected local work. Destructive actions ask for confirmation.
 - Press `u` to undo the last operation and `Shift+u` to redo it.
 
 GitButler records these operations in the operations log, so you can also inspect and recover with [`but oplog`](/commands/but-oplog), [`but undo`](/commands/but-undo), and [`but redo`](/commands/but-redo).
+
+## Commit selected changes
+
+You do not need to stage changes before committing them. Mark the files or
+hunks that belong together, then create the commit directly:
+
+1. Select an uncommitted file and press `Space` to mark it.
+2. To select individual hunks, open the file details with `d`, focus the details
+   pane with `l`, and press `Space` on each hunk you want.
+3. Press `c`, choose the target branch or commit position, and press `Enter`.
+
+Commit mode opens your configured editor for the message by default. Press `i`
+before confirming to write the message inline, `e` to leave it empty, or `b` to
+create the commit on a new branch.
+
+## Open files in another program
+
+Select an uncommitted or committed file and press `o` to open it in the default
+available program. Press `Shift+o` to choose a program instead.
+
+You can mark multiple files or hunks before opening them. When multiple items
+are marked, GitButler opens the containing files rather than individual hunks.
+
+## Restore your last selection
+
+Start the TUI with `--remember-selection` to remember supported selections such
+as an uncommitted item, branch, commit, or file when you quit, then restore that
+selection the next time you use the same option:
+
+```sh
+but tui --remember-selection
+```
+
+If the saved branch, commit, or file no longer exists, the TUI starts with its
+normal default selection.
 
 ## Use command mode
 
@@ -141,34 +184,3 @@ Use `--no-tui` for a one-off plain diff:
 ```sh
 but diff --no-tui
 ```
-
-## Stage hunks interactively
-
-Run [`but stage`](/commands/but-stage) without file arguments to open the hunk
-picker. This is the most precise way to assign only part of a file to a branch.
-
-```sh
-but stage
-but stage --branch my-branch
-```
-
-If you have one active branch, GitButler uses it. If you have several active branches, GitButler asks which branch to stage to first. If you have no branches, GitButler creates one with a generated name.
-
-The stage picker starts with all hunks selected. When you confirm, selected hunks are assigned to the target branch and deselected hunks are explicitly left unassigned.
-
-- `j` / `k` move through files or hunks, depending on the active pane.
-- `h` / `l` / `Tab` switch panes.
-- `Space` toggles the selected file or hunk.
-- `a` selects all hunks.
-- `n` deselects all hunks.
-- `PageDown` / `PageUp` scroll the diff pane.
-- `s` or `Enter` stages the selected hunks.
-- `q` or `Esc` cancels.
-
-After staging, commit only the assigned changes with:
-
-```sh
-but commit --only -m "Update billing copy" my-branch
-```
-
-Without `--only`, `but commit` also includes eligible unassigned changes for that branch.

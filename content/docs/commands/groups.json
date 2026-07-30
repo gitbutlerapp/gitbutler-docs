@@ -1,18 +1,9 @@
 {
-  "Basics": [
-    "but-setup",
-    "but-teardown"
-  ],
-  "Inspection": [
-    "but-status",
-    "but-diff",
-    "but-show"
-  ],
+  "Basics": ["but-setup", "but-teardown"],
+  "Inspection": ["but-status", "but-diff", "but-show", "but-help-cli-ids"],
   "Branching and Committing": [
     "but-commit",
-    "but-stage",
     "but-branch",
-    "but-merge",
     "but-discard",
     "but-resolve",
     "but-unapply",
@@ -20,17 +11,8 @@
     "but-clean",
     "but-pick"
   ],
-  "Rules": [
-    "but-mark",
-    "but-unmark"
-  ],
-  "Server Interactions": [
-    "but-push",
-    "but-pull",
-    "but-pr"
-  ],
+  "Server Interactions": ["but-push", "but-pull", "but-pr", "but-land"],
   "Editing Commits": [
-    "but-rub",
     "but-absorb",
     "but-reword",
     "but-uncommit",
@@ -38,17 +20,15 @@
     "but-squash",
     "but-move"
   ],
-  "Operations Log": [
-    "but-oplog",
-    "but-undo",
-    "but-redo"
-  ],
+  "Operations Log": ["but-oplog", "but-undo", "but-redo"],
   "Helper Commands": [
     "but-gui",
     "but-tui",
     "but-update",
+    "but-completions",
     "but-alias",
     "but-config",
+    "but-agent",
     "but-skill"
   ]
 }

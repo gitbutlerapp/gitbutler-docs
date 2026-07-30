@@ -1,55 +1,42 @@
 ---
-title: Editing Commits
-description: Editing commit messages and edit mode with GitButler.
+title: Edit commit messages and branch names
+description: Reword commits and rename branches with the GitButler CLI.
 ---
 
-While you can rub changes in and out of commits, you can also edit the commit
-message of any commit in your workspace quite easily.
+Use `but reword` to change a commit message or branch name. When you reword a commit, GitButler rewrites it and rebases dependent work above it.
 
-## Editing Commit Messages
+## Change a commit message
 
-You can edit commit messages with the `but describe` command. So if we have this status:
+Find the commit ID:
 
-{/* restore [d69fffa7c6eb] */}
-
-```cli [editing-commits-but-status-1, 330px]
+```bash
 but status
 ```
 
-Then you can edit the message of any commit by running `but reword <sha>`, which will open up your editor of choice with the existing commit message and when you exit the editor, replace that message in the commit and rebase everything above it.
+Then pass the new message:
 
-The editor would look something like this:
-
-```
-add user changes
-
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-#
-# Changes in this commit:
-#       modified:   app/models/user.rb
-#       modified:   config/routes.rb
-#
-~
-~
-~
-~
+```bash
+but reword nn -m "Add user bookmarks"
 ```
 
-Pretty simple.
+Omit `-m` when you want to edit the existing message in your configured editor:
 
-## Changing Branch Names
-
-Just like changing commit messages, you can also use `but reword` to change the name of a branch. So, in the above example, if we wanted to change the branch name from `user-bookmarks` to `feature-awesome-thing`, we can do this:
-
-```cli [editing-commits-but-reword-1, 88px]
-but reword -m feature-awesome-thing us
+```bash
+but reword nn
 ```
 
-Et voila.
+Use `--fix-formatting` to wrap the existing message to 72 characters without opening an editor:
 
-```cli [editing-commits-but-status-2, 330px]
-but status
+```bash
+but reword nn --fix-formatting
 ```
 
-{/* TODO: Edit Mode */}
+## Rename a branch
+
+Pass the branch name or CLI ID as the target:
+
+```bash
+but reword user-bookmarks -m feature/user-bookmarks
+```
+
+Run `but status` to see the new branch name.

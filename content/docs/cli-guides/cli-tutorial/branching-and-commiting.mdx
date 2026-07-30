@@ -1,299 +1,90 @@
 ---
 title: Branching and committing
-description: Create branches, commit changes, and stack dependent work with the GitButler CLI.
+description: Create branches, commit selected changes, and stack dependent work with the GitButler CLI.
 ---
 
-Now that your project is setup and GitButler is installed and configured, you can start branching and committing.
+Now that your project is set up, you can create a branch and commit your first changes.
 
-## The simple flow
+## Create and commit on a branch
 
-Let’s begin with a simple workflow, one that should be familiar to Git users. We will:
-
-- Do some work
-- Create a new branch
-- Commit to that branch
-
-### Status
-
-Let’s begin by seeing what the status of the working directory is by running `but status`. This will tell you a little more than `git status`, it will list:
-
-1. All files in your working directory that differ from your base branch (`origin/main`) the last time you updated it that aren’t assigned to a branch
-2. A list of the active branches that you have and
-   1. All assigned file changes in each branch
-   2. All commits in each branch
-
-So it's sort of like a combination of `git status` and a shortlog of what is on your branches that is not on `origin/master`.
-
-It looks something like this:
-
-{/* restore [f0f437258043] */}
-{/* run but rub wu gemfile-fixes */}
-{/* run but rub te feature-bookmarks */}
-
-```cli [branching-and-commiting-but-status-1, 506px]
-but status
-```
-
-Here we can see three applied branches: `gemfile-fixes` stacked on `feature-bookmarks` and independent `sc-branch-26`. There are also three unassigned files.
-
-<Callout type="info">
-
-You can also simply run `but` to get the status. Check out [`but alias`](/commands/but-alias) to set the default of `but` to something else.
-
-</Callout>
-
-### Create a branch
-
-Let’s look at a very simple case first. Let’s say we’ve just modified some files and don’t have a branch yet. Our status might look like this:
-
-{/* restore [04d62f15beb4] */}
-
-```cli [branching-and-commiting-but-status-2, 308px]
-but status
-```
-
-Now let’s say that we want to put those unassigned file changes into a commit on a new branch called `user-bookmarks`.
-
-To do this, you can use the `but branch new <branch-name>` command.
-
-{/* run git branch -D user-bookmarks */}
-
-```cli [branching-and-commiting-but-branch-1, 88px]
-but branch new user-bookmarks
-```
-
-Now if you run `but status` you can see your new empty branch:
-
-```cli [branching-and-commiting-but-status-3, 374px]
-but status
-```
-
-### Commit to a branch
-
-Now we can commit our unassigned changes to that branch. You can simply assign your changes to the branch first to commit later (we'll cover that later in [Rubbing](./rubbing)), but for now let's keep it simple and just commit them directly using the `but commit` command.
-
-```cli [branching-and-commiting-but-commit-1, 88px]
-but commit -m 'all the user bookmarks'
-```
-
-If you don’t specify the `-m` commit message, GitButler will try to open an editor with a tempfile where you can write a longer commit message. It will use the `$EDITOR` environment variable if it’s set, or the `core.editor` Git or GitButler config setting, or it will prompt you for a command to run if you’re in an interactive terminal.
-
-Now our status looks like this, with all unassigned files in a new commit on our new branch:
-
-```cli [branching-and-commiting-but-status-4, 286px]
-but status
-```
-
-<Callout type="info">
-
-You also don't _need_ to create a branch to commit if you have none currently applied. If you run `but commit` and there are no active branches, GitButler will simply create a temporarily named one that you can later rename if you want.
-
-</Callout>
-
-## Stacked and parallel branches
-
-Ok, that’s the simple case, pretty straightforward. However, GitButler can also do some pretty cool things that Git either cannot do or struggles with, namely:
-
-- Having multiple active branches that you can work on in parallel.
-- Managing stacked branches.
-
-That is, both multiple independent and dependent active branches. Even at the same time if you want.
-
-### Parallel branches
-
-Parallel branches is very simple, you can create multiple simultaneously active branches that you can assign and commit changes to in your workspace.
-
-To create a parallel branch, you simply create a new branch the same way we did before. Let’s say that we want to create a `liked-tweets` branch alongside our existing `user-bookmarks`. We simply run the same `but branch new` command again:
-
-{/* run git branch -D liked-tweets */}
-{/* run echo 'test' > app/controllers/likes_controller.rb */}
-{/* run echo 'test' > app/models/like.rb */}
-
-```cli [branching-and-commiting-but-branch-2, 88px]
-but branch new liked-tweets
-```
-
-Now if we run `but status` we can see our previous branch and our new empty branch.
-
-```cli [branching-and-commiting-but-status-5, 374px]
-but status
-```
-
-We can see our previous branch and the commit we made, our new empty branch and a couple of modified files. Now we can commit the unassigned changes to that branch with `but commit -b liked-tweets -m "liked tweets changes"`.
-
-```cli [branching-and-commiting-but-commit-2, 88px]
-but commit -b liked-tweets -m "liked tweets changes"
-```
-
-And now we have one commit in each lane.
-
-```cli [branching-and-commiting-but-status-6, 374px]
-but status
-```
-
-Here we specified the entire branch name as the commit target (as there is more than one), but you can also use the two character short code that is next to each one.
-
-If you don’t specify a branch identifier and you have more than one active branch, then GitButler will prompt you for which branch you wish to commit the unassigned changes to.
-
-We can also see which files were modified in each commit with the `--files` or `-f` option to `but status`:
-
-```cli [branching-and-commiting-but-status-7, 550px]
-but status -f
-```
-
-### Stacked branches
-
-The other way you can create new branches is to stack them. One branch depends
-on another, but each branch can still be reviewed independently.
-
-To create a new stacked branch in GitButler, you can run `but branch new` with a target branch ID. If we go back in time and instead stack our `liked-tweets` branch, we can make it dependent on the `user-bookmarks` branch by providing it as a stacking "anchor" with `-a` option:
-
-{/* run git branch -D liked-tweets-stacked */}
-{/* restore [e32713a1f41c] */}
-
-```cli [branching-and-commiting-but-branch-3, 88px]
-but branch new -a user-bookmarks liked-tweets-stacked
-```
-
-```cli [branching-and-commiting-but-status-8, 374px]
-but status
-```
-
-Now we can commit to our stacked branch.
-
-```cli [branching-and-commiting-but-commit-3, 88px]
-but commit -b liked-tweets-stacked -m "liked tweets changes"
-```
-
-```cli [branching-and-commiting-but-status-9, 352px]
-but status
-```
-
-Once you have connected a forge account with `but config forge auth`, publish
-the whole stack from its top branch:
+Start by inspecting the workspace:
 
 ```bash
-but pr new liked-tweets-stacked -t
-```
-
-GitButler pushes both branches and opens a review for each one, with
-`liked-tweets-stacked` targeting `user-bookmarks`. See
-[Create stacked branches and pull requests](/features/branch-management/stacked-branches)
-for how GitButler keeps the stack in sync.
-
-## Assigning and committing changes
-
-The other way to commit to a branch is to explicitly assign changes to it. This is somewhat like running `git add` in Git, where you’re staging some changes for a future commit. However, unlike Git where you have to do this or override it with `-a` or something, the default in GitButler is to commit all changes by default and only leave out unassigned changes with the flag `-o` or `--only`.
-
-### Staging changes
-
-So, how do we stage changes to a specific branch and then only commit those changes?
-
-Let’s look at an example `but status` with six modified files and two empty, parallel branches and assign and commit one file to each branch as a separate commit.
-
-{/* restore [d5c7317b0fd4] */}
-
-```cli [branching-and-commiting-but-status-10, 440px]
 but status
 ```
 
-We will assign each file to a different branch and then see the result. We assign file changes to branches using the `but stage` command, which assigns changes to branches, much like `git add`, but you can do this for multiple branches.
+`but status` shows the uncommitted area, applied branches and stacks, and the commits that haven't landed in your target branch.
 
-You can either stage the file identifier that you see next to each file, or all or part of the file path. For example, in this case to identify the `app/models/bookmark.rb` file, you can do either:
-
-- `g0`
-- `app/models/bookmark.rb`
-
-So lets stage the bookmark changes to the bookmarks branch:
-
-```cli [branching-and-commiting-but-stage-1, 154px]
-but stage h0,i0,k0 user-bookmarks
-```
-
-Now we can run `status` and see that these are staged.
-
-```cli [branching-and-commiting-but-st-1, 484px]
-but st
-```
-
-Now let's rub the user changes into the `user-changes` branch:
-
-```cli [branching-and-commiting-but-stage-2, 110px]
-but stage h0 user-changes
-```
-
-Now we have some file changes assigned to each branch and still some unassigned changes:
-
-```cli [branching-and-commiting-but-status-11, 528px]
-but status
-```
-
-Now, if we want to create a commit in the `user-bookmarks` branch, we can either run `but commit bo` which will create a commit with the files assigned as well as both files that are unassigned, but _not_ the file assigned to the `user-changes` lane.
-
-Or, we can make a commit with _only_ the assigned files in `user-bookmarks` by using the `-o` option to `but commit`.
-
-```cli [branching-and-commiting-but-commit-4, 88px]
-but commit -o -m "liked tweets view" bo
-```
-
-Now if we look at our status we can see a commit on our branch instead of the assigned changes:
-
-```cli [branching-and-commiting-but-st-2, 440px]
-but st
-```
-
-Now let's commit all the rest of the changes (assigned and unassigned) to our other branch:
-
-```cli [branching-and-commiting-but-commit-5, 88px]
-but commit -m 'bookmarks stuff' ch
-```
-
-```cli [branching-and-commiting-but-status-12, 374px]
-but status
-```
-
-### Committing Specific Files or Hunks
-
-Instead of staging files first and then committing with `-o`, you can also directly specify which files or hunks to include in a commit using the `-p` or `--changes` option. This lets you commit only specific changes without having to assign them to a branch first.
-
-For example, if you have multiple unassigned files and only want to commit some of them:
+If you have uncommitted changes and no branch yet, create the branch and commit in one command:
 
 ```bash
-but commit -p h0,i0 -m "only these two files" user-bookmarks
+but commit -b user-bookmarks -m "Add user bookmarks"
 ```
 
-You can specify files in several ways:
-
-- **By CLI ID**: Use the short identifier shown in `but status` (e.g., `h0`, `i0`)
-- **Space-separated**: `--changes h0 i0 k0`
-- **Comma-separated**: `-p h0,i0,k0`
-- **By path**: `-p app/models/bookmark.rb`
-
-This also works with hunk IDs. When a file has multiple hunks (shown in `but status -f` or `but diff`), you can commit individual hunks rather than the entire file. This is useful when you have changes in the same file that belong to different logical commits.
+The `-b` option selects the branch. If `user-bookmarks` doesn't exist, GitButler creates it. Because the command doesn't include any change IDs, it commits all uncommitted changes.
 
 <Callout type="info">
 
-If you don't specify `-p`, all uncommitted changes (or changes staged to the target branch) are committed. Use `-p` when you need fine-grained control over what goes into a commit.
+If you omit `-m`, GitButler opens your configured editor for the commit message. In scripts, always pass `-m` or `--no-message` so the command doesn't wait for input.
 
 </Callout>
 
-### Assigning Ranges
+## Commit selected files or hunks
 
-If you happen to have a large number of changes, you can also use ranges or lists for rubbing assignment. So for example, if we go back to this status:
+Use `but diff` to get IDs for the changes you want to commit:
 
-{/* restore [6fdd8fb1d547] */}
-{/* run but rub l0 zz */}
+```bash
+but diff
+```
 
-```cli [branching-and-commiting-but-status-13, 484px]
+The first token on each file line is its ID. A hunk ID has the form `<file-id>:<hunk-id>`, such as `q3:5`.
+
+Pass the IDs as space-separated positional arguments:
+
+```bash
+but commit -b user-bookmarks -m "Add bookmark model" q3 w7
+```
+
+That commits only changes `q3` and `w7`. The other changes stay uncommitted.
+
+To commit one hunk without committing the rest of its file:
+
+```bash
+but commit -b user-bookmarks -m "Validate bookmark URLs" q3:5
+```
+
+Copy IDs from your current `but diff` output. Don't comma-separate IDs or use line ranges.
+
+## Work on parallel branches
+
+Parallel branches hold independent work in the same workspace. Suppose `user-bookmarks` is applied and you start an unrelated `liked-tweets` change. Inspect the new changes, then commit them to another branch:
+
+```bash
+but diff
+but commit -b liked-tweets -m "Add liked tweets" n2 p8
+```
+
+GitButler creates `liked-tweets` alongside `user-bookmarks`. Run `but status` to see both branches:
+
+```bash
 but status
 ```
 
-Then you can assign the everything in `app/` to a branch with:
+When more than one independent stack is applied, always use `-b`, `--above`, or `--below` to say where a commit belongs. GitButler refuses an untargeted commit when the destination is ambiguous.
 
-```cli [branching-and-commiting-but-stage-3, 154px]
-but stage h0-j0 user-bookmarks
+## Stack dependent branches
+
+If the `liked-tweets` work turns out to depend on `user-bookmarks`, move that
+branch above `user-bookmarks` to turn the two parallel branches into a stack:
+
+```bash
+but move liked-tweets --above user-bookmarks
 ```
 
-```cli [branching-and-commiting-but-status-14, 528px]
-but status
+Once you've authenticated with `but config forge auth`, publish the stack from its top branch:
+
+```bash
+but pr new liked-tweets -t
 ```
+
+GitButler pushes the stack and creates the missing reviews from the bottom upward. See [Create stacked branches and pull requests](/features/branch-management/stacked-branches) for the full stacked-review workflow.

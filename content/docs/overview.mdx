@@ -31,20 +31,25 @@ This ability to do multiple dependant or independent branches at the same time i
 The reason is stock Git can only handle one branch at a time, it does not have tooling to use or understand multiple branches, so most commands having to do with the index or HEAD or branching (commit, branch, checkout, etc) may behave unexpectedly.
 
 <Callout type="info">
-  To understand why and how to get out of any difficulties you run into, please read our
-  [integration branch](/features/branch-management/integration-branch) docs. We are working on
-  making this interaction better.
+  Read [Parallel Branches](/features/branch-management/virtual-branches) for more detail on how
+  GitButler represents several branches in one working directory.
 </Callout>
 
 ## Target Branch
 
-With parallel branches, you are not working off local main or master branches. Everything that you do is on a virtual branch, automatically.
+With parallel branches, you are not working directly on a local `main` or
+`master` branch.
 
 Similar to GitHub, where you specify a default branch to use to merge your Pull Requests into by default, GitButler requires a "Target Branch". This is understood to be whatever your concept of "production" is. Typically what represents deployed, production code that cannot or should not be rolled back. Generally this would be something like `origin/master` or `origin/main`.
 
-Once a target branch is specified, everything in your working directory that differs from it is branched code and must belong to a virtual branch.
+Once a target branch is specified, GitButler treats it as the baseline for the
+workspace. New working-directory changes appear under **Unstaged**. Stage the
+files or hunks you want into a branch lane, then commit the branch's **Staged**
+changes.
 
-This means you don't need to create a new branch when you want to start working, you simply start working and then change the branch name later. There is no local "main" or "master" because it doesn't make sense. Everything is a branch, with work that is meant to eventually be integrated into your target branch.
+You can start editing before deciding which branch should own the work. In
+workspace mode there is no checked-out local `main` or `master`; your branches
+hold the work that will eventually be integrated into the target.
 
 ## Parallel Branches
 

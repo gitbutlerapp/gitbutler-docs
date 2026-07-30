@@ -1,88 +1,83 @@
 ---
-title: Remote Servers and Forges
-description: Now that we have amazing work, how do we get it out to other people?
+title: Push branches and create reviews
+description: Publish branches, create pull or merge requests, and land work with the GitButler CLI.
 ---
 
-We've touched on how to update your local branches with `but pull`, but what about when you want to take your awesome new branches of work and put them on a server to get them integrated or collaborate with other people?
+Use `but push` to publish a branch, `but pr` to create a review, or `but land` when your project accepts direct updates to the target branch.
 
-The two main commands to get work out are `but push` and `but pr`. Let's start with `but push` as it's a little simpler.
+## Push a branch
 
-## Pushing
+Name the branch you want to push:
 
-The very simple example would be to simply run `but push <branch-name>`.
-
-```
-❯ but push update-homepage
-
-✓ Push completed successfully
-
-  update-homepage -> origin/update-homepage ((new branch) -> 1d31833)
+```bash
+but push update-homepage
 ```
 
-You can also run `but push` by itself. If there is only one applied branch, it will push that one. If there are several applied branches, you can choose which to push or select 'all' to push all of them.
+Preview the push without changing the remote:
 
-You can also supply `-d` or `--dry-run` to see what _would_ be pushed up.
-
-## Pull Requests
-
-That's the simple way to push branches to your default remote and update already pushed ones.
-
-The other common thing to do is to open Pull Requests on GitHub. GitButler's CLI has a built in command for opening and updating PRs, called `but pr`.
-
-Much like `but push`, if there is only one branch, it will open a PR for that, otherwise it will ask you which branch to open one for. Or you can be explicit with something like `but pr <branch>`.
-
-```
-❯ but pr
-Do you want to open a new PR on branch 'sc-switch-wording-to-x'? [Y/n]: y
-→ Pushing sc-switch-wording-to-x...
-  ✓ Pushed to origin
-→ Creating PR for sc-switch-wording-to-x → main...
-
-✓ Created PR #69
-  Title: Switch Wording to X
-  Branch: sc-switch-wording-to-x
-  URL: https://github.com/schacon/why/pull/69
+```bash
+but push update-homepage --dry-run
 ```
 
-Once it's opened, you'll get a URL you can view the pull request on.
+In an interactive terminal, bare `but push` opens a branch picker. In a non-interactive session, it pushes every branch with unpushed commits, so naming the branch is safer in scripts.
 
-## Landing Without a Pull Request
+## Create a pull or merge request
 
-Not every project reviews changes through pull requests. If you're working solo, or your team pushes straight to the target branch, `but land` skips the PR step entirely and lands a branch directly onto the target (for example `origin/main`).
+Authenticate with the repository's forge first:
 
-```
-❯ but land update-homepage
-This lands update-homepage directly onto origin/main without a pull request — skipping any code review, CI checks, or branch protections your team may rely on.
-Land update-homepage directly onto origin/main? [y/N]: y
-
-Landed update-homepage onto origin/main.
+```bash
+but config forge auth
 ```
 
-The target is fast-forwarded when possible, otherwise a merge commit is created, and the result is pushed to the remote. Afterwards, your remaining applied branches are rebased onto the moved target, just like `but pull`.
+GitButler supports accounts for GitHub, GitLab, and Bitbucket. The authentication flow offers the methods supported by the selected provider, including self-hosted GitHub and GitLab instances.
 
-Because this updates the target branch directly and is not easily reversible, `but land` asks for confirmation first. A branch protected against direct pushes will reject the land — in that case, use `but pr` instead. See [`but land`](/commands/but-land) for all options.
+Create a review for a branch:
 
-## Forge Authentication
-
-In order to open a PR on GitHub, you'll need to authenticate to that forge. You can see which authentications you have by running `but config`:
-
-```cli [forges-but-config-1, 572px]
-but config
+```bash
+but pr new update-homepage
 ```
 
-If you have not authenticated to a forge yet, you can run `but config forge auth`, which will ask you which type of authentication you would like to do:
+GitButler pushes the branch before creating its pull request or merge request. Use `but mr` as an alias when you prefer GitLab terminology.
 
-```
-❯ but config forge auth
-? Select an authentication method:
-> Device flow (OAuth)
-  Personal Access Token (PAT)
-  GitHub Enterprise
+Pass `-t` to use the default title and description without prompts:
+
+```bash
+but pr new update-homepage -t
 ```
 
-Selecting one of the options will allow you to provide an authentication token for GitButler to use for opening and modifying PRs.
+For a stacked branch, name the top branch. GitButler pushes the whole stack and creates missing reviews from the bottom upward:
 
-<Callout type="info">
-  Currently, GitButler only authenticates to GitHub servers, but support for Merge Requests on
-  GitLab and other forges is coming.
-</Callout>
+```bash
+but pr new feature-polish -t
+```
+
+## Manage forge accounts
+
+Show configured accounts and their authentication status:
+
+```bash
+but config forge
+```
+
+List accounts or remove one that you no longer use:
+
+```bash
+but config forge list-users
+but config forge forget alice
+```
+
+## Land without a review
+
+If your project accepts direct updates to the target branch, land a branch with:
+
+```bash
+but land update-homepage
+```
+
+This bypasses code review and any checks enforced only by your review workflow.
+GitButler asks for confirmation because the target update isn't easily
+reversible.
+
+The target fast-forwards when possible; otherwise GitButler creates a merge commit. After landing, GitButler reconciles the remaining applied branches onto the updated target.
+
+If the remote rejects direct pushes because of branch protection, create a review with `but pr new` instead. See [`but land`](/commands/but-land) for stack and non-interactive options.
