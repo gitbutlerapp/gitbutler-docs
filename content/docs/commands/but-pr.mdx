@@ -31,6 +31,18 @@ Create a new review for a branch. If no branch is specified, you will be prompte
 * `-t`, `--default` — Use the default content for the review title and description, skipping any prompts. If the branch contains only a single commit, the commit message will be used (default: `false`)
 * `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
 
+When `<BRANCH>` is the top of a stack, `but pr new <BRANCH>` pushes the whole
+stack and creates missing reviews from the bottom upward. GitButler sets each
+review's base to the nearest branch below it that also has a review.
+
+Add `-t` to skip the title and description prompts. `-m` and `-F` apply only to
+`<BRANCH>`; branches below it use their default titles and descriptions.
+
+After creating the reviews, GitButler updates either GitHub's native stack
+membership or the stack information in the review descriptions. See
+[Create stacked branches and pull requests](/features/branch-management/stacked-branches)
+for the full workflow.
+
 ### `but pr auto-merge`
 
 Enable or disable the automatic merging of a review or reviews. If no reviews are specified, you will be prompted to select one or multiple of the review associated with branches in your workspace
@@ -93,4 +105,3 @@ Configure the template to use for review descriptions. This will list all availa
 ## Options
 
 * `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
-
