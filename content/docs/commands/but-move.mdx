@@ -1,76 +1,81 @@
 ---
 title: "`but move`"
-description: "Move a commit or branch to a different location."
+description: "Move commits and changes around."
 ---
 
-Commit moves:
-- By default, commits are moved to be before (below) the target.
-- Use `--after` to move the commit after (above) the target instead.
-- Use comma-separated commit IDs to move multiple commits together.
-- When moving to a branch, the commit is placed at the top of that branch's stack.
+Move a set of `<SOURCES>` around relative to a `TARGET`.
 
-Branch moves:
-- Move one branch on top of another to stack them.
-- Move a branch to `zz` to tear it off (unstack it).
+`<SOURCES>` is a set of commits, a set of committed files or a single branch. You are not
+allowed to mix kinds of sources (e.g. commits and committed files) in a single command.
 
-## Examples
+`TARGET` is one of `--above`, `--below`, `--unstack` or `--branch` and defines how `<SOURCES>`
+should be moved. Depending on how `<SOURCES>` and `TARGET` are combined, a commit and/or branch
+may be created as part of the move.
 
-Move a commit before another commit:
+**A branch is created when:**
 
-```text
-but move abc123 def456
-```
+* You move a commit or committed file relative to a branch
+* You unstack a commit or committed file
 
-Move multiple commits before another commit:
+**A commit is created when:**
 
-```text
-but move abc123,789abc def456
-```
+* You move a committed file relative to a commit or branch
+* You unstack a committed file
 
-Move a commit after another commit:
+Note the overlap between the above conditions. For example, unstacking a committed file both
+creates a new commit for the file and a branch for the commit.
 
-```text
-but move abc123 def456 --after
-```
+For more details about CLI IDs, see `but help cli-ids`.
 
-Move multiple commits after another commit:
-
-```text
-but move abc123,789abc def456 --after
-```
-
-Move a commit to a different branch (places at top):
-
-```text
-but move abc123 my-feature-branch
-```
-
-Move multiple commits to a different branch (places at top):
-
-```text
-but move abc123,789abc my-feature-branch
-```
-
-Stack one branch on top of another:
-
-```text
-but move feature/frontend feature/backend
-```
-
-Tear off (unstack) a branch:
-
-```text
-but move feature/frontend zz
-```
-
-**Usage:** `but move <SOURCE> <TARGET> [OPTIONS]`
+**Usage:** `but move <SOURCES> [OPTIONS]`
 
 ## Arguments
 
-* `<SOURCE>` — Commit/branch identifier to move. Use comma-separated commit IDs for multi-commit moves (required)
-* `<TARGET>` — Target commit/branch identifier, or zz to unstack a branch (required)
+* `<SOURCES>` — One or more sources to move.
+
+You may provide one of the following kinds of sources:
+
+- Commits
+- Committed files
+  - All files must come from the same commit
+- A branch
+  - Branches can only be moved one at a time
+
+Mixing sources in a single command is not allowed.
+
+The order of the sources does not matter.
+
+Providing any of the sources as an argument for a target such as --above or --below is an error. (required)
 
 ## Options
 
-* `-a`, `--after` — Move the commit after (above) the target instead of before (below). Only valid for commit-to-commit moves
+* `-b`, `--branch` `<BRANCH>` — Place <SOURCES> on the branch BRANCH.
+
+If BRANCH does not exist, it is created as an unstacked branch.
+
+If BRANCH is omitted, an unstacked branch with a generated name is created. This is exactly equivalent to --unstack and is allowed for any source kind.
+
+If BRANCH is provided, <SOURCES> must be either commits or committed files.
+
+Attempting to place <SOURCES> on a branch that exists but is not applied is an error.
+* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place <SOURCES> above BRANCH_OR_COMMIT, which must be an applied branch or commit.
+
+If BRANCH_OR_COMMIT is a commit, <SOURCES> are placed on the same branch as the targeted commit.
+
+If BRANCH_OR_COMMIT is a branch, the sources are placed on a new branch above the targeted branch.
+
+This target is applicable for all kinds of <SOURCES>.
+* `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place <SOURCES> below BRANCH_OR_COMMIT, which must be an applied branch or commit.
+
+If BRANCH_OR_COMMIT is a commit, the <SOURCES> are placed on the same branch as the targeted commit.
+
+If BRANCH_OR_COMMIT is a branch, <SOURCES> are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
+
+This target is only applicable for <SOURCES> that are commits or committed files.
+* `--unstack` — Unstack <SOURCES> from their current stacks.
+
+--unstack does not take an argument, so --unstack <SOURCES> and <SOURCES> --unstack are equivalent.
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 

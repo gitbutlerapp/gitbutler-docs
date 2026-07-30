@@ -26,4 +26,7 @@ With a branch ID:
 * `-s`, `--skip-force-push-protection` — Skip force push protection checks
 * `--no-hooks` — Bypass pre-push hooks
 * `-d`, `--dry-run` — Show what would be pushed without actually pushing
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 

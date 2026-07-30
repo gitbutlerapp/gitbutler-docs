@@ -3,8 +3,9 @@ title: "`but clean`"
 description: "Remove empty branches from the workspace."
 ---
 
-A branch is considered empty if it has no local commits, no assigned
-changes, and (by default) no upstream-only commits.
+A branch is considered empty if it has no local commits and (by default)
+no upstream-only commits. Stacks with uncommitted changes assigned to them
+in the GitButler app are skipped entirely.
 
 The entire operation is recorded as a single oplog entry, so it can
 be undone with `but undo`.
