@@ -1,43 +1,39 @@
 import { readdir, readFile, writeFile } from "node:fs/promises"
+import { relative } from "node:path"
 
 const CONTENT_DIR = "./content/docs"
 
-let fileContent = []
-let filePaths = {}
-
-try {
-  const files = await readdir(CONTENT_DIR, {
+const filePaths = (
+  await readdir(CONTENT_DIR, {
     recursive: true,
     withFileTypes: true
   })
+)
+  .filter(
+    (file) =>
+      file.isFile() && file.name.endsWith(".mdx") && !file.parentPath.includes("api-reference")
+  )
+  .map((file) => `${file.parentPath}/${file.name}`)
+  .sort()
 
-  for (const file of files) {
-    if (file.isFile() && file.name.includes("mdx") && !file.parentPath.includes("api-reference")) {
-      filePaths[file.name] = `${file.parentPath}/${file.name}`
-    }
-  }
-  fileContent = `
-# GitButler Documentation
+const pages = await Promise.all(
+  filePaths.map(async (filePath) => {
+    let contents = (await readFile(filePath)).toString()
+    contents = contents.replace(/^---\n[\s\S]*?\n---\n?/, "")
+    contents = contents.replace(/^import .*\n/gm, "")
 
-## Table of Contents 
-
-${Object.entries(filePaths).map((file) => {
-  return `- [${file[0].replace(".mdx","")}](#${file[0]})\n`
-}).join("")}`
-} catch (err) {
-  console.error("Error reading files", err)
-}
-
-await Promise.all(
-  Object.entries(filePaths).map(async (file) => {
-    let fileContents = (await readFile(`${file[1]}`)).toString()
-    fileContents = fileContents.replace(/---.*---\n/s, "")
-    fileContents = fileContents.replace(/import .*\n/g, "")
-
-    fileContent += `\n\n# ${file[0]}`
-    fileContent += `\n${fileContents}`
+    const section = relative(CONTENT_DIR, filePath).slice(0, -4).replaceAll("/", "-")
+    return { section, contents }
   })
 )
+
+let fileContent = `
+# GitButler Documentation
+
+## Table of Contents
+
+${pages.map(({ section }) => `- [${section}](#${section})`).join("\n")}
+${pages.map(({ section, contents }) => `\n\n# ${section}\n${contents}`).join("")}`
 
 fileContent = fileContent
   .split("\n")
