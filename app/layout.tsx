@@ -6,6 +6,7 @@ import type { ReactNode } from "react"
 import "@gitbutler/design-core/fonts"
 
 import Script from "next/script"
+import { PostHog } from "@/app/components/PostHog"
 import WebMcpTools from "@/app/components/WebMcpTools"
 import { getSiteUrl } from "@/app/utils/site"
 
@@ -21,6 +22,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
       <body>
+        <PostHog />
         <Provider>
           <WebMcpTools />
           {children}
