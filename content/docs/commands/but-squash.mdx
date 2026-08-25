@@ -11,6 +11,7 @@ Squash is flexible in the ways it can move changes around. It can
 - Amend uncommitted changes into a commit
 - Uncommit commits
 - Uncommit changes in commits
+- Uncommit branches
 
 If no message-related flag is passed when squashing commits or branches, an editor may be
 opened where the new message can be composed; other squashes keep the target's message.
@@ -27,7 +28,7 @@ If --target is provided and &lt;SOURCES&gt; is omitted, the uncommitted area (zz
 
 If &lt;SOURCES&gt; is one or more commits they will be squashed into the target.
 
-If &lt;SOURCES&gt; is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed.
+If &lt;SOURCES&gt; is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed. When the target is the uncommitted area (zz), all commits on the branches are uncommitted.
 
 If TARGET is omitted and &lt;SOURCES&gt; is exactly one branch all commits on the branch will be squashed.
 

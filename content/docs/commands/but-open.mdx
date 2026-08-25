@@ -1,0 +1,23 @@
+---
+title: "`but open`"
+description: "Open the project in GitButler."
+---
+
+With no argument this opens the workspace. Given a branch or a commit, the
+app opens with that selected, so a link can point at the thing you are
+talking about rather than at the app.
+
+Commits are addressed by their change ID where they have one, which
+survives amending and rebasing — the link keeps working after the commit is
+rewritten.
+
+**Usage:** `but open [TARGET] [OPTIONS]`
+
+## Arguments
+
+* `<TARGET>` — The branch or commit to select, defaulting to the workspace itself
+
+## Options
+
+* `--print` — Print the link instead of opening it
+
