@@ -8,13 +8,18 @@ terminal. For the full workflow and key bindings, see [https://docs.gitbutler.co
 
 **Environment variables:**
 
-**BUT_THEME**  Sets the theme for but. Options: dark, light. [default: dark]
+**BUT_THEME**  Sets the theme for but. Options: dark, light. [default: detected from the terminal, falling back to dark]
 
-**Usage:** `but tui [OPTIONS]`
+**Usage:** `but tui [TARGET] [OPTIONS]`
+
+## Arguments
+
+* `<TARGET>` — The commit, branch, committed file, or uncommitted file or hunk to select
 
 ## Options
 
 * `--remember-selection` — When the TUI quits save the selection and restore it when re-opening.
 
 If the saved selection cannot be restore the TUI launch normally as if --remember-selection wasn't passed. (default: `false`)
+* `--diff` — Automatically show the diff when opening the TUI
 

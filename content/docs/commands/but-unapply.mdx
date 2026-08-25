@@ -1,6 +1,6 @@
 ---
 title: "`but unapply`"
-description: "Unapply a branch from the workspace."
+description: "Unapply a branch."
 ---
 
 If you want to unapply an applied branch from your workspace
@@ -18,23 +18,11 @@ The identifier can be:
 If a branch name (or an identifier pointing to a branch) is provided,
 the entire stack containing that branch will be unapplied.
 
-## Examples
+For more details about CLI IDs, see `but help cli-ids`.
 
-Unapply by branch name:
-
-```text
-but unapply my-feature-branch
-```
-
-Unapply by CLI ID:
-
-```text
-but unapply bu
-```
-
-**Usage:** `but unapply <IDENTIFIER>`
+**Usage:** `but unapply <TARGET>`
 
 ## Arguments
 
-* `<IDENTIFIER>` — CLI ID or name of the branch/stack to unapply (required)
+* `<TARGET>` — The branch or stack to unapply (required)
 

@@ -44,6 +44,8 @@
     "but-alias",
     "but-config",
     "but-agent",
-    "but-skill"
+    "but-skill",
+    "---Miscellaneous---",
+    "but-open"
   ]
 }
