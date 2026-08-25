@@ -29,7 +29,9 @@ When in resolution mode, `but status` will also show that you're resolving confl
 
 List the conflicts of a conflicted commit, without entering resolution mode.
 
-Each conflict is shown with its ours side (the new base the commit was rebased onto), the common ancestor, and its theirs side (the commit's own version), numbered per file for use with but resolve apply.
+Each conflict is shown with its ours side (the new base the commit was
+rebased onto), the common ancestor, and its theirs side (the commit's
+own version), numbered per file for use with `but resolve apply`.
 
 **Usage:** `but resolve conflicts [COMMIT]`
 
@@ -41,7 +43,12 @@ Each conflict is shown with its ours side (the new base the commit was rebased o
 
 Resolve conflicts of a conflicted commit, without entering resolution mode.
 
-Targets one conflict (<path>:<N>, numbers from but resolve conflicts) or every conflict in a file (<path> with --ours/--theirs). The replacement content for mixed resolutions is read from --file or stdin. Resolving only some conflicts keeps the commit conflicted with the rest, so conflicts can be worked off incrementally; the commit id changes with every apply. Undo with but undo.
+Targets one conflict (`<path>:<N>`, numbers from `but resolve conflicts`)
+or every conflict in a file (`<path>` with `--ours`/`--theirs`). The
+replacement content for mixed resolutions is read from `--file` or stdin.
+Resolving only some conflicts keeps the commit conflicted with the rest,
+so conflicts can be worked off incrementally; the commit id changes with
+every apply. Undo with `but undo`.
 
 **Usage:** `but resolve apply <TARGET> [OPTIONS]`
 
@@ -59,7 +66,7 @@ Targets one conflict (<path>:<N>, numbers from but resolve conflicts) or every c
 
 ### `but resolve status`
 
-Show the status of conflict resolution, listing remaining conflicted files
+Show the status of conflict resolution, listing remaining conflicted files.
 
 **Usage:** `but resolve status`
 
@@ -67,7 +74,8 @@ Show the status of conflict resolution, listing remaining conflicted files
 
 Finalize conflict resolution and return to workspace mode.
 
-This commits the resolved changes, rebases any commits on top of the resolved commit, and returns to the normal workspace.
+This commits the resolved changes, rebases any commits on top of the
+resolved commit, and returns to the normal workspace.
 
 **Usage:** `but resolve finish`
 
@@ -75,7 +83,8 @@ This commits the resolved changes, rebases any commits on top of the resolved co
 
 Cancel conflict resolution and return to workspace mode.
 
-This discards all changes made during resolution and restores the workspace to its pre-resolution state.
+This discards all changes made during resolution and restores
+the workspace to its pre-resolution state.
 
 **Usage:** `but resolve cancel [OPTIONS]`
 
