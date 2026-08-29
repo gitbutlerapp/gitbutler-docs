@@ -46,6 +46,7 @@
     "but-agent",
     "but-skill",
     "---Miscellaneous---",
-    "but-open"
+    "but-open",
+    "but-worktree"
   ]
 }
