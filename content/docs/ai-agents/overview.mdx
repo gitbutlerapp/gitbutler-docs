@@ -1,0 +1,85 @@
+---
+title: Overview
+description: Use GitButler to keep coding-agent changes organized into branches and commits you can inspect and review.
+---
+
+Use GitButler with coding agents when you want messy local changes to become
+reviewable branches and commits without moving every task into a separate
+worktree.
+
+GitButler keeps one working directory while organizing changes into separate
+branches and commits. Agents can do that through the [`but` CLI](/cli-overview),
+and you can inspect the same state in the [Desktop Client](/overview). For when
+to use GitButler instead of separate worktrees, see
+[Parallel agents](/ai-agents/parallel-agents#how-this-differs-from-worktrees).
+
+You decide how far the agent goes. You can tell it to stop after local commits,
+or you can allow it to push and open pull requests. GitButler gives the agent
+version-control commands; your instructions decide when it stops.
+
+<Callout type="info">
+  We ran coding agents through the same version-control tasks with Git, Jujutsu, and GitButler and
+  published the results at [vcbench.dev](https://vcbench.dev). With GitButler, agents used about 80%
+  fewer commands and finished around 60% faster than with plain Git, at similar reliability. It is
+  our own benchmark, so the tasks, deterministic grader, and full results are public for you to
+  check.
+</Callout>
+
+## Quick start
+
+Run this from the repository where your agent will work:
+
+```sh
+but agent setup
+```
+
+The wizard can install the GitButler skill, write GitButler version-control
+instructions for your agent, and prepare the repository with `but setup` when
+GitButler needs workspace mode. It shows the files and exact instructions before
+writing anything.
+
+For the full setup path, see [Getting started](/ai-agents/getting-started). To
+choose or adjust the policies by hand, see
+[Tuning agent behavior](/ai-agents/tuning-agent-behavior).
+
+## What agents can do with GitButler
+
+- **Parallel branches in one workspace.** An agent can create separate branches
+  for independent work while staying in the same working directory. That gives
+  you separate review branches without creating a new worktree, directory, and
+  setup for each task.
+- **Selected files and hunks.** The agent can commit selected files or hunks by
+  passing their IDs positionally to `but commit`. Other uncommitted changes stay
+  untouched, so you can inspect the split before the work is pushed.
+- **Stacked branches for dependent work.** If one change depends on another, the
+  agent can put the dependent branch on top of the branch it needs.
+- **History edits without an interactive rebase.** The agent can move a change
+  from one commit to another, reorder commits, reword commits, absorb fixes, or
+  split a commit with `but` commands.
+- **Review and recovery before publishing.** You can inspect the same branches
+  and commits in the CLI or Desktop Client, then use [`but oplog`](/commands/but-oplog)
+  to restore an earlier local GitButler state if the branch layout needs to be
+  rolled back.
+
+## History edits as direct commands
+
+History edits are where agent workflows often get brittle. Moving one file's
+changes from one commit to another with Git can involve patch restore/reset
+steps, fixup commits, autosquash, or an interactive rebase with one or more
+`edit` stops.
+
+With GitButler, that kind of edit becomes a direct operation: move this file's
+changes into that commit. The operation can still rewrite commits and can still
+conflict. The difference is control flow: the agent gets targeted tools for the
+edit instead of driving a multi-step rebase session.
+
+The command depends on the task: use [`but amend`](/commands/but-amend) for
+uncommitted fixes that belong in an existing commit,
+[`but squash`](/commands/but-squash) to combine commits or move committed
+changes into another commit, and [`but uncommit`](/commands/but-uncommit) to
+move committed changes back to the uncommitted area.
+
+For reviewed work, agents can push branches and open PRs or MRs with
+[`but pr`](/commands/but-pr). When you explicitly authorize a direct update to
+the target branch, [`but land`](/commands/but-land) can land a branch without a
+pull request.

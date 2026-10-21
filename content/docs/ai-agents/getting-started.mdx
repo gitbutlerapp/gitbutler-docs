@@ -1,0 +1,88 @@
+---
+title: Getting started
+description: Install `but`, run `but agent setup`, and give coding agents a GitButler version-control policy.
+---
+
+This page is for coding agents that can read local instruction files and run
+commands in your repository. The GitButler skill does not give the agent new
+permissions. It tells the agent how to use `but` instead of driving Git through
+checkout, stash, add, commit, and rebase commands.
+
+## Install the `but` CLI
+
+If you already have GitButler Desktop installed, you can install the CLI from
+the Desktop Client settings. For terminal-only setup, run:
+
+```sh
+curl -fsSL https://gitbutler.com/install.sh | sh
+```
+
+See [Installation and setup](/cli-guides/installation) for the full CLI install
+options.
+
+## Run the agent setup wizard
+
+From the repository where the agent will work, run:
+
+```sh
+but agent setup
+```
+
+The wizard asks which agents you use, where the setup applies, and which
+workflow preferences you want. It can:
+
+- install the GitButler skill for Codex, Claude Code, Cursor, GitHub Copilot,
+  Windsurf / Devin, OpenCode, or Agent Skills;
+- save workflow instructions globally, in this repository, or both;
+- run `but setup` for this repository when GitButler needs workspace mode.
+
+Before it writes anything, the wizard shows the skill install paths, instruction
+files, any repository setup step, and the exact generated text.
+
+`but agent` with no subcommand starts the same wizard. For command details, see
+[`but agent`](/commands/but-agent).
+
+The wizard installs the skill for you. To check installed skills and update any
+outdated copies later without rerunning the wizard, use:
+
+```sh
+but skill check --update
+```
+
+See [`but skill`](/commands/but-skill) for other install and update options.
+
+## Set up the repository
+
+GitButler currently needs the repository in workspace mode for its multi-branch
+model: multiple GitButler branches in one working directory. The setup wizard
+runs this for you when needed. You can also run it yourself:
+
+```sh
+but setup
+```
+
+For the full list of setup changes, see [`but setup`](/commands/but-setup).
+
+GitButler is working toward a plain Git mode that switches into a workspace only
+when multiple concurrent branches are needed. Follow
+[gitbutlerapp/gitbutler#11866](https://github.com/gitbutlerapp/gitbutler/issues/11866)
+for that work.
+
+## Add optional agent instructions
+
+The wizard can write common workflow preferences for you: folding small fixes
+into the right commits, splitting mixed work, stacking dependent branches,
+updating from the target branch, opening draft PRs, landing approved work
+directly onto the target instead of opening pull requests (single-repository
+setups only), using a publish phrase, naming branches, following
+commit-message conventions, and creating checkpoint commits.
+
+Use [Tuning agent behavior](/ai-agents/tuning-agent-behavior) when you want to
+read the policies before choosing them, adjust them after the wizard runs, or
+copy individual snippets by hand.
+
+These instructions steer agent behavior; they are not access controls. Use your
+usual repository permissions and branch protection for hard limits.
+
+For prompt examples that ask for specific branch and commit outcomes, see
+[Useful requests](/ai-agents/useful-requests).

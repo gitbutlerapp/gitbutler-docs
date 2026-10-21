@@ -3,17 +3,18 @@ title: "`but diff`"
 description: "Displays the diff of changes in the repo."
 ---
 
-Without any arguments, it shows the diff of all uncommitted changes.
-Optionally, a CLI ID argument can be provided, which chan show the diff specific to
-- an uncommitted file
-- a branch
-- an entire stack
-- a commit
-- a file change within a commit
+Without any arguments, it shows the diff of all uncommitted changes. Optionally, provide one
+CLI ID to show the diff for an uncommitted file, branch, commit, committed file, or worktree.
+
+`TARGET` accepts at most one entity. To show several entities, run this command once per entity.
 
 **Usage:** `but diff [TARGET]`
 
 ## Arguments
 
-* `<TARGET>` — The CLI ID of the entity to show the diff for
+* `<TARGET>` — The CLI ID of the entity to show the diff for.
+
+If omitted shows the diff of all uncommitted changes.
+
+For more details about CLI IDs, see but help cli-ids.
 

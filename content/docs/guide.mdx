@@ -37,15 +37,11 @@ If you would like to use our AI features like commit message generation, you can
 
 You can also connect GitButler to your GitHub account so we can automatically open Pull Requests for you (this is also optional).
 
-## Set Up Git Authentication
+## Test Git authentication
 
-In order to push to a remote repository, you will need to set up your Git authentication. We provide three ways to do this, but generally it's easiest to use the existing Git executable. You can hit the "Test credentials" button to make sure everything is working properly.
+GitButler uses your system Git executable and its existing authentication configuration. Open the Git section in your project settings and select **Test credentials** to make sure GitButler can push to the remote.
 
-<ImageSection
-  alt="Git configuration screen"
-  src="/started/setup-git.png"
-  subtitle="Second step: configure your git pushes"
-/>
+If the test fails, configure authentication for Git in your terminal first, then run the test again.
 
 ## Ready to Go
 

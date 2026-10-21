@@ -6,6 +6,7 @@ description: "Exit GitButler mode and return to normal Git workflow."
 This command:
 - Creates an oplog snapshot of the current state
 - Finds the first active branch and checks it out
+    - Alternatively, use `--checkout-to <branch>` to override this default
 - Cherry-picks any dangling commits from gitbutler/workspace
 - Provides instructions on how to return to GitButler mode
 
@@ -20,5 +21,13 @@ Exit GitButler mode:
 but teardown
 ```
 
-**Usage:** `but teardown`
+```text
+but teardown --checkout-to my-feature-branch
+```
+
+**Usage:** `but teardown [OPTIONS]`
+
+## Options
+
+* `-c`, `--checkout-to` `<LOCAL_BRANCH>` — Explicit override for which local branch to checkout to
 

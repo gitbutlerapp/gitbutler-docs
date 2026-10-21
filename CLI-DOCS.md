@@ -52,7 +52,7 @@ To restore to a specific state before running commands, add a restore comment:
 but status
 ````
 
-This will run `but restore [commit-hash]` before executing the cli command.
+This will run `but oplog restore [commit-hash]` before executing the CLI command.
 
 ````
 

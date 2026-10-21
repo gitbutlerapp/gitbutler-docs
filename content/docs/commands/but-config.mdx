@@ -32,6 +32,7 @@ View/set target branch:
 
 ```text
 but config target
+but config push-remote
 ```
 
 View/set metrics:
@@ -75,7 +76,7 @@ Unset a local value:
 
 View and manage forge configuration.
 
-Shows configured forge accounts (GitHub, GitLab, etc.) and authentication status. Use subcommands to authenticate or forget accounts.
+Shows configured forge accounts (GitHub, GitLab, Bitbucket) and authentication status. Use subcommands to manage accounts or native GitHub stacked pull requests.
 
 Examples
 
@@ -94,6 +95,11 @@ List authenticated accounts:
 Forget an account:
 
   but config forge forget username
+
+View or configure native GitHub stacked pull requests:
+
+  but config forge github-stacks
+  but config forge github-stacks enable
 
 
 **Usage:** `but config forge`
@@ -114,12 +120,43 @@ Set target branch:
 
   but config target origin/main
 
+Set a target branch and push branches to a fork:
 
-**Usage:** `but config target [BRANCH]`
+  but config target upstream/main --push-remote origin
+
+
+**Usage:** `but config target [BRANCH] [OPTIONS]`
 
 **Arguments:**
 
 * `<BRANCH>` — New target branch to set (e.g., "origin/main")
+
+**Options:**
+
+* `--push-remote` `<REMOTE>` — Remote to push branches to (e.g., "origin" for a fork)
+
+### `but config push-remote`
+
+View or set the remote used to push branches.
+
+Without arguments, displays the effective push remote. With a remote name, updates the push remote without changing the target branch.
+
+Examples
+
+View the current push remote:
+
+  but config push-remote
+
+Push branches to a fork remote:
+
+  but config push-remote origin
+
+
+**Usage:** `but config push-remote [REMOTE]`
+
+**Arguments:**
+
+* `<REMOTE>` — New remote to use when pushing branches (e.g., "origin")
 
 ### `but config metrics`
 
@@ -149,4 +186,60 @@ Disable metrics:
 **Arguments:**
 
 * `<STATUS>` — Whether metrics are enabled
+
+### `but config feature`
+
+View and configure feature flags.
+
+Without arguments, displays all feature flags that can be changed through the CLI. Specify a flag to view its current value, or add enable or disable to update it.
+
+Examples
+
+View all feature flags:
+
+  but config feature
+
+Enable single-branch mode:
+
+  but config feature single-branch enable
+
+
+**Usage:** `but config feature [FLAG] [STATUS]`
+
+**Arguments:**
+
+* `<FLAG>` — Feature flag to view or update
+* `<STATUS>` — Whether the feature flag is enabled
+
+### `but config ai`
+
+View and configure AI provider settings.
+
+Without subcommands, this starts an interactive setup flow. Use provider subcommands for non-interactive configuration.
+
+Examples
+
+Interactive setup:
+
+  but config ai
+
+View current AI configuration:
+
+  but config ai show
+
+Configure OpenAI non-interactively:
+
+  but config ai openai --key-option bring-your-own --api-key-env OPENAI_API_KEY --model gpt-5.4-nano
+
+Configure Ollama locally:
+
+  but config ai --local ollama --endpoint localhost:11434 --model llama3.1
+
+
+**Usage:** `but config ai [OPTIONS]`
+
+**Options:**
+
+* `--local` — Configure local repository git config instead of global user config
+* `--global` — Configure global user git config
 

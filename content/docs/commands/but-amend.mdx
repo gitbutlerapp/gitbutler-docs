@@ -1,14 +1,28 @@
 ---
 title: "`but amend`"
-description: "Amend a file change into a specific commit and rebases any dependent commits."
+description: "Amend uncommitted changes into a commit or branch."
 ---
 
-Wrapper for `but rub <file> <commit>`.
+Sources must be uncommitted files or hunks. To move changes that are already committed, or to
+combine commits, use `but squash`.
 
-**Usage:** `but amend <FILE> <COMMIT>`
+If the target is a branch, the changes are amended into that branch's newest commit (its tip).
+Name the commit explicitly to amend into anything below the tip.
+
+For more details about CLI IDs, see `but help cli-ids`.
+
+**Usage:** `but amend [SOURCES] [OPTIONS]`
 
 ## Arguments
 
-* `<FILE>` — File ID to amend (required)
-* `<COMMIT>` — Commit ID to amend into (required)
+* `<SOURCES>` — One or more uncommitted files or hunks to amend.
+
+If omitted, all changes in the uncommitted area (zz) are amended.
+
+## Options
+
+* `-t`, `--target` `<COMMIT_OR_BRANCH>` — The commit or branch to amend into (required)
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 

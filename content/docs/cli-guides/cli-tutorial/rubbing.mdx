@@ -1,193 +1,143 @@
 ---
-title: Rubbing
-description: Learn how to use the rub command to apply changes to branches.
+title: Edit commit history
+description: Amend, squash, uncommit, move, and split commits with the GitButler CLI.
 ---
 
-As we saw in the [Branching and Committing](branching-and-commiting) section, the `but stage` command can be used to assign changes to branch lanes.
+GitButler gives each history-editing task a focused command. Start with `but status -fv` when you need commit IDs and the file IDs inside each commit:
 
-However, we can also do this with a command called `but rub`. Not only can it stage changes though, it can be used to do _so much_ more. Rubbing is essentially combining two things. Since there are lots of _things_ in the tool, combining them together can do lots of different operations. Most of them should be fairly intuitive once you understand the concept.
+```bash
+but status -fv
+```
 
-Let’s take a look at what is possible with this very straightforward command.
+Use the IDs shown in your own output. Commit IDs with a change ID remain stable across history edits; a SHA-based ID can change when GitButler rewrites history.
 
-## Unassigning Changes
+## Amend uncommitted changes
 
-We already showed how you can use `rub` to assign a file change or set of changes to a branch for later committing (rubbing a file and a branch), but what if you want to undo that? Move assignments to a different lane or revert them to being unassigned for later?
+Use `but amend` when new work belongs in an existing commit. First inspect the uncommitted changes and history:
 
-As you may have noticed in the `but status` output, there is a special identifier `zz` which is always the “unassigned” ID. If you rub anything to `zz` then it will move it to unassigned.
-
-So given this status:
-
-{/* restore [f0f437258043] */}
-{/* run but rub g0,h0 gemfile-fixes */}
-
-```cli [rubbing-but-status-1, 528px]
+```bash
+but diff
 but status
 ```
 
-We can re-unassign the `README.new.md` file with `but rub h0 zz`. Or, we can re-assign that file to the `sc-branch-26` parallel branch with `but rub h0 sc-branch-26`.
+Then pass the uncommitted file or hunk IDs as positional sources and select the commit with `-t`:
 
-## Amending Commits
-
-However, branch assignment is not all we can do with rubbing. We can also use it to move things to and from commits. A common example would be to amend a commit with new work.
-
-Let’s say that we sent commits out for review and got feedback and instead of creating new commits to address the review, we wanted to actually fix up our commits to be better. This is somewhat complicated to do in Git (something something [fixup commit, autosquash](https://blog.gitbutler.com/git-autosquash), etc).
-
-However, with `rub` it’s incredibly simple. Just rub the new changes into the target commit rather than a branch.
-
-Let’s say that we have a branch with some commits in it, we’ve made changes to two files and want to amend two different commits with the new changes.
-
-```cli [rubbing-but-status-2, 528px]
-but status
+```bash
+but amend -t nn q3 w7:5
 ```
 
-If we want to update the first commit (`da42d06`) with the `README-es.md` changes and the last commit (`fdbd753`) with the `app/views/bookmarks/index.html.erb` changes, we can run the following two `rub` commands:
+This adds file `q3` and hunk `w7:5` to commit `nn`. If you target a branch instead, GitButler amends its newest commit:
 
-```cli [rubbing-but-rub-1, 88px]
-but rub h0 da42d06
+```bash
+but amend -t user-bookmarks q3
 ```
 
-```cli [rubbing-but-rub-2, 88px]
-but rub app/views/bookmarks/index.html.erb fdbd753
+## Squash commits
+
+To combine a newer commit with an older target commit, pass the source commit first and the target with `-t`:
+
+```bash
+but squash ss -t nn -m "Add bookmark validation"
 ```
 
-```cli [rubbing-but-status-3, 770px]
-but status --files
+The source commit disappears and its changes become part of the target. Pass `-m` when squashing commits so GitButler doesn't open an editor.
+
+To collapse every commit on one branch into a single commit:
+
+```bash
+but squash user-bookmarks -m "Add user bookmarks"
 ```
 
-Notice that the SHAs have changed for those commits. It has rewritten the commits to have the same messages but incorporated the changes you rubbed into those patches.
+## Uncommit work
 
-Also notice that you can use either the commit SHA or file path instead of the short ID if you prefer more typing.
+Use `but uncommit` to move a whole commit back to the uncommitted area:
 
-If you wanted to rub all the unassigned changes into a specific commit, you could also do that by rubbing the unstaged section to a commit, for example `but rub zz f55a30e` which would take all unstaged changes (if there were any) and amend commit `f55a30e` with them.
-
-## Squashing Commits
-
-File changes are not the only thing that you can rub. You can also rub commits into things. To squash two commits together, you simply rub them together. Let’s look at a simple example of a branch with two commits on it. We'll squash them into one:
-
-{/* restore [eb63f26e885a] */}
-
-```cli [rubbing-but-status-4, 330px]
-but status
+```bash
+but uncommit nn
 ```
 
-We can absorb the top commit into the bottom one by running `but rub <commit-squash> <commit-target>`:
+To uncommit one file from a commit, get its committed-file ID from `but status -f`, then combine the commit and file IDs:
 
-```cli [rubbing-but-rub-3, 88px]
-but rub 0f 08
+```bash
+but uncommit nn:a
 ```
 
-Now we can see that we only have one commit in our branch:
+The rest of commit `nn` stays committed.
 
-```cli [rubbing-but-status-5, 308px]
-but status
+## Move commits
+
+If a commit landed on the wrong branch, move it to another branch's tip:
+
+```bash
+but move nn -b liked-tweets
 ```
 
-You probably want to [edit the commit message](editing-commits) after this too, since it will simply combine the two commit messages.
+If `liked-tweets` doesn't exist, GitButler creates it as an independent branch.
 
-## Uncommitting
+You can also reorder commits on a branch. `--below` makes the source older than the target, while `--above` makes it newer:
 
-Let’s say that we want to just _undo_ a commit - that is, pretend that we had not made that commit and instead put the changes back to unassigned status. In this case we would use the special `00` ID that we talked about earlier, just like unassigning changes, we can unassign commits.
-
-So, if we’re back to this status:
-
-{/* restore [eb63f26e885a] */}
-
-```cli [rubbing-but-status-6, 330px]
-but status
+```bash
+but move ss --below nn
+but move ss --above nn
 ```
 
-And we want to un-commit the first commit (`0fa2965`) as though we had never made it, you can rub to `zz`:
+Move a branch above another branch to turn two independent branches into a stack:
 
-```cli [rubbing-but-rub-4, 88px]
-but rub 0f zz
+```bash
+but move liked-tweets --above user-bookmarks
 ```
 
-Now if we look at our status again, we will see that commit removed and those files back in the unassigned status:
+## Move a file between commits
 
-```cli [rubbing-but-status-7, 418px]
-but status
-```
+Run `but status -f` to get committed-file IDs:
 
-## Moving Commits
-
-We can also use rubbing to move a commit from one branch to another branch if we have multiple active branches and committed to the wrong one, or otherwise decide that we want to split up independent work.
-
-Let’s say that we have two commits on one branch and created a second parallel branch to move one of the commits to so it's not dependent.
-
-{/* restore [f71c049739a9] */}
-
-```cli [rubbing-but-status-8, 396px]
-but status
-```
-
-We can move the “second commit” commit to the `move-second-commit` branch with `but rub`:
-
-```cli [rubbing-but-rub-5, 88px]
-but rub 0f mo
-```
-
-Now we can see that the commit has been moved to the `move-second-commit` branch, breaking up the series into two independent branches with one commit each.
-
-```cli [rubbing-but-status-9, 396px]
-but status
-```
-
-Notice that the only SHA that changed was the one that moved, since nothing else needed to be rebased. Rubbing a commit to another branch always adds it to the top of that branch.
-
-As you might imagine, you can also simultaneously move and squash by rubbing a commit in one branch on a commit in another branch too.
-
-## Moving Files between Commits
-
-You can also move specific file changes from one commit to another.
-
-{/* restore [6ccc38e33e0e] */}
-
-To do that, you need identifiers for the files and hunks in an existing commit, which you can get via a `but status -f`, or `but status --files` that tells status to also list commit file IDs.
-
-```cli [rubbing-but-status-10, 638px]
+```bash
 but status -f
 ```
 
-So now we can move the changes from one commit to another by rubbing pretty easily. Let’s take the `app/controllers/bookmarks_controller.rb` change and move it down to the "second commit" commit on the other branch:
+Move file `a` out of commit `nn` and into commit `mm`:
 
-```cli [rubbing-but-rub-6, 88px]
-but rub 08:3 2e
+```bash
+but squash nn:a -t mm
 ```
 
-Now the change is in the "second commit" on the other branch:
+When the source is a committed file, GitButler keeps the target commit's message.
 
-```cli [rubbing-but-status-11, 638px]
-but status -f
+## Split a commit
+
+For a top commit, the cleanest split is to uncommit it and create replacement commits from selected changes.
+
+1. Uncommit the source and inspect the resulting file and hunk IDs:
+
+   ```bash
+   but uncommit nn
+   but diff
+   ```
+
+2. Create the replacement commits from oldest to newest:
+
+   ```bash
+   but commit -b user-bookmarks -m "Add bookmark model" q3 w7
+   but commit -b user-bookmarks -m "Validate bookmark URLs" p8:5
+   ```
+
+Changes you don't name remain uncommitted. If the source commit has other commits above it, those commits may need to be moved back to the branch tip after you create the replacements.
+
+## Add an empty placeholder commit
+
+An empty commit can reserve a place in history for work you plan to amend later:
+
+```bash
+but commit --empty --below nn -m "Add bookmark error handling"
 ```
 
-Also notice that the SHAs of both commits were changed, as they both needed to have content modified.
+When the implementation is ready, inspect its change IDs and amend them into the placeholder:
 
-## Splitting Commits
-
-Ok, so now we can be pretty specifc about moving changes around to all these different states. The last thing we’ll cover here is splitting commits, which requires a new command that creates a new empty commit called `but commit empty`.
-
-The general strategy here is that to split a commit, you would make a new empty commit above or below it, then rub changes from the one commit into the empty commit until it's how you want it to look, then you're done.
-
-Let’s say we have a branch with a single commit on it and want to split it into two commits.
-
-{/* restore [64df45a76e99] */}
-
-```cli [rubbing-but-status-12, 308px]
-but status
+```bash
+but diff
+but amend -t ee q3 w7
 ```
 
-Now we want to split the "add bookmark model and associations" into two separate commits. The way we do this is to insert a blank commit in between `06` and `f5` and then rub changes into it (then probably edit the commit message).
+In `but status`, `--above` places the placeholder on the line above the target (newer), while `--below` places it on the line below (older).
 
-We can insert a blank commit by running `but commit empty --after 6a` which inserts a blank commit above the specified commit.
-
-```cli [rubbing-but-commit-1, 88px]
-but commit empty --after 6a
-```
-
-Now we have a blank commit:
-
-```cli [rubbing-but-status-13, 462px]
-but status -f
-```
-
-Now we can use the previous method of moving file changes from other commits into it, then edit the commit message with `but reword 54` (for more on the `reword` command, see [Editing Commits](editing-commits), coming up next).
+Next, learn how to [change commit messages and branch names](editing-commits).

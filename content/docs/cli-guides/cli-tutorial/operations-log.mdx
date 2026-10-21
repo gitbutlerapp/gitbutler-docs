@@ -23,10 +23,10 @@ but undo
 
 ## Restoring to a previous point
 
-You can easily restore to any point in the operations history by running the `but oplog restore` command. If it will modify your working directory (maybe it's just changes to the commit history or staging stuff), then it will prompt you if you want to continue. If you don't want that, you can pass `-f` or `--force` to make it do it anyhow.
+You can restore to any point in the operations history by running the `but oplog restore` command with the SHA from `but oplog`.
 
 ```cli [operations-log-but-oplog-2, 154px]
-but oplog restore -f 6fdd8fb1d547
+but oplog restore 6fdd8fb1d547
 ```
 
 Restorations create a new oplog entry before running, so you can always easily undo it in the same manner.

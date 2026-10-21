@@ -1,13 +1,21 @@
 ---
 title: "`but uncommit`"
-description: "Uncommit changes from a commit or file-in-commit to the unstaged area."
+description: "Uncommit commits, branches, or committed files."
 ---
 
-Wrapper for `but rub <source> zz`.
+For more details about CLI IDs, see `but help cli-ids`.
 
-**Usage:** `but uncommit <SOURCE>`
+**Usage:** `but uncommit <SOURCES> [OPTIONS]`
 
 ## Arguments
 
-* `<SOURCE>` — Commit ID or file-in-commit ID to uncommit (required)
+* `<SOURCES>` — One or more commits, branches, or committed files to uncommit.
+
+Sources must all be the same kind. (required)
+
+## Options
+
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 

@@ -6,11 +6,11 @@ import type { ReactNode } from "react"
 import "@gitbutler/design-core/fonts"
 
 import Script from "next/script"
+import { PostHog } from "@/app/components/PostHog"
+import WebMcpTools from "@/app/components/WebMcpTools"
+import { getSiteUrl } from "@/app/utils/site"
 
-const baseUrl =
-  process.env.NODE_ENV === "development"
-    ? new URL("http://localhost:3000")
-    : new URL(`https://${process.env.VERCEL_URL}`)
+const baseUrl = getSiteUrl()
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,7 +22,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
       <body>
-        <Provider>{children}</Provider>
+        <PostHog />
+        <Provider>
+          <WebMcpTools />
+          {children}
+        </Provider>
       </body>
       <Script
         async
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
       template: "%s | GitButler Docs",
       default: "GitButler Docs"
     },
-    url: "https://docs.gitbutler.com",
+    url: baseUrl.toString(),
     siteName: "GitButler Docs",
     description:
       "GitButler is a new Source Code Management system designed to manage your branches, record and backup your work, be your Git client, help with your code and much more"

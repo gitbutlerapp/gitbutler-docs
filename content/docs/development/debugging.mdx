@@ -151,6 +151,54 @@ The `settings.json` are some top level preferences you've set.
 
 Finally, the `keys` directory holds the SSH key that we generate for you in case you don't want to go through creating your own. It's only used if you want to use it to sign commits or use it for authentication.
 
+### Per-project repository data
+
+Most repository-specific GitButler state lives next to the repository itself, inside the `.git` directory. By default, GitButler stores that data in `.git/gitbutler` for
+release builds, nightly builds and developer builds.
+
+You can override that location with a Git config change, here for the stable build:
+
+```bash title="Terminal"
+❯ git config --local gitbutler.storagePath gitbutler-alt
+```
+
+You can also set it globally if you want all repositories opened by GitButler on that machine to use the same base configuration:
+
+Setting it to a shared directory is useful if the project locations themselves are on a filesystem that doesn't support Sqlite very well,
+like a network drive.
+
+```bash title="Terminal"
+❯ git config --global gitbutler.storagePath /path/to/gitbutler-projects
+```
+
+Setting it to a relative path would force a channel, like Nightly, to reuse the data of stable builds.
+
+```bash title="Terminal"
+❯ git config --global gitbutler.nightly.storagePath gitbutler
+```
+
+The Git config key depends on the app channel:
+
+- Release builds use `gitbutler.storagePath`
+- Nightly builds use `gitbutler.nightly.storagePath`
+- Developer builds use `gitbutler.dev.storagePath`
+
+There are a couple of constraints on the configured path:
+
+- Relative paths are resolved relative to the repository's `.git` directory
+- If the resolved path stays inside `.git`, it must be under a top-level directory whose name starts with `gitbutler`, case-insensitive
+- You cannot point it at `.git` itself
+- If the resolved path ends up outside `.git`, GitButler appends a project-path specific identifier so multiple repositories can share the same base directory safely
+
+For example, these are valid:
+
+```bash title="Terminal"
+❯ git config --local gitbutler.storagePath gitbutler-alt
+❯ git config --local gitbutler.storagePath ../../gitbutler-projects
+```
+
+If you use a path outside `.git`, GitButler treats it as a base directory. For example, `../../gitbutler-projects` becomes something like `../../gitbutler-projects/<project-handle>` after resolution.
+
 ## Linux
 
 ### `glibc` Errors

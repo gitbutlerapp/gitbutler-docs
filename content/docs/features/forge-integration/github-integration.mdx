@@ -1,20 +1,20 @@
 ---
-title: GitHub Integration
-description: Connect GitButler to GitHub for seamless pull request management and branch collaboration directly from the GitButler client.
+title: Connect GitButler to GitHub
+description: Connect GitHub accounts to create pull requests and keep branch stacks in sync from GitButler.
 ---
 
 import ImageSection from "@/components/ImageSection"
 
-GitButler integrates seamlessly with GitHub, allowing you to manage the pull requests associated with your branches directly from the GitButler client.
+Connect GitButler to a GitHub account to create and manage pull requests
+without leaving the app.
 
-You can setup multiple GitHub accounts and pick which account to use for specific projects. This makes it easy to manage work across different organizations or personal repositories.
+You can connect multiple GitHub accounts and choose which one each project
+uses.
 
-## Setting up GitHub Integration
+## Connect a GitHub account
 
-To set up GitHub integration, you need to connect your GitButler client to your GitHub account. This is done through the GitButler settings.
-
-Open the GitButler settings by clicking on the profile button in the sidebar, then navigate to the **Integrations** tab, then click on the **Add account** button for GitHub.
-
+Open GitButler settings from the profile button in the sidebar. Go to
+**Integrations**, then click **Add account** for GitHub.
 
 <ImageSection
   className="mx-auto"
@@ -24,10 +24,14 @@ Open the GitButler settings by clicking on the profile button in the sidebar, th
   subtitle="GitHub authentication via the Integrations settings tab"
 />
 
-This will offer you to create an account out of the following options:
-- **Device Flow**: This option will generate a code and ask you to open a browser window to authorize GitButler to access your GitHub account. This is the recommended option for most users.
-- **Personal Access Token**: This option allows you to manually enter a personal access token from GitHub. This is useful for users who prefer not to use OAuth or need specific scopes for their token.
-- **GitHub Enterprise**: This option allows you to connect to a GitHub Enterprise instance by providing the base URL for the API and a personal access token.
+You can add an account three ways:
+
+- **Device Flow** generates a code and opens GitHub in your browser for
+  authorization. This is the recommended option for most users.
+- **Personal Access Token** connects an account with a token you create on
+  GitHub.
+- **GitHub Enterprise** connects to an Enterprise instance with its API URL and
+  a personal access token.
 
 We'll select the **Device Flow** option for this example.
 
@@ -49,18 +53,17 @@ A code will be generated for you. Copy it to your clipboard.
   subtitle="URL to authorize GitHub integration"
 />
 
-Next, click on the **Open GitHub activation page** button. This will open a browser window to the GitHub authorization page.
-
+Click **Open GitHub activation page** to continue in your browser.
 
 <ImageSection
   className="mx-auto"
   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/github-auth.png"
   width="800"
   height="600"
-  subtitle="github-auth.png"
+  subtitle="Enter the device code on GitHub"
 />
 
-Once you are on the GitHub authorization page, paste the code into the input field and it should let you know that you are authorized.
+Paste the code into GitHub and approve the authorization request.
 
 <ImageSection
   className="mx-auto"
@@ -70,8 +73,8 @@ Once you are on the GitHub authorization page, paste the code into the input fie
   subtitle="Button to check authorization status"
 />
 
-Return to the GitButler client and click on the **Check the status** button.
-If everything went well, your account should be connected and you should see your GitHub username in the Integrations tab.
+Return to GitButler and click **Check the status**. Your GitHub username appears
+in the Integrations tab after the account connects.
 
 <ImageSection
   className="mx-auto"
@@ -81,7 +84,7 @@ If everything went well, your account should be connected and you should see you
   subtitle="GitHub account connected successfully"
 />
 
-You can always forget an account by clicking on the **Forget** button next to the account name.
+To disconnect an account, click **Forget** next to its name.
 
 <ImageSection
   className="mx-auto"
@@ -91,9 +94,10 @@ You can always forget an account by clicking on the **Forget** button next to th
   subtitle="Add a GitHub account via Personal Access Token"
 />
 
-Alternatively, you can also connect your GitHub account using a Personal Access Token by selecting the **Personal Access Token** option when adding an account.
-The permissions required for GitButler to manage pull requests are read access to *Metadata* and read and write access to *Pull Requests*
-The required permissions might change in the future as new features are added.
+To connect with a personal access token, select **Personal Access Token** when
+adding the account. GitButler needs read access to **Metadata** and read and
+write access to **Pull Requests**. These requirements may change as GitButler
+adds GitHub features.
 
 <ImageSection
   className="mx-auto"
@@ -103,23 +107,77 @@ The required permissions might change in the future as new features are added.
   subtitle="Add a GitHub Enterprise account via Personal Access Token"
 />
 
-In the case of GitHub Enterprise, select the **GitHub Enterprise** option when adding an account.
-This will ask you for the base URL of your GitHub Enterprise instance's API as well as a Personal Access Token with the same permissions as above.
+For GitHub Enterprise, select **GitHub Enterprise** and enter the instance's API
+base URL and a personal access token with the same permissions.
 
 For example, if your GitHub Enterprise Server's hostname is **github.a-super-serious-company.com**, then set the base URL to **github.a-super-serious-company.com/api/v3**.
 
 See [GitHub's Octokit base URL documentation](https://github.com/octokit/octokit.js?tab=readme-ov-file#constructor-options) for more information.
 
-## Using GitButler to Manage Pull Requests
+## Create and manage pull requests
 
-Once you have set up GitHub integration, you can open your pull requests directly from the GitButler branch.
+After connecting GitHub, create a pull request from its GitButler branch.
 
 <ImageSection
   className="mx-auto"
   src="https://gitbutler-docs-images-public.s3.us-east-1.amazonaws.com/create-pr.png"
   width="800"
   height="600"
-  subtitle="create-pr.png"
+  subtitle="Create a pull request from a GitButler branch"
 />
 
-When you create a new branch or commit changes, GitButler will automatically check if there are any associated pull requests on GitHub. You can view these pull requests in the "Pull Requests" tab in the sidebar of the Branches page.
+GitButler checks whether each branch has an associated pull request. You can
+view those pull requests from the **Pull Requests** section of the Branches
+page.
+
+## Use native GitHub stacked pull requests
+
+GitButler uses native GitHub stacked pull requests when:
+
+- The repository is enrolled in GitHub's stacked pull requests private
+  preview.
+- The pull requests use branches in the same repository, not a fork.
+- The project has not disabled native stacks.
+
+The default mode is **Auto**. GitButler detects whether the repository supports
+native stacks and registers stacks containing at least two open pull requests.
+GitHub renders the stack, so GitButler does not add stack information to the
+pull request descriptions.
+
+If the repository is not enrolled, Auto falls back to ordinary pull requests
+with GitButler-managed stack information in their descriptions. Fork-backed
+pull requests always use this fallback.
+
+Change the mode under **Project settings → Project → Native GitHub stacked pull
+requests**:
+
+- **Auto** uses native stacks when available and falls back otherwise.
+- **Native** requires native stack support and reports an error when the
+  repository is not enrolled.
+- **Disabled** always uses description-based stack information.
+
+The **Stack information in review descriptions** setting controls whether
+fallback information appears at the top, bottom, or not at all. It does not
+affect native stacks.
+
+The same project-local setting is available in the CLI:
+
+```bash
+but config forge github-stacks auto
+but config forge github-stacks enable
+but config forge github-stacks disable
+```
+
+The CLI values map to Desktop as follows:
+
+- `auto` selects **Auto**.
+- `enable` selects **Native**.
+- `disable` selects **Disabled**.
+
+Changes take effect on the next push or pull request creation. GitButler then
+updates the pull request bases and either the native stack membership or the
+fallback descriptions.
+
+See
+[Create stacked branches and pull requests](/features/branch-management/stacked-branches)
+for the publishing workflow.

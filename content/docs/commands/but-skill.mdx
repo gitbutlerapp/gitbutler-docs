@@ -1,17 +1,20 @@
 ---
 title: "`but skill`"
-description: "Manage Claude AI skills for GitButler."
+description: "Manage AI agent skills for GitButler."
 ---
 
 Skills provide enhanced AI capabilities for working with GitButler through
-Claude Code and other AI assistants.
+Claude Code, Codex, and other AI assistants.
 
-Use `but skill install` to install the GitButler skill files into your
-repository or globally.
+Use `but skill install` to install the GitButler skill files. By default,
+it prompts for scope (repository or global home directory) and then format.
+When run outside a git repository, local scope is unavailable and the
+default install location is global (home directory). You can still
+install to a custom location with `--path` using an absolute or `~` path.
 
 ## Examples
 
-Install the skill in the current repository:
+Install interactively (prompts for scope and format):
 
 ```text
 but skill install
@@ -31,16 +34,24 @@ but skill install --global
 
 Install the GitButler CLI skill files for Coding agents
 
-By default, installs the skill into the current repository. The command
-will prompt you to select a skill folder format (Claude Code, OpenCode, Codex, GitHub Copilot,
-Cursor, Windsurf) unless you specify a custom path with --path.
+By default, the command prompts you to choose installation scope first
+(current repository or global home directory), then prompts you to
+select a skill folder format (Agent Skills / .agents, Claude Code,
+OpenCode, Codex, GitHub Copilot, Cursor, Windsurf, Poolside) unless you
+specify a custom path with --path.
+When run outside a git repository, local scope is unavailable and the
+default install location is global (home directory). You can still
+install to a custom location with `--path` using an absolute or `~` path.
 
 Use --global to install the skill in a global location instead of the
 current repository.
 
+In non-interactive mode, a detected agent uses its global skill directory;
+otherwise specify --path or --detect.
+
 ## Examples
 
-Install in current repository (prompts for format):
+Install interactively (prompts for scope and format):
 
 ```text
 but skill install
@@ -55,10 +66,10 @@ but skill install --global
 Install to a custom path:
 
 ```text
-but skill install --path .claude/skills/gitbutler
+but skill install --path .agents/skills/gitbutler
 ```
 
-Auto-detect installation location (update existing installation):
+Auto-detect installation location (update existing installations):
 
 ```text
 but skill install --detect
@@ -69,8 +80,8 @@ but skill install --detect
 **Options:**
 
 * `-g`, `--global` — Install the skill globally instead of in the current repository
-* `-p`, `--path` `<PATH>` — Custom path where to install the skill (relative to repository root or absolute)
-* `-d`, `--detect` — Automatically detect where to install by finding existing installation
+* `-p`, `--path` `<PATH>` — Custom path where to install the skill (relative to repository root or absolute). Outside a repository, relative paths require --global
+* `-d`, `--detect` — Refresh existing installations in place, updating every GitButler skill found in the current scope (local before global)
 
 ### `but skill check`
 

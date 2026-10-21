@@ -1,0 +1,186 @@
+---
+title: GitButler TUI
+description: Inspect and edit your GitButler workspace from interactive terminal UIs.
+---
+
+import ImageSection from "@/components/ImageSection"
+
+Use `but tui` when you want a live, keyboard-first GitButler workspace in your
+terminal. It opens an interactive view of your workspace state: uncommitted
+changes, active branches, commits, files, and the common base.
+
+```sh
+but tui
+```
+
+Run it from a GitButler-managed repository. If the repository has not been set
+up yet, run [`but setup`](/commands/but-setup) first.
+
+<ImageSection
+  alt="GitButler TUI showing available keyboard commands over workspace status"
+  src="/ai-agents-tui.png"
+  width="2068"
+  height="1394"
+  subtitle="GitButler TUI command view."
+/>
+
+## Pick the right terminal workflow
+
+- Use `but tui` for the full workspace view: branches, commits, assigned
+  changes, uncommitted changes, diffs, and local history operations.
+- Use [`but diff --tui`](/commands/but-diff) for focused diff review without the
+  full workspace editing surface.
+- Mark files or hunks inside `but tui`, then press `c` when you want to commit
+  only those changes.
+- Use [command mode](#use-command-mode) inside `but tui` when you need a `but`
+  command without leaving the TUI.
+- Use plain CLI commands when you need repeatable output for scripts, agents, or
+  logs.
+
+## What you can do
+
+In the full workspace TUI, you can:
+
+- Inspect uncommitted changes, branch lanes, commits, and file-level changes.
+- Open a details pane for the selected branch, commit, file, or hunk.
+- Create commits from all or selected uncommitted changes, and insert empty
+  commits.
+- Create branches.
+- Move commits or branches.
+- Squash commits, amend changes into commits, or move committed changes back to
+  the uncommitted area.
+- Mark multiple commits and act on them together.
+- Reword commits or branch names.
+- Open selected files in another program.
+- Discard local work after a confirmation prompt.
+- Undo and redo GitButler operations.
+
+For the complete shortcut list, press `?` inside the TUI. The help popup is
+generated from the current keybindings, so it is the source of truth.
+
+## Move around
+
+Most navigation uses Vim-style keys, with arrow keys where they make sense.
+
+- `j` / `k` move down and up.
+- `Shift+j` / `Shift+k` jump to the next or previous section.
+- `g` jumps to uncommitted changes.
+- `Shift+g` jumps to the common merge base.
+- `t` opens the branch picker.
+- `Esc` backs out of the current mode.
+- `q` quits.
+
+The hotbar at the bottom shows the most useful keys for the current mode.
+
+## Inspect changes
+
+Select a branch, commit, file, or hunk, then press `d` to open details. The details pane shows commit metadata and diffs for the selected row.
+
+- `d` toggles the split details pane.
+- `Shift+d` toggles full-screen details.
+- `f` shows files in the selected commit.
+- `Shift+f` shows files across all commits.
+- `l` focuses the details pane.
+- `h` returns focus to the status list.
+- `+` and `-` resize the split details pane.
+- In details mode, `j` / `k` move between hunks.
+- In details mode, `Shift+j` / `Shift+k` scroll.
+- In details mode, `r` starts squash mode from the current uncommitted hunk.
+- In details mode, `y` copies the current hunk.
+
+## Change local history
+
+- Press `c` to create a commit from the selected uncommitted changes. Press `i` in commit mode to write the message inline, `e` to leave it empty, or `b` to commit to a new branch.
+- Press `n` to insert an empty commit.
+- Press `b` to create a branch.
+- Press `m` to move the selected commit or branch, then choose the destination and press `Enter`.
+- Press `r` to enter squash mode with the selected source. Choose a target and
+  press `Enter`. The target is labeled with the operation GitButler will run:
+  `amend`, `squash`, or `uncommit`.
+- In squash mode, press `u` to keep the target commit message when combining
+  commits.
+- Press `Space` to mark multiple commits, then press `r` to squash them into
+  another commit.
+- Press `Enter` on a commit or branch to reword it inline. Press `Shift+m` to reword a commit in your configured editor.
+- Press `x` to discard the selected local work. Destructive actions ask for confirmation.
+- Press `u` to undo the last operation and `Shift+u` to redo it.
+
+GitButler records these operations in the operations log, so you can also inspect and recover with [`but oplog`](/commands/but-oplog), [`but undo`](/commands/but-undo), and [`but redo`](/commands/but-redo).
+
+## Commit selected changes
+
+You do not need to stage changes before committing them. Mark the files or
+hunks that belong together, then create the commit directly:
+
+1. Select an uncommitted file and press `Space` to mark it.
+2. To select individual hunks, open the file details with `d`, focus the details
+   pane with `l`, and press `Space` on each hunk you want.
+3. Press `c`, choose the target branch or commit position, and press `Enter`.
+
+Commit mode opens your configured editor for the message by default. Press `i`
+before confirming to write the message inline, `e` to leave it empty, or `b` to
+create the commit on a new branch.
+
+## Open files in another program
+
+Select an uncommitted or committed file and press `o` to open it in the default
+available program. Press `Shift+o` to choose a program instead.
+
+You can mark multiple files or hunks before opening them. When multiple items
+are marked, GitButler opens the containing files rather than individual hunks.
+
+## Restore your last selection
+
+Start the TUI with `--remember-selection` to remember supported selections such
+as an uncommitted item, branch, commit, or file when you quit, then restore that
+selection the next time you use the same option:
+
+```sh
+but tui --remember-selection
+```
+
+If the saved branch, commit, or file no longer exists, the TUI starts with its
+normal default selection.
+
+## Use command mode
+
+Use command mode when you want the TUI to stay open but need one command.
+
+- `:` runs a `but` command. For example, type `branch list` rather than
+  `but branch list`.
+- `!` runs an external command. It does not run through your shell, so shell
+  syntax like pipes, redirects, built-ins, and `&&` needs `sh -c '...'`.
+- `Ctrl+r` reloads the workspace state.
+
+After the command finishes, press `Enter` to return to the TUI. Successful
+commands reload the workspace state. Failed commands return with an error.
+
+## Use the diff TUI
+
+[`but diff --tui`](/commands/but-diff) opens a smaller TUI focused only on
+diffs. It has a file list on the left and a diff pane on the right.
+
+```sh
+but diff --tui
+but diff g0 --tui
+but diff my-branch --tui
+```
+
+- `j` / `k` move through files in the file list.
+- `h` / `l` / `Tab` switch panes.
+- In the diff pane, `j` / `k` scroll one line.
+- `Space` or `PageDown` scrolls down a page.
+- `PageUp` scrolls up a page.
+- `q` quits.
+
+You can make `but diff` use the TUI by default:
+
+```sh
+but config ui set tui true
+```
+
+Use `--no-tui` for a one-off plain diff:
+
+```sh
+but diff --no-tui
+```

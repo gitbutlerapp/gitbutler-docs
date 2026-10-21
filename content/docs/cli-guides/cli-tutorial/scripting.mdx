@@ -1,20 +1,26 @@
 ---
-title: Scripting
-description: How to script with GitButler CLI
+title: Script with JSON output
+description: Use structured GitButler CLI output in scripts and agent workflows.
 ---
 
-### JSON Errwhere
+Commands that expose structured output accept the `--json` option. For example, inspect the workspace with `jq`:
 
-All of the commands are designed to be very user friendly when we have an interactive terminal, but you can also very easily script everything by passing the `--json` or `-j` option to anything. For example, here is using `but show` on a commit.
-
-```cli [scripting-but-show-1, 308px]
-but show 2672465
+```bash
+but status --json | jq
 ```
 
-Now with the `--json` option:
+Or inspect one commit:
 
-```cli [scripting-but-show-2, 682px]
-but show --json 2672465 | jq
+```bash
+but show nn --json | jq
 ```
 
-You can do this with anything - committing, status, diffing, etc. Just throw a `-j` in there and you get parseable data (or, data your agent can very easily work with).
+Mutation commands such as `but commit`, `but amend`, and `but move` also support `--json`:
+
+```bash
+but commit -b user-bookmarks -m "Add user bookmarks" q3 w7 --json
+```
+
+Not every command has JSON output, and there is no `-j` shorthand. Check `but <command> --help` before relying on `--json` in a script.
+
+Avoid commands that can prompt for input. Pass a commit message, name explicit branch targets, and use command-specific non-interactive options when available.

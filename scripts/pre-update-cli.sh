@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This script runs in the exampleProjectPath directory before the CLI update process begins.
-# It executes before the "but restore" command, allowing you to set up the project state.
+# It executes before the "but oplog restore" command, allowing you to set up the project state.
 
 # Exit on error
 set -e

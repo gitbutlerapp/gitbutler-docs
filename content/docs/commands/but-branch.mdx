@@ -9,48 +9,55 @@ By default without a subcommand, it will list the branches.
 
 To apply or unapply branches, use `but apply` and `but unapply`.
 
+To rename an applied branch, use `but reword <branch> -m <new-name>`.
+
 **Usage:** `but branch <COMMAND>`
 
 ## Subcommands
 
 ### `but branch new`
 
-Creates a new branch in the workspace
+Create a new branch.
 
-If no branch name is provided, a new parallel branch with a generated
-name will be created.
+Use `--above` or `--below` to created stacked branches. Omitting these create a new unstacked
+branch.
 
-You can also specify an anchor point using the `--anchor` option,
-which can be either a commit ID or an existing branch name to create
-the new branch from. This allows you to create stacked branches.
+For more details about CLI IDs, see `but help cli-ids`.
 
-**Usage:** `but branch new [BRANCH_NAME] [OPTIONS]`
+**Usage:** `but branch new [NAME] [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH_NAME>` — Name of the new branch
+* `<NAME>` — Name of the new branch.
+
+If omitted the new branch will get a generated name.
 
 **Options:**
 
-* `-a`, `--anchor` `<ANCHOR>` — Anchor point - either a commit ID or branch name to create the new branch from
+* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place the branch above BRANCH_OR_COMMIT, which must be an applied branch or commit.
+
+If BRANCH_OR_COMMIT is a commit, the new branch is created above the commit.
+
+If BRANCH_OR_COMMIT is a branch, the new branch is created above the targeted branch.
+* `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place the branch below BRANCH_OR_COMMIT, which must be an applied branch or commit.
+
+If BRANCH_OR_COMMIT is a commit, the new branch is created below the commit.
+
+If BRANCH_OR_COMMIT is a branch, the new branch is created below the targeted branch.
+* `-s`, `--switch` — Switch to the newly created branch instead of applying it to the GitButler workspace
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 
 ### `but branch delete`
 
-Deletes a branch from the workspace
+Delete branchs from the workspace
 
-This will remove the branch and all its commits from the workspace.
-If the branch has unpushed commits, you will be prompted for confirmation
-unless the `--force` flag is used.
-
-**Usage:** `but branch delete <BRANCH_NAME> [OPTIONS]`
+**Usage:** `but branch delete <BRANCHES>`
 
 **Arguments:**
 
-* `<BRANCH_NAME>` — Name of the branch to delete (required)
-
-**Options:**
-
-* `-f`, `--force` — Force deletion without confirmation
+* `<BRANCHES>` — One or more branches to delete (required)
 
 ### `but branch list`
 
@@ -90,6 +97,7 @@ make the command faster.
 * `--no-ahead` — Don't calculate and show number of commits ahead of base (faster)
 * `--review` — Fetch and display review information (PRs, MRs, etc.)
 * `--no-check` — Don't check if each branch merges cleanly into upstream
+* `--empty` — Include branches with no commits on them (hidden by default)
 
 ### `but branch show`
 
@@ -99,11 +107,11 @@ This shows the list of commits that are on the specified branch but not yet inte
 
 You can also choose to fetch and display review information, show files modified in each commit with line counts, generate an AI summary of the branch changes, and check if the branch merges cleanly into upstream.
 
-**Usage:** `but branch show <BRANCH_ID> [OPTIONS]`
+**Usage:** `but branch show <BRANCH> [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH_ID>` — CLI ID or name of the branch to show (required)
+* `<BRANCH>` — CLI ID or name of the branch to show (required)
 
 **Options:**
 
@@ -111,4 +119,24 @@ You can also choose to fetch and display review information, show files modified
 * `-f`, `--files` — Show files modified in each commit with line counts
 * `--ai` — Generate AI summary of the branch changes
 * `--check` — Check if the branch merges cleanly into upstream and identify conflicting commits
+
+### `but branch update`
+
+Update your local branch with the content of its remote counterpart.
+
+This allows you to resolve the divergence between your local branch and its
+tracked remote in different ways.
+
+**Usage:** `but branch update <BRANCH> [OPTIONS]`
+
+**Arguments:**
+
+* `<BRANCH>` — Name of the local branch to integrate (required)
+
+**Options:**
+
+* `-s`, `--strategy` `<STRATEGY>` — Strategy to use for the integration. If no strategy is specified, we default to pull-rebase (default: `pull-rebase`)
+* `--dry-run` — Preview the resulting branch state without persisting changes
+* `-v`, `--verbose` — Show additional dry-run details like the current divergence
+* `-i`, `--interactive` — Open the generated integration script in an editor
 

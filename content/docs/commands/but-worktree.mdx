@@ -1,0 +1,62 @@
+---
+title: "`but worktree`"
+description: "Manage linked worktrees (experimental, requires the `worktreeManipulation` feature flag)."
+---
+
+Without a subcommand, lists the worktrees.
+
+**Usage:** `but worktree <COMMAND>`
+
+## Subcommands
+
+### `but worktree list`
+
+List linked worktrees, most recently updated first.
+
+By default this lists every active worktree and the three most recently updated
+archived ones. A worktree is shown by its name, followed by the branch it has checked
+out when that differs from the name, and its path.
+
+**Usage:** `but worktree list [OPTIONS]`
+
+**Options:**
+
+* `--archived` — List all archived worktrees
+* `--active` — List all active worktrees
+
+### `but worktree archive`
+
+Hide a worktree from the workspace
+
+**Usage:** `but worktree archive <WORKTREE>`
+
+**Arguments:**
+
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+
+### `but worktree unarchive`
+
+Show an archived worktree in the workspace again
+
+**Usage:** `but worktree unarchive <WORKTREE>`
+
+**Arguments:**
+
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+
+### `but worktree remove`
+
+Remove a worktree from disk, like `git worktree remove`.
+
+This works on archived worktrees too, and keeps the branch the worktree had checked out.
+
+**Usage:** `but worktree remove <WORKTREE> [OPTIONS]`
+
+**Arguments:**
+
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+
+**Options:**
+
+* `-f`, `--force` — Remove the worktree even if it has uncommitted changes
+

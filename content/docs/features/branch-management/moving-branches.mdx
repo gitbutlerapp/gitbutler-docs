@@ -1,17 +1,14 @@
 ---
-title: Moving Branches
-description: Learn how to reorganize your branches by moving them between different stacks
+title: Move branches between stacks
+description: Change branch dependencies by moving branches between stacks or tearing them off into new stacks.
 ---
 
-## Overview
+You can drag a branch from one stack to another to change what it depends on.
+You can also tear a branch off into an independent stack.
 
-GitButler allows you to move branches between stacks through a simple drag-and-drop interface. This is useful when you want to reorganize your work, change branch dependencies, or consolidate related branches into a single stack.
+## Move a branch to another stack
 
-## Moving a Branch to Another Stack
-
-You can move a branch from one stack to another by dragging it to a specific position in the target stack.
-
-### How to Move a Branch
+Drag the branch to the position where it belongs in the target stack:
 
 1. **Drag the branch header** - Click and hold on the branch header (the section displaying the branch name)
 2. **Drop on target location** - Drag it to the position where you want to insert it in another stack
@@ -26,7 +23,7 @@ When you hover over a valid drop target during the drag operation, you'll see vi
   Your browser does not support the video tag.
 </video>
 
-### Drop Zones
+### Drop zones
 
 There are two types of drop zones when moving branches:
 
@@ -35,16 +32,16 @@ There are two types of drop zones when moving branches:
 
 The drop zones appear as horizontal lines with visual feedback when you hover over them during a drag operation.
 
-## Creating a New Stack (Tearing Off)
+## Tear a branch off into a new stack
 
 You can also separate a branch from its current stack and create a new independent stack for it. This is called "tearing off" a branch.
 
-### How to Tear Off a Branch
+### Tear off a branch
 
 1. **Drag the branch header** - Click and hold on the branch header you want to separate
 2. **Drop outside the stacks area** - Drag it to the designated dropzone outside of the existing stacks
 
-This creates a new standalone stack containing just that branch.
+This creates a new standalone stack containing only that branch.
 
 <video width="100%" controls muted>
   <source
@@ -54,9 +51,7 @@ This creates a new standalone stack containing just that branch.
   Your browser does not support the video tag.
 </video>
 
-## Important Considerations
-
-### Branch Requirements
+## Requirements
 
 Not all branches can be moved. A branch must meet these conditions to be movable:
 
@@ -64,7 +59,7 @@ Not all branches can be moved. A branch must meet these conditions to be movable
 - **Has commits** - The branch must contain at least one commit
 - **Different target stack** - You can only move branches to different stacks (not within the same stack)
 
-### What Happens During a Move
+### What happens during a move
 
 When you move a branch:
 
@@ -73,15 +68,18 @@ When you move a branch:
 3. **References updated** - Git references are updated to reflect the new structure
 4. **Stack cleanup** - If the moved branch was the last one in its stack, that stack is deleted
 
-### Pull Request Updates
+### Pull request updates
 
-If you're using GitHub integration and the branch has an associated pull request:
+If the branch has an associated pull request or merge request:
 
-- **PR descriptions are automatically updated** - The PR base and description are updated to reflect the new stack structure
-- **Stack PRs are synchronized** - All PRs in both the source and target stacks have their descriptions updated to maintain proper stacking information
+- **Pull request bases** - Each pull request targets the nearest branch below it that also has a pull request
+- **GitHub stack membership** - GitButler updates the native stack on GitHub to match the new branch order
+- **Description-based stacks** - Repositories without native stack support get updated stack information in their pull request descriptions
 
-## Related Features
+The synchronization runs on the next push or pull request creation.
 
-- [Stacked Branches](/features/branch-management/stacked-branches) - Learn about working with stacked branches
-- [Branch Lanes](/features/branch-management/branch-lanes) - Understand the branch lane interface
-- [Parallel Branches](/features/branch-management/virtual-branches) - Core concepts of GitButler's virtual branch system
+## Related features
+
+- [Create stacked branches and pull requests](/features/branch-management/stacked-branches)
+- [Use the Branches page](/features/branch-management/branch-lanes)
+- [Work with parallel branches](/features/branch-management/virtual-branches)
