@@ -4,7 +4,7 @@ import path from 'path';
 interface CliBlockProps {
   hash?: string;
   height?: string;
-  lang?: 'cli' | 'ansi';
+  lang?: 'cli' | 'ansi' | 'example';
   children: React.ReactNode;
 }
 
@@ -22,9 +22,11 @@ export default async function CliBlock({ hash, height, lang = 'cli', children }:
   }
 
   // Determine which directory to use based on lang
-  const dir = lang === 'ansi'
-    ? path.join(process.cwd(), 'public/cli-examples')
-    : path.join(process.cwd(), 'public/cache/cli-output');
+  const dir = {
+    ansi: path.join(process.cwd(), 'public/cli-examples'),
+    example: path.join(process.cwd(), 'public/examples'),
+    cli: path.join(process.cwd(), 'public/cache/cli-output'),
+  }[lang];
   const htmlPath = path.join(dir, `${hash}.html`);
   const darkHtmlPath = path.join(dir, `${hash}.dark.html`);
 
@@ -61,9 +63,11 @@ export default async function CliBlock({ hash, height, lang = 'cli', children }:
     );
   } catch {
     // HTML file not found, show placeholder
-    const errorMessage = lang === 'ansi'
-      ? 'Output not found. Run ./scripts/sync-commands.sh to sync examples.'
-      : 'Output cache not found. Run pnpm update-cli to generate.';
+    const errorMessage = {
+      ansi: 'Output not found. Run ./scripts/sync-commands.sh to sync examples.',
+      example: 'Example output not found. Run pnpm examples to generate.',
+      cli: 'Output cache not found. Run pnpm update-cli to generate.',
+    }[lang];
 
     return (
       <div className="rounded-lg border bg-muted p-4 mb-4">

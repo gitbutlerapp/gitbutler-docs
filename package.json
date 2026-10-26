@@ -9,6 +9,7 @@
     "dev": "next dev",
     "start": "next start",
     "update-cli": "node scripts/update-cli-outputs.js",
+    "examples": "bash examples/run.sh",
     "update-manpages": "bash scripts/update-manpages.sh",
     "generate-cheat-pdfs": "node scripts/generate-cheat-pdfs.js"
   },
