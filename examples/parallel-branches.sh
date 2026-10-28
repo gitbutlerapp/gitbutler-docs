@@ -10,7 +10,6 @@ printf '# Tweeter\n' > README.md
 git add .
 git commit -qm "Initial commit"
 git push -q origin main
-but setup > /dev/null
 
 printf 'export function addBookmark(id: string) {\n  return id;\n}\n' > src/bookmarks.ts
 printf 'export function likeTweet(id: string) {\n  return id;\n}\n' > src/likes.ts
