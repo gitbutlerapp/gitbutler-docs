@@ -8,6 +8,9 @@ OUTPUT_DIR="$DOCS_ROOT/public/examples"
 BUT_VERSION="$(tr -d '[:space:]' < "$EXAMPLES_DIR/but-version")"
 BUT_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/gitbutler-docs-examples/$BUT_VERSION"
 BUT_BIN_DIR="$BUT_CACHE_DIR/bin"
+if [ -n "${BUT_BIN:-}" ]; then
+  BUT_BIN_DIR="$(cd "$(dirname "$BUT_BIN")" && pwd)"
+fi
 
 ensure_but() {
   if [ -x "$BUT_BIN_DIR/but" ]; then
@@ -70,6 +73,7 @@ new_repo() {
   git init -q --bare "$SCENARIO_DIR/remote.git"
   git init -q -b main "$SCENARIO_DIR/app"
   cd "$SCENARIO_DIR/app"
+  echo "Using $(but --version)"
   git config user.name "Markus Butler"
   git config user.email markus@example.com
   git remote add origin ../remote.git
@@ -81,7 +85,7 @@ _render() {
   out="$OUTPUT_DIR/$name.html"
   [ "$theme" = dark ] && out="$OUTPUT_DIR/$name.dark.html"
   clean_env BUT_THEME="$theme" CLICOLOR_FORCE=1 ansi-senor -o "$out" -t "$theme" "$command" >/dev/null
-  perl -0pi -e 's|<pre>(?:<[^>]*>)*[^<\n]*Initiated a background sync\.\.\.(?:<[^>]*>)*\n|<pre>|' "$out"
+  perl -0pi -e 's|<pre>(?:<[^>]*>)*[^<\n]*Initiated a background sync\.\.\.(?:<[^>]*>)*\n|<pre>|; s|<pre>(?:<[^>]*>)*GitButler uses metrics[^<\n]*(?:<[^>]*>)*\n|<pre>|' "$out"
   echo "  $out"
 }
 
