@@ -48,7 +48,8 @@
 - [commands-but-discard](#commands-but-discard)
 - [commands-but-gui](#commands-but-gui)
 - [commands-but-help-cli-ids](#commands-but-help-cli-ids)
-- [commands-but-land](#commands-but-land)
+- [commands-but-init](#commands-but-init)
+- [commands-but-merge](#commands-but-merge)
 - [commands-but-move](#commands-but-move)
 - [commands-but-open](#commands-but-open)
 - [commands-but-oplog](#commands-but-oplog)
@@ -59,9 +60,9 @@
 - [commands-but-redo](#commands-but-redo)
 - [commands-but-resolve](#commands-but-resolve)
 - [commands-but-reword](#commands-but-reword)
-- [commands-but-setup](#commands-but-setup)
 - [commands-but-show](#commands-but-show)
 - [commands-but-skill](#commands-but-skill)
+- [commands-but-split](#commands-but-split)
 - [commands-but-squash](#commands-but-squash)
 - [commands-but-status](#commands-but-status)
 - [commands-but-teardown](#commands-but-teardown)
@@ -798,7 +799,7 @@ but unapply liked-tweets
 but status
 ```
 
-The workspace commit now sits on top of `user-bookmarks` alone:
+With only one branch left, GitButler **switches back to that branch**, like a plain Git checkout, and the workspace commit is gone:
 
 ```example parallel-branches-git-log-2
 git log --oneline --graph
@@ -810,7 +811,7 @@ git log --oneline --graph
 but branch
 ```
 
-To bring the branch back, apply it:
+To bring the branch back, apply it, and GitButler switches to `gitbutler/workspace` again:
 
 ```example parallel-branches-but-apply-1
 but apply liked-tweets
@@ -2612,7 +2613,7 @@ If `--dry-run` is specified, no changes will be made; instead, the absorption pl
 
 ## Arguments
 
-* `<SOURCE>` — If the Source is an uncommitted change - the change will be absorbed. If not provided, everything that is uncommitted will be absorbed
+* `<SOURCE>` — An uncommitted file or hunk to absorb; if omitted, everything uncommitted in the checkout but runs in is absorbed. A linked worktree's changes cannot be absorbed yet
 
 ## Options
 
@@ -2777,11 +2778,11 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 * `<SOURCES>` — One or more uncommitted files or hunks to amend.
 
-If omitted, all changes in the uncommitted area (zz) are amended.
+If omitted, all uncommitted changes of the checkout but runs in are amended: @, or a linked worktree's.
 
 ## Options
 
-* `-t`, `--target` `<COMMIT_OR_BRANCH>` — The commit or branch to amend into (required)
+* `-t`, `--target` `<COMMIT_OR_BRANCH>` — The commit to amend into; a branch means its newest commit (required)
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
@@ -2822,8 +2823,8 @@ To rename an applied branch, use `but reword <branch> -m <new-name>`.
 
 Create a new branch.
 
-Use `--above` or `--below` to created stacked branches. Omitting these create a new unstacked
-branch.
+Use `--above` or `--below` to create stacked branches. Omitting these creates a new unstacked
+branch in the workspace, which is refused when run from a linked worktree.
 
 For more details about CLI IDs, see `but help cli-ids`.
 
@@ -2854,7 +2855,7 @@ By default, mutations refuse to touch history that has landed in the target bran
 
 ### `but branch delete`
 
-Delete branchs from the workspace
+Delete branches and their commits from the workspace
 
 **Usage:** `but branch delete <BRANCHES>`
 
@@ -2896,7 +2897,7 @@ make the command faster.
 
 * `-l`, `--local` — Show only local branches
 * `-r`, `--remote` — Show only remote branches
-* `-a`, `--all` — Show all branches (not just active + 20 most recent)
+* `-a`, `--all` — Show all branches (not just active + 20 most recent); empty branches also need --empty
 * `--no-ahead` — Don't calculate and show number of commits ahead of base (faster)
 * `--review` — Fetch and display review information (PRs, MRs, etc.)
 * `--no-check` — Don't check if each branch merges cleanly into upstream
@@ -2925,7 +2926,7 @@ You can also choose to fetch and display review information, show files modified
 
 ### `but branch update`
 
-Update your local branch with the content of its remote counterpart.
+Integrate a branch's remote counterpart into the local branch.
 
 This allows you to resolve the divergence between your local branch and its
 tracked remote in different ways.
@@ -2938,7 +2939,7 @@ tracked remote in different ways.
 
 **Options:**
 
-* `-s`, `--strategy` `<STRATEGY>` — Strategy to use for the integration. If no strategy is specified, we default to pull-rebase (default: `pull-rebase`)
+* `-s`, `--strategy` `<STRATEGY>` — Strategy to use for the integration (default: `pull-rebase`)
 * `--dry-run` — Preview the resulting branch state without persisting changes
 * `-v`, `--verbose` — Show additional dry-run details like the current divergence
 * `-i`, `--interactive` — Open the generated integration script in an editor
@@ -2992,18 +2993,22 @@ but clean --include-upstream
 
 # commands-but-commit
 
-By default, all uncommitted changes are included in the commit. This can be controlled with
-change flags such as `--empty` and `--interactive`, or by providing `CHANGES` as positional
-arguments.
+By default, all uncommitted changes of the checkout `but` runs in are included in the commit:
+the main worktree's, or a linked worktree's when run from inside one. This can be controlled
+with change flags such as `--empty` and `--interactive`, or by providing `CHANGES` as
+positional arguments.
 
-If there are no branches applied, a new branch is created for the commit. If there is only one
-stack of branches applied, the commit is placed at the tip of that stack. Otherwise, the
-targeting flags `--above`, `--below` and `--branch` control where the commit is placed. Note
-that only one of the targeting flags can be provided at a time.
+Run from a linked worktree, or given changes from one, the commit is placed at the tip of that
+worktree's branch. Otherwise, if there are no branches applied, a new branch is created for the
+commit. If there is only one stack of branches applied, the commit is placed at the tip of that
+stack. Otherwise, the targeting flags `--above`, `--below` and `--branch` control where the
+commit is placed.
+`--above` and `--below` are mutually exclusive; combine either with `--branch` to name a new
+branch when targeting a branch.
 
-The commit is expected to have a commit message unless `--no-message` is provided. If neither of
-`--no-message` nor `--message` is provided, the user's preferred editor is opened to input a
-message.
+The commit is expected to have a commit message unless `--no-message` is provided. If none of
+`--no-message`, `--message` or `--file` is provided, the user's preferred editor is opened to
+input a message.
 
 For more details about CLI IDs, see `but help cli-ids`.
 
@@ -3011,42 +3016,44 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-* `<CHANGES>` — One or more changes to commit.
+* `<CHANGES>` — The files or hunks to commit, by CLI ID from but diff.
 
-A change can either be a file or a hunk.
+If omitted, everything uncommitted in the checkout but runs in is committed.
 
 ## Options
 
 * `-m`, `--message` `<MESSAGE>` — The message to use for the commit.
 
-Can be supplied any amount of times, each value being appended to the preceding ones with a blank line in between.
-* `--no-message` — Creates the commit without a commit message
+Can be supplied any amount of times, each value being appended to the preceding ones with a blank line in between. Without -m, -F or --no-message, a terminal opens the editor and a non-interactive run commits with an empty message.
+* `--no-message` — Create the commit without a message
+* `-F`, `--file` `<FILE>` — Read the commit message from FILE, or from stdin when FILE is -
 * `-b`, `--branch` `<BRANCH>` — Place the commit on the branch BRANCH.
 
-If BRANCH does not exist, it is created as an unstacked branch.
+With --above or --below, name the new branch created relative to the target branch. The name must not already exist; omit it for a generated name. Cannot be combined with commit or worktree targets.
 
-If BRANCH is omitted, an unstacked branch with a generated name is created.
+Otherwise, if BRANCH does not exist, it is created as an unstacked branch. If BRANCH is omitted, an unstacked branch with a generated name is created.
 
-If BRANCH is a linked worktree or a branch checked out in one, the commit is placed on the tip of that worktree's branch.
+If BRANCH is a worktree or a branch checked out in one, the commit is placed on the tip of that worktree's branch.
 
 Attempting to place a commit on a branch that exists but is not applied is an error.
 * `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place the commit above BRANCH_OR_COMMIT, which must be an applied branch or commit.
 
 If BRANCH_OR_COMMIT is a commit, the new commit is placed on the same branch as the targeted commit.
 
-If BRANCH_OR_COMMIT is a branch, the new commit is placed on a new branch above the targeted branch.
+If BRANCH_OR_COMMIT is a branch, the new commit is placed on a new branch above the targeted branch. Use --branch &lt;NAME&gt; to name it; otherwise a name is generated.
 * `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place the commit below BRANCH_OR_COMMIT, which must be an applied branch or commit.
 
 If BRANCH_OR_COMMIT is a commit, the new commit is placed on the same branch as the targeted commit.
 
-If BRANCH_OR_COMMIT is a branch, the new commit is placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
+If BRANCH_OR_COMMIT is a branch, the new commit is placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch. Use --branch &lt;NAME&gt; to name the new branch; otherwise a name is generated.
 
-If BRANCH_OR_COMMIT is a linked worktree, the new commit is placed on the tip of the branch that worktree has checked out.
-* `--empty` — Forces the commit to be empty regardless of repository state
+If BRANCH_OR_COMMIT is a worktree, the new commit is placed on the tip of the branch that worktree has checked out.
+* `--empty` — Create an empty commit even when there are changes
 * `-i`, `--interactive` — Open the TUI to interactively select what to commit
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
+* `-s`, `--switch` — Switch to the target branch instead of remaining in the GitButler workspace
 
 
 
@@ -3180,7 +3187,9 @@ View or configure native GitHub stacked pull requests:
 
 View or set the target branch.
 
-Without arguments, displays the current target branch. With a branch name, sets the target branch.
+Without arguments, displays the current target branch.
+
+With a branch name, sets the target branch. Local branches take precedence; remote-tracking branches resolve to their local tracking branch.
 
 Examples
 
@@ -3190,18 +3199,19 @@ View current target:
 
 Set target branch:
 
-  but config target origin/main
+  but config target main
 
 Set a target branch and push branches to a fork:
 
-  but config target upstream/main --push-remote origin
+  but config target main --push-remote origin
 
+Assumes main tracks upstream/main and origin points to your fork.
 
 **Usage:** `but config target [BRANCH] [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH>` — New target branch to set (e.g., "origin/main")
+* `<BRANCH>` — Local or remote-tracking branch (e.g., "main" or "origin/main"). Use refs/heads/... or refs/remotes/... to disambiguate
 
 **Options:**
 
@@ -3271,10 +3281,6 @@ View all feature flags:
 
   but config feature
 
-Enable single-branch mode:
-
-  but config feature single-branch enable
-
 
 **Usage:** `but config feature [FLAG] [STATUS]`
 
@@ -3319,7 +3325,8 @@ Configure Ollama locally:
 
 # commands-but-diff
 
-Without any arguments, it shows the diff of all uncommitted changes. Optionally, provide one
+Without any arguments, it shows the diff of all uncommitted changes of the checkout `but` runs
+in: the main worktree's, or a linked worktree's when run from inside one. Optionally, provide one
 CLI ID to show the diff for an uncommitted file, branch, commit, committed file, or worktree.
 
 `TARGET` accepts at most one entity. To show several entities, run this command once per entity.
@@ -3328,9 +3335,9 @@ CLI ID to show the diff for an uncommitted file, branch, commit, committed file,
 
 ## Arguments
 
-* `<TARGET>` — The CLI ID of the entity to show the diff for.
+* `<TARGET>` — What to diff, by CLI ID: a commit, branch, committed file or hunk, uncommitted file or hunk, path prefix ending in /, or a worktree's uncommitted area. A commit lists its files and hunks with their IDs.
 
-If omitted shows the diff of all uncommitted changes.
+If omitted shows the diff of all uncommitted changes of the checkout but runs in, with file and hunk IDs.
 
 For more details about CLI IDs, see but help cli-ids.
 
@@ -3339,7 +3346,8 @@ For more details about CLI IDs, see but help cli-ids.
 # commands-but-discard
 
 Changes may be selected by branch, commit, committed file, uncommitted file, or uncommitted
-hunk CLI ID. Use `zz`, or omit `<CHANGES>`, to discard all uncommitted changes.
+hunk CLI ID. Use `@` to discard all of the main worktree's uncommitted changes, or omit
+`<CHANGES>` to discard those of the checkout `but` runs in.
 
 All provided changes must be the same kind. Committed files must come from the same commit.
 
@@ -3353,7 +3361,7 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 * `<CHANGES>` — One or more branches, commits, or changes to discard.
 
-If omitted all uncommitted changes will be discarded.
+If omitted, all uncommitted changes of the checkout but runs in are discarded.
 
 
 
@@ -3385,7 +3393,8 @@ CLI IDs are used by `but` to reference things such as commits, branches and file
 obvious identifiers like full commit hashes and entire branch names are viable CLI IDs,
 there are also various shorter identifiers that can be used in place of the full names.
 
-In general, `but status` will show all currently available CLI IDs in front of the "thing".
+In general, `but status` or `but diff` will show currently available CLI IDs in front of
+the "thing".
 
 Typical CLI IDs include:
 
@@ -3400,9 +3409,11 @@ Typical CLI IDs include:
 * **Uncommitted file:** A path-derived ID that is typically 1-3 characters
 * **Uncommitted hunk:** `<uncommitted_file_cli_id>:<hunk_cli_id>`
     - Run `but diff` to show all current uncommitted hunks and their IDs
-* **Uncommitted area:** Always `zz`
+* **Uncommitted area:** Always `@`
 * **Committed file:** `<commit_cli_id>:<file_cli_id>`
     - Run `but status -f` to show committed files
+* **Committed hunk:** `<commit_cli_id>:<file_cli_id>:<hunk_cli_id>`
+    - Run `but diff <commit_cli_id>` to show committed hunks and their IDs
 
 Many CLI IDs depend on the context and may change if the context changes, such as when new
 data is written to files, commits are made or rearranged and branches are created or
@@ -3420,56 +3431,82 @@ that command in particular.
 
 
 
-# commands-but-land
+# commands-but-init
 
-Lands the branch onto the configured target (for example `origin/master`) without going
+Use `but -C <path> init` to initialize another directory. Existing repositories
+are left unchanged.
+
+**Usage:** `but init [OPTIONS]`
+
+## Options
+
+* `--commit` — Also create an initial empty commit
+
+
+
+# commands-but-merge
+
+Merges the branch onto the configured target (for example `origin/master`) without going
 through a pull request — the "just push to the target" workflow. By default the target is
 fast-forwarded to the branch tip when possible (no merge commit); otherwise a merge commit
-is created. For a local (`gb-local`) target the refs are moved locally; otherwise the result
-is pushed to the remote. After landing, the remaining applied branches are reconciled onto
-the moved target, just like `but pull`.
+is created, or with `--ff-only` the merge is refused. When the target branch has no upstream
+(for example in a repository without a remote), or for a local (`gb-local`) target, the
+refs are moved locally; otherwise the result is pushed to the remote. After merging, the
+remaining applied branches are reconciled onto the moved target, just like `but pull`.
 
-Requires an active GitButler workspace. Updating the target is direct and not easily
-reversible, so a confirmation is required (use `--yes` to skip it in scripts).
+Requires the GitButler workspace or, in single-branch mode, a checked-out branch. In
+single-branch mode, merging the checked-out branch checks out the target branch afterwards,
+like `but pull` does once a branch is merged upstream, or a generated branch when the target
+can't be reused; the output names the branch checked out. Updating a target that has an
+upstream is direct and not easily reversible, so a confirmation is required (use `--yes` to
+skip it in scripts). Merging into a target without an upstream publishes nothing, so it
+needs no confirmation and `but undo` reverts it.
 
-When NOT to use this: if your project lands changes through pull requests / code review,
-use `but push` and open a PR (`but pr new`) instead — `but land` deliberately bypasses that
-process. On a real remote, a branch protected against direct pushes will reject the land.
+When NOT to use this: if your project merges changes through pull requests / code review,
+use `but push` and open a PR (`but pr new`) instead — `but merge` deliberately bypasses that
+process. On a real remote, a branch protected against direct pushes will reject the merge.
 
-Landing a segment with other segments below it is refused unless `--whole-stack` is
-passed with the stack's top segment, which lands the entire stack.
+Merging a segment with other segments below it is refused unless `--whole-stack` is
+passed with the stack's top segment, which merges the entire stack.
 
 ## Examples
 
-Land a branch by its CLI ID:
+Merge a branch by its CLI ID:
 
 ```text
-but land bu
+but merge bu
 ```
 
-Land a branch by name, forcing a merge commit:
+Merge a branch by name, forcing a merge commit:
 
 ```text
-but land my-feature-branch --no-ff
+but merge my-feature-branch --no-ff
 ```
 
-Land an entire stack by naming its top segment:
+Merge a branch only if the target can be fast-forwarded to it:
 
 ```text
-but land top-branch --whole-stack
+but merge my-feature-branch --ff-only
 ```
 
-**Usage:** `but land <BRANCH> [OPTIONS]`
+Merge an entire stack by naming its top segment:
+
+```text
+but merge top-branch --whole-stack
+```
+
+**Usage:** `but merge <BRANCH> [OPTIONS]`
 
 ## Arguments
 
-* `<BRANCH>` — Branch ID or name to land onto the target branch (required)
+* `<BRANCH>` — Branch ID or name to merge onto the target branch (required)
 
 ## Options
 
 * `--yes` — Skip the confirmation prompt
 * `--no-ff` — Always create a merge commit, even when the branch can be fast-forwarded
-* `--whole-stack` — Land the entire stack: BRANCH must be the top segment, and the segments below it are published to the target along with it
+* `--ff-only` — Refuse to merge unless the target can be fast-forwarded to the branch tip
+* `--whole-stack` — Merge the entire stack: BRANCH must be the top segment, and the segments below it are published to the target along with it
 
 
 
@@ -3477,8 +3514,9 @@ but land top-branch --whole-stack
 
 Move a set of `<SOURCES>` around relative to a `TARGET`.
 
-`<SOURCES>` is a set of commits, a set of committed files or a single branch. You are not
-allowed to mix kinds of sources (e.g. commits and committed files) in a single command.
+`<SOURCES>` is a set of commits, a set of committed changes or a single branch. Committed
+changes may be files, hunks or a mixture of both from the same commit. You are not allowed to
+mix other kinds of sources (e.g. commits and committed changes) in a single command.
 
 `TARGET` is one of `--above`, `--below`, `--unstack` or `--branch` and defines how `<SOURCES>`
 should be moved. Depending on how `<SOURCES>` and `TARGET` are combined, a commit and/or branch
@@ -3486,16 +3524,16 @@ may be created as part of the move.
 
 **A branch is created when:**
 
-* You move a commit or committed file relative to a branch
-* You unstack a commit or committed file
+* You move a commit or committed change relative to a branch
+* You unstack a commit or committed change
 
 **A commit is created when:**
 
-* You move a committed file relative to a commit or branch
-* You unstack a committed file
+* You move a committed change relative to a commit or branch
+* You unstack a committed change
 
-Note the overlap between the above conditions. For example, unstacking a committed file both
-creates a new commit for the file and a branch for the commit.
+Note the overlap between the above conditions. For example, unstacking a committed change both
+creates a new commit for the change and a branch for the commit.
 
 For more details about CLI IDs, see `but help cli-ids`.
 
@@ -3503,17 +3541,7 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-* `<SOURCES>` — One or more sources to move.
-
-You may provide one of the following kinds of sources:
-
-- Commits
-- Committed files
-  - All files must come from the same commit
-- A branch
-  - Branches can only be moved one at a time
-
-Mixing sources in a single command is not allowed.
+* `<SOURCES>` — One or more sources to move, all of one kind: commits; committed files and hunks from one commit; or a single branch.
 
 The order of the sources does not matter.
 
@@ -3523,11 +3551,11 @@ Providing any of the sources as an argument for a target such as --above or --be
 
 * `-b`, `--branch` `<BRANCH>` — Place &lt;SOURCES&gt; on the branch BRANCH.
 
-If BRANCH exists, commits or committed files are moved onto its tip. A branch source is instead stacked on top of BRANCH, equivalent to --above BRANCH.
+If BRANCH exists, commits or committed changes are moved onto its tip. A branch source is instead stacked on top of BRANCH, equivalent to --above BRANCH.
 
-If BRANCH does not exist, it is created as an unstacked branch for commit or committed-file sources. Using a branch source with a nonexistent BRANCH is an error.
+If BRANCH does not exist, it is created as an unstacked branch for commit or committed-change sources. Using a branch source with a nonexistent BRANCH is an error.
 
-If BRANCH is a linked worktree or a branch checked out in one, commit or committed-file sources are moved onto the tip of that worktree's branch.
+If BRANCH is a worktree or a branch checked out in one, commit or committed-change sources are moved onto the tip of that worktree's branch.
 
 If BRANCH is omitted, an unstacked branch with a generated name is created. This is exactly equivalent to --unstack and is allowed for any source kind.
 
@@ -3538,19 +3566,34 @@ If BRANCH_OR_COMMIT is a commit, &lt;SOURCES&gt; are placed on the same branch a
 
 If BRANCH_OR_COMMIT is a branch, the sources are placed on a new branch above the targeted branch.
 
+If BRANCH_OR_COMMIT is a worktree, a branch source is stacked on the branch that worktree has checked out and becomes its checked-out branch.
+
 This target is applicable for all kinds of &lt;SOURCES&gt;.
+
+If moving commits or committed changes, use --branch NAME to name the new branch.
 * `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place &lt;SOURCES&gt; below BRANCH_OR_COMMIT.
 
 If BRANCH_OR_COMMIT is a commit, the &lt;SOURCES&gt; are placed on the same branch as the targeted commit.
 
 If BRANCH_OR_COMMIT is a branch, &lt;SOURCES&gt; are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
 
-If BRANCH_OR_COMMIT is a linked worktree, &lt;SOURCES&gt; are placed on the tip of the branch that worktree has checked out.
+If BRANCH_OR_COMMIT is a worktree, &lt;SOURCES&gt; are placed on the tip of the branch that worktree has checked out.
 
-This target is only applicable for &lt;SOURCES&gt; that are commits or committed files.
+This target is only applicable for &lt;SOURCES&gt; that are commits or committed changes.
+
+If moving commits or committed changes, use --branch NAME to name the new branch.
 * `--unstack` — Unstack &lt;SOURCES&gt; from their current stacks.
 
 --unstack does not take an argument, so --unstack &lt;SOURCES&gt; and &lt;SOURCES&gt; --unstack are equivalent.
+
+If moving commits or committed changes, use --branch NAME to name the new branch.
+* `-s`, `--switch` — Switch to the destination branch instead of remaining in the GitButler workspace.
+
+When moving a branch, switch to the moved branch.
+* `-m`, `--message` `<MESSAGE>` — The message to use when moving changes into a new commit.
+
+Can be supplied any amount of times, each value being appended to the preceding ones with a blank line in between. Without -m, the new commit will get an empty message.
+* `-F`, `--file` `<FILE>` — Read the new commit's message from FILE, or from stdin when FILE is -
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
@@ -3650,10 +3693,13 @@ which you can find by running `but oplog` or `but oplog list`.
 
 Each source commit is copied to the target location as a new commit.
 
-If there are no branches applied, a new branch is created for the picked commits. If there is
-only one stack of branches applied, the commits are placed at the tip of that stack. Otherwise,
-the targeting flags `--above`, `--below`, and `--branch` control where the commits are placed.
-Only one targeting flag can be provided at a time.
+Run from a linked worktree, the commits are placed at the tip of that worktree's branch.
+Otherwise, if there are no branches applied, a new branch is created for the picked commits. If
+there is only one stack of branches applied, the commits are placed at the tip of that stack.
+Otherwise, the targeting flags `--above`, `--below`, and `--branch` control where the commits
+are placed.
+`--above` and `--below` are mutually exclusive; combine either with `--branch` to name a new
+branch when targeting a branch.
 
 For more details about CLI IDs, see `but help cli-ids`.
 
@@ -3661,27 +3707,28 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-* `<SOURCES>` — The sources to cherry-pick (required)
+* `<SOURCES>` — The commits to copy, as SHAs or as CLI IDs of commits on applied branches. IDs shown for unapplied branches do not resolve; use the SHA (required)
 
 ## Options
 
 * `-b`, `--branch` `<BRANCH>` — Place the picked commits on the branch BRANCH.
 
-If BRANCH does not exist, it is created as an unstacked branch.
+With --above or --below, name the new branch created relative to the target branch. The name must not already exist; omit it for a generated name. Cannot be combined with commit or worktree targets.
 
-If BRANCH is omitted, an unstacked branch with a generated name is created.
+Otherwise, if BRANCH does not exist, it is created as an unstacked branch. If BRANCH is omitted, an unstacked branch with a generated name is created.
 
 Attempting to pick onto a branch that exists but is not applied is an error.
 * `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place the picked commits above BRANCH_OR_COMMIT.
 
 If BRANCH_OR_COMMIT is a commit, the picked commits are placed on the same branch as the targeted commit.
 
-If BRANCH_OR_COMMIT is a branch, the picked commits are placed on a new branch above the targeted branch.
+If BRANCH_OR_COMMIT is a branch, the picked commits are placed on a new branch above the targeted branch. Use --branch &lt;NAME&gt; to name it; otherwise a name is generated.
 * `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place the picked commits below BRANCH_OR_COMMIT.
 
 If BRANCH_OR_COMMIT is a commit, the picked commits are placed on the same branch as the targeted commit.
 
-If BRANCH_OR_COMMIT is a branch, the picked commits are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
+If BRANCH_OR_COMMIT is a branch, the picked commits are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch. Use --branch &lt;NAME&gt; to name the new branch; otherwise a name is generated.
+* `-s`, `--switch` — Switch to the target branch instead of remaining in the GitButler workspace
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
@@ -3700,95 +3747,83 @@ Running but pr without a subcommand defaults to but pr new, which will prompt yo
 
 ### `but pr new`
 
-Create a new review for a branch. If no branch is specified, you will be prompted to select one. If there is only one branch without a review, you will be asked to confirm.
+Create a new review for a branch, force-pushing it first.
 
-If the branch is part of a stack, GitButler pushes that branch and its ancestors and creates missing reviews from the bottom upward. It also updates stack metadata using native GitHub stacks when enabled and supported, or review descriptions otherwise.
+If the branch is part of a stack, or of a linked worktree, GitButler pushes that branch and its ancestors, including the branches a worktree rests on, and creates missing reviews from the bottom upward. It also updates stack metadata using native GitHub stacks when enabled and supported, or review descriptions otherwise.
 
 **Usage:** `but pr new [BRANCH] [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH>` — The branch to create a review for
+* `<BRANCH>` — The branch to create a review for. Without it, a terminal prompts for one (or confirms when only one branch lacks a review); a non-interactive run needs it
 
 **Options:**
 
-* `-m`, `--message` `<MESSAGE>` — review title and description. The first line is the title, the rest is the description
-* `-F`, `--file` `<FILE>` — Read review title and description from file. The first line is the title, the rest is the description
-* `-f`, `--with-force` — Force push even if it's not fast-forward (defaults to true) (default: `true`)
+* `-m`, `--message` `<MESSAGE>` — Review title and description: the first line is the title, the rest is the description. A non-interactive run needs -m, -F, or -t
+* `-F`, `--file` `<FILE>` — Read review title and description from FILE, or from stdin when FILE is -. The first line is the title, the rest is the description
 * `-s`, `--skip-force-push-protection` — Skip force push protection checks
 * `--no-hooks` — Bypass pre-push hooks
 * `-t`, `--default` — Use the default content for the review title and description, skipping any prompts. If the branch contains only a single commit, the commit message will be used (default: `false`)
-* `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
+* `-d`, `--draft` — Create the review as a draft (default: `false`)
 
 ### `but pr auto-merge`
 
-Enable or disable the automatic merging of a review or reviews. If no reviews are specified, you will be prompted to select one or multiple of the review associated with branches in your workspace
+Enable or disable the automatic merging of reviews
 
 **Usage:** `but pr auto-merge [SELECTOR] [OPTIONS]`
 
 **Arguments:**
 
-* `<SELECTOR>` — The target of this operation. This can be one or multiple (comma-separated):
-
-- Branch names,
-- Branch IDs,
-- Stack IDs (in which case, all the reviews associated with the stacked branches are selected),
-- Associated review IDs (i.e. PR numeric IDs or MR numeric IDs, without the symbol).
+* `<SELECTOR>` — One or more comma-separated branch names, branch IDs, stack IDs (every review on the stack), or review numbers (the PR or MR number without the symbol). Without it, a terminal prompts for reviews from the workspace's branches; a non-interactive run needs it
 
 **Options:**
 
-* `-d`, `--off` — Whether to disable the automatic merging of the review(s) (default: `false`)
+* `-d`, `--off` — Disable automatic merging instead of enabling it (default: `false`)
 
 ### `but pr set-draft`
 
-Set an existing review (or set of reviews) as draft. If no reviews are specified, you will be prompted to select one or multiple of the review associated with branches in your workspace
+Mark existing reviews as draft
 
 **Usage:** `but pr set-draft [SELECTOR]`
 
 **Arguments:**
 
-* `<SELECTOR>` — The target of this operation. This can be one or multiple (comma-separated):
-
-- Branch names,
-- Branch IDs,
-- Stack IDs (in which case, all the reviews associated with the stacked branches are selected),
-- Associated review IDs (i.e. PR numeric IDs or MR numeric IDs, without the symbol).
+* `<SELECTOR>` — One or more comma-separated branch names, branch IDs, stack IDs (every review on the stack), or review numbers (the PR or MR number without the symbol). Without it, a terminal prompts for reviews from the workspace's branches; a non-interactive run needs it
 
 ### `but pr set-ready`
 
-Set an existing review (or set of reviews) as ready-to-review. If no reviews are specified, you will be prompted to select one or multiple of the review associated with branches in your workspace
+Mark existing reviews as ready for review
 
 **Usage:** `but pr set-ready [SELECTOR]`
 
 **Arguments:**
 
-* `<SELECTOR>` — The target of this operation. This can be one or multiple (comma-separated):
-
-- Branch names,
-- Branch IDs,
-- Stack IDs (in which case, all the reviews associated with the stacked branches are selected),
-- Associated review IDs (i.e. PR numeric IDs or MR numeric IDs, without the symbol).
+* `<SELECTOR>` — One or more comma-separated branch names, branch IDs, stack IDs (every review on the stack), or review numbers (the PR or MR number without the symbol). Without it, a terminal prompts for reviews from the workspace's branches; a non-interactive run needs it
 
 ### `but pr template`
 
-Configure the template to use for review descriptions. This will list all available templates found in the repository and allow you to select one
+Configure the template to use for review descriptions
 
 **Usage:** `but pr template [TEMPLATE_PATH]`
 
 **Arguments:**
 
-* `<TEMPLATE_PATH>` — Path to the review template file within the repository
+* `<TEMPLATE_PATH>` — Path to the review template file within the repository. Without it, a terminal lists the templates found in the repository to pick from; a non-interactive run needs it
 
 ## Options
 
-* `-d`, `--draft` — Whether to create reviews as a draft (default: `false`)
+* `-d`, `--draft` — Create the review as a draft (default: `false`)
 
 
 
 # commands-but-pull
 
 This fetches the latest changes from the remote and rebases all applied branches
-on top of the updated target branch.
+and linked worktrees on top of the updated target branch.
+
+When the target branch has no upstream, for example in a repository without a remote,
+there is nothing to fetch: this updates the branches onto the local target branch
+instead, for example after merging branches into `main` with `git merge`.
 
 You should run this regularly to keep your branches up to date with the latest
 changes from the main development line.
@@ -3796,11 +3831,15 @@ changes from the main development line.
 You can run `but pull --check` first to see if your branches can be cleanly
 merged into the target branch before running the update.
 
+Commits pushed to a branch's own remote counterpart are not integrated by pull;
+use `but branch update <branch>` for those.
+
 **Usage:** `but pull [OPTIONS]`
 
 ## Options
 
-* `-c`, `--check` — Only check the status without updating (equivalent to the old but base check)
+* `-c`, `--check` — Only check whether the update would apply cleanly, without updating
+* `--update` `<UPDATE>` — What to rebase onto the target, comma-separated (default: `worktrees,workspace`)
 
 
 
@@ -3821,11 +3860,10 @@ With a branch ID:
 
 ## Arguments
 
-* `<BRANCH_ID>` — Branch name or CLI ID to push. If not specified, will list all branches and prompt for selection in interactive mode
+* `<BRANCH_ID>` — Branch name or CLI ID to push; the branches below it in its stack are pushed with it. If omitted, a terminal prompts for a selection and a non-interactive run pushes every stack with unpushed commits
 
 ## Options
 
-* `-f`, `--with-force` — Force push even if it's not fast-forward (default: `true`)
 * `-s`, `--skip-force-push-protection` — Skip force push protection checks
 * `--no-hooks` — Bypass pre-push hooks
 * `-d`, `--dry-run` — Show what would be pushed without actually pushing
@@ -3930,7 +3968,7 @@ the workspace to its pre-resolution state.
 
 **Options:**
 
-* `-f`, `--force` — Forcibly remove any changes made
+* `-f`, `--force` — Discard any changes made during resolution
 
 ## Options
 
@@ -3949,17 +3987,18 @@ editor.
 This will recreate the commit with the new message and then rebase any
 dependent commits on top of it.
 
-You can also use `but reword <branch-id>` to rename the branch.
+You can also use `but reword <branch-id>` to rename the branch, or
+`but reword <anonymous-branch-id>` to give an anonymous branch a name.
 
 **Usage:** `but reword <TARGET> [OPTIONS]`
 
 ## Arguments
 
-* `<TARGET>` — Commit ID to edit the message for, or branch ID to rename (required)
+* `<TARGET>` — Commit ID to edit, branch ID to rename, or anonymous branch ID to name (required)
 
 ## Options
 
-* `-m`, `--message` `<MESSAGE>` — The new commit message or branch name. If not provided, opens an editor
+* `-m`, `--message` `<MESSAGE>` — The new commit message or branch name. Without it, a terminal opens the editor and a non-interactive run fails
 * `-f`, `--fix-formatting` — Format the existing commit message to 72-char line wrapping without opening an editor
 * `--diff` — Always show diff inside the editor.
 
@@ -3968,37 +4007,6 @@ By default the diff will be shown unless it's large. The diff will always be sho
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
-
-
-
-# commands-but-setup
-
-This command will:
-- Add the repository to the global GitButler project registry
-- Switch to the gitbutler/workspace branch (if not already on it)
-- Set up a default target branch (the remote's HEAD)
-- Add a gb-local remote if no push remote exists
-
-If you have an existing Git repository and want to start using GitButler
-with it, you can run this command to set up the necessary configuration
-and data structures.
-
-## Examples
-
-Initialize a new git repository and set up GitButler:
-
-```text
-but setup --init
-```
-
-**Usage:** `but setup [OPTIONS]`
-
-## Options
-
-* `--init` — Initialize a new git repository with an empty commit if one doesn't exist.
-
-This is useful when running in non-interactive environments (like CI/CD)
-where you want to ensure a git repository exists before setting up GitButler.
 
 
 
@@ -4073,9 +4081,27 @@ Install the skill globally:
 but skill install --global
 ```
 
-**Usage:** `but skill <COMMAND>`
+**Usage:** `but skill <COMMAND> [OPTIONS]`
 
 ## Subcommands
+
+### `but skill reference`
+
+Print the command reference: syntax and flags for every but command
+
+**Usage:** `but skill reference`
+
+### `but skill concepts`
+
+Print the concepts guide: the workspace model behind but
+
+**Usage:** `but skill concepts`
+
+### `but skill examples`
+
+Print the workflow examples
+
+**Usage:** `but skill examples`
 
 ### `but skill install`
 
@@ -4165,6 +4191,32 @@ but skill check --global
 * `-l`, `--local` — Only check local installations (in current repository)
 * `-u`, `--update` — Automatically update any outdated skills found
 
+## Options
+
+* `--full` — Also print every reference document after the core guide
+
+
+
+# commands-but-split
+
+Sources must all be committed changes from the same commit. Files and hunks may be mixed.
+
+**Usage:** `but split <SOURCES> [OPTIONS]`
+
+## Arguments
+
+* `<SOURCES>` — The committed files and hunks to move into a new commit (required)
+
+## Options
+
+* `-m`, `--message` `<MESSAGE>` — The message to use for the new commit.
+
+Can be supplied any amount of times, each value being appended to the preceding ones with a blank line in between. Without -m, the new commit will get an empty message.
+* `-F`, `--file` `<FILE>` — Read the new commit's message from FILE, or from stdin when FILE is -
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
+
 
 
 # commands-but-squash
@@ -4188,51 +4240,42 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-* `<SOURCES>` — The sources to squash.
+* `<SOURCES>` — The sources to squash, all of one kind.
 
-If --target is provided and &lt;SOURCES&gt; is omitted, the uncommitted area (zz) is used.
+Commits: squashed into the target. Branches: every commit on them is squashed into the target and the branches are removed; with no target and exactly one branch, that branch is squashed into a single commit. Uncommitted files or hunks, or @ for all of them: squashed into the target. Committed files and hunks from one commit: moved into the target.
 
-If &lt;SOURCES&gt; is one or more commits they will be squashed into the target.
-
-If &lt;SOURCES&gt; is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed. When the target is the uncommitted area (zz), all commits on the branches are uncommitted.
-
-If TARGET is omitted and &lt;SOURCES&gt; is exactly one branch all commits on the branch will be squashed.
-
-If &lt;SOURCES&gt; is one or more uncommitted files or hunks they will be squashed into the target.
-
-If &lt;SOURCES&gt; is the uncommitted area (zz) all uncommitted changes will be squashed into the target.
-
-If &lt;SOURCES&gt; is a committed file those changes will be moved into the target. All changes must come from the same commit. It is not possible to move changes from multiple source commits into a single target.
-
-It is not possible to mix sources of different types, i.e., all sources must either be commits, branches, uncommitted files, zz, or committed files.
+A target of @ uncommits the sources instead. With --target and no sources, the uncommitted area of the checkout but runs in is used: @, or a linked worktree's.
 
 ## Options
 
 * `-m`, `--message` `<MESSAGE>` — The message to use for the new commit.
 
-Can be supplied any number of times, each value being appended to the preceding ones with a blank line in between.
+Can be supplied any number of times, each value being appended to the preceding ones with a blank line in between. Without a message flag, squashing commits or branches opens the editor in a terminal; a non-interactive run skips the editor.
 
-This cannot be used when TARGET is the uncommitted area (zz).
-* `--no-message` — Creates the commit without a commit message.
+This cannot be used when TARGET is the uncommitted area (@).
+* `--no-message` — Create the commit without a message.
 
-This cannot be used when TARGET is the uncommitted area (zz).
+This cannot be used when TARGET is the uncommitted area (@).
+* `-F`, `--file` `<FILE>` — Read the message for the new commit from FILE, or from stdin when FILE is -.
+
+This cannot be used when TARGET is the uncommitted area (@).
 * `-u`, `--use-target-message` — Use the message of the target.
 
 The message of the source(s) will be discarded.
 
-This cannot be used when TARGET is the uncommitted area (zz).
+This cannot be used when TARGET is the uncommitted area (@).
 * `--use-source-message` — Use the message of the source(s).
 
 The message of the target will be discarded.
 
-Cannot be used if &lt;SOURCES&gt; are not committed, if TARGET is the uncommitted area (zz), or if moving committed changes between commits.
+Cannot be used if &lt;SOURCES&gt; are not committed, if TARGET is the uncommitted area (@), or if moving committed changes between commits.
 * `-t`, `--target` `<TARGET>` — The target to squash into.
 
 If TARGET is a commit the sources will be added to the commit.
 
 If TARGET is a branch the sources will be added to that branch's newest commit (its tip).
 
-If TARGET is the uncommitted area (zz) the sources will be uncommitted.
+If TARGET is the uncommitted area (@) the sources will be uncommitted. A commit owned by a worktree uncommits into that worktree's area instead, named by its ID (&lt;id&gt;:@).
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
@@ -4264,7 +4307,7 @@ but status -f
 
 ## Options
 
-* `-f` — Determines whether the committed files should be shown as well (default: `false`)
+* `-f` — Also list the files changed by each commit (default: `false`)
 * `-v`, `--verbose` — Show verbose output with commit author and timestamp (default: `false`)
 * `-r`, `--refresh-prs` — Forces a sync of pull requests from the forge before showing status (default: `false`)
 * `-u`, `--upstream` — Show detailed list of upstream commits that haven't been integrated yet (default: `false`)
@@ -4323,12 +4366,14 @@ terminal. For the full workflow and key bindings, see [https://docs.gitbutler.co
 
 * `--remember-selection` — When the TUI quits save the selection and restore it when re-opening.
 
-If the saved selection cannot be restore the TUI launch normally as if --remember-selection wasn't passed. (default: `false`)
+If the saved selection cannot be restored, the TUI launches normally as if --remember-selection wasn't passed. (default: `false`)
 * `--diff` — Automatically show the diff when opening the TUI
 
 
 
 # commands-but-unapply
+
+later.
 
 If you want to unapply an applied branch from your workspace
 (effectively stashing it) so you can work on other branches,
@@ -4337,6 +4382,10 @@ you can run `but unapply <branch-name>`.
 This will remove the changes in that branch from your working
 directory and you can re-apply it later when needed. You will then
 see the branch as unapplied in `but branch list`.
+
+Unapplying the last branch checks out the target's local tracking branch, if available.
+The unapplied branch is preserved and stays unapplied when switching back with
+`but switch --workspace`.
 
 The identifier can be:
 - A CLI ID pointing to a stack or branch (e.g., "bu" from `but status`)
@@ -4363,9 +4412,9 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-* `<SOURCES>` — One or more commits, branches, or committed files to uncommit.
+* `<SOURCES>` — One or more commits, branches, or committed changes to uncommit.
 
-Sources must all be the same kind. (required)
+Sources must all be the same category. Uncommitting a branch also deletes it. (required)
 
 ## Options
 
@@ -4419,13 +4468,19 @@ Linux: Installs and updates only the CLI itself.
 
 Note: For other platforms and install forms, see https://gitbutler.com/downloads
 
+Examples
+
+  but update install           # Auto-detect channel and install latest
+  but update install nightly   # Install latest nightly build
+  but update install release   # Install latest stable release
+  but update install 0.18.7    # Install specific version
+
+
 **Usage:** `but update install [TARGET]`
 
 **Arguments:**
 
 * `<TARGET>` — What to install: "nightly", "release", or a version like "0.18.7"
-
-Examples: but update install           Auto-detect channel and install latest but update install nightly   Install latest nightly build but update install release   Install latest stable release but update install 0.18.7    Install specific version
 
 
 
@@ -4439,7 +4494,7 @@ Without a subcommand, lists the worktrees.
 
 ### `but worktree list`
 
-List linked worktrees, most recently updated first.
+List worktrees, most recently updated first.
 
 By default this lists every active worktree and the three most recently updated
 archived ones. A worktree is shown by its name, followed by the branch it has checked
@@ -4451,6 +4506,32 @@ out when that differs from the name, and its path.
 
 * `--archived` — List all archived worktrees
 * `--active` — List all active worktrees
+
+### `but worktree new`
+
+Create a worktree on a new branch at the workspace base or above a commit, or on an
+existing branch that isn't in the workspace.
+
+By default, a new branch starts at the child-most commit any applied stack rests on, and is
+checked out under `~/.gitbutler-worktrees/<repo-dir-basename>/` in a directory
+named by a slug of the branch name (or `wt` if the slug is empty). If that
+directory is taken, retries up to five times with a random ASCII suffix.
+
+Worktree creation supports simple `.worktreeinclude` files with paths to files or
+directories. Untracked files are copied if any prefix of their path is in the
+`.worktreeinclude` file and they are also gitignored.
+
+**Usage:** `but worktree new [NAME] [OPTIONS]`
+
+**Arguments:**
+
+* `<NAME>` — The branch to check out, created if it doesn't exist, or a generated one
+
+**Options:**
+
+* `-A`, `--above` `<COMMIT>` — Start the new branch at COMMIT instead of the workspace base.
+
+Accepts a commit SHA or CLI ID, not a branch. Conflicted commits are refused.
 
 ### `but worktree archive`
 
@@ -4476,7 +4557,8 @@ Show an archived worktree in the workspace again
 
 Remove a worktree from disk, like `git worktree remove`.
 
-This works on archived worktrees too, and keeps the branch the worktree had checked out.
+This works on archived and locked worktrees too, and keeps the branch the worktree had
+checked out.
 
 **Usage:** `but worktree remove <WORKTREE> [OPTIONS]`
 

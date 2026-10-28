@@ -206,7 +206,7 @@ A scenario script sources `examples/lib.sh`, which provides:
 - `capture NAME 'COMMAND'`: runs the command and saves `public/examples/NAME.html`. CSS variables adapt its colors to dark mode.
 - `capture_themed NAME 'COMMAND'`: runs the command twice and also saves `NAME.dark.html`, for output with fixed colors such as `but diff`. Use it only for commands that don't change the repository.
 
-The GitButler version is pinned in `examples/but-version`. The first run downloads that release into `~/.cache/gitbutler-docs-examples/`.
+The GitButler version is pinned in `examples/but-version`. The first run downloads that release into `~/.cache/gitbutler-docs-examples/`. To render with another build, such as a local one with an unreleased fix, set `BUT_BIN` to the path of its `but` binary: `BUT_BIN=$(command -v but) pnpm examples`.
 
 To regenerate every scenario, or only some of them:
 
