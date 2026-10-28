@@ -1,6 +1,6 @@
 ---
 title: "`but absorb`"
-description: "Amends changes into the appropriate commits where they belong."
+description: "Amend uncommitted changes into the commits they belong to."
 ---
 
 The semantic for finding "the appropriate commit" is as follows:
@@ -22,7 +22,7 @@ If `--dry-run` is specified, no changes will be made; instead, the absorption pl
 
 ## Arguments
 
-* `<SOURCE>` — If the Source is an uncommitted change - the change will be absorbed. If not provided, everything that is uncommitted will be absorbed
+* `<SOURCE>` — An uncommitted file or hunk to absorb; if omitted, everything uncommitted in the checkout but runs in is absorbed. A linked worktree's changes cannot be absorbed yet
 
 ## Options
 

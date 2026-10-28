@@ -17,11 +17,11 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 * `<SOURCES>` — One or more uncommitted files or hunks to amend.
 
-If omitted, all changes in the uncommitted area (zz) are amended.
+If omitted, all uncommitted changes of the checkout but runs in are amended: @, or a linked worktree's.
 
 ## Options
 
-* `-t`, `--target` `<COMMIT_OR_BRANCH>` — The commit or branch to amend into (required)
+* `-t`, `--target` `<COMMIT_OR_BRANCH>` — The commit to amend into; a branch means its newest commit (required)
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.

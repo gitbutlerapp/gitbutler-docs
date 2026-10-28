@@ -18,11 +18,10 @@ With a branch ID:
 
 ## Arguments
 
-* `<BRANCH_ID>` — Branch name or CLI ID to push. If not specified, will list all branches and prompt for selection in interactive mode
+* `<BRANCH_ID>` — Branch name or CLI ID to push; the branches below it in its stack are pushed with it. If omitted, a terminal prompts for a selection and a non-interactive run pushes every stack with unpushed commits
 
 ## Options
 
-* `-f`, `--with-force` — Force push even if it's not fast-forward (default: `true`)
 * `-s`, `--skip-force-push-protection` — Skip force push protection checks
 * `--no-hooks` — Bypass pre-push hooks
 * `-d`, `--dry-run` — Show what would be pushed without actually pushing

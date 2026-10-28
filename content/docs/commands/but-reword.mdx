@@ -10,17 +10,18 @@ editor.
 This will recreate the commit with the new message and then rebase any
 dependent commits on top of it.
 
-You can also use `but reword <branch-id>` to rename the branch.
+You can also use `but reword <branch-id>` to rename the branch, or
+`but reword <anonymous-branch-id>` to give an anonymous branch a name.
 
 **Usage:** `but reword <TARGET> [OPTIONS]`
 
 ## Arguments
 
-* `<TARGET>` — Commit ID to edit the message for, or branch ID to rename (required)
+* `<TARGET>` — Commit ID to edit, branch ID to rename, or anonymous branch ID to name (required)
 
 ## Options
 
-* `-m`, `--message` `<MESSAGE>` — The new commit message or branch name. If not provided, opens an editor
+* `-m`, `--message` `<MESSAGE>` — The new commit message or branch name. Without it, a terminal opens the editor and a non-interactive run fails
 * `-f`, `--fix-formatting` — Format the existing commit message to 72-char line wrapping without opening an editor
 * `--diff` — Always show diff inside the editor.
 

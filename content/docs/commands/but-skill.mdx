@@ -26,9 +26,27 @@ Install the skill globally:
 but skill install --global
 ```
 
-**Usage:** `but skill <COMMAND>`
+**Usage:** `but skill <COMMAND> [OPTIONS]`
 
 ## Subcommands
+
+### `but skill reference`
+
+Print the command reference: syntax and flags for every but command
+
+**Usage:** `but skill reference`
+
+### `but skill concepts`
+
+Print the concepts guide: the workspace model behind but
+
+**Usage:** `but skill concepts`
+
+### `but skill examples`
+
+Print the workflow examples
+
+**Usage:** `but skill examples`
 
 ### `but skill install`
 
@@ -117,4 +135,8 @@ but skill check --global
 * `-g`, `--global` — Only check global installations (in home directory)
 * `-l`, `--local` — Only check local installations (in current repository)
 * `-u`, `--update` — Automatically update any outdated skills found
+
+## Options
+
+* `--full` — Also print every reference document after the core guide
 

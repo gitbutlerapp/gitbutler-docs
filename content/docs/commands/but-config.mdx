@@ -108,7 +108,9 @@ View or configure native GitHub stacked pull requests:
 
 View or set the target branch.
 
-Without arguments, displays the current target branch. With a branch name, sets the target branch.
+Without arguments, displays the current target branch.
+
+With a branch name, sets the target branch. Local branches take precedence; remote-tracking branches resolve to their local tracking branch.
 
 Examples
 
@@ -118,18 +120,19 @@ View current target:
 
 Set target branch:
 
-  but config target origin/main
+  but config target main
 
 Set a target branch and push branches to a fork:
 
-  but config target upstream/main --push-remote origin
+  but config target main --push-remote origin
 
+Assumes main tracks upstream/main and origin points to your fork.
 
 **Usage:** `but config target [BRANCH] [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH>` — New target branch to set (e.g., "origin/main")
+* `<BRANCH>` — Local or remote-tracking branch (e.g., "main" or "origin/main"). Use refs/heads/... or refs/remotes/... to disambiguate
 
 **Options:**
 
@@ -198,10 +201,6 @@ Examples
 View all feature flags:
 
   but config feature
-
-Enable single-branch mode:
-
-  but config feature single-branch enable
 
 
 **Usage:** `but config feature [FLAG] [STATUS]`
