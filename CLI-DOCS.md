@@ -186,3 +186,33 @@ You can also simply run `ansi-senor <command>` and ansi-senor will output an htm
 ```ansi but-setup-5faf7f36
 but setup
 ```
+
+## Reproducible Examples
+
+Use `example` blocks when a page needs output from a specific repository state, such as two branches or an unapplied branch. Anyone can regenerate them; `pnpm update-cli` ignores them.
+
+Each page that uses `example` blocks has a scenario script in `examples/`, for example `examples/parallel-branches.sh`. The script builds a fresh repository, runs commands, and saves their output to `public/examples/`. A block names the output file without `.html`:
+
+````mdx
+```example parallel-branches-but-status-1
+but status
+```
+````
+
+A scenario script sources `examples/lib.sh`, which provides:
+
+- `new_repo`: creates a temporary repository with an `origin` remote and author Markus Butler, and changes into it. It is removed when the script ends.
+- `but`: runs the pinned GitButler release with isolated app data and no coding-agent environment variables.
+- `capture NAME 'COMMAND'`: runs the command and saves `public/examples/NAME.html`. CSS variables adapt its colors to dark mode.
+- `capture_themed NAME 'COMMAND'`: runs the command twice and also saves `NAME.dark.html`, for output with fixed colors such as `but diff`. Use it only for commands that don't change the repository.
+
+The GitButler version is pinned in `examples/but-version`. The first run downloads that release into `~/.cache/gitbutler-docs-examples/`.
+
+To regenerate every scenario, or only some of them:
+
+```bash
+pnpm examples
+pnpm examples parallel-branches
+```
+
+Scenarios need `git`, `curl`, `node`, and `ansi-senor` (`cargo install ansi-senor`), and run on macOS and Linux.

@@ -80,6 +80,19 @@ p[class*="mb-8"][class*="text-lg"][class*="text-fd-muted-foreground"] {
   line-height: 22px;
 }
 
+.dark .cli-output-container {
+  --red: #ff7b72;
+  --green: #7ee787;
+  --yellow: #e3b341;
+  --blue: #79c0ff;
+  --magenta: #d2a8ff;
+  --cyan: #56d4dd;
+  --bright-black: #8b949e;
+  --bright-yellow: #f8e3a1;
+  --bright-blue: #a5d6ff;
+  --bright-cyan: #b3f0ff;
+}
+
 /* Make code in h3 headings smaller and highlighted */
 
 .prose h3 a {

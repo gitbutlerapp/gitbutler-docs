@@ -9,6 +9,7 @@
 - [guide](#guide)
 - [index](#index)
 - [overview](#overview)
+- [parallel-branches](#parallel-branches)
 - [releases](#releases)
 - [why-gitbutler](#why-gitbutler)
 - [workspace-branch](#workspace-branch)
@@ -49,6 +50,7 @@
 - [commands-but-help-cli-ids](#commands-but-help-cli-ids)
 - [commands-but-land](#commands-but-land)
 - [commands-but-move](#commands-but-move)
+- [commands-but-open](#commands-but-open)
 - [commands-but-oplog](#commands-but-oplog)
 - [commands-but-pick](#commands-but-pick)
 - [commands-but-pr](#commands-but-pr)
@@ -68,6 +70,7 @@
 - [commands-but-uncommit](#commands-but-uncommit)
 - [commands-but-undo](#commands-but-undo)
 - [commands-but-update](#commands-but-update)
+- [commands-but-worktree](#commands-but-worktree)
 - [commands-commands-overview](#commands-commands-overview)
 - [community-contact-us](#community-contact-us)
 - [community-open-source](#community-open-source)
@@ -619,7 +622,7 @@ Read about it over [Why GitButler](/why-gitbutler) Section.
 
 The GitButler client is a powerful Git client. You can manage your branches, work on multiple things at once, push and fetch from your Git server, easily rebase and modify commits and more. We have a unique approach to merge conflicts that helps split up any conflicting work. It also keeps a timeline so that you can easily undo any operation.
 
-- [Parallel Branches](/features/branch-management/virtual-branches)
+- [Parallel Branches](/parallel-branches)
 - [First Class Conflicts](/features/branch-management/merging)
 - [Project History](/features/timeline)
 
@@ -746,6 +749,82 @@ This will check out the conflicts into your working directory and you can let us
 ## The End
 
 That is our general overview of how our branching model and workflow works. We've found that it's way easier and faster than constantly switching back and forth between branches, managing branches all the time, and all the other overhead that comes with branching in Git, while still easily creating pull requests and integrating features.
+
+
+# parallel-branches
+
+You don't switch branches, and you don't need a folder per branch.
+All the branches you're working on are **in the same folder at the same time**, so you open one editor window on the repository.
+When you commit, you choose which branch each change goes to.
+
+## What is in your folder
+
+Your folder contains the changes from all your branches, combined.
+For example, with two branches, `but status` shows each branch and its commits:
+
+```example parallel-branches-but-status-1
+but status
+```
+
+Git sees this combination as a single merge commit on a branch called [`gitbutler/workspace`](/workspace-branch), so your editor and other Git tools work as usual.
+
+```example parallel-branches-git-log-1
+git log --oneline --graph
+```
+
+## Check each branch's changes
+
+To see only one branch's changes, pass its name to `but diff`:
+
+```example parallel-branches-but-diff-1
+but diff user-bookmarks
+```
+
+```example parallel-branches-but-diff-2
+but diff liked-tweets
+```
+
+## Hide a branch
+
+To take a branch's changes out of your folder, unapply it:
+
+```example parallel-branches-but-unapply-1
+but unapply liked-tweets
+```
+
+`but status` now shows only `user-bookmarks`:
+
+```example parallel-branches-but-status-2
+but status
+```
+
+The workspace commit now sits on top of `user-bookmarks` alone:
+
+```example parallel-branches-git-log-2
+git log --oneline --graph
+```
+
+`liked-tweets` still exists, and `but branch` lists it under unapplied branches:
+
+```example parallel-branches-but-branch-1
+but branch
+```
+
+To bring the branch back, apply it:
+
+```example parallel-branches-but-apply-1
+but apply liked-tweets
+```
+
+## Run several agents at once
+
+You can run several agent sessions in the same folder, and each session commits the changes it made to a separate branch.
+There is **nothing to set up per session**: once your agents use GitButler, start another session in the same folder.
+[Parallel agents](/ai-agents/parallel-agents) explains how.
+
+## Next steps
+
+For step-by-step workflows, follow the [CLI tutorial](/cli-guides/cli-tutorial/tutorial-overview).
 
 
 # releases
@@ -2717,19 +2796,11 @@ can work on it, you can run `but apply <branch-name>`.
 This will apply the changes in that branch into your working directory
 as a parallel applied branch.
 
-## Examples
-
-Apply by branch name:
-
-```text
-but apply my-feature-branch
-```
-
-**Usage:** `but apply <BRANCH_NAME>`
+**Usage:** `but apply <BRANCH>`
 
 ## Arguments
 
-* `<BRANCH_NAME>` — Name of the branch to apply (required)
+* `<BRANCH>` — The branch to apply (required)
 
 
 
@@ -2741,44 +2812,55 @@ By default without a subcommand, it will list the branches.
 
 To apply or unapply branches, use `but apply` and `but unapply`.
 
+To rename an applied branch, use `but reword <branch> -m <new-name>`.
+
 **Usage:** `but branch <COMMAND>`
 
 ## Subcommands
 
 ### `but branch new`
 
-Creates a new branch in the workspace
+Create a new branch.
 
-If no branch name is provided, a new parallel branch with a generated
-name will be created.
+Use `--above` or `--below` to created stacked branches. Omitting these create a new unstacked
+branch.
 
-You can also specify an anchor point using the `--anchor` option,
-which can be either a commit ID or an existing branch name to create
-the new branch from. This allows you to create stacked branches.
+For more details about CLI IDs, see `but help cli-ids`.
 
-**Usage:** `but branch new [BRANCH_NAME] [OPTIONS]`
+**Usage:** `but branch new [NAME] [OPTIONS]`
 
 **Arguments:**
 
-* `<BRANCH_NAME>` — Name of the new branch
+* `<NAME>` — Name of the new branch.
+
+If omitted the new branch will get a generated name.
 
 **Options:**
 
-* `-a`, `--anchor` `<ANCHOR>` — Anchor point - either a commit ID or branch name to create the new branch from
+* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place the branch above BRANCH_OR_COMMIT, which must be an applied branch or commit.
+
+If BRANCH_OR_COMMIT is a commit, the new branch is created above the commit.
+
+If BRANCH_OR_COMMIT is a branch, the new branch is created above the targeted branch.
+* `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place the branch below BRANCH_OR_COMMIT, which must be an applied branch or commit.
+
+If BRANCH_OR_COMMIT is a commit, the new branch is created below the commit.
+
+If BRANCH_OR_COMMIT is a branch, the new branch is created below the targeted branch.
+* `-s`, `--switch` — Switch to the newly created branch instead of applying it to the GitButler workspace
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 
 ### `but branch delete`
 
-Deletes a branch from the workspace
+Delete branchs from the workspace
 
-This will remove the branch and all its commits from the workspace.
-If the branch has unpushed commits, you will be prompted for confirmation
-unless the `--force` flag is used.
-
-**Usage:** `but branch delete <BRANCH_NAME>`
+**Usage:** `but branch delete <BRANCHES>`
 
 **Arguments:**
 
-* `<BRANCH_NAME>` — Name of the branch to delete (required)
+* `<BRANCHES>` — One or more branches to delete (required)
 
 ### `but branch list`
 
@@ -2945,6 +3027,8 @@ If BRANCH does not exist, it is created as an unstacked branch.
 
 If BRANCH is omitted, an unstacked branch with a generated name is created.
 
+If BRANCH is a linked worktree or a branch checked out in one, the commit is placed on the tip of that worktree's branch.
+
 Attempting to place a commit on a branch that exists but is not applied is an error.
 * `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place the commit above BRANCH_OR_COMMIT, which must be an applied branch or commit.
 
@@ -2956,6 +3040,8 @@ If BRANCH_OR_COMMIT is a branch, the new commit is placed on a new branch above 
 If BRANCH_OR_COMMIT is a commit, the new commit is placed on the same branch as the targeted commit.
 
 If BRANCH_OR_COMMIT is a branch, the new commit is placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
+
+If BRANCH_OR_COMMIT is a linked worktree, the new commit is placed on the tip of the branch that worktree has checked out.
 * `--empty` — Forces the commit to be empty regardless of repository state
 * `-i`, `--interactive` — Open the TUI to interactively select what to commit
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
@@ -3197,29 +3283,6 @@ Enable single-branch mode:
 * `<FLAG>` — Feature flag to view or update
 * `<STATUS>` — Whether the feature flag is enabled
 
-### `but config ui`
-
-View and configure UI preferences.
-
-Without arguments, displays current UI settings. Use subcommands to set or unset configuration values.
-
-Examples
-
-View UI configuration:
-
-  but config ui
-
-Enable TUI mode for diff by default:
-
-  but config ui set tui true
-
-Disable TUI mode:
-
-  but config ui set tui false
-
-
-**Usage:** `but config ui`
-
 ### `but config ai`
 
 View and configure AI provider settings.
@@ -3256,34 +3319,27 @@ Configure Ollama locally:
 
 # commands-but-diff
 
-Without any arguments, it shows the diff of all uncommitted changes.
-Optionally, provide one CLI ID to show the diff specific to:
-- an uncommitted file
-- a branch
-- an entire stack
-- a commit
-- a file change within a commit
+Without any arguments, it shows the diff of all uncommitted changes. Optionally, provide one
+CLI ID to show the diff for an uncommitted file, branch, commit, committed file, or worktree.
 
-`TARGET` accepts at most one entity. To show several entities, run this command once per
-entity.
+`TARGET` accepts at most one entity. To show several entities, run this command once per entity.
 
-**Usage:** `but diff [TARGET] [OPTIONS]`
+**Usage:** `but diff [TARGET]`
 
 ## Arguments
 
-* `<TARGET>` — The CLI ID of one entity to show the diff for
+* `<TARGET>` — The CLI ID of the entity to show the diff for.
 
-## Options
+If omitted shows the diff of all uncommitted changes.
 
-* `--tui` — Open an interactive TUI diff viewer
-* `--no-tui` — Disable the interactive TUI diff viewer (overrides but.ui.tui config)
+For more details about CLI IDs, see but help cli-ids.
 
 
 
 # commands-but-discard
 
 Changes may be selected by branch, commit, committed file, uncommitted file, or uncommitted
-hunk CLI ID. Use `zz` to discard all uncommitted changes.
+hunk CLI ID. Use `zz`, or omit `<CHANGES>`, to discard all uncommitted changes.
 
 All provided changes must be the same kind. Committed files must come from the same commit.
 
@@ -3291,11 +3347,13 @@ The entire operation is recorded as a single oplog entry, so it can be undone wi
 
 For more details about CLI IDs, see `but help cli-ids`.
 
-**Usage:** `but discard <CHANGES>`
+**Usage:** `but discard [CHANGES]`
 
 ## Arguments
 
-* `<CHANGES>` — One or more branches, commits, or changes to discard (required)
+* `<CHANGES>` — One or more branches, commits, or changes to discard.
+
+If omitted all uncommitted changes will be discarded.
 
 
 
@@ -3465,25 +3523,29 @@ Providing any of the sources as an argument for a target such as --above or --be
 
 * `-b`, `--branch` `<BRANCH>` — Place &lt;SOURCES&gt; on the branch BRANCH.
 
-If BRANCH does not exist, it is created as an unstacked branch.
+If BRANCH exists, commits or committed files are moved onto its tip. A branch source is instead stacked on top of BRANCH, equivalent to --above BRANCH.
+
+If BRANCH does not exist, it is created as an unstacked branch for commit or committed-file sources. Using a branch source with a nonexistent BRANCH is an error.
+
+If BRANCH is a linked worktree or a branch checked out in one, commit or committed-file sources are moved onto the tip of that worktree's branch.
 
 If BRANCH is omitted, an unstacked branch with a generated name is created. This is exactly equivalent to --unstack and is allowed for any source kind.
 
-If BRANCH is provided, &lt;SOURCES&gt; must be either commits or committed files.
-
 Attempting to place &lt;SOURCES&gt; on a branch that exists but is not applied is an error.
-* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place &lt;SOURCES&gt; above BRANCH_OR_COMMIT, which must be an applied branch or commit.
+* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place &lt;SOURCES&gt; above BRANCH_OR_COMMIT.
 
 If BRANCH_OR_COMMIT is a commit, &lt;SOURCES&gt; are placed on the same branch as the targeted commit.
 
 If BRANCH_OR_COMMIT is a branch, the sources are placed on a new branch above the targeted branch.
 
 This target is applicable for all kinds of &lt;SOURCES&gt;.
-* `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place &lt;SOURCES&gt; below BRANCH_OR_COMMIT, which must be an applied branch or commit.
+* `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place &lt;SOURCES&gt; below BRANCH_OR_COMMIT.
 
 If BRANCH_OR_COMMIT is a commit, the &lt;SOURCES&gt; are placed on the same branch as the targeted commit.
 
 If BRANCH_OR_COMMIT is a branch, &lt;SOURCES&gt; are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
+
+If BRANCH_OR_COMMIT is a linked worktree, &lt;SOURCES&gt; are placed on the tip of the branch that worktree has checked out.
 
 This target is only applicable for &lt;SOURCES&gt; that are commits or committed files.
 * `--unstack` — Unstack &lt;SOURCES&gt; from their current stacks.
@@ -3492,6 +3554,28 @@ This target is only applicable for &lt;SOURCES&gt; that are commits or committed
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
+
+
+
+# commands-but-open
+
+With no argument this opens the workspace. Given a branch or a commit, the
+app opens with that selected, so a link can point at the thing you are
+talking about rather than at the app.
+
+Commits are addressed by their change ID where they have one, which
+survives amending and rebasing — the link keeps working after the commit is
+rewritten.
+
+**Usage:** `but open [TARGET] [OPTIONS]`
+
+## Arguments
+
+* `<TARGET>` — The branch or commit to select, defaulting to the workspace itself
+
+## Options
+
+* `--print` — Print the link instead of opening it
 
 
 
@@ -3564,51 +3648,43 @@ which you can find by running `but oplog` or `but oplog list`.
 
 # commands-but-pick
 
-This command allows you to pick individual commits from unapplied branches
-and apply them to your current workspace branches.
+Each source commit is copied to the target location as a new commit.
 
-The source can be:
-- A commit SHA (full or short)
-- A CLI ID (e.g., "c5" from `but status`)
-- An unapplied branch name (shows interactive commit selection)
+If there are no branches applied, a new branch is created for the picked commits. If there is
+only one stack of branches applied, the commits are placed at the tip of that stack. Otherwise,
+the targeting flags `--above`, `--below`, and `--branch` control where the commits are placed.
+Only one targeting flag can be provided at a time.
 
-If no target branch is specified:
-- In interactive mode: prompts you to select a target branch
-- If only one branch exists: automatically uses that branch
-- In non-interactive mode: fails with an error
+For more details about CLI IDs, see `but help cli-ids`.
 
-## Examples
-
-Pick a specific commit into a branch:
-
-```text
-but pick abc1234 my-feature
-```
-
-Pick using a CLI ID:
-
-```text
-but pick c5 my-feature
-```
-
-Interactively select commits from an unapplied branch:
-
-```text
-but pick feature-branch
-```
-
-If one or more cherry-picks conflict, GitButler keeps the commits in a
-conflicted state instead of aborting the operation. Resolve all of them,
-oldest first, with `but resolve --ai`; or find their IDs with `but status`
-and resolve them individually with `but resolve <commit-id>`. Back out of
-the pick operation with `but undo`.
-
-**Usage:** `but pick <SOURCE> [TARGET_BRANCH]`
+**Usage:** `but pick <SOURCES> [OPTIONS]`
 
 ## Arguments
 
-* `<SOURCE>` — The commit SHA, CLI ID, or unapplied branch name to cherry-pick from (required)
-* `<TARGET_BRANCH>` — The target virtual branch to apply the commit(s) to
+* `<SOURCES>` — The sources to cherry-pick (required)
+
+## Options
+
+* `-b`, `--branch` `<BRANCH>` — Place the picked commits on the branch BRANCH.
+
+If BRANCH does not exist, it is created as an unstacked branch.
+
+If BRANCH is omitted, an unstacked branch with a generated name is created.
+
+Attempting to pick onto a branch that exists but is not applied is an error.
+* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Place the picked commits above BRANCH_OR_COMMIT.
+
+If BRANCH_OR_COMMIT is a commit, the picked commits are placed on the same branch as the targeted commit.
+
+If BRANCH_OR_COMMIT is a branch, the picked commits are placed on a new branch above the targeted branch.
+* `-B`, `--below` `<BRANCH_OR_COMMIT>` — Place the picked commits below BRANCH_OR_COMMIT.
+
+If BRANCH_OR_COMMIT is a commit, the picked commits are placed on the same branch as the targeted commit.
+
+If BRANCH_OR_COMMIT is a branch, the picked commits are placed on a new branch below the targeted branch. Branches are treated as buckets, meaning that "below a branch" is treated as below the oldest ancestor on that branch.
+* `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
+
+By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
 
 
 
@@ -3769,6 +3845,8 @@ By default, mutations refuse to touch history that has landed in the target bran
 
 When a commit is in a conflicted state (marked with conflicts during rebase),
 use this command to enter resolution mode, resolve the conflicts, and finalize.
+Uncommitted files marked `{conflicted}` by `but status` are resolved with
+`but resolve <path>...` once they hold the desired content (or were deleted).
 
 ## Workflow
 
@@ -3783,13 +3861,52 @@ or `but resolve --ai` to resolve all conflicted commits, oldest first.
 
 When in resolution mode, `but status` will also show that you're resolving conflicts.
 
-**Usage:** `but resolve <COMMAND> [COMMIT] [OPTIONS]`
+**Usage:** `but resolve <COMMAND> [TARGETS] [OPTIONS]`
 
 ## Subcommands
 
+### `but resolve conflicts`
+
+List the conflicts of a conflicted commit, without entering resolution mode.
+
+Each conflict is shown with its ours side (the new base the commit was
+rebased onto), the common ancestor, and its theirs side (the commit's
+own version), numbered per file for use with `but resolve apply`.
+
+**Usage:** `but resolve conflicts [COMMIT]`
+
+**Arguments:**
+
+* `<COMMIT>` — A conflicted commit, or a branch (meaning its oldest conflicted commit). Defaults to the first conflicted branch's oldest conflicted commit
+
+### `but resolve apply`
+
+Resolve conflicts of a conflicted commit, without entering resolution mode.
+
+Targets one conflict (`<path>:<N>`, numbers from `but resolve conflicts`)
+or every conflict in a file (`<path>` with `--ours`/`--theirs`). The
+replacement content for mixed resolutions is read from `--file` or stdin.
+Resolving only some conflicts keeps the commit conflicted with the rest,
+so conflicts can be worked off incrementally; the commit id changes with
+every apply. Undo with `but undo`.
+
+**Usage:** `but resolve apply <TARGET> [OPTIONS]`
+
+**Arguments:**
+
+* `<TARGET>` — The conflicted file, optionally with a 1-based conflict number (&lt;path&gt;:&lt;N&gt;) (required)
+
+**Options:**
+
+* `--commit` `<COMMIT>` — A conflicted commit, or a branch (meaning its oldest conflicted commit — branch names stay stable across applies, unlike commit ids). Defaults to the first conflicted branch's oldest conflicted commit
+* `--ours` — Take the ours side: the new base the commit was rebased onto
+* `--theirs` — Take the theirs side: the commit's own version
+* `--ai` — Let the configured AI model merge the targeted conflicts
+* `-F`, `--file` `<FILE>` — Read the replacement content from this file (otherwise from stdin)
+
 ### `but resolve status`
 
-Show the status of conflict resolution, listing remaining conflicted files
+Show the status of conflict resolution, listing remaining conflicted files.
 
 **Usage:** `but resolve status`
 
@@ -3797,7 +3914,8 @@ Show the status of conflict resolution, listing remaining conflicted files
 
 Finalize conflict resolution and return to workspace mode.
 
-This commits the resolved changes, rebases any commits on top of the resolved commit, and returns to the normal workspace.
+This commits the resolved changes, rebases any commits on top of the
+resolved commit, and returns to the normal workspace.
 
 **Usage:** `but resolve finish`
 
@@ -3805,7 +3923,8 @@ This commits the resolved changes, rebases any commits on top of the resolved co
 
 Cancel conflict resolution and return to workspace mode.
 
-This discards all changes made during resolution and restores the workspace to its pre-resolution state.
+This discards all changes made during resolution and restores
+the workspace to its pre-resolution state.
 
 **Usage:** `but resolve cancel [OPTIONS]`
 
@@ -4058,6 +4177,7 @@ Squash is flexible in the ways it can move changes around. It can
 - Amend uncommitted changes into a commit
 - Uncommit commits
 - Uncommit changes in commits
+- Uncommit branches
 
 If no message-related flag is passed when squashing commits or branches, an editor may be
 opened where the new message can be composed; other squashes keep the target's message.
@@ -4074,7 +4194,7 @@ If --target is provided and &lt;SOURCES&gt; is omitted, the uncommitted area (zz
 
 If &lt;SOURCES&gt; is one or more commits they will be squashed into the target.
 
-If &lt;SOURCES&gt; is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed.
+If &lt;SOURCES&gt; is one or more branches all the commits on the branches will be squashed into the target and the branches will be removed. When the target is the uncommitted area (zz), all commits on the branches are uncommitted.
 
 If TARGET is omitted and &lt;SOURCES&gt; is exactly one branch all commits on the branch will be squashed.
 
@@ -4191,15 +4311,20 @@ terminal. For the full workflow and key bindings, see [https://docs.gitbutler.co
 
 **Environment variables:**
 
-**BUT_THEME**  Sets the theme for but. Options: dark, light. [default: dark]
+**BUT_THEME**  Sets the theme for but. Options: dark, light. [default: detected from the terminal, falling back to dark]
 
-**Usage:** `but tui [OPTIONS]`
+**Usage:** `but tui [TARGET] [OPTIONS]`
+
+## Arguments
+
+* `<TARGET>` — The commit, branch, committed file, or uncommitted file or hunk to select
 
 ## Options
 
 * `--remember-selection` — When the TUI quits save the selection and restore it when re-opening.
 
 If the saved selection cannot be restore the TUI launch normally as if --remember-selection wasn't passed. (default: `false`)
+* `--diff` — Automatically show the diff when opening the TUI
 
 
 
@@ -4220,25 +4345,13 @@ The identifier can be:
 If a branch name (or an identifier pointing to a branch) is provided,
 the entire stack containing that branch will be unapplied.
 
-## Examples
+For more details about CLI IDs, see `but help cli-ids`.
 
-Unapply by branch name:
-
-```text
-but unapply my-feature-branch
-```
-
-Unapply by CLI ID:
-
-```text
-but unapply bu
-```
-
-**Usage:** `but unapply <IDENTIFIER>`
+**Usage:** `but unapply <TARGET>`
 
 ## Arguments
 
-* `<IDENTIFIER>` — CLI ID or name of the branch/stack to unapply (required)
+* `<TARGET>` — The branch or stack to unapply (required)
 
 
 
@@ -4250,9 +4363,9 @@ For more details about CLI IDs, see `but help cli-ids`.
 
 ## Arguments
 
-* `<SOURCES>` — One or more commits or committed files to uncommit.
+* `<SOURCES>` — One or more commits, branches, or committed files to uncommit.
 
-A whole commit is uncommitted by its commit ID; a single file is uncommitted with &lt;commit-id&gt;:&lt;file-id&gt;. (required)
+Sources must all be the same kind. (required)
 
 ## Options
 
@@ -4313,6 +4426,67 @@ Note: For other platforms and install forms, see https://gitbutler.com/downloads
 * `<TARGET>` — What to install: "nightly", "release", or a version like "0.18.7"
 
 Examples: but update install           Auto-detect channel and install latest but update install nightly   Install latest nightly build but update install release   Install latest stable release but update install 0.18.7    Install specific version
+
+
+
+# commands-but-worktree
+
+Without a subcommand, lists the worktrees.
+
+**Usage:** `but worktree <COMMAND>`
+
+## Subcommands
+
+### `but worktree list`
+
+List linked worktrees, most recently updated first.
+
+By default this lists every active worktree and the three most recently updated
+archived ones. A worktree is shown by its name, followed by the branch it has checked
+out when that differs from the name, and its path.
+
+**Usage:** `but worktree list [OPTIONS]`
+
+**Options:**
+
+* `--archived` — List all archived worktrees
+* `--active` — List all active worktrees
+
+### `but worktree archive`
+
+Hide a worktree from the workspace
+
+**Usage:** `but worktree archive <WORKTREE>`
+
+**Arguments:**
+
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+
+### `but worktree unarchive`
+
+Show an archived worktree in the workspace again
+
+**Usage:** `but worktree unarchive <WORKTREE>`
+
+**Arguments:**
+
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+
+### `but worktree remove`
+
+Remove a worktree from disk, like `git worktree remove`.
+
+This works on archived worktrees too, and keeps the branch the worktree had checked out.
+
+**Usage:** `but worktree remove <WORKTREE> [OPTIONS]`
+
+**Arguments:**
+
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+
+**Options:**
+
+* `-f`, `--force` — Remove the worktree even if it has uncommitted changes
 
 
 

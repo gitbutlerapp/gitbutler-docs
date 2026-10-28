@@ -5,14 +5,14 @@ import type { Plugin } from 'unified';
 export const remarkCli: Plugin = () => {
   return (tree) => {
     visit(tree, 'code', (node: Code) => {
-      // Handle both 'cli' and 'ansi' code blocks
-      if (node.lang === 'cli' || node.lang === 'ansi') {
+      // Handle 'cli', 'ansi', and 'example' code blocks
+      if (node.lang === 'cli' || node.lang === 'ansi' || node.lang === 'example') {
         const meta = node.meta || '';
         let hash: string | undefined;
         let height: string | undefined;
 
-        if (node.lang === 'ansi') {
-          // For ansi blocks, the meta is the hash directly
+        if (node.lang === 'ansi' || node.lang === 'example') {
+          // For ansi and example blocks, the meta is the output name directly
           hash = meta.trim() || undefined;
         } else {
           // For cli blocks, parse the old format [hash, height]
