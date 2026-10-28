@@ -4,7 +4,6 @@
   "pages": [
     "commands-overview",
     "---Basics---",
-    "but-setup",
     "but-teardown",
     "---Inspection---",
     "but-status",
@@ -24,7 +23,6 @@
     "but-push",
     "but-pull",
     "but-pr",
-    "but-land",
     "---Editing Commits---",
     "but-absorb",
     "but-reword",
@@ -46,7 +44,10 @@
     "but-agent",
     "but-skill",
     "---Miscellaneous---",
+    "but-init",
+    "but-merge",
     "but-open",
+    "but-split",
     "but-worktree"
   ]
 }

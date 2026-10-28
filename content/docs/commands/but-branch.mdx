@@ -19,8 +19,8 @@ To rename an applied branch, use `but reword <branch> -m <new-name>`.
 
 Create a new branch.
 
-Use `--above` or `--below` to created stacked branches. Omitting these create a new unstacked
-branch.
+Use `--above` or `--below` to create stacked branches. Omitting these creates a new unstacked
+branch in the workspace, which is refused when run from a linked worktree.
 
 For more details about CLI IDs, see `but help cli-ids`.
 
@@ -51,7 +51,7 @@ By default, mutations refuse to touch history that has landed in the target bran
 
 ### `but branch delete`
 
-Delete branchs from the workspace
+Delete branches and their commits from the workspace
 
 **Usage:** `but branch delete <BRANCHES>`
 
@@ -93,7 +93,7 @@ make the command faster.
 
 * `-l`, `--local` — Show only local branches
 * `-r`, `--remote` — Show only remote branches
-* `-a`, `--all` — Show all branches (not just active + 20 most recent)
+* `-a`, `--all` — Show all branches (not just active + 20 most recent); empty branches also need --empty
 * `--no-ahead` — Don't calculate and show number of commits ahead of base (faster)
 * `--review` — Fetch and display review information (PRs, MRs, etc.)
 * `--no-check` — Don't check if each branch merges cleanly into upstream
@@ -122,7 +122,7 @@ You can also choose to fetch and display review information, show files modified
 
 ### `but branch update`
 
-Update your local branch with the content of its remote counterpart.
+Integrate a branch's remote counterpart into the local branch.
 
 This allows you to resolve the divergence between your local branch and its
 tracked remote in different ways.
@@ -135,7 +135,7 @@ tracked remote in different ways.
 
 **Options:**
 
-* `-s`, `--strategy` `<STRATEGY>` — Strategy to use for the integration. If no strategy is specified, we default to pull-rebase (default: `pull-rebase`)
+* `-s`, `--strategy` `<STRATEGY>` — Strategy to use for the integration (default: `pull-rebase`)
 * `--dry-run` — Preview the resulting branch state without persisting changes
 * `-v`, `--verbose` — Show additional dry-run details like the current divergence
 * `-i`, `--interactive` — Open the generated integration script in an editor
