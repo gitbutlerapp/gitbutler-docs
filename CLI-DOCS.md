@@ -171,9 +171,19 @@ pnpm update-cli
 
 ## Commands
 
-The command "man pages" are copied from `../gitbutler/cli-docs` so that changes to the commands docs can be included in changes with the code.
+The command reference pages are generated from the `but` CLI and stay in sync with GitButler releases. Do not edit these files by hand, even to remove the page of a deleted command:
 
-To update the command man-pages, you can run:
+- `content/docs/commands/but-*.mdx`
+- `content/docs/commands/meta.json`
+- `public/cli-examples/*.html`
+
+The [Update Generated Docs](.github/workflows/update-generated-docs.yml) workflow runs daily. When GitButler publishes a new `release/*` tag, it regenerates these files from that tag and opens a pull request for the maintainers. A command added, changed, or removed in GitButler reaches the docs with the first release that contains it.
+
+To change a command's text, edit its definition in the `but` CLI in [gitbutlerapp/gitbutler](https://github.com/gitbutlerapp/gitbutler), for example under `crates/but/src/args/`.
+
+`content/docs/commands/groups.json` is edited by hand. It sets the sidebar groups; commands it doesn't list appear under "Miscellaneous".
+
+To preview the generated pages locally from a GitButler checkout at `../gitbutler`, run the same script as the workflow, and do not commit the result:
 
 ```bash
 pnpm update-manpages
