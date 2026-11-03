@@ -1,6 +1,6 @@
 ---
 title: "`but agent`"
-description: "Set up GitButler for AI coding agents."
+description: "Set up or remove GitButler for AI coding agents."
 ---
 
 Runs a guided setup wizard for installing GitButler agent skills and
@@ -52,4 +52,28 @@ but agent setup --print
 **Options:**
 
 * `--print` — Print the default generated steering text without prompting or modifying files
+
+### `but agent uninstall`
+
+Remove GitButler skills and workflow instructions from coding agents.
+
+Deletes every GitButler skill folder that `but agent setup` or
+`but skill install` created, in your home directory and in the current
+repository, and removes the GitButler section from agent instruction
+files such as `~/.codex/AGENTS.md`, `~/.claude/rules/gitbutler.md`, or a
+repository's `AGENTS.md`. Text outside the GitButler section is kept,
+and a file left empty is deleted.
+
+In a terminal, it lists what it found and asks before removing it.
+Otherwise it removes what it found and lists it.
+
+## Examples
+
+Remove GitButler from your coding agents:
+
+```text
+but agent uninstall
+```
+
+**Usage:** `but agent uninstall`
 
