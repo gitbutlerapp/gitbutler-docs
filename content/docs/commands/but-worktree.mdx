@@ -46,19 +46,19 @@ directories. Untracked files are copied if any prefix of their path is in the
 
 **Options:**
 
-* `-A`, `--above` `<COMMIT>` — Start the new branch at COMMIT instead of the workspace base.
+* `-A`, `--above` `<BRANCH_OR_COMMIT>` — Start the new branch at BRANCH_OR_COMMIT instead of the workspace base.
 
-Accepts a commit SHA or CLI ID, not a branch. Conflicted commits are refused.
+Accepts a branch by name or CLI ID, a commit by SHA or CLI ID, or any Git revision like origin/main. Conflicted commits and the GitButler workspace commit are refused.
 
 ### `but worktree archive`
 
-Hide a worktree from the workspace
+Hide a worktree from the workspace until but runs inside it again
 
 **Usage:** `but worktree archive <WORKTREE>`
 
 **Arguments:**
 
-* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list), name, or path (required)
 
 ### `but worktree unarchive`
 
@@ -68,7 +68,7 @@ Show an archived worktree in the workspace again
 
 **Arguments:**
 
-* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list), name, or path (required)
 
 ### `but worktree remove`
 
@@ -81,7 +81,7 @@ checked out.
 
 **Arguments:**
 
-* `<WORKTREE>` — The worktree, by CLI ID (see but wt list) or name (required)
+* `<WORKTREE>` — The worktree, by CLI ID (see but wt list), name, or path (required)
 
 **Options:**
 
