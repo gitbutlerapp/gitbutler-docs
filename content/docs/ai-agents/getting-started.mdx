@@ -33,11 +33,10 @@ workflow preferences you want. It can:
 
 - install the GitButler skill for Codex, Claude Code, Cursor, GitHub Copilot,
   Windsurf / Devin, OpenCode, or Agent Skills;
-- save workflow instructions globally, in this repository, or both;
-- run `but setup` for this repository when GitButler needs workspace mode.
+- save workflow instructions globally, in this repository, or both.
 
 Before it writes anything, the wizard shows the skill install paths, instruction
-files, any repository setup step, and the exact generated text.
+files, and the exact generated text.
 
 `but agent` with no subcommand starts the same wizard. For command details, see
 [`but agent`](/commands/but-agent).
@@ -51,22 +50,10 @@ but skill check --update
 
 See [`but skill`](/commands/but-skill) for other install and update options.
 
-## Set up the repository
-
-GitButler currently needs the repository in workspace mode for its multi-branch
-model: multiple GitButler branches in one working directory. The setup wizard
-runs this for you when needed. You can also run it yourself:
-
-```sh
-but setup
-```
-
-For the full list of setup changes, see [`but setup`](/commands/but-setup).
-
-GitButler is working toward a plain Git mode that switches into a workspace only
-when multiple concurrent branches are needed. Follow
-[gitbutlerapp/gitbutler#11866](https://github.com/gitbutlerapp/gitbutler/issues/11866)
-for that work.
+The repository itself needs no setup. With one branch applied, it stays a
+normal checkout of that branch. When an agent creates a second branch,
+GitButler switches to its [workspace branch](/workspace-branch) so both
+branches can be in the folder at once.
 
 ## Add optional agent instructions
 

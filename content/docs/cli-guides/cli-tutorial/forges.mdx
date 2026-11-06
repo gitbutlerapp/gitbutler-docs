@@ -3,7 +3,7 @@ title: Push branches and create reviews
 description: Publish branches, create pull or merge requests, and land work with the GitButler CLI.
 ---
 
-Use `but push` to publish a branch, `but pr` to create a review, or `but land` when your project accepts direct updates to the target branch.
+Use `but push` to publish a branch, `but pr` to create a review, or `but merge` when your project accepts direct updates to the target branch.
 
 ## Push a branch
 
@@ -71,7 +71,7 @@ but config forge forget alice
 If your project accepts direct updates to the target branch, land a branch with:
 
 ```bash
-but land update-homepage
+but merge update-homepage
 ```
 
 This bypasses code review and any checks enforced only by your review workflow.
@@ -80,4 +80,4 @@ reversible.
 
 The target fast-forwards when possible; otherwise GitButler creates a merge commit. After landing, GitButler reconciles the remaining applied branches onto the updated target.
 
-If the remote rejects direct pushes because of branch protection, create a review with `but pr new` instead. See [`but land`](/commands/but-land) for stack and non-interactive options.
+If the remote rejects direct pushes because of branch protection, create a review with `but pr new` instead. See [`but merge`](/commands/but-merge) for stack and non-interactive options.

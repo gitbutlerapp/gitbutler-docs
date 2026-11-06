@@ -1,9 +1,10 @@
 {
-  "Basics": ["but-setup", "but-teardown"],
+  "Basics": ["but-init", "but-teardown"],
   "Inspection": ["but-status", "but-diff", "but-show", "but-help-cli-ids"],
   "Branching and Committing": [
     "but-commit",
     "but-branch",
+    "but-worktree",
     "but-discard",
     "but-resolve",
     "but-unapply",
@@ -11,14 +12,15 @@
     "but-clean",
     "but-pick"
   ],
-  "Server Interactions": ["but-push", "but-pull", "but-pr", "but-land"],
+  "Server Interactions": ["but-push", "but-pull", "but-pr", "but-merge"],
   "Editing Commits": [
     "but-absorb",
     "but-reword",
     "but-uncommit",
     "but-amend",
     "but-squash",
-    "but-move"
+    "but-move",
+    "but-split"
   ],
   "Operations Log": ["but-oplog", "but-undo", "but-redo"],
   "Helper Commands": [

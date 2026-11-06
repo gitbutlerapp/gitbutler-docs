@@ -1,35 +1,37 @@
 ---
-title: Initializing a Repository
-description: How to initialize a GitButler workspace in your repository.
+title: Starting in a Repository
+description: What happens when you run GitButler in an existing Git repository.
 ---
 
-If you run any `but` command in a repository that has never been seen by GitButler before, it will automatically ask you if you want to setup the repository for GitButler.
+GitButler needs no setup step. Run any `but` command in an existing Git repository and it works:
 
-It will guess most things needed, but everything can be changed later if it got anything wrong. The most important thing is to figure out the target branch - the main branch that you'll want to merge things into and you consider 'production' or 'golden'. Normally this is something like `origin/main`, but GitButler should be pretty good at guessing.
-
-You can also run `but setup` manually to set everything up explicitly:
-
-```ansi but-setup-5faf7f36
-but setup
+```bash
+but status
 ```
 
-As the command says, it does a few things to prepare your repository for being managed by GitButler.
+GitButler picks a target branch, the branch you eventually merge into, such as `main` or `origin/main`. To see it or change it, use [`but config target`](/commands/but-config):
 
-Unlike a tool like [Jujutsu](https://docs.jj-vcs.dev/latest/git-compatibility/) or [Sapling](https://sapling-scm.com/docs/git/git_support_modes/), GitButler mainly operates on normal Git repositories, so nearly all Git commands will work with anything produced or managed by GitButler. You can think of it more like a new porcelain than a different system.
+```bash
+but config target
+but config target main
+```
 
-However, one thing we need to do in order to enable having parallel applied branches is create a "megamerge" commit that automatically merges in the heads of all your applied branches, so that other tools `git status` will correctly show you what you expect.
+Unlike a tool like [Jujutsu](https://docs.jj-vcs.dev/latest/git-compatibility/) or [Sapling](https://sapling-scm.com/docs/git/git_support_modes/), GitButler operates on normal Git repositories, so nearly all Git commands work with anything GitButler produces. You can think of it as a new porcelain rather than a different system.
 
-This means that we do two things:
+## One branch or several
 
-- We create a new branch called `gitbutler/workspace` pointing to a constantly rewritten and ephemeral merge commit and check this branch out so HEAD is pointing to it (again, for `git status` reasons in tools like VSCode or whatever)
-- We add custom `pre-commit` and `post-checkout` hooks (moving and continuing to call any existing hooks) to try to prevent you from accidentally committing on top of our managed mega-merge commit.
+With one branch applied, your repository stays a normal checkout of that branch, like plain Git.
 
-<Callout type="info">
+When you apply a second branch, GitButler creates a branch called `gitbutler/workspace` and checks it out. It points to a merge commit of all your applied branches, so `git status` and your editor show what you expect. GitButler rewrites this commit as your branches change. See [Workspace Branch](/workspace-branch) for details.
 
-The mega-merge workspace commit will soon only be needed once you actually have more than one branch applied, so at some point we won't automatically do it on setup, but we're working on it.
+When you unapply branches until one is left, GitButler switches back to that branch.
 
-</Callout>
+## Leave the workspace
 
-Both of these things can be quickly and easily undone by running `but teardown`, doing any Git committing stuff you need to do and then re-running `but setup` to go back to GitButler tooling.
+To go back to a single checked-out branch, run:
 
-You can also simply checkout a git branch with `git checkout <branch>` and the `post-checkout` hook we installed should clean up after itself.
+```bash
+but teardown
+```
+
+This checks out your first applied branch and unapplies the others, which you can apply again later with `but apply`.

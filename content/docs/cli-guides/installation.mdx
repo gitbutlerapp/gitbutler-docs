@@ -31,8 +31,8 @@ curl -fsSL https://gitbutler.com/install.sh | sh
 
 ## Setup
 
-If you go into any existing Git repository and run `but setup`, it will make some neccesary changes to your setup in order for GitButler to manage your data.
+There is no setup step. Run `but` in any Git repository.
 
-If you run almost any `but` command in an existing Git repository in an interactive terminal, it will ask you if you want to set it up and then run the command you were trying to run. So basically just run `but` anywhere to get started.
+With one branch applied, the repository stays a normal checkout of that branch, so plain Git commands keep working. When you apply a second branch, GitButler switches to its [workspace branch](/workspace-branch) so both branches can be in your folder at once.
 
-At any time after this, you can run `but teardown` to undo the GitButler changes and go back to being a boring old Git project. It will not remove GitButler metadata, so feel free to go back and forth if you need to.
+To leave the workspace and go back to a single checked-out branch, run [`but teardown`](/commands/but-teardown).
