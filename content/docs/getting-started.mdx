@@ -1,0 +1,95 @@
+---
+title: Getting started
+description: What GitButler does differently, the three ways to use it, and where to go next.
+---
+
+<img src="/img/waving.svg" alt="" width="160" height="185" className="dark:invert" />
+
+Thanks for installing GitButler. It lets you work on several branches at once in one folder, from a desktop app, a CLI, or a terminal UI. This page takes about two minutes to read.
+
+## Open a repository you already have
+
+GitButler needs no import step, config file, or account. Run `but` in any Git repository, or open the repository in the app:
+
+```sh
+cd ~/code/storefront
+but status
+```
+
+While you work on one branch, the repository stays a normal Git checkout of that branch. Your editor, scripts, and other Git tools keep working.
+
+## Work on several branches at once
+
+You can have several branches applied in one folder at the same time, so you don't switch branches or stash. When you commit, you choose the branch the changes go to:
+
+```sh
+but commit -b login-page -m "Add login page" src/login.ts
+but commit -b api-client -m "Add API client" src/api.ts
+```
+
+Each branch pushes and gets its own pull request. [Parallel branches](/parallel-branches) explains how they share one folder.
+
+When a task needs its own checkout, for example to run a second dev server or to try two approaches to the same problem, create a worktree:
+
+```sh
+but worktree new checkout-redesign
+```
+
+`but status` shows your branches and worktrees together:
+
+```example getting-started-but-status-1
+but status
+```
+
+## Use the app, the CLI, or the terminal UI
+
+All three work on the same repository state, and you can switch between them at any time.
+
+| | Start it with | Use it for |
+| --- | --- | --- |
+| Desktop app | `but gui`, or open GitButler | Reviewing diffs and dragging changes between branches and commits |
+| CLI | `but` | Quick commands, scripts, and coding agents |
+| Terminal UI | `but tui` | A keyboard-first view of branches, commits, and diffs |
+
+If your shell can't find `but`, install it from the app under **Settings › General**, or run `curl -fsSL https://gitbutler.com/install.sh | sh`.
+
+## Set up your coding agent
+
+GitButler includes a skill that teaches coding agents to use `but` instead of raw Git commands. Run the setup wizard in a repository:
+
+```sh
+but agent setup
+```
+
+The wizard installs the skill for Claude Code, Codex, Cursor, GitHub Copilot, and other agents, and shows every file before it writes it. After that, each agent commits its work to its own branch, and you can run several agents in the same folder. See [AI agents](/ai-agents/overview).
+
+## Undo any operation
+
+GitButler records every commit, history edit, and update from the remote. If something goes wrong, run `but undo`, or open **Operations history** in the app.
+
+## Next steps
+
+<Cards>
+  <Card
+    title="Parallel branches"
+    href="/parallel-branches"
+    description="How several branches share one folder."
+  />
+  <Card
+    title="CLI tutorial"
+    href="/cli-guides/cli-tutorial/tutorial-overview"
+    description="Branch, commit, edit history, and push from the terminal."
+  />
+  <Card
+    title="AI agents"
+    href="/ai-agents/overview"
+    description="Turn agent changes into branches and commits you can review."
+  />
+  <Card
+    title="CLI cheat sheet"
+    href="/cli/cheat"
+    description="The commands you'll use most, on one page."
+  />
+</Cards>
+
+Questions or bugs? Ask on [Discord](https://discord.gg/MmFkmaJ42D) or open an issue on [GitHub](https://github.com/gitbutlerapp/gitbutler/issues).

@@ -4,11 +4,12 @@
   "defaultOpen": false,
   "pages": [
     "index",
-    "guide",
+    "getting-started",
     "why-gitbutler",
     "parallel-branches",
     "---GitButler Desktop Client---",
     "overview",
+    "guide",
     "butler-flow",
     "features",
     "troubleshooting",
