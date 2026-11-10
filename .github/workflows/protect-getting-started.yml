@@ -1,0 +1,29 @@
+name: "Protect /getting-started"
+
+# The GitButler client opens /getting-started during onboarding.
+# This job fails if the page is removed, renamed, or redirected away.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  getting_started_exists:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check that /getting-started still resolves
+        run: |
+          if [ ! -f content/docs/getting-started.mdx ]; then
+            echo "::error::content/docs/getting-started.mdx is missing. The GitButler client links to /getting-started."
+            exit 1
+          fi
+          if ! jq -e 'any(.redirects[]?; .source == "/getting-started") | not' vercel.json > /dev/null; then
+            echo "::error::vercel.json redirects /getting-started. The GitButler client links to this page."
+            exit 1
+          fi
