@@ -20,13 +20,16 @@ The commit is expected to have a commit message unless `--no-message` is provide
 `--no-message`, `--message` or `--file` is provided, the user's preferred editor is opened to
 input a message.
 
+The repository's pre-commit, commit-msg and post-commit hooks run unless `--no-hooks` is
+provided. A failing pre-commit or commit-msg hook aborts the commit.
+
 For more details about CLI IDs, see `but help cli-ids`.
 
 **Usage:** `but commit [CHANGES] [OPTIONS]`
 
 ## Arguments
 
-* `<CHANGES>` — The files or hunks to commit, by CLI ID from but diff.
+* `<CHANGES>` — The files or hunks to commit, by CLI ID from but diff or by path.
 
 If omitted, everything uncommitted in the checkout but runs in is committed.
 
@@ -62,6 +65,9 @@ If BRANCH_OR_COMMIT is a branch, the new commit is placed on a new branch below 
 If BRANCH_OR_COMMIT is a worktree, the new commit is placed on the tip of the branch that worktree has checked out.
 * `--empty` — Create an empty commit even when there are changes
 * `-i`, `--interactive` — Open the TUI to interactively select what to commit
+* `-n`, `--no-hooks` — Skip the pre-commit, commit-msg and post-commit hooks.
+
+Without this flag the hooks run for changes from the main worktree, but not for changes from a linked worktree. A hook's output shows only when it fails.
 * `--allow-merged` — Allow targeting branches and commits that are already merged upstream.
 
 By default, mutations refuse to touch history that has landed in the target branch, since the results tend to conflict on the next but pull.
