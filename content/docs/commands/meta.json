@@ -4,6 +4,7 @@
   "pages": [
     "commands-overview",
     "---Basics---",
+    "but-init",
     "but-teardown",
     "---Inspection---",
     "but-status",
@@ -13,6 +14,7 @@
     "---Branching and Committing---",
     "but-commit",
     "but-branch",
+    "but-worktree",
     "but-discard",
     "but-resolve",
     "but-unapply",
@@ -23,6 +25,7 @@
     "but-push",
     "but-pull",
     "but-pr",
+    "but-merge",
     "---Editing Commits---",
     "but-absorb",
     "but-reword",
@@ -30,6 +33,7 @@
     "but-amend",
     "but-squash",
     "but-move",
+    "but-split",
     "---Operations Log---",
     "but-oplog",
     "but-undo",
@@ -42,11 +46,6 @@
     "but-alias",
     "but-config",
     "but-agent",
-    "but-skill",
-    "---Miscellaneous---",
-    "but-init",
-    "but-merge",
-    "but-split",
-    "but-worktree"
+    "but-skill"
   ]
 }
